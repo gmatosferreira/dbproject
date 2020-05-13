@@ -49,26 +49,88 @@ namespace Funcionarios
                 return func.email.Split('@')[1];
             };
             // ObjectListView Aditional preferences
-            this.funcionariosListView.FullRowSelect = true;
-            this.funcionariosListView.SelectedIndex = 0;
+            this.listObjects.FullRowSelect = true;
+            this.listObjects.SelectedIndex = 0;
         }
 
         //  Methods
         private void updateStats()
         {
-            stats.Text = "A mostrar " + counter.ToString() + " registos";
+            janelaSubtitulo.Text = "A mostrar " + counter.ToString() + " registos";
         }
 
         private void showObject()
         {
-            if (funcionariosListView.Items.Count == 0 | current < 0)
+            // Get Object
+            if (listObjects.Items.Count == 0 | current < 0)
                 return;
-            Funcionario f = (Funcionario)funcionariosListView.SelectedObjects[0];
+            Funcionario f = (Funcionario)listObjects.SelectedObjects[0];
+            // Set labels values
             panelObjectTitulo.Text = f.nome;
             panelObjectSubtitulo.Text = f.nmec.ToString();
+            // Show panel
             if (!panelObject.Visible)
                 panelObject.Visible = true;
 
+        }
+
+        private void editObject()
+        {
+            // Get Object
+            if (listObjects.Items.Count == 0 | current < 0)
+                return;
+            Funcionario f = (Funcionario)listObjects.SelectedObjects[0];
+            // Set textboxes value
+            panelFormFieldNMec.Text = f.nmec.ToString();
+            panelFormFieldNome.Text = f.nome;
+            panelFormFieldContacto.Text = f.telemovel.ToString();
+            panelFormFieldEmail.Text = f.email;
+            panelFormFieldSalario.Text = f.salario.ToString();
+            // Disable fields not changable
+            panelFormFieldNMec.Enabled = false;
+            // Set title and description
+            panelFormTitulo.Text = "Editar funcionário " + f.nmec.ToString();
+            panelFormDescricao.Text = "Altere os dados e submita o formulário";
+            panelFormButton.Text = "Submeter";
+            // Make panel visible
+            if (!panelForm.Visible)
+                panelForm.Visible = true;
+        }
+
+        private void addObject()
+        {
+            // Clear all fields
+            panelFormFieldNMec.Text = "";
+            panelFormFieldNome.Text = "";
+            panelFormFieldContacto.Text = "";
+            panelFormFieldEmail.Text = "";
+            panelFormFieldSalario.Text = "";
+            // Enable fields that are not editable
+            panelFormFieldNMec.Enabled = true;
+            // Set title and description
+            panelFormTitulo.Text = "Adicionar um novo funcionário";
+            panelFormDescricao.Text = "Preencha os dados e submita o formulário";
+            panelFormButton.Text = "Criar funcionário";
+            // Make panel visible
+            if (!panelForm.Visible)
+                panelForm.Visible = true;
+        }
+
+        private void deleteObject()
+        {
+            // Get Object
+            if (listObjects.Items.Count == 0 | current < 0)
+                return;
+            Funcionario f = (Funcionario)listObjects.SelectedObjects[0];
+            // Confirm delete
+            DialogResult msgb = MessageBox.Show("Esta operação é irreversível!", "Tem a certeza que quer eliminar o funcionário " + f.nmec.ToString() +"?", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+            if (msgb == DialogResult.No)
+                return;
+            MessageBox.Show("Funcionalidade em implementação..."); 
+            //TODO
+            // Hide panels
+            panelForm.Visible = false;
+            panelObject.Visible = false;
         }
 
         // Event handlers
@@ -99,7 +161,7 @@ namespace Funcionarios
 
 
             // ObjectListView
-            funcionariosListView.SetObjects(funcionarios);
+            listObjects.SetObjects(funcionarios);
 
             // Update stats
             updateStats();
@@ -108,12 +170,48 @@ namespace Funcionarios
             reader.Close();
         }
 
-   
+        private void panelObjectEsconder_Click(object sender, EventArgs e)
+        {
+            panelObject.Visible = false;
+            panelForm.Visible = false;
+        }
+
+        private void panelObjectEditar_Click(object sender, EventArgs e)
+        {
+            if (listObjects.SelectedIndex >= 0)
+            {
+                editObject();
+            }
+        }
+
+        private void buttonAdicionarObject_Click(object sender, EventArgs e)
+        {
+            addObject();
+        }
+
+        private void panelFormHide_Click(object sender, EventArgs e)
+        {
+            panelForm.Visible = false;
+        }
+
+        private void panelObjectEliminar_Click(object sender, EventArgs e)
+        {
+            if (listObjects.SelectedIndex >= 0)
+            {
+                deleteObject();
+            }
+        }
+
+        private void panelFormButton_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Funcionalidade em implementação...");
+            //TODO
+        }
+
         private void funcionariosListView_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (funcionariosListView.SelectedIndex >= 0)
+            if (listObjects.SelectedIndex >= 0)
             {
-                current = funcionariosListView.SelectedIndex;
                 showObject();
             }
         }

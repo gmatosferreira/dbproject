@@ -30,14 +30,17 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Funcionarios));
-            this.stats = new System.Windows.Forms.Label();
-            this.titulo = new System.Windows.Forms.Label();
+            this.janelaSubtitulo = new System.Windows.Forms.Label();
+            this.janelaTitulo = new System.Windows.Forms.Label();
             this.Ajuda = new System.Windows.Forms.ToolTip(this.components);
-            this.ajudaBtn = new System.Windows.Forms.PictureBox();
             this.panelObjectEditar = new System.Windows.Forms.Button();
             this.panelObjectEliminar = new System.Windows.Forms.Button();
             this.buttonAdicionarObject = new System.Windows.Forms.Button();
-            this.funcionariosListView = new BrightIdeasSoftware.ObjectListView();
+            this.panelObjectHide = new System.Windows.Forms.PictureBox();
+            this.ajudaBtn = new System.Windows.Forms.PictureBox();
+            this.panelFormButton = new System.Windows.Forms.Button();
+            this.panelFormHide = new System.Windows.Forms.PictureBox();
+            this.listObjects = new BrightIdeasSoftware.ObjectListView();
             this.nmec = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.salario = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.nome = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -47,32 +50,96 @@
             this.panelObjectSubtitulo = new System.Windows.Forms.Label();
             this.panelObjectTitulo = new System.Windows.Forms.Label();
             this.panelObjectImage = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.janelaLogo = new System.Windows.Forms.PictureBox();
+            this.panelForm = new System.Windows.Forms.Panel();
+            this.label6 = new System.Windows.Forms.Label();
+            this.panelFormFieldSalario = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.panelFormFieldContacto = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.panelFormFieldEmail = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.panelFormTitulo = new System.Windows.Forms.Label();
+            this.panelFormFieldNome = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.panelFormFieldNMec = new System.Windows.Forms.TextBox();
+            this.panelFormDescricao = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.panelObjectHide)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ajudaBtn)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.funcionariosListView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelFormHide)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.listObjects)).BeginInit();
             this.panelObject.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelObjectImage)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.janelaLogo)).BeginInit();
+            this.panelForm.SuspendLayout();
             this.SuspendLayout();
             // 
-            // stats
+            // janelaSubtitulo
             // 
-            this.stats.AutoSize = true;
-            this.stats.Location = new System.Drawing.Point(80, 54);
-            this.stats.Name = "stats";
-            this.stats.Size = new System.Drawing.Size(100, 13);
-            this.stats.TabIndex = 15;
-            this.stats.Text = "A mostrar X registos";
+            this.janelaSubtitulo.AutoSize = true;
+            this.janelaSubtitulo.Location = new System.Drawing.Point(80, 54);
+            this.janelaSubtitulo.Name = "janelaSubtitulo";
+            this.janelaSubtitulo.Size = new System.Drawing.Size(100, 13);
+            this.janelaSubtitulo.TabIndex = 15;
+            this.janelaSubtitulo.Text = "A mostrar X registos";
             // 
-            // titulo
+            // janelaTitulo
             // 
-            this.titulo.AutoSize = true;
-            this.titulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.titulo.Location = new System.Drawing.Point(76, 23);
-            this.titulo.Name = "titulo";
-            this.titulo.Size = new System.Drawing.Size(100, 20);
-            this.titulo.TabIndex = 13;
-            this.titulo.Text = "Funcionários";
+            this.janelaTitulo.AutoSize = true;
+            this.janelaTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.janelaTitulo.Location = new System.Drawing.Point(76, 23);
+            this.janelaTitulo.Name = "janelaTitulo";
+            this.janelaTitulo.Size = new System.Drawing.Size(100, 20);
+            this.janelaTitulo.TabIndex = 13;
+            this.janelaTitulo.Text = "Funcionários";
+            // 
+            // panelObjectEditar
+            // 
+            this.panelObjectEditar.Location = new System.Drawing.Point(40, 181);
+            this.panelObjectEditar.Name = "panelObjectEditar";
+            this.panelObjectEditar.Size = new System.Drawing.Size(75, 23);
+            this.panelObjectEditar.TabIndex = 20;
+            this.panelObjectEditar.Text = "Editar";
+            this.Ajuda.SetToolTip(this.panelObjectEditar, "0");
+            this.panelObjectEditar.UseVisualStyleBackColor = true;
+            this.panelObjectEditar.Click += new System.EventHandler(this.panelObjectEditar_Click);
+            // 
+            // panelObjectEliminar
+            // 
+            this.panelObjectEliminar.Location = new System.Drawing.Point(40, 223);
+            this.panelObjectEliminar.Name = "panelObjectEliminar";
+            this.panelObjectEliminar.Size = new System.Drawing.Size(75, 23);
+            this.panelObjectEliminar.TabIndex = 21;
+            this.panelObjectEliminar.Text = "Eliminar";
+            this.Ajuda.SetToolTip(this.panelObjectEliminar, "0");
+            this.panelObjectEliminar.UseVisualStyleBackColor = true;
+            this.panelObjectEliminar.Click += new System.EventHandler(this.panelObjectEliminar_Click);
+            // 
+            // buttonAdicionarObject
+            // 
+            this.buttonAdicionarObject.Location = new System.Drawing.Point(645, 427);
+            this.buttonAdicionarObject.Name = "buttonAdicionarObject";
+            this.buttonAdicionarObject.Size = new System.Drawing.Size(112, 23);
+            this.buttonAdicionarObject.TabIndex = 22;
+            this.buttonAdicionarObject.Text = "Adicionar novo";
+            this.Ajuda.SetToolTip(this.buttonAdicionarObject, "0");
+            this.buttonAdicionarObject.UseVisualStyleBackColor = true;
+            this.buttonAdicionarObject.Click += new System.EventHandler(this.buttonAdicionarObject_Click);
+            // 
+            // panelObjectHide
+            // 
+            this.panelObjectHide.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.panelObjectHide.Cursor = System.Windows.Forms.Cursors.Default;
+            this.panelObjectHide.Image = global::Funcionarios.Properties.Resources.Esconder;
+            this.panelObjectHide.InitialImage = null;
+            this.panelObjectHide.Location = new System.Drawing.Point(131, 16);
+            this.panelObjectHide.Name = "panelObjectHide";
+            this.panelObjectHide.Size = new System.Drawing.Size(14, 18);
+            this.panelObjectHide.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.panelObjectHide.TabIndex = 23;
+            this.panelObjectHide.TabStop = false;
+            this.Ajuda.SetToolTip(this.panelObjectHide, "Esconder");
+            this.panelObjectHide.Click += new System.EventHandler(this.panelObjectEsconder_Click);
             // 
             // ajudaBtn
             // 
@@ -88,59 +155,55 @@
             this.ajudaBtn.TabStop = false;
             this.Ajuda.SetToolTip(this.ajudaBtn, resources.GetString("ajudaBtn.ToolTip"));
             // 
-            // panelObjectEditar
+            // panelFormButton
             // 
-            this.panelObjectEditar.Location = new System.Drawing.Point(40, 181);
-            this.panelObjectEditar.Name = "panelObjectEditar";
-            this.panelObjectEditar.Size = new System.Drawing.Size(75, 23);
-            this.panelObjectEditar.TabIndex = 20;
-            this.panelObjectEditar.Text = "Editar";
-            this.Ajuda.SetToolTip(this.panelObjectEditar, "0");
-            this.panelObjectEditar.UseVisualStyleBackColor = true;
+            this.panelFormButton.Location = new System.Drawing.Point(415, 132);
+            this.panelFormButton.Name = "panelFormButton";
+            this.panelFormButton.Size = new System.Drawing.Size(139, 23);
+            this.panelFormButton.TabIndex = 25;
+            this.panelFormButton.Text = "Botao";
+            this.Ajuda.SetToolTip(this.panelFormButton, "0");
+            this.panelFormButton.UseVisualStyleBackColor = true;
+            this.panelFormButton.Click += new System.EventHandler(this.panelFormButton_Click);
             // 
-            // panelObjectEliminar
+            // panelFormHide
             // 
-            this.panelObjectEliminar.Location = new System.Drawing.Point(40, 223);
-            this.panelObjectEliminar.Name = "panelObjectEliminar";
-            this.panelObjectEliminar.Size = new System.Drawing.Size(75, 23);
-            this.panelObjectEliminar.TabIndex = 21;
-            this.panelObjectEliminar.Text = "Eliminar";
-            this.Ajuda.SetToolTip(this.panelObjectEliminar, "0");
-            this.panelObjectEliminar.UseVisualStyleBackColor = true;
+            this.panelFormHide.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.panelFormHide.Cursor = System.Windows.Forms.Cursors.Default;
+            this.panelFormHide.Image = global::Funcionarios.Properties.Resources.Esconder;
+            this.panelFormHide.InitialImage = null;
+            this.panelFormHide.Location = new System.Drawing.Point(554, 14);
+            this.panelFormHide.Name = "panelFormHide";
+            this.panelFormHide.Size = new System.Drawing.Size(14, 18);
+            this.panelFormHide.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.panelFormHide.TabIndex = 24;
+            this.panelFormHide.TabStop = false;
+            this.Ajuda.SetToolTip(this.panelFormHide, "Esconder");
+            this.panelFormHide.Click += new System.EventHandler(this.panelFormHide_Click);
             // 
-            // buttonAdicionarObject
+            // listObjects
             // 
-            this.buttonAdicionarObject.Location = new System.Drawing.Point(645, 427);
-            this.buttonAdicionarObject.Name = "buttonAdicionarObject";
-            this.buttonAdicionarObject.Size = new System.Drawing.Size(112, 23);
-            this.buttonAdicionarObject.TabIndex = 22;
-            this.buttonAdicionarObject.Text = "Adicionar novo";
-            this.Ajuda.SetToolTip(this.buttonAdicionarObject, "0");
-            this.buttonAdicionarObject.UseVisualStyleBackColor = true;
-            // 
-            // funcionariosListView
-            // 
-            this.funcionariosListView.AllColumns.Add(this.nmec);
-            this.funcionariosListView.AllColumns.Add(this.salario);
-            this.funcionariosListView.AllColumns.Add(this.nome);
-            this.funcionariosListView.AllColumns.Add(this.tel);
-            this.funcionariosListView.AllColumns.Add(this.email);
-            this.funcionariosListView.CellEditUseWholeCell = false;
-            this.funcionariosListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.listObjects.AllColumns.Add(this.nmec);
+            this.listObjects.AllColumns.Add(this.salario);
+            this.listObjects.AllColumns.Add(this.nome);
+            this.listObjects.AllColumns.Add(this.tel);
+            this.listObjects.AllColumns.Add(this.email);
+            this.listObjects.CellEditUseWholeCell = false;
+            this.listObjects.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.nmec,
             this.salario,
             this.nome,
             this.tel,
             this.email});
-            this.funcionariosListView.Cursor = System.Windows.Forms.Cursors.Default;
-            this.funcionariosListView.HideSelection = false;
-            this.funcionariosListView.Location = new System.Drawing.Point(22, 114);
-            this.funcionariosListView.Name = "funcionariosListView";
-            this.funcionariosListView.Size = new System.Drawing.Size(580, 336);
-            this.funcionariosListView.TabIndex = 17;
-            this.funcionariosListView.UseCompatibleStateImageBehavior = false;
-            this.funcionariosListView.View = System.Windows.Forms.View.Details;
-            this.funcionariosListView.SelectedIndexChanged += new System.EventHandler(this.funcionariosListView_SelectedIndexChanged);
+            this.listObjects.Cursor = System.Windows.Forms.Cursors.Default;
+            this.listObjects.HideSelection = false;
+            this.listObjects.Location = new System.Drawing.Point(22, 114);
+            this.listObjects.Name = "listObjects";
+            this.listObjects.Size = new System.Drawing.Size(580, 336);
+            this.listObjects.TabIndex = 17;
+            this.listObjects.UseCompatibleStateImageBehavior = false;
+            this.listObjects.View = System.Windows.Forms.View.Details;
+            this.listObjects.SelectedIndexChanged += new System.EventHandler(this.funcionariosListView_SelectedIndexChanged);
             // 
             // nmec
             // 
@@ -175,6 +238,7 @@
             // 
             // panelObject
             // 
+            this.panelObject.Controls.Add(this.panelObjectHide);
             this.panelObject.Controls.Add(this.panelObjectEliminar);
             this.panelObject.Controls.Add(this.panelObjectEditar);
             this.panelObject.Controls.Add(this.panelObjectSubtitulo);
@@ -194,6 +258,7 @@
             this.panelObjectSubtitulo.Size = new System.Drawing.Size(42, 13);
             this.panelObjectSubtitulo.TabIndex = 20;
             this.panelObjectSubtitulo.Text = "XXXXX";
+            this.panelObjectSubtitulo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panelObjectTitulo
             // 
@@ -219,41 +284,176 @@
             this.panelObjectImage.TabIndex = 18;
             this.panelObjectImage.TabStop = false;
             // 
-            // pictureBox1
+            // janelaLogo
             // 
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pictureBox1.Image = global::Funcionarios.Properties.Resources.Funcionários;
-            this.pictureBox1.InitialImage = null;
-            this.pictureBox1.Location = new System.Drawing.Point(22, 23);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(39, 45);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 14;
-            this.pictureBox1.TabStop = false;
+            this.janelaLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.janelaLogo.Image = global::Funcionarios.Properties.Resources.Funcionários;
+            this.janelaLogo.InitialImage = null;
+            this.janelaLogo.Location = new System.Drawing.Point(22, 23);
+            this.janelaLogo.Name = "janelaLogo";
+            this.janelaLogo.Size = new System.Drawing.Size(39, 45);
+            this.janelaLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.janelaLogo.TabIndex = 14;
+            this.janelaLogo.TabStop = false;
+            // 
+            // panelForm
+            // 
+            this.panelForm.Controls.Add(this.panelFormHide);
+            this.panelForm.Controls.Add(this.panelFormButton);
+            this.panelForm.Controls.Add(this.label6);
+            this.panelForm.Controls.Add(this.panelFormFieldSalario);
+            this.panelForm.Controls.Add(this.label3);
+            this.panelForm.Controls.Add(this.panelFormFieldContacto);
+            this.panelForm.Controls.Add(this.label4);
+            this.panelForm.Controls.Add(this.panelFormFieldEmail);
+            this.panelForm.Controls.Add(this.label2);
+            this.panelForm.Controls.Add(this.panelFormTitulo);
+            this.panelForm.Controls.Add(this.panelFormFieldNome);
+            this.panelForm.Controls.Add(this.label1);
+            this.panelForm.Controls.Add(this.panelFormFieldNMec);
+            this.panelForm.Controls.Add(this.panelFormDescricao);
+            this.panelForm.Location = new System.Drawing.Point(22, 477);
+            this.panelForm.Name = "panelForm";
+            this.panelForm.Size = new System.Drawing.Size(580, 174);
+            this.panelForm.TabIndex = 24;
+            this.panelForm.Visible = false;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(412, 71);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(39, 13);
+            this.label6.TabIndex = 34;
+            this.label6.Text = "Salario";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // panelFormFieldSalario
+            // 
+            this.panelFormFieldSalario.Location = new System.Drawing.Point(415, 87);
+            this.panelFormFieldSalario.Name = "panelFormFieldSalario";
+            this.panelFormFieldSalario.Size = new System.Drawing.Size(139, 20);
+            this.panelFormFieldSalario.TabIndex = 33;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(226, 118);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(50, 13);
+            this.label3.TabIndex = 32;
+            this.label3.Text = "Contacto";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // panelFormFieldContacto
+            // 
+            this.panelFormFieldContacto.Location = new System.Drawing.Point(229, 134);
+            this.panelFormFieldContacto.Name = "panelFormFieldContacto";
+            this.panelFormFieldContacto.Size = new System.Drawing.Size(139, 20);
+            this.panelFormFieldContacto.TabIndex = 31;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(226, 71);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(32, 13);
+            this.label4.TabIndex = 30;
+            this.label4.Text = "Email";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // panelFormFieldEmail
+            // 
+            this.panelFormFieldEmail.Location = new System.Drawing.Point(229, 87);
+            this.panelFormFieldEmail.Name = "panelFormFieldEmail";
+            this.panelFormFieldEmail.Size = new System.Drawing.Size(139, 20);
+            this.panelFormFieldEmail.TabIndex = 29;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(16, 119);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(35, 13);
+            this.label2.TabIndex = 28;
+            this.label2.Text = "Nome";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // panelFormTitulo
+            // 
+            this.panelFormTitulo.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.panelFormTitulo.AutoSize = true;
+            this.panelFormTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.panelFormTitulo.Location = new System.Drawing.Point(17, 14);
+            this.panelFormTitulo.Name = "panelFormTitulo";
+            this.panelFormTitulo.Size = new System.Drawing.Size(47, 20);
+            this.panelFormTitulo.TabIndex = 24;
+            this.panelFormTitulo.Text = "Título";
+            this.panelFormTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // panelFormFieldNome
+            // 
+            this.panelFormFieldNome.Location = new System.Drawing.Point(19, 134);
+            this.panelFormFieldNome.Name = "panelFormFieldNome";
+            this.panelFormFieldNome.Size = new System.Drawing.Size(139, 20);
+            this.panelFormFieldNome.TabIndex = 27;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(16, 71);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(117, 13);
+            this.label1.TabIndex = 26;
+            this.label1.Text = "Número mecanográfico";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // panelFormFieldNMec
+            // 
+            this.panelFormFieldNMec.Enabled = false;
+            this.panelFormFieldNMec.Location = new System.Drawing.Point(19, 87);
+            this.panelFormFieldNMec.Name = "panelFormFieldNMec";
+            this.panelFormFieldNMec.Size = new System.Drawing.Size(139, 20);
+            this.panelFormFieldNMec.TabIndex = 25;
+            // 
+            // panelFormDescricao
+            // 
+            this.panelFormDescricao.AutoSize = true;
+            this.panelFormDescricao.Location = new System.Drawing.Point(18, 43);
+            this.panelFormDescricao.Name = "panelFormDescricao";
+            this.panelFormDescricao.Size = new System.Drawing.Size(42, 13);
+            this.panelFormDescricao.TabIndex = 24;
+            this.panelFormDescricao.Text = "XXXXX";
+            this.panelFormDescricao.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // Funcionarios
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 491);
+            this.ClientSize = new System.Drawing.Size(800, 673);
+            this.Controls.Add(this.panelForm);
             this.Controls.Add(this.buttonAdicionarObject);
             this.Controls.Add(this.panelObject);
-            this.Controls.Add(this.funcionariosListView);
+            this.Controls.Add(this.listObjects);
             this.Controls.Add(this.ajudaBtn);
-            this.Controls.Add(this.stats);
-            this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.titulo);
+            this.Controls.Add(this.janelaSubtitulo);
+            this.Controls.Add(this.janelaLogo);
+            this.Controls.Add(this.janelaTitulo);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Funcionarios";
             this.Text = "Sistema de Gestão Escolar | Funcionários";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Funcionarios_FormClosed);
             this.Load += new System.EventHandler(this.Funcionarios_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.panelObjectHide)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ajudaBtn)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.funcionariosListView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelFormHide)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.listObjects)).EndInit();
             this.panelObject.ResumeLayout(false);
             this.panelObject.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelObjectImage)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.janelaLogo)).EndInit();
+            this.panelForm.ResumeLayout(false);
+            this.panelForm.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -262,11 +462,11 @@
         #endregion
 
         private System.Windows.Forms.PictureBox ajudaBtn;
-        private System.Windows.Forms.Label stats;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label titulo;
+        private System.Windows.Forms.Label janelaSubtitulo;
+        private System.Windows.Forms.PictureBox janelaLogo;
+        private System.Windows.Forms.Label janelaTitulo;
         private System.Windows.Forms.ToolTip Ajuda;
-        private BrightIdeasSoftware.ObjectListView funcionariosListView;
+        private BrightIdeasSoftware.ObjectListView listObjects;
         private BrightIdeasSoftware.OLVColumn nmec;
         private BrightIdeasSoftware.OLVColumn salario;
         private BrightIdeasSoftware.OLVColumn nome;
@@ -279,5 +479,21 @@
         private System.Windows.Forms.Button panelObjectEditar;
         private System.Windows.Forms.Button panelObjectEliminar;
         private System.Windows.Forms.Button buttonAdicionarObject;
+        private System.Windows.Forms.PictureBox panelObjectHide;
+        private System.Windows.Forms.Panel panelForm;
+        private System.Windows.Forms.Label panelFormDescricao;
+        private System.Windows.Forms.Label panelFormTitulo;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox panelFormFieldNMec;
+        private System.Windows.Forms.Button panelFormButton;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox panelFormFieldSalario;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox panelFormFieldContacto;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox panelFormFieldEmail;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox panelFormFieldNome;
+        private System.Windows.Forms.PictureBox panelFormHide;
     }
 }

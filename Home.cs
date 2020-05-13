@@ -99,10 +99,10 @@ namespace Funcionarios
             }
             getStats();
 
-            // TODO Temporary (to open directly Funcioonarios Form)
+            /* TODO Temporary (to open directly Funcioonarios Form)
             this.Hide();
             Funcionarios f = new Funcionarios(cn, this);
-            f.ShowDialog();
+            f.ShowDialog();*/
         }
 
         private void menuFuncionariosPanel_Click(object sender, EventArgs e)
