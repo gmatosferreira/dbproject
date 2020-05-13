@@ -128,6 +128,7 @@
             this.menuFuncionariosPanel.BackColor = System.Drawing.SystemColors.Window;
             this.menuFuncionariosPanel.Controls.Add(this.menuFuncionariosLabel);
             this.menuFuncionariosPanel.Controls.Add(this.menuFuncionariosImagem);
+            this.menuFuncionariosPanel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.menuFuncionariosPanel.Location = new System.Drawing.Point(20, 31);
             this.menuFuncionariosPanel.Name = "menuFuncionariosPanel";
             this.menuFuncionariosPanel.Size = new System.Drawing.Size(101, 106);
@@ -175,7 +176,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(34, 454);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(62, 13);
+            this.label2.Size = new System.Drawing.Size(256, 13);
             this.label2.TabIndex = 5;
             this.label2.Text = "© Gonçalo matos (92972) e Maria Inês (93320) 2020";
             // 
