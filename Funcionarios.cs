@@ -27,7 +27,9 @@ namespace Funcionarios
             this.previous = f;
             InitializeComponent();
             // ObjectListView Column groups
+            // http://objectlistview.sourceforge.net/python/groupListView.html
             this.nmec.GroupKeyGetter = delegate (object rowObject) {
+                // When the same is returned by every object, all of them are put together in one group
                 return "Número mecanográfico";
             };
             this.nome.GroupKeyGetter = delegate (object rowObject)
@@ -35,28 +37,35 @@ namespace Funcionarios
                 return "Nome";
             };
             this.salario.GroupKeyGetter = delegate (object rowObject) {
+                // Group salaries by the integer value of it
                 Funcionario func = (Funcionario)rowObject;
                 return func.salario.ToString().Split(',')[0];
             };
             this.tel.GroupKeyGetter = delegate (object rowObject) {
+                // Group phones by the first two digits (phone company indicator)
                 Funcionario func = (Funcionario)rowObject;
                 if (func.telemovel.ToString().Length > 2)
                     return func.telemovel.ToString().Substring(0, 2);
                 return "Outros";
             };
             this.email.GroupKeyGetter = delegate (object rowObject) {
+                // Group emails by domain (text after @ symbol)
                 Funcionario func = (Funcionario)rowObject;
                 return func.email.Split('@')[1];
             };
             // ObjectListView Aditional preferences
-            this.listObjects.FullRowSelect = true;
-            this.listObjects.SelectedIndex = 0;
+            this.listObjects.FullRowSelect = true; //Make selection select the full row (and not only a cell)
+            this.listObjects.SelectedIndex = 0; //Make the first row selected ad default
+            // Filtering
+            pesquisaAtributo.SelectedIndex = 0; // Set atribute combo box selected index to xero as default
+            this.listObjects.UseFiltering = true; // Activate filtering (for search porpuses)
         }
 
         //  Methods
         private void updateStats()
         {
-            janelaSubtitulo.Text = "A mostrar " + counter.ToString() + " registos";
+            // Update interface subtitle with the number of rows being shown
+            janelaSubtitulo.Text = "A mostrar " + listObjects.Items.Count.ToString() + " registos";
         }
 
         private void showObject()
@@ -133,19 +142,64 @@ namespace Funcionarios
             panelObject.Visible = false;
         }
 
+        private void pesquisar()
+        {
+            // Get attribute and value fields text
+            String atr = pesquisaAtributo.Text;
+            String val = pesquisaTexto.Text;
+            if (atr=="" || val=="")
+            {
+                // If one of them is empty, don't filter
+                this.listObjects.ModelFilter = null;
+            } else
+            {
+                // Define filtering
+                this.listObjects.ModelFilter = new ModelFilter(delegate (object x) {
+                    Funcionario func = (Funcionario)x;
+                    String toFilter = "";
+                    switch(atr)
+                    {
+                        case "Número mecanográfico":
+                            toFilter = func.nmec.ToString();
+                            break;
+                        case "Salário":
+                            toFilter = func.salario.ToString();
+                            break;
+                        case "Nome":
+                            toFilter = func.nome;
+                            break;
+                        case "Contacto":
+                            toFilter = func.telemovel.ToString();
+                            break;
+                        case "Email":
+                            toFilter = func.email;
+                            break;
+                    }
+                    if (toFilter.Contains(val))
+                        return true;
+                    return false;
+                });
+            }
+            updateStats();
+            // Hide data panel (both edit and data)
+            panelObject.Visible = false;
+            panelForm.Visible = false;
+        }
+
         // Event handlers
         private void Funcionarios_FormClosed(object sender, FormClosedEventArgs e)
         {
+            // When form closed, show the previous one (main interface form)
             previous.Show();
         }
 
 
         private void Funcionarios_Load(object sender, EventArgs e)
         {
-            // Executar query SQL
+            // Execute SQL query
             SqlCommand cmd = new SqlCommand("SELECT PNMec, nome, salario, telemovel, CONCAT(email,'@',dominio) AS emailComposed FROM( (GestaoEscola.Funcionario JOIN GestaoEscola.Pessoa ON Funcionario.PNMec=Pessoa.NMec) JOIN GestaoEscola.EmailDominio ON Pessoa.emailDominio=EmailDominio.id)", cn);
             SqlDataReader reader = cmd.ExecuteReader();
-
+            // Create list of Objects given the query results
             List<Funcionario> funcionarios = new List<Funcionario>();
             while (reader.Read())
             {
@@ -161,6 +215,7 @@ namespace Funcionarios
 
 
             // ObjectListView
+            // Add Objects to list view
             listObjects.SetObjects(funcionarios);
 
             // Update stats
@@ -172,12 +227,14 @@ namespace Funcionarios
 
         private void panelObjectEsconder_Click(object sender, EventArgs e)
         {
+            // Hide data panel (both edit and data)
             panelObject.Visible = false;
             panelForm.Visible = false;
         }
 
         private void panelObjectEditar_Click(object sender, EventArgs e)
         {
+            // Edit object btn
             if (listObjects.SelectedIndex >= 0)
             {
                 editObject();
@@ -186,16 +243,19 @@ namespace Funcionarios
 
         private void buttonAdicionarObject_Click(object sender, EventArgs e)
         {
+            // Add object btn
             addObject();
         }
 
         private void panelFormHide_Click(object sender, EventArgs e)
         {
+            // Hide pannel
             panelForm.Visible = false;
         }
 
         private void panelObjectEliminar_Click(object sender, EventArgs e)
         {
+            // Delete Object btn
             if (listObjects.SelectedIndex >= 0)
             {
                 deleteObject();
@@ -205,11 +265,24 @@ namespace Funcionarios
         private void panelFormButton_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Funcionalidade em implementação...");
-            //TODO
+            //TODO (Distinguish new and edit operation)
+        }
+
+        private void pesquisaTexto_TextChanged(object sender, EventArgs e)
+        {
+            // When textbox value changes, compute new search
+            pesquisar();
+        }
+
+        private void pesquisaAtributo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // When attr combobox value changes, compute new search
+            pesquisar();
         }
 
         private void funcionariosListView_SelectedIndexChanged(object sender, EventArgs e)
         {
+            // When new row selected, show it's Object data
             if (listObjects.SelectedIndex >= 0)
             {
                 showObject();

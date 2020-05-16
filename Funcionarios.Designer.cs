@@ -64,6 +64,12 @@
             this.label1 = new System.Windows.Forms.Label();
             this.panelFormFieldNMec = new System.Windows.Forms.TextBox();
             this.panelFormDescricao = new System.Windows.Forms.Label();
+            this.pesquisaTexto = new System.Windows.Forms.TextBox();
+            this.pesquisaLabel = new System.Windows.Forms.Label();
+            this.pesquisaAtributo = new System.Windows.Forms.ComboBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.panelObjectHide)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ajudaBtn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelFormHide)).BeginInit();
@@ -72,6 +78,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelObjectImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.janelaLogo)).BeginInit();
             this.panelForm.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // janelaSubtitulo
@@ -95,7 +102,7 @@
             // 
             // panelObjectEditar
             // 
-            this.panelObjectEditar.Location = new System.Drawing.Point(40, 181);
+            this.panelObjectEditar.Location = new System.Drawing.Point(40, 236);
             this.panelObjectEditar.Name = "panelObjectEditar";
             this.panelObjectEditar.Size = new System.Drawing.Size(75, 23);
             this.panelObjectEditar.TabIndex = 20;
@@ -106,7 +113,7 @@
             // 
             // panelObjectEliminar
             // 
-            this.panelObjectEliminar.Location = new System.Drawing.Point(40, 223);
+            this.panelObjectEliminar.Location = new System.Drawing.Point(40, 276);
             this.panelObjectEliminar.Name = "panelObjectEliminar";
             this.panelObjectEliminar.Size = new System.Drawing.Size(75, 23);
             this.panelObjectEliminar.TabIndex = 21;
@@ -117,9 +124,9 @@
             // 
             // buttonAdicionarObject
             // 
-            this.buttonAdicionarObject.Location = new System.Drawing.Point(645, 427);
+            this.buttonAdicionarObject.Location = new System.Drawing.Point(643, 385);
             this.buttonAdicionarObject.Name = "buttonAdicionarObject";
-            this.buttonAdicionarObject.Size = new System.Drawing.Size(112, 23);
+            this.buttonAdicionarObject.Size = new System.Drawing.Size(112, 53);
             this.buttonAdicionarObject.TabIndex = 22;
             this.buttonAdicionarObject.Text = "Adicionar novo";
             this.Ajuda.SetToolTip(this.buttonAdicionarObject, "0");
@@ -147,9 +154,9 @@
             this.ajudaBtn.Cursor = System.Windows.Forms.Cursors.Help;
             this.ajudaBtn.Image = global::Funcionarios.Properties.Resources.Ajuda;
             this.ajudaBtn.InitialImage = null;
-            this.ajudaBtn.Location = new System.Drawing.Point(742, 23);
+            this.ajudaBtn.Location = new System.Drawing.Point(56, 23);
             this.ajudaBtn.Name = "ajudaBtn";
-            this.ajudaBtn.Size = new System.Drawing.Size(30, 30);
+            this.ajudaBtn.Size = new System.Drawing.Size(38, 47);
             this.ajudaBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.ajudaBtn.TabIndex = 16;
             this.ajudaBtn.TabStop = false;
@@ -244,16 +251,16 @@
             this.panelObject.Controls.Add(this.panelObjectSubtitulo);
             this.panelObject.Controls.Add(this.panelObjectTitulo);
             this.panelObject.Controls.Add(this.panelObjectImage);
-            this.panelObject.Location = new System.Drawing.Point(620, 114);
+            this.panelObject.Location = new System.Drawing.Point(626, 23);
             this.panelObject.Name = "panelObject";
-            this.panelObject.Size = new System.Drawing.Size(152, 267);
+            this.panelObject.Size = new System.Drawing.Size(152, 336);
             this.panelObject.TabIndex = 19;
             this.panelObject.Visible = false;
             // 
             // panelObjectSubtitulo
             // 
             this.panelObjectSubtitulo.AutoSize = true;
-            this.panelObjectSubtitulo.Location = new System.Drawing.Point(54, 129);
+            this.panelObjectSubtitulo.Location = new System.Drawing.Point(53, 173);
             this.panelObjectSubtitulo.Name = "panelObjectSubtitulo";
             this.panelObjectSubtitulo.Size = new System.Drawing.Size(42, 13);
             this.panelObjectSubtitulo.TabIndex = 20;
@@ -265,7 +272,7 @@
             this.panelObjectTitulo.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.panelObjectTitulo.AutoSize = true;
             this.panelObjectTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panelObjectTitulo.Location = new System.Drawing.Point(21, 100);
+            this.panelObjectTitulo.Location = new System.Drawing.Point(20, 144);
             this.panelObjectTitulo.Name = "panelObjectTitulo";
             this.panelObjectTitulo.Size = new System.Drawing.Size(108, 20);
             this.panelObjectTitulo.TabIndex = 20;
@@ -277,7 +284,7 @@
             this.panelObjectImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.panelObjectImage.Image = global::Funcionarios.Properties.Resources.Funcionario;
             this.panelObjectImage.InitialImage = null;
-            this.panelObjectImage.Location = new System.Drawing.Point(46, 16);
+            this.panelObjectImage.Location = new System.Drawing.Point(45, 60);
             this.panelObjectImage.Name = "panelObjectImage";
             this.panelObjectImage.Size = new System.Drawing.Size(59, 68);
             this.panelObjectImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -426,16 +433,86 @@
             this.panelFormDescricao.Text = "XXXXX";
             this.panelFormDescricao.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // pesquisaTexto
+            // 
+            this.pesquisaTexto.Location = new System.Drawing.Point(437, 77);
+            this.pesquisaTexto.Name = "pesquisaTexto";
+            this.pesquisaTexto.Size = new System.Drawing.Size(165, 20);
+            this.pesquisaTexto.TabIndex = 25;
+            this.pesquisaTexto.TextChanged += new System.EventHandler(this.pesquisaTexto_TextChanged);
+            // 
+            // pesquisaLabel
+            // 
+            this.pesquisaLabel.AutoSize = true;
+            this.pesquisaLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pesquisaLabel.Location = new System.Drawing.Point(552, 23);
+            this.pesquisaLabel.Name = "pesquisaLabel";
+            this.pesquisaLabel.Size = new System.Drawing.Size(50, 13);
+            this.pesquisaLabel.TabIndex = 26;
+            this.pesquisaLabel.Text = "Pesquisa";
+            this.pesquisaLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // pesquisaAtributo
+            // 
+            this.pesquisaAtributo.FormattingEnabled = true;
+            this.pesquisaAtributo.Items.AddRange(new object[] {
+            "Número mecanográfico",
+            "Salário",
+            "Nome",
+            "Contacto",
+            "Email"});
+            this.pesquisaAtributo.Location = new System.Drawing.Point(453, 46);
+            this.pesquisaAtributo.Name = "pesquisaAtributo";
+            this.pesquisaAtributo.Size = new System.Drawing.Size(149, 21);
+            this.pesquisaAtributo.TabIndex = 27;
+            this.pesquisaAtributo.SelectedIndexChanged += new System.EventHandler(this.pesquisaAtributo_SelectedIndexChanged);
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.label5);
+            this.panel1.Controls.Add(this.ajudaBtn);
+            this.panel1.Controls.Add(this.label7);
+            this.panel1.Location = new System.Drawing.Point(626, 477);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(152, 174);
+            this.panel1.TabIndex = 28;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(21, 105);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(118, 52);
+            this.label5.TabIndex = 24;
+            this.label5.Text = "Passe o rato sobre a\r\nimagem acima e saiba\r\nmais sobre como utilizar\r\nesta interf" +
+    "ace!";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label7
+            // 
+            this.label7.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(40, 80);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(75, 20);
+            this.label7.TabIndex = 25;
+            this.label7.Text = "Dúvidas?";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // Funcionarios
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 673);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.pesquisaAtributo);
+            this.Controls.Add(this.pesquisaLabel);
+            this.Controls.Add(this.pesquisaTexto);
             this.Controls.Add(this.panelForm);
             this.Controls.Add(this.buttonAdicionarObject);
             this.Controls.Add(this.panelObject);
             this.Controls.Add(this.listObjects);
-            this.Controls.Add(this.ajudaBtn);
             this.Controls.Add(this.janelaSubtitulo);
             this.Controls.Add(this.janelaLogo);
             this.Controls.Add(this.janelaTitulo);
@@ -454,6 +531,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.janelaLogo)).EndInit();
             this.panelForm.ResumeLayout(false);
             this.panelForm.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -495,5 +574,11 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox panelFormFieldNome;
         private System.Windows.Forms.PictureBox panelFormHide;
+        private System.Windows.Forms.TextBox pesquisaTexto;
+        private System.Windows.Forms.Label pesquisaLabel;
+        private System.Windows.Forms.ComboBox pesquisaAtributo;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label7;
     }
 }

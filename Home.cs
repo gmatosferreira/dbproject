@@ -60,9 +60,9 @@ namespace Funcionarios
             MessageBox.Show("This functionality is not implemented yet, sorry!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        // Stats
         private void getStats()
         {
+            // Make SQL requests for every table to get the number of rows of each one
             SqlCommand cmd = new SqlCommand("SELECT COUNT(PNMec) AS N FROM GestaoEscola.Funcionario", cn);
             SqlDataReader reader = cmd.ExecuteReader();
             reader.Read();
@@ -85,28 +85,25 @@ namespace Funcionarios
             {
                 if (cn == null || cn.State != ConnectionState.Open)
                 {
+                    // If there was an error, ask the user if he wants to retry the connection to the DB
                     userfeedback = MessageBox.Show("Could not connect to DB. Do tou want to retry?", "ERROR", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
                     repeat = (userfeedback == DialogResult.Retry);
                     if (userfeedback == DialogResult.Cancel)
                         this.Close();
                     verifySGBDConnection();
                 }
-                else if (debug)
+                else
                 {
                     repeat = false;
-                    MessageBox.Show("Connected with sucess to DB!", "SUCESS", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
+
             }
             getStats();
-
-            /* TODO Temporary (to open directly Funcioonarios Form)
-            this.Hide();
-            Funcionarios f = new Funcionarios(cn, this);
-            f.ShowDialog();*/
         }
 
         private void menuFuncionariosPanel_Click(object sender, EventArgs e)
         {
+            // Hide this form and open the interface for the clicked item
             this.Hide();
             Funcionarios f = new Funcionarios(cn, this);
             f.ShowDialog();
