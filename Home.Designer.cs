@@ -33,20 +33,20 @@
             this.statsGroup = new System.Windows.Forms.GroupBox();
             this.statsFuncionarios = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.statsFuncionariosLabel = new System.Windows.Forms.Label();
+            this.statsDocentesLabel = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.menuGroup = new System.Windows.Forms.GroupBox();
-            this.menuFuncionariosPanel = new System.Windows.Forms.Panel();
-            this.menuFuncionariosLabel = new System.Windows.Forms.Label();
-            this.menuFuncionariosImagem = new System.Windows.Forms.PictureBox();
+            this.menuDocentesPanel = new System.Windows.Forms.Panel();
+            this.menuDocentesLabel = new System.Windows.Forms.Label();
+            this.menuDocentesImagem = new System.Windows.Forms.PictureBox();
             this.logo = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
             this.statsGroup.SuspendLayout();
             this.statsFuncionarios.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.menuGroup.SuspendLayout();
-            this.menuFuncionariosPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.menuFuncionariosImagem)).BeginInit();
+            this.menuDocentesPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.menuDocentesImagem)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             this.SuspendLayout();
             // 
@@ -74,7 +74,7 @@
             // 
             this.statsFuncionarios.BackColor = System.Drawing.SystemColors.Window;
             this.statsFuncionarios.Controls.Add(this.label1);
-            this.statsFuncionarios.Controls.Add(this.statsFuncionariosLabel);
+            this.statsFuncionarios.Controls.Add(this.statsDocentesLabel);
             this.statsFuncionarios.Controls.Add(this.pictureBox1);
             this.statsFuncionarios.Location = new System.Drawing.Point(20, 30);
             this.statsFuncionarios.Name = "statsFuncionarios";
@@ -87,19 +87,19 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(61, 46);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(67, 13);
+            this.label1.Size = new System.Drawing.Size(53, 13);
             this.label1.TabIndex = 8;
-            this.label1.Text = "Funcionários";
+            this.label1.Text = "Docentes";
             // 
-            // statsFuncionariosLabel
+            // statsDocentesLabel
             // 
-            this.statsFuncionariosLabel.AutoSize = true;
-            this.statsFuncionariosLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.statsFuncionariosLabel.Location = new System.Drawing.Point(59, 14);
-            this.statsFuncionariosLabel.Name = "statsFuncionariosLabel";
-            this.statsFuncionariosLabel.Size = new System.Drawing.Size(42, 26);
-            this.statsFuncionariosLabel.TabIndex = 8;
-            this.statsFuncionariosLabel.Text = "XX";
+            this.statsDocentesLabel.AutoSize = true;
+            this.statsDocentesLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statsDocentesLabel.Location = new System.Drawing.Point(59, 14);
+            this.statsDocentesLabel.Name = "statsDocentesLabel";
+            this.statsDocentesLabel.Size = new System.Drawing.Size(42, 26);
+            this.statsDocentesLabel.TabIndex = 8;
+            this.statsDocentesLabel.Text = "XX";
             // 
             // pictureBox1
             // 
@@ -115,7 +115,7 @@
             // 
             // menuGroup
             // 
-            this.menuGroup.Controls.Add(this.menuFuncionariosPanel);
+            this.menuGroup.Controls.Add(this.menuDocentesPanel);
             this.menuGroup.Location = new System.Drawing.Point(25, 231);
             this.menuGroup.Name = "menuGroup";
             this.menuGroup.Size = new System.Drawing.Size(752, 207);
@@ -123,41 +123,41 @@
             this.menuGroup.TabStop = false;
             this.menuGroup.Text = "Menu";
             // 
-            // menuFuncionariosPanel
+            // menuDocentesPanel
             // 
-            this.menuFuncionariosPanel.BackColor = System.Drawing.SystemColors.Window;
-            this.menuFuncionariosPanel.Controls.Add(this.menuFuncionariosLabel);
-            this.menuFuncionariosPanel.Controls.Add(this.menuFuncionariosImagem);
-            this.menuFuncionariosPanel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.menuFuncionariosPanel.Location = new System.Drawing.Point(20, 31);
-            this.menuFuncionariosPanel.Name = "menuFuncionariosPanel";
-            this.menuFuncionariosPanel.Size = new System.Drawing.Size(101, 106);
-            this.menuFuncionariosPanel.TabIndex = 5;
-            this.menuFuncionariosPanel.Click += new System.EventHandler(this.menuFuncionariosPanel_Click);
+            this.menuDocentesPanel.BackColor = System.Drawing.SystemColors.Window;
+            this.menuDocentesPanel.Controls.Add(this.menuDocentesLabel);
+            this.menuDocentesPanel.Controls.Add(this.menuDocentesImagem);
+            this.menuDocentesPanel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.menuDocentesPanel.Location = new System.Drawing.Point(20, 31);
+            this.menuDocentesPanel.Name = "menuDocentesPanel";
+            this.menuDocentesPanel.Size = new System.Drawing.Size(101, 106);
+            this.menuDocentesPanel.TabIndex = 5;
+            this.menuDocentesPanel.Click += new System.EventHandler(this.menuFuncionariosPanel_Click);
             // 
-            // menuFuncionariosLabel
+            // menuDocentesLabel
             // 
-            this.menuFuncionariosLabel.AutoSize = true;
-            this.menuFuncionariosLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.menuFuncionariosLabel.Location = new System.Drawing.Point(9, 77);
-            this.menuFuncionariosLabel.Name = "menuFuncionariosLabel";
-            this.menuFuncionariosLabel.Size = new System.Drawing.Size(89, 17);
-            this.menuFuncionariosLabel.TabIndex = 7;
-            this.menuFuncionariosLabel.Text = "Funcionários";
-            this.menuFuncionariosLabel.Click += new System.EventHandler(this.menuFuncionariosPanel_Click);
+            this.menuDocentesLabel.AutoSize = true;
+            this.menuDocentesLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.menuDocentesLabel.Location = new System.Drawing.Point(17, 80);
+            this.menuDocentesLabel.Name = "menuDocentesLabel";
+            this.menuDocentesLabel.Size = new System.Drawing.Size(68, 17);
+            this.menuDocentesLabel.TabIndex = 7;
+            this.menuDocentesLabel.Text = "Docentes";
+            this.menuDocentesLabel.Click += new System.EventHandler(this.menuFuncionariosPanel_Click);
             // 
-            // menuFuncionariosImagem
+            // menuDocentesImagem
             // 
-            this.menuFuncionariosImagem.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.menuFuncionariosImagem.Image = global::Funcionarios.Properties.Resources.Funcionários;
-            this.menuFuncionariosImagem.InitialImage = null;
-            this.menuFuncionariosImagem.Location = new System.Drawing.Point(28, 17);
-            this.menuFuncionariosImagem.Name = "menuFuncionariosImagem";
-            this.menuFuncionariosImagem.Size = new System.Drawing.Size(44, 52);
-            this.menuFuncionariosImagem.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.menuFuncionariosImagem.TabIndex = 5;
-            this.menuFuncionariosImagem.TabStop = false;
-            this.menuFuncionariosImagem.Click += new System.EventHandler(this.menuFuncionariosPanel_Click);
+            this.menuDocentesImagem.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.menuDocentesImagem.Image = global::Funcionarios.Properties.Resources.Funcionários;
+            this.menuDocentesImagem.InitialImage = null;
+            this.menuDocentesImagem.Location = new System.Drawing.Point(28, 17);
+            this.menuDocentesImagem.Name = "menuDocentesImagem";
+            this.menuDocentesImagem.Size = new System.Drawing.Size(44, 52);
+            this.menuDocentesImagem.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.menuDocentesImagem.TabIndex = 5;
+            this.menuDocentesImagem.TabStop = false;
+            this.menuDocentesImagem.Click += new System.EventHandler(this.menuFuncionariosPanel_Click);
             // 
             // logo
             // 
@@ -199,9 +199,9 @@
             this.statsFuncionarios.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.menuGroup.ResumeLayout(false);
-            this.menuFuncionariosPanel.ResumeLayout(false);
-            this.menuFuncionariosPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.menuFuncionariosImagem)).EndInit();
+            this.menuDocentesPanel.ResumeLayout(false);
+            this.menuDocentesPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.menuDocentesImagem)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -214,10 +214,10 @@
         private System.Windows.Forms.PictureBox logo;
         private System.Windows.Forms.GroupBox statsGroup;
         private System.Windows.Forms.GroupBox menuGroup;
-        private System.Windows.Forms.PictureBox menuFuncionariosImagem;
-        private System.Windows.Forms.Panel menuFuncionariosPanel;
-        private System.Windows.Forms.Label menuFuncionariosLabel;
-        private System.Windows.Forms.Label statsFuncionariosLabel;
+        private System.Windows.Forms.PictureBox menuDocentesImagem;
+        private System.Windows.Forms.Panel menuDocentesPanel;
+        private System.Windows.Forms.Label menuDocentesLabel;
+        private System.Windows.Forms.Label statsDocentesLabel;
         private System.Windows.Forms.Panel statsFuncionarios;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label1;

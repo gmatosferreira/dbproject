@@ -13,7 +13,7 @@ using BrightIdeasSoftware;
 
 namespace Funcionarios
 {
-    public partial class Funcionarios : Form
+    public partial class Docentes : Form
     {
         // Attributes
         private SqlConnection cn;
@@ -21,7 +21,7 @@ namespace Funcionarios
         private int current = 0, counter = 0;
 
         // Constructor
-        public Funcionarios(SqlConnection cn, Form f)
+        public Docentes(SqlConnection cn, Form f)
         {
             this.cn = cn;
             this.previous = f;

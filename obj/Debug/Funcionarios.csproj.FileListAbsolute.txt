@@ -19,6 +19,6 @@ C:\Users\GonçaloMatos\MEOCloud\UA2A\2S\BD\P\Projeto\dbproject\obj\Debug\Funcion
 C:\Users\GonçaloMatos\MEOCloud\UA2A\2S\BD\P\Projeto\dbproject\obj\Debug\Funcionarios.csproj.CoreCompileInputs.cache
 C:\Users\GonçaloMatos\MEOCloud\UA2A\2S\BD\P\Projeto\dbproject\obj\Debug\Funcionarios.exe
 C:\Users\GonçaloMatos\MEOCloud\UA2A\2S\BD\P\Projeto\dbproject\obj\Debug\Funcionarios.pdb
-C:\Users\GonçaloMatos\MEOCloud\UA2A\2S\BD\P\Projeto\dbproject\obj\Debug\Funcionarios.Funcionarios.resources
 C:\Users\GonçaloMatos\MEOCloud\UA2A\2S\BD\P\Projeto\dbproject\bin\Debug\ObjectListView.dll
 C:\Users\GonçaloMatos\MEOCloud\UA2A\2S\BD\P\Projeto\dbproject\obj\Debug\Funcionarios.csproj.CopyComplete
+C:\Users\GonçaloMatos\MEOCloud\UA2A\2S\BD\P\Projeto\dbproject\obj\Debug\Funcionarios.Docentes.resources

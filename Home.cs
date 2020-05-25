@@ -63,11 +63,11 @@ namespace Funcionarios
         private void getStats()
         {
             // Make SQL requests for every table to get the number of rows of each one
-            SqlCommand cmd = new SqlCommand("SELECT COUNT(PNMec) AS N FROM GestaoEscola.Funcionario", cn);
+            SqlCommand cmd = new SqlCommand("SELECT COUNT(NMec) AS N FROM GestaoEscola.Docente", cn);
             SqlDataReader reader = cmd.ExecuteReader();
             reader.Read();
             String n = reader["N"].ToString();
-            statsFuncionariosLabel.Text = n;
+            statsDocentesLabel.Text = n;
             reader.Close();
         }
 
@@ -105,7 +105,7 @@ namespace Funcionarios
         {
             // Hide this form and open the interface for the clicked item
             this.Hide();
-            Funcionarios f = new Funcionarios(cn, this);
+            Docentes f = new Docentes(cn, this);
             f.ShowDialog();
         }
 

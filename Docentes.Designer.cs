@@ -1,6 +1,6 @@
 ﻿namespace Funcionarios
 {
-    partial class Funcionarios
+    partial class Docentes
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Funcionarios));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Docentes));
             this.janelaSubtitulo = new System.Windows.Forms.Label();
             this.janelaTitulo = new System.Windows.Forms.Label();
             this.Ajuda = new System.Windows.Forms.ToolTip(this.components);
@@ -96,9 +96,9 @@
             this.janelaTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.janelaTitulo.Location = new System.Drawing.Point(76, 23);
             this.janelaTitulo.Name = "janelaTitulo";
-            this.janelaTitulo.Size = new System.Drawing.Size(100, 20);
+            this.janelaTitulo.Size = new System.Drawing.Size(78, 20);
             this.janelaTitulo.TabIndex = 13;
-            this.janelaTitulo.Text = "Funcionários";
+            this.janelaTitulo.Text = "Docentes";
             // 
             // panelObjectEditar
             // 
@@ -500,7 +500,7 @@
             this.label7.Text = "Dúvidas?";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // Funcionarios
+            // Docentes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -517,8 +517,8 @@
             this.Controls.Add(this.janelaLogo);
             this.Controls.Add(this.janelaTitulo);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "Funcionarios";
-            this.Text = "Sistema de Gestão Escolar | Funcionários";
+            this.Name = "Docentes";
+            this.Text = "Sistema de Gestão Escolar | Docentes";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Funcionarios_FormClosed);
             this.Load += new System.EventHandler(this.Funcionarios_Load);
             ((System.ComponentModel.ISupportInitialize)(this.panelObjectHide)).EndInit();
