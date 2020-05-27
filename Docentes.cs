@@ -194,14 +194,14 @@ namespace Funcionarios
         }
 
         // Event handlers
-        private void Funcionarios_FormClosed(object sender, FormClosedEventArgs e)
+        private void FormClosed_Handler(object sender, FormClosedEventArgs e)
         {
             // When form closed, show the previous one (main interface form)
             previous.Show();
         }
 
 
-        private void Funcionarios_Load(object sender, EventArgs e)
+        private void FormLoad_Handler(object sender, EventArgs e)
         {
             // SQL Query to get grupoDisciplinar
             RelacaoGrupoDisciplinar = new Dictionary<int, String>();

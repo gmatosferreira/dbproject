@@ -552,8 +552,8 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Docentes";
             this.Text = "Sistema de Gestão Escolar | Docentes";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Funcionarios_FormClosed);
-            this.Load += new System.EventHandler(this.Funcionarios_Load);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormClosed_Handler);
+            this.Load += new System.EventHandler(this.FormLoad_Handler);
             ((System.ComponentModel.ISupportInitialize)(this.panelObjectHide)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ajudaBtn)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelFormHide)).EndInit();
