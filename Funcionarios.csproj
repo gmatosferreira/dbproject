@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Docente.cs" />
     <Compile Include="Funcionario.cs" />
     <Compile Include="Docentes.cs">
       <SubType>Form</SubType>

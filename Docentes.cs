@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Text.RegularExpressions;
 using BrightIdeasSoftware;
+using System.Diagnostics;
 
 namespace Funcionarios
 {
@@ -19,6 +20,7 @@ namespace Funcionarios
         private SqlConnection cn;
         private Form previous;
         private int current = 0, counter = 0;
+        private Dictionary<int, String> RelacaoGrupoDisciplinar;
 
         // Constructor
         public Docentes(SqlConnection cn, Form f)
@@ -38,19 +40,19 @@ namespace Funcionarios
             };
             this.salario.GroupKeyGetter = delegate (object rowObject) {
                 // Group salaries by the integer value of it
-                Funcionario func = (Funcionario)rowObject;
+                Docente func = (Docente)rowObject;
                 return func.salario.ToString().Split(',')[0];
             };
             this.tel.GroupKeyGetter = delegate (object rowObject) {
                 // Group phones by the first two digits (phone company indicator)
-                Funcionario func = (Funcionario)rowObject;
+                Docente func = (Docente)rowObject;
                 if (func.telemovel.ToString().Length > 2)
                     return func.telemovel.ToString().Substring(0, 2);
                 return "Outros";
             };
             this.email.GroupKeyGetter = delegate (object rowObject) {
                 // Group emails by domain (text after @ symbol)
-                Funcionario func = (Funcionario)rowObject;
+                Docente func = (Docente)rowObject;
                 return func.email.Split('@')[1];
             };
             // ObjectListView Aditional preferences
@@ -73,7 +75,7 @@ namespace Funcionarios
             // Get Object
             if (listObjects.Items.Count == 0 | current < 0)
                 return;
-            Funcionario f = (Funcionario)listObjects.SelectedObjects[0];
+            Docente f = (Docente)listObjects.SelectedObjects[0];
             // Set labels values
             panelObjectTitulo.Text = f.nome;
             panelObjectSubtitulo.Text = f.nmec.ToString();
@@ -88,13 +90,14 @@ namespace Funcionarios
             // Get Object
             if (listObjects.Items.Count == 0 | current < 0)
                 return;
-            Funcionario f = (Funcionario)listObjects.SelectedObjects[0];
+            Docente f = (Docente)listObjects.SelectedObjects[0];
             // Set textboxes value
             panelFormFieldNMec.Text = f.nmec.ToString();
             panelFormFieldNome.Text = f.nome;
             panelFormFieldContacto.Text = f.telemovel.ToString();
             panelFormFieldEmail.Text = f.email;
             panelFormFieldSalario.Text = f.salario.ToString();
+            panelFormFieldGrupoDisciplinar.Text = f.grupoDisciplinarStr;
             // Disable fields not changable
             panelFormFieldNMec.Enabled = false;
             // Set title and description
@@ -114,6 +117,7 @@ namespace Funcionarios
             panelFormFieldContacto.Text = "";
             panelFormFieldEmail.Text = "";
             panelFormFieldSalario.Text = "";
+            panelFormFieldGrupoDisciplinar.SelectedIndex = 0;
             // Enable fields that are not editable
             panelFormFieldNMec.Enabled = true;
             // Set title and description
@@ -130,7 +134,7 @@ namespace Funcionarios
             // Get Object
             if (listObjects.Items.Count == 0 | current < 0)
                 return;
-            Funcionario f = (Funcionario)listObjects.SelectedObjects[0];
+            Docente f = (Docente)listObjects.SelectedObjects[0];
             // Confirm delete
             DialogResult msgb = MessageBox.Show("Esta operação é irreversível!", "Tem a certeza que quer eliminar o funcionário " + f.nmec.ToString() +"?", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
             if (msgb == DialogResult.No)
@@ -155,7 +159,7 @@ namespace Funcionarios
             {
                 // Define filtering
                 this.listObjects.ModelFilter = new ModelFilter(delegate (object x) {
-                    Funcionario func = (Funcionario)x;
+                    Docente func = (Docente)x;
                     String toFilter = "";
                     switch(atr)
                     {
@@ -174,8 +178,11 @@ namespace Funcionarios
                         case "Email":
                             toFilter = func.email;
                             break;
+                        case "Grupo disciplinar":
+                            toFilter = func.grupoDisciplinarStr;
+                            break;
                     }
-                    if (toFilter.Contains(val))
+                    if (toFilter.ToLower().Contains(val.ToLower()))
                         return true;
                     return false;
                 });
@@ -196,33 +203,48 @@ namespace Funcionarios
 
         private void Funcionarios_Load(object sender, EventArgs e)
         {
-            // Execute SQL query
-            SqlCommand cmd = new SqlCommand("SELECT PNMec, nome, salario, telemovel, CONCAT(email,'@',dominio) AS emailComposed FROM( (GestaoEscola.Funcionario JOIN GestaoEscola.Pessoa ON Funcionario.PNMec=Pessoa.NMec) JOIN GestaoEscola.EmailDominio ON Pessoa.emailDominio=EmailDominio.id)", cn);
+            // SQL Query to get grupoDisciplinar
+            RelacaoGrupoDisciplinar = new Dictionary<int, String>();
+            SqlCommand cmdInicial = new SqlCommand("SELECT * FROM GestaoEscola.GrupoDisciplinar;", cn);
+            SqlDataReader readerInicial = cmdInicial.ExecuteReader();
+            while (readerInicial.Read())
+            {
+                int id = Int32.Parse(readerInicial["num"].ToString());
+                String nome = readerInicial["nome"].ToString();
+                RelacaoGrupoDisciplinar.Add(id, nome);
+                panelFormFieldGrupoDisciplinar.Items.Add(nome);
+            }
+            readerInicial.Close();
+            
+
+            // Execute SQL query to get Docente rows
+            SqlCommand cmd = new SqlCommand("SELECT PNMec, grupoDisciplinar, nome, salario, telemovel, CONCAT(email, '@', dominio) AS emailComposed FROM(((GestaoEscola.Funcionario JOIN GestaoEscola.Pessoa ON Funcionario.PNMec = Pessoa.NMec) JOIN GestaoEscola.Docente ON Funcionario.PNMec = Docente.NMec) JOIN GestaoEscola.EmailDominio ON Pessoa.emailDominio = EmailDominio.id)", cn);
             SqlDataReader reader = cmd.ExecuteReader();
             // Create list of Objects given the query results
-            List<Funcionario> funcionarios = new List<Funcionario>();
+            List<Docente> docentes = new List<Docente>();
             while (reader.Read())
             {
-                Funcionario f = new Funcionario();
-                f.nmec = Int32.Parse(reader["PNMec"].ToString());
-                f.nome = reader["nome"].ToString();
-                f.salario = Double.Parse(reader["salario"].ToString());
-                f.telemovel = Int32.Parse(reader["telemovel"].ToString());
-                f.email = reader["emailComposed"].ToString();
-                funcionarios.Add(f);
+                Docente d = new Docente();
+                d.nmec = Int32.Parse(reader["PNMec"].ToString());
+                d.nome = reader["nome"].ToString();
+                d.salario = Double.Parse(reader["salario"].ToString());
+                d.telemovel = Int32.Parse(reader["telemovel"].ToString());
+                d.email = reader["emailComposed"].ToString();
+                d.grupoDisciplinar = Int32.Parse(reader["grupoDisciplinar"].ToString());
+                d.grupoDisciplinarStr = RelacaoGrupoDisciplinar[d.grupoDisciplinar];
+                docentes.Add(d);
                 counter++;
             }
 
+            // Close reader
+            reader.Close();
 
             // ObjectListView
             // Add Objects to list view
-            listObjects.SetObjects(funcionarios);
+            listObjects.SetObjects(docentes);
 
             // Update stats
             updateStats();
-
-            // Close reader
-            reader.Close();
         }
 
         private void panelObjectEsconder_Click(object sender, EventArgs e)

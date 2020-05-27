@@ -70,6 +70,9 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.grupoDisciplinar = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.label8 = new System.Windows.Forms.Label();
+            this.panelFormFieldGrupoDisciplinar = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.panelObjectHide)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ajudaBtn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelFormHide)).BeginInit();
@@ -164,7 +167,7 @@
             // 
             // panelFormButton
             // 
-            this.panelFormButton.Location = new System.Drawing.Point(415, 132);
+            this.panelFormButton.Location = new System.Drawing.Point(415, 164);
             this.panelFormButton.Name = "panelFormButton";
             this.panelFormButton.Size = new System.Drawing.Size(139, 23);
             this.panelFormButton.TabIndex = 25;
@@ -191,6 +194,7 @@
             // listObjects
             // 
             this.listObjects.AllColumns.Add(this.nmec);
+            this.listObjects.AllColumns.Add(this.grupoDisciplinar);
             this.listObjects.AllColumns.Add(this.salario);
             this.listObjects.AllColumns.Add(this.nome);
             this.listObjects.AllColumns.Add(this.tel);
@@ -198,6 +202,7 @@
             this.listObjects.CellEditUseWholeCell = false;
             this.listObjects.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.nmec,
+            this.grupoDisciplinar,
             this.salario,
             this.nome,
             this.tel,
@@ -305,6 +310,8 @@
             // 
             // panelForm
             // 
+            this.panelForm.Controls.Add(this.panelFormFieldGrupoDisciplinar);
+            this.panelForm.Controls.Add(this.label8);
             this.panelForm.Controls.Add(this.panelFormHide);
             this.panelForm.Controls.Add(this.panelFormButton);
             this.panelForm.Controls.Add(this.label6);
@@ -321,7 +328,7 @@
             this.panelForm.Controls.Add(this.panelFormDescricao);
             this.panelForm.Location = new System.Drawing.Point(22, 477);
             this.panelForm.Name = "panelForm";
-            this.panelForm.Size = new System.Drawing.Size(580, 174);
+            this.panelForm.Size = new System.Drawing.Size(580, 202);
             this.panelForm.TabIndex = 24;
             this.panelForm.Visible = false;
             // 
@@ -454,9 +461,11 @@
             // 
             // pesquisaAtributo
             // 
+            this.pesquisaAtributo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.pesquisaAtributo.FormattingEnabled = true;
             this.pesquisaAtributo.Items.AddRange(new object[] {
             "Número mecanográfico",
+            "Grupo disciplinar",
             "Salário",
             "Nome",
             "Contacto",
@@ -500,11 +509,35 @@
             this.label7.Text = "Dúvidas?";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // grupoDisciplinar
+            // 
+            this.grupoDisciplinar.AspectName = "grupoDisciplinarStr";
+            this.grupoDisciplinar.Text = "Grupo Disciplinar";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(412, 118);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(87, 13);
+            this.label8.TabIndex = 35;
+            this.label8.Text = "Grupo Disciplinar";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // panelFormFieldGrupoDisciplinar
+            // 
+            this.panelFormFieldGrupoDisciplinar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.panelFormFieldGrupoDisciplinar.FormattingEnabled = true;
+            this.panelFormFieldGrupoDisciplinar.Location = new System.Drawing.Point(415, 133);
+            this.panelFormFieldGrupoDisciplinar.Name = "panelFormFieldGrupoDisciplinar";
+            this.panelFormFieldGrupoDisciplinar.Size = new System.Drawing.Size(139, 21);
+            this.panelFormFieldGrupoDisciplinar.TabIndex = 36;
+            // 
             // Docentes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 673);
+            this.ClientSize = new System.Drawing.Size(800, 723);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.pesquisaAtributo);
             this.Controls.Add(this.pesquisaLabel);
@@ -580,5 +613,8 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label7;
+        private BrightIdeasSoftware.OLVColumn grupoDisciplinar;
+        private System.Windows.Forms.ComboBox panelFormFieldGrupoDisciplinar;
+        private System.Windows.Forms.Label label8;
     }
 }
