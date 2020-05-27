@@ -12,23 +12,21 @@ using System.Text.RegularExpressions;
 using BrightIdeasSoftware;
 
 namespace Funcionarios
-{
-    public partial class Docentes : Form
+{//TODO: FALTA O BUTAO DE AJUDA!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    public partial class Estudantes : Form
     {
         // Attributes
         private SqlConnection cn;
         private Form previous;
         private int current = 0, counter = 0;
 
-        // Constructor
-        public Docentes(SqlConnection cn, Form f)
+        public Estudantes(SqlConnection cn, Form f)
         {
             this.cn = cn;
             this.previous = f;
             InitializeComponent();
-            // ObjectListView Column groups
-            // http://objectlistview.sourceforge.net/python/groupListView.html
-            this.nmec.GroupKeyGetter = delegate (object rowObject) {
+            this.nmec.GroupKeyGetter = delegate (object rowObject)
+            {
                 // When the same is returned by every object, all of them are put together in one group
                 return "Número mecanográfico";
             };
@@ -36,51 +34,49 @@ namespace Funcionarios
             {
                 return "Nome";
             };
-            this.salario.GroupKeyGetter = delegate (object rowObject) {
-                // Group salaries by the integer value of it
-                Funcionario func = (Funcionario)rowObject;
-                return func.salario.ToString().Split(',')[0];
+
+            this.nomeEE.GroupKeyGetter = delegate (object rowObject)
+            {
+                return "Nome Enc Educ";
             };
-            this.tel.GroupKeyGetter = delegate (object rowObject) {
+
+            this.telemovelEE.GroupKeyGetter = delegate (object rowObject)
+            {
                 // Group phones by the first two digits (phone company indicator)
-                Funcionario func = (Funcionario)rowObject;
-                if (func.telemovel.ToString().Length > 2)
-                    return func.telemovel.ToString().Substring(0, 2);
+                Estudante e = (Estudante)rowObject;
+                if (e.telemovelEE.ToString().Length > 2)
+                    return e.telemovelEE.ToString().Substring(0, 2);
                 return "Outros";
             };
-            this.email.GroupKeyGetter = delegate (object rowObject) {
+            this.email_EE.GroupKeyGetter = delegate (object rowObject)
+            {
                 // Group emails by domain (text after @ symbol)
-                Funcionario func = (Funcionario)rowObject;
-                return func.email.Split('@')[1];
+                Estudante e = (Estudante)rowObject;
+                return e.emailEE.Split('@')[1];
             };
-            // ObjectListView Aditional preferences
             this.listObjects.FullRowSelect = true; //Make selection select the full row (and not only a cell)
             this.listObjects.SelectedIndex = 0; //Make the first row selected ad default
             // Filtering
             pesquisaAtributo.SelectedIndex = 0; // Set atribute combo box selected index to xero as default
-            this.listObjects.UseFiltering = true; // Activate filtering (for search porpuses)
+            this.listObjects.UseFiltering = true;
         }
-
-        //  Methods
         private void updateStats()
         {
             // Update interface subtitle with the number of rows being shown
             janelaSubtitulo.Text = "A mostrar " + listObjects.Items.Count.ToString() + " registos";
         }
-
         private void showObject()
         {
             // Get Object
             if (listObjects.Items.Count == 0 | current < 0)
                 return;
-            Funcionario f = (Funcionario)listObjects.SelectedObjects[0];
+            Estudante e = (Estudante)listObjects.SelectedObjects[0];
             // Set labels values
-            panelObjectTitulo.Text = f.nome;
-            panelObjectSubtitulo.Text = f.nmec.ToString();
+            panelObjectTitulo.Text = e.nome;
+            panelObjectSubtitulo.Text = e.nmec.ToString();
             // Show panel
             if (!panelObject.Visible)
                 panelObject.Visible = true;
-
         }
 
         private void editObject()
@@ -88,17 +84,20 @@ namespace Funcionarios
             // Get Object
             if (listObjects.Items.Count == 0 | current < 0)
                 return;
-            Funcionario f = (Funcionario)listObjects.SelectedObjects[0];
+            Estudante e = (Estudante)listObjects.SelectedObjects[0];
             // Set textboxes value
-            panelFormFieldNMec.Text = f.nmec.ToString();
-            panelFormFieldNome.Text = f.nome;
-            panelFormFieldContacto.Text = f.telemovel.ToString();
-            panelFormFieldEmail.Text = f.email;
-            panelFormFieldSalario.Text = f.salario.ToString();
+            panelFormFieldNMec.Text = e.nmec.ToString();
+            panelFormFieldNome.Text = e.nome;
+            panelFormFieldNomeEE.Text = e.nomeEE;
+            panelFormFieldContacto.Text = e.telemovel.ToString();
+            panelFormFieldContactoEE.Text = e.telemovelEE.ToString();
+            panelFormFieldEmail.Text = e.email;
+            panelFormFieldEmailEE.Text = e.emailEE;
+
             // Disable fields not changable
             panelFormFieldNMec.Enabled = false;
             // Set title and description
-            panelFormTitulo.Text = "Editar funcionário " + f.nmec.ToString();
+            panelFormTitulo.Text = "Editar estudante " + e.nmec.ToString();
             panelFormDescricao.Text = "Altere os dados e submita o formulário";
             panelFormButton.Text = "Submeter";
             // Make panel visible
@@ -111,15 +110,18 @@ namespace Funcionarios
             // Clear all fields
             panelFormFieldNMec.Text = "";
             panelFormFieldNome.Text = "";
+            panelFormFieldNomeEE.Text = ""; 
             panelFormFieldContacto.Text = "";
+            panelFormFieldContactoEE.Text = "";
             panelFormFieldEmail.Text = "";
-            panelFormFieldSalario.Text = "";
+            panelFormFieldEmailEE.Text = "";
+
             // Enable fields that are not editable
             panelFormFieldNMec.Enabled = true;
             // Set title and description
-            panelFormTitulo.Text = "Adicionar um novo funcionário";
+            panelFormTitulo.Text = "Adicionar um novo estudante";
             panelFormDescricao.Text = "Preencha os dados e submita o formulário";
-            panelFormButton.Text = "Criar funcionário";
+            panelFormButton.Text = "Criar estudante";
             // Make panel visible
             if (!panelForm.Visible)
                 panelForm.Visible = true;
@@ -130,12 +132,12 @@ namespace Funcionarios
             // Get Object
             if (listObjects.Items.Count == 0 | current < 0)
                 return;
-            Funcionario f = (Funcionario)listObjects.SelectedObjects[0];
+            Estudante e = (Estudante)listObjects.SelectedObjects[0];
             // Confirm delete
-            DialogResult msgb = MessageBox.Show("Esta operação é irreversível!", "Tem a certeza que quer eliminar o funcionário " + f.nmec.ToString() +"?", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+            DialogResult msgb = MessageBox.Show("Esta operação é irreversível!", "Tem a certeza que quer eliminar o estudante " + e.nmec.ToString() + "?", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
             if (msgb == DialogResult.No)
                 return;
-            MessageBox.Show("Funcionalidade em implementação..."); 
+            MessageBox.Show("Funcionalidade em implementação...");
             //TODO
             // Hide panels
             panelForm.Visible = false;
@@ -147,32 +149,33 @@ namespace Funcionarios
             // Get attribute and value fields text
             String atr = pesquisaAtributo.Text;
             String val = pesquisaTexto.Text;
-            if (atr=="" || val=="")
+            if (atr == "" || val == "")
             {
                 // If one of them is empty, don't filter
                 this.listObjects.ModelFilter = null;
-            } else
+            }
+            else
             {
                 // Define filtering
                 this.listObjects.ModelFilter = new ModelFilter(delegate (object x) {
-                    Funcionario func = (Funcionario)x;
+                    Estudante est = (Estudante)x;
                     String toFilter = "";
-                    switch(atr)
+                    switch (atr)
                     {
                         case "Número mecanográfico":
-                            toFilter = func.nmec.ToString();
+                            toFilter = est.nmec.ToString();
                             break;
-                        case "Salário":
-                            toFilter = func.salario.ToString();
+                        case "Nome Enc Educ":
+                            toFilter = est.nomeEE.ToString();
                             break;
                         case "Nome":
-                            toFilter = func.nome;
+                            toFilter = est.nome;
                             break;
-                        case "Contacto":
-                            toFilter = func.telemovel.ToString();
+                        case "Contacto Enc Educ":
+                            toFilter = est.telemovelEE.ToString();
                             break;
-                        case "Email":
-                            toFilter = func.email;
+                        case "Email Enc Educ":
+                            toFilter = est.emailEE;
                             break;
                     }
                     if (toFilter.Contains(val))
@@ -187,36 +190,37 @@ namespace Funcionarios
         }
 
         // Event handlers
-        private void Funcionarios_FormClosed(object sender, FormClosedEventArgs e)
+        private void Estudantes_FormClosed(object sender, FormClosedEventArgs e)
         {
             // When form closed, show the previous one (main interface form)
-            previous.Show();
+            this.previous.Show();
         }
 
-
-        private void Funcionarios_Load(object sender, EventArgs e)
+        private void Estudantes_Load(object sender, EventArgs e)
         {
             // Execute SQL query
-            SqlCommand cmd = new SqlCommand("SELECT PNMec, nome, salario, telemovel, CONCAT(email,'@',dominio) AS emailComposed FROM( (GestaoEscola.Funcionario JOIN GestaoEscola.Pessoa ON Funcionario.PNMec=Pessoa.NMec) JOIN GestaoEscola.EmailDominio ON Pessoa.emailDominio=EmailDominio.id)", cn);
+            SqlCommand cmd = new SqlCommand("SELECT Estudante.NMec, nome, telemovel, NomeEE, contactoEE, CONCAT(EmailEE, '@', dominio) AS EEemailComposed, CONCAT(email, '@', dominio) AS emailComposed FROM((GestaoEscola.Estudante JOIN GestaoEscola.Pessoa ON Estudante.NMec = Pessoa.NMec) JOIN GestaoEscola.EmailDominio ON Pessoa.emailDominio = EmailDominio.id)", cn);
             SqlDataReader reader = cmd.ExecuteReader();
             // Create list of Objects given the query results
-            List<Funcionario> funcionarios = new List<Funcionario>();
+            List<Estudante> estudantes = new List<Estudante>();
             while (reader.Read())
             {
-                Funcionario f = new Funcionario();
-                f.nmec = Int32.Parse(reader["PNMec"].ToString());
-                f.nome = reader["nome"].ToString();
-                f.salario = Double.Parse(reader["salario"].ToString());
-                f.telemovel = Int32.Parse(reader["telemovel"].ToString());
-                f.email = reader["emailComposed"].ToString();
-                funcionarios.Add(f);
+                Estudante est = new Estudante();
+                est.nmec = Int32.Parse(reader["NMec"].ToString());
+                est.nome = reader["nome"].ToString();
+                est.nomeEE = reader["NomeEE"].ToString();
+                est.telemovelEE = Int32.Parse(reader["contactoEE"].ToString());
+                est.telemovel = Int32.Parse(reader["telemovel"].ToString());
+                est.email = reader["emailComposed"].ToString(); 
+                est.emailEE = reader["EEemailComposed"].ToString();
+                estudantes.Add(est);
                 counter++;
             }
 
 
             // ObjectListView
             // Add Objects to list view
-            listObjects.SetObjects(funcionarios);
+            listObjects.SetObjects(estudantes);
 
             // Update stats
             updateStats();
@@ -280,7 +284,7 @@ namespace Funcionarios
             pesquisar();
         }
 
-        private void funcionariosListView_SelectedIndexChanged(object sender, EventArgs e)
+        private void estudantesListView_SelectedIndexChanged(object sender, EventArgs e)
         {
             // When new row selected, show it's Object data
             if (listObjects.SelectedIndex >= 0)

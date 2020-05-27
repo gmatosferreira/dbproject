@@ -65,9 +65,42 @@ namespace Funcionarios
             // Make SQL requests for every table to get the number of rows of each one
             SqlCommand cmd = new SqlCommand("SELECT COUNT(NMec) AS N FROM GestaoEscola.Docente", cn);
             SqlDataReader reader = cmd.ExecuteReader();
+            //docentes
             reader.Read();
             String n = reader["N"].ToString();
             statsDocentesLabel.Text = n;
+            reader.Close();
+
+            //nao docentes
+            SqlCommand cmd2 = new SqlCommand("SELECT COUNT(NMec) AS N FROM GestaoEscola.NaoDocente", cn);
+            reader = cmd2.ExecuteReader();
+            reader.Read();
+            n = reader["N"].ToString();
+            statsNaoDocentesLabel.Text = n;
+            reader.Close();
+
+            //estudantes
+            cmd = new SqlCommand("SELECT COUNT(NMec) AS N FROM GestaoEscola.Estudante", cn);
+            reader = cmd.ExecuteReader();
+            reader.Read();
+            n = reader["N"].ToString();
+            statsEstudantesLabel.Text = n;
+            reader.Close();
+ 
+            //turmas
+            cmd = new SqlCommand("SELECT COUNT(nivel) AS N FROM GestaoEscola.Turma", cn);
+            reader = cmd.ExecuteReader();
+            reader.Read();
+            n = reader["N"].ToString();
+            statsTurmasLabel.Text = n;
+            reader.Close();
+ 
+            //biblioteca ?
+            cmd = new SqlCommand("SELECT COUNT(nome) AS N FROM GestaoEscola.Biblioteca", cn);
+            reader = cmd.ExecuteReader();
+            reader.Read();
+            n = reader["N"].ToString();
+            statsBibliotecaLabel.Text = n;
             reader.Close();
         }
 
@@ -109,5 +142,32 @@ namespace Funcionarios
             f.ShowDialog();
         }
 
+        private void menuEstudantesPanel_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Estudantes estudante = new Estudantes(cn, this);
+            estudante.ShowDialog();
+        }
+
+        private void menuNaoDocentesPanel_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            //NaoDocentes nd = new NaoDocentes(cn, this);
+            //nd.ShowDialog();
+        }
+
+        private void menuTurmasPanel_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            //Turmas t = new Turmas(cn, this);
+            //t.ShowDialog();
+        }
+
+        private void menuBibliotecaPanel_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            //Bibliotecas b = new Bibliotecas(cn, this);
+            //b.ShowDialog();
+        }
     }
 }
