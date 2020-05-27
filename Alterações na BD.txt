@@ -1,0 +1,10 @@
+26/05/2020
+Criei scripts SQL para adicionar o atributo emailDominio aos tuplos que os tinham a NULL nas relações...
+- Pessoa 
+- Estudante
+
+27/05/2020
+Criei scripts para ...
+- Adicionar as entidades da relação Docente à tabela Funcionario 
+- Adicionar as entidades da relação NaoDocente à tabela Funcionario 
+(ambas estavam apenas na Pessoa, mas deveriam de estar no Funcionario também)
