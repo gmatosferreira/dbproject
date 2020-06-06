@@ -63,11 +63,17 @@ namespace Funcionarios
         private void getStats()
         {
             // Make SQL requests for every table to get the number of rows of each one
+            // Docente
             SqlCommand cmd = new SqlCommand("SELECT COUNT(NMec) AS N FROM GestaoEscola.Docente", cn);
             SqlDataReader reader = cmd.ExecuteReader();
             reader.Read();
-            String n = reader["N"].ToString();
-            statsDocentesLabel.Text = n;
+            statsDocentesLabel.Text = reader["N"].ToString();
+            reader.Close();
+            // naoDocente
+            cmd = new SqlCommand("SELECT COUNT(NMec) AS N FROM GestaoEscola.NaoDocente", cn);
+            reader = cmd.ExecuteReader();
+            reader.Read();
+            statsNaoDocentesLabel.Text = reader["N"].ToString();
             reader.Close();
         }
 
@@ -109,5 +115,12 @@ namespace Funcionarios
             f.ShowDialog();
         }
 
+        private void menuNaoDocentesPanel_Click(object sender, EventArgs e)
+        {
+            // Hide this form and open the interface for the clicked item
+            this.Hide();
+            NaoDocentes f = new NaoDocentes(cn, this);
+            f.ShowDialog();
+        }
     }
 }

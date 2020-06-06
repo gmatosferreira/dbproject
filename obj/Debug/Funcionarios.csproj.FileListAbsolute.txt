@@ -22,3 +22,4 @@ C:\Users\GonçaloMatos\MEOCloud\UA2A\2S\BD\P\Projeto\dbproject\obj\Debug\Funcion
 C:\Users\GonçaloMatos\MEOCloud\UA2A\2S\BD\P\Projeto\dbproject\bin\Debug\ObjectListView.dll
 C:\Users\GonçaloMatos\MEOCloud\UA2A\2S\BD\P\Projeto\dbproject\obj\Debug\Funcionarios.csproj.CopyComplete
 C:\Users\GonçaloMatos\MEOCloud\UA2A\2S\BD\P\Projeto\dbproject\obj\Debug\Funcionarios.Docentes.resources
+C:\Users\GonçaloMatos\MEOCloud\UA2A\2S\BD\P\Projeto\dbproject\obj\Debug\Funcionarios.NaoDocentes.resources
