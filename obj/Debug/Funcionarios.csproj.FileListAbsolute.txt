@@ -22,6 +22,7 @@ C:\Users\GonçaloMatos\MEOCloud\UA2A\2S\BD\P\Projeto\dbproject\obj\Debug\Funcion
 C:\Users\GonçaloMatos\MEOCloud\UA2A\2S\BD\P\Projeto\dbproject\bin\Debug\ObjectListView.dll
 C:\Users\GonçaloMatos\MEOCloud\UA2A\2S\BD\P\Projeto\dbproject\obj\Debug\Funcionarios.csproj.CopyComplete
 C:\Users\GonçaloMatos\MEOCloud\UA2A\2S\BD\P\Projeto\dbproject\obj\Debug\Funcionarios.Docentes.resources
+<<<<<<< HEAD
 C:\Users\danie\Desktop\dbproject-master\dbproject-master\bin\Debug\Funcionarios.exe.config
 C:\Users\danie\Desktop\dbproject-master\dbproject-master\bin\Debug\Funcionarios.exe
 C:\Users\danie\Desktop\dbproject-master\dbproject-master\bin\Debug\Funcionarios.pdb
@@ -50,3 +51,6 @@ C:\Users\danie\Desktop\BD\dbproject\bin\Debug\Funcionarios.exe
 C:\Users\danie\Desktop\BD\dbproject\bin\Debug\Funcionarios.pdb
 C:\Users\danie\Desktop\BD\dbproject\bin\Debug\ObjectListView.dll
 C:\Users\danie\Desktop\BD\dbproject\obj\Debug\Funcionarios.csproj.CopyComplete
+=======
+C:\Users\GonçaloMatos\MEOCloud\UA2A\2S\BD\P\Projeto\dbproject\obj\Debug\Funcionarios.NaoDocentes.resources
+>>>>>>> tempBranch

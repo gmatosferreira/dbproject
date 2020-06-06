@@ -83,6 +83,16 @@ namespace Funcionarios.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Docentes {
+            get {
+                object obj = ResourceManager.GetObject("Docentes", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Esconder {
             get {
                 object obj = ResourceManager.GetObject("Esconder", resourceCulture);
