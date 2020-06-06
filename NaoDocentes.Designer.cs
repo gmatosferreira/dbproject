@@ -53,7 +53,7 @@
             this.panelObjectImage = new System.Windows.Forms.PictureBox();
             this.janelaLogo = new System.Windows.Forms.PictureBox();
             this.panelForm = new System.Windows.Forms.Panel();
-            this.panelFormFieldGrupoDisciplinar = new System.Windows.Forms.ComboBox();
+            this.panelFormFieldTurno = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.panelFormFieldSalario = new System.Windows.Forms.TextBox();
@@ -315,7 +315,7 @@
             // 
             // panelForm
             // 
-            this.panelForm.Controls.Add(this.panelFormFieldGrupoDisciplinar);
+            this.panelForm.Controls.Add(this.panelFormFieldTurno);
             this.panelForm.Controls.Add(this.label8);
             this.panelForm.Controls.Add(this.panelFormHide);
             this.panelForm.Controls.Add(this.panelFormButton);
@@ -337,23 +337,23 @@
             this.panelForm.TabIndex = 24;
             this.panelForm.Visible = false;
             // 
-            // panelFormFieldGrupoDisciplinar
+            // panelFormFieldTurno
             // 
-            this.panelFormFieldGrupoDisciplinar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.panelFormFieldGrupoDisciplinar.FormattingEnabled = true;
-            this.panelFormFieldGrupoDisciplinar.Location = new System.Drawing.Point(415, 133);
-            this.panelFormFieldGrupoDisciplinar.Name = "panelFormFieldGrupoDisciplinar";
-            this.panelFormFieldGrupoDisciplinar.Size = new System.Drawing.Size(139, 21);
-            this.panelFormFieldGrupoDisciplinar.TabIndex = 36;
+            this.panelFormFieldTurno.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.panelFormFieldTurno.FormattingEnabled = true;
+            this.panelFormFieldTurno.Location = new System.Drawing.Point(415, 133);
+            this.panelFormFieldTurno.Name = "panelFormFieldTurno";
+            this.panelFormFieldTurno.Size = new System.Drawing.Size(139, 21);
+            this.panelFormFieldTurno.TabIndex = 36;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(412, 118);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(87, 13);
+            this.label8.Size = new System.Drawing.Size(35, 13);
             this.label8.TabIndex = 35;
-            this.label8.Text = "Grupo Disciplinar";
+            this.label8.Text = "Turno";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label6
@@ -614,7 +614,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label7;
         private BrightIdeasSoftware.OLVColumn grupoDisciplinar;
-        private System.Windows.Forms.ComboBox panelFormFieldGrupoDisciplinar;
+        private System.Windows.Forms.ComboBox panelFormFieldTurno;
         private System.Windows.Forms.Label label8;
     }
 }

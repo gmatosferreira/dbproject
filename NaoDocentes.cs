@@ -20,13 +20,14 @@ namespace Funcionarios
         private SqlConnection cn;
         private Form previous;
         private int current = 0, counter = 0;
-        private Dictionary<int, String> RelacaoTurno;
+        private List<Turno> turnos;
 
         // Constructor
         public NaoDocentes(SqlConnection cn, Form f)
         {
             this.cn = cn;
             this.previous = f;
+            this.turnos = new List<Turno>();
             InitializeComponent();
             // ObjectListView Column groups
             // http://objectlistview.sourceforge.net/python/groupListView.html
@@ -40,19 +41,19 @@ namespace Funcionarios
             };
             this.salario.GroupKeyGetter = delegate (object rowObject) {
                 // Group salaries by the integer value of it
-                Docente func = (Docente)rowObject;
+                NaoDocente func = (NaoDocente)rowObject;
                 return func.salario.ToString().Split(',')[0];
             };
             this.tel.GroupKeyGetter = delegate (object rowObject) {
                 // Group phones by the first two digits (phone company indicator)
-                Docente func = (Docente)rowObject;
+                NaoDocente func = (NaoDocente)rowObject;
                 if (func.telemovel.ToString().Length > 2)
                     return func.telemovel.ToString().Substring(0, 2);
                 return "Outros";
             };
             this.email.GroupKeyGetter = delegate (object rowObject) {
                 // Group emails by domain (text after @ symbol)
-                Docente func = (Docente)rowObject;
+                NaoDocente func = (NaoDocente)rowObject;
                 return func.email.Split('@')[1];
             };
             // ObjectListView Aditional preferences
@@ -64,6 +65,25 @@ namespace Funcionarios
         }
 
         //  Methods
+
+        private void getTurnos()
+        {
+            // Execute SQL query to get Docente rows
+            SqlCommand cmd = new SqlCommand("SELECT * FROM GestaoEscola.Turno", cn);
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                Turno t = new Turno();
+                t.codigo = Int32.Parse(reader["codigo"].ToString());
+                t.horaInicio = TimeSpan.Parse(reader["horaInicio"].ToString());
+                t.horaFim= TimeSpan.Parse(reader["horaFim"].ToString());
+                panelFormFieldTurno.Items.Add(t.horaInicio.ToString(@"hh\:mm\:ss", null));
+                turnos.Add(t);
+            }
+
+            // Close reader
+            reader.Close();
+        }
         private void updateStats()
         {
             // Update interface subtitle with the number of rows being shown
@@ -75,7 +95,7 @@ namespace Funcionarios
             // Get Object
             if (listObjects.Items.Count == 0 | current < 0)
                 return;
-            Docente f = (Docente)listObjects.SelectedObjects[0];
+            NaoDocente f = (NaoDocente)listObjects.SelectedObjects[0];
             // Set labels values
             panelObjectTitulo.Text = f.nome;
             panelObjectSubtitulo.Text = f.nmec.ToString();
@@ -90,14 +110,14 @@ namespace Funcionarios
             // Get Object
             if (listObjects.Items.Count == 0 | current < 0)
                 return;
-            Docente f = (Docente)listObjects.SelectedObjects[0];
+            NaoDocente f = (NaoDocente)listObjects.SelectedObjects[0];
             // Set textboxes value
             panelFormFieldNMec.Text = f.nmec.ToString();
             panelFormFieldNome.Text = f.nome;
             panelFormFieldContacto.Text = f.telemovel.ToString();
             panelFormFieldEmail.Text = f.email;
             panelFormFieldSalario.Text = f.salario.ToString();
-            panelFormFieldGrupoDisciplinar.Text = f.grupoDisciplinarStr;
+            //panelFormFieldGrupoDisciplinar.Text = f.grupoDisciplinarStr;
             // Disable fields not changable
             panelFormFieldNMec.Enabled = false;
             // Set title and description
@@ -117,7 +137,7 @@ namespace Funcionarios
             panelFormFieldContacto.Text = "";
             panelFormFieldEmail.Text = "";
             panelFormFieldSalario.Text = "";
-            panelFormFieldGrupoDisciplinar.SelectedIndex = 0;
+            panelFormFieldTurno.SelectedIndex = 0;
             // Enable fields that are not editable
             panelFormFieldNMec.Enabled = true;
             // Set title and description
@@ -134,7 +154,7 @@ namespace Funcionarios
             // Get Object
             if (listObjects.Items.Count == 0 | current < 0)
                 return;
-            Docente f = (Docente)listObjects.SelectedObjects[0];
+            NaoDocente f = (NaoDocente)listObjects.SelectedObjects[0];
             // Confirm delete
             DialogResult msgb = MessageBox.Show("Esta operação é irreversível!", "Tem a certeza que quer eliminar o funcionário " + f.nmec.ToString() +"?", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
             if (msgb == DialogResult.No)
@@ -159,7 +179,7 @@ namespace Funcionarios
             {
                 // Define filtering
                 this.listObjects.ModelFilter = new ModelFilter(delegate (object x) {
-                    Docente func = (Docente)x;
+                    NaoDocente func = (NaoDocente)x;
                     String toFilter = "";
                     switch(atr)
                     {
@@ -177,9 +197,6 @@ namespace Funcionarios
                             break;
                         case "Email":
                             toFilter = func.email;
-                            break;
-                        case "Grupo disciplinar":
-                            toFilter = func.grupoDisciplinarStr;
                             break;
                     }
                     if (toFilter.ToLower().Contains(val.ToLower()))
@@ -202,21 +219,24 @@ namespace Funcionarios
 
 
         private void FormLoad_Handler(object sender, EventArgs e)
-        {           
+        {
+            // Get turnos
+            getTurnos();
+
             // Execute SQL query to get Docente rows
-            SqlCommand cmd = new SqlCommand("SELECT PNMec, grupoDisciplinar, nome, salario, telemovel, CONCAT(email, '@', dominio) AS emailComposed FROM(((GestaoEscola.Funcionario JOIN GestaoEscola.Pessoa ON Funcionario.PNMec = Pessoa.NMec) JOIN GestaoEscola.Docente ON Funcionario.PNMec = Docente.NMec) JOIN GestaoEscola.EmailDominio ON Pessoa.emailDominio = EmailDominio.id)", cn);
+            SqlCommand cmd = new SqlCommand("SELECT Pessoa.NMec, Pessoa.nome, Pessoa.telemovel, Funcionario.Salario, NaoDocente.turno, CONCAT(email, '@', dominio) AS emailComposed FROM(( (GestaoEscola.NaoDocente JOIN GestaoEscola.Funcionario ON NaoDocente.NMec = Funcionario.PNMec) JOIN GestaoEscola.Pessoa ON NaoDocente.NMec = Pessoa.NMec) JOIN GestaoEscola.EmailDominio ON Pessoa.emailDominio = EmailDominio.id)", cn);
             SqlDataReader reader = cmd.ExecuteReader();
             // Create list of Objects given the query results
-            List<Funcionario> docentes = new List<Funcionario>();
+            List<NaoDocente> tuplos = new List<NaoDocente>();
             while (reader.Read())
             {
-                Funcionario d = new Funcionario();
-                d.nmec = Int32.Parse(reader["PNMec"].ToString());
+                NaoDocente d = new NaoDocente();
+                d.nmec = Int32.Parse(reader["NMec"].ToString());
                 d.nome = reader["nome"].ToString();
                 d.salario = Double.Parse(reader["salario"].ToString());
                 d.telemovel = Int32.Parse(reader["telemovel"].ToString());
                 d.email = reader["emailComposed"].ToString();
-                docentes.Add(d);
+                tuplos.Add(d);
                 counter++;
             }
 
@@ -225,7 +245,7 @@ namespace Funcionarios
 
             // ObjectListView
             // Add Objects to list view
-            listObjects.SetObjects(docentes);
+            listObjects.SetObjects(tuplos);
 
             // Update stats
             updateStats();

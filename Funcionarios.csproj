@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GrupoDisciplinar.cs" />
     <Compile Include="NaoDocente.cs" />
     <Compile Include="Docente.cs" />
     <Compile Include="NaoDocentes.cs">
@@ -79,6 +80,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="NDTrabalhaBloco.cs" />
     <Compile Include="Turno.cs" />
     <EmbeddedResource Include="NaoDocentes.resx">
       <DependentUpon>NaoDocentes.cs</DependentUpon>

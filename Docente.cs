@@ -8,21 +8,14 @@ namespace Funcionarios
 {
     class Docente : Funcionario
     {
-        private int _grupoDisciplinar;
-        private String _grupoDisciplinarStr;
+        private GrupoDisciplinar _grupoDisciplinar;
 
         public Docente() { }
 
-        public int grupoDisciplinar
+        public GrupoDisciplinar grupoDisciplinar
         {
             get { return this._grupoDisciplinar; }
             set { this._grupoDisciplinar = value; }
-        }
-
-        public String grupoDisciplinarStr
-        {
-            get { return this._grupoDisciplinarStr; }
-            set { this._grupoDisciplinarStr = value; }
         }
 
     }

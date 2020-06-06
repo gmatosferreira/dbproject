@@ -19,12 +19,15 @@ namespace Funcionarios
         private SqlConnection cn;
         private Form previous;
         private int current = 0, counter = 0;
+        private List<GrupoDisciplinar> gruposDisciplinares;
+
 
         // Constructor
         public Docentes(SqlConnection cn, Form f)
         {
             this.cn = cn;
             this.previous = f;
+            this.gruposDisciplinares = new List<GrupoDisciplinar>();
             InitializeComponent();
             // ObjectListView Column groups
             // http://objectlistview.sourceforge.net/python/groupListView.html
@@ -62,6 +65,35 @@ namespace Funcionarios
         }
 
         //  Methods
+
+        private void getGruposDisciplinares()
+        {
+            // Execute SQL query
+            SqlCommand cmd = new SqlCommand("SELECT * FROM GestaoEscola.GrupoDisciplinar;", cn);
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                GrupoDisciplinar g = new GrupoDisciplinar();
+                g.num = Int32.Parse(reader["num"].ToString());
+                g.nome = reader["nome"].ToString();
+                panelFormFieldGrupoDisciplinar.Items.Add(g.nome);
+
+                gruposDisciplinares.Add(g);
+            }
+            reader.Close();
+
+        }
+
+        private GrupoDisciplinar getGrupoDisciplinar(int num)
+        {
+            foreach (GrupoDisciplinar gd in gruposDisciplinares)
+            {
+                if (num == gd.num)
+                    return gd;
+            }
+            return null;
+        }
+
         private void updateStats()
         {
             // Update interface subtitle with the number of rows being shown
@@ -88,13 +120,14 @@ namespace Funcionarios
             // Get Object
             if (listObjects.Items.Count == 0 | current < 0)
                 return;
-            Funcionario f = (Funcionario)listObjects.SelectedObjects[0];
+            Docente f = (Docente)listObjects.SelectedObjects[0];
             // Set textboxes value
             panelFormFieldNMec.Text = f.nmec.ToString();
             panelFormFieldNome.Text = f.nome;
             panelFormFieldContacto.Text = f.telemovel.ToString();
             panelFormFieldEmail.Text = f.email;
             panelFormFieldSalario.Text = f.salario.ToString();
+            panelFormFieldGrupoDisciplinar.Text = f.grupoDisciplinar.nome;
             // Disable fields not changable
             panelFormFieldNMec.Enabled = false;
             // Set title and description
@@ -114,6 +147,7 @@ namespace Funcionarios
             panelFormFieldContacto.Text = "";
             panelFormFieldEmail.Text = "";
             panelFormFieldSalario.Text = "";
+            panelFormFieldGrupoDisciplinar.SelectedIndex = 0;
             // Enable fields that are not editable
             panelFormFieldNMec.Enabled = true;
             // Set title and description
@@ -155,7 +189,7 @@ namespace Funcionarios
             {
                 // Define filtering
                 this.listObjects.ModelFilter = new ModelFilter(delegate (object x) {
-                    Funcionario func = (Funcionario)x;
+                    Docente func = (Docente)x;
                     String toFilter = "";
                     switch(atr)
                     {
@@ -174,8 +208,11 @@ namespace Funcionarios
                         case "Email":
                             toFilter = func.email;
                             break;
+                        case "Grupo disciplinar":
+                            toFilter = func.grupoDisciplinar.nome;
+                            break;
                     }
-                    if (toFilter.Contains(val))
+                    if (toFilter.ToLower().Contains(val.ToLower()))
                         return true;
                     return false;
                 });
@@ -196,27 +233,33 @@ namespace Funcionarios
 
         private void Funcionarios_Load(object sender, EventArgs e)
         {
+            // Load grupos disciplinares
+            getGruposDisciplinares();
+
             // Execute SQL query
-            SqlCommand cmd = new SqlCommand("SELECT PNMec, nome, salario, telemovel, CONCAT(email,'@',dominio) AS emailComposed FROM( (GestaoEscola.Funcionario JOIN GestaoEscola.Pessoa ON Funcionario.PNMec=Pessoa.NMec) JOIN GestaoEscola.EmailDominio ON Pessoa.emailDominio=EmailDominio.id)", cn);
+            //SqlCommand cmd = new SqlCommand("SELECT Pessoa.NMec, Pessoa.nome, Pessoa.telemovel, Funcionario.Salario, GrupoDisciplinar.nome AS grupoDisciplinarNome, GrupoDisciplinar.num AS grupoDisciplinarNum, CONCAT(email, '@', dominio) AS emailComposed FROM((( (GestaoEscola.Docente JOIN GestaoEscola.Funcionario ON Docente.NMec = Funcionario.PNMec) JOIN GestaoEscola.Pessoa ON Docente.NMec = Pessoa.NMec) JOIN GestaoEscola.EmailDominio ON Pessoa.emailDominio = EmailDominio.id) JOIN GestaoEscola.GrupoDisciplinar ON Docente.grupoDisciplinar = GrupoDisciplinar.num)", cn);
+            SqlCommand cmd = new SqlCommand("SELECT Pessoa.NMec, Pessoa.nome, Pessoa.telemovel, Funcionario.Salario, Docente.grupoDisciplinar, CONCAT(email, '@', dominio) AS emailComposed FROM(( (GestaoEscola.Docente JOIN GestaoEscola.Funcionario ON Docente.NMec = Funcionario.PNMec) JOIN GestaoEscola.Pessoa ON Docente.NMec = Pessoa.NMec) JOIN GestaoEscola.EmailDominio ON Pessoa.emailDominio = EmailDominio.id) ", cn);
             SqlDataReader reader = cmd.ExecuteReader();
             // Create list of Objects given the query results
-            List<Funcionario> funcionarios = new List<Funcionario>();
+            List<Funcionario> docentes = new List<Funcionario>();
             while (reader.Read())
             {
-                Funcionario f = new Funcionario();
-                f.nmec = Int32.Parse(reader["PNMec"].ToString());
+                Docente f = new Docente();
+                f.nmec = Int32.Parse(reader["NMec"].ToString());
                 f.nome = reader["nome"].ToString();
                 f.salario = Double.Parse(reader["salario"].ToString());
                 f.telemovel = Int32.Parse(reader["telemovel"].ToString());
                 f.email = reader["emailComposed"].ToString();
-                funcionarios.Add(f);
+                f.grupoDisciplinar = getGrupoDisciplinar(Int32.Parse(reader["grupoDisciplinar"].ToString()));
+
+                docentes.Add(f);
                 counter++;
             }
 
 
             // ObjectListView
             // Add Objects to list view
-            listObjects.SetObjects(funcionarios);
+            listObjects.SetObjects(docentes);
 
             // Update stats
             updateStats();
