@@ -304,7 +304,7 @@
             // janelaLogo
             // 
             this.janelaLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.janelaLogo.Image = global::Funcionarios.Properties.Resources.Funcionários;
+            this.janelaLogo.Image = global::Funcionarios.Properties.Resources.Nao_Docente;
             this.janelaLogo.InitialImage = null;
             this.janelaLogo.Location = new System.Drawing.Point(22, 23);
             this.janelaLogo.Name = "janelaLogo";

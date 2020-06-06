@@ -207,7 +207,7 @@ namespace Funcionarios
             SqlCommand cmd = new SqlCommand("SELECT PNMec, grupoDisciplinar, nome, salario, telemovel, CONCAT(email, '@', dominio) AS emailComposed FROM(((GestaoEscola.Funcionario JOIN GestaoEscola.Pessoa ON Funcionario.PNMec = Pessoa.NMec) JOIN GestaoEscola.Docente ON Funcionario.PNMec = Docente.NMec) JOIN GestaoEscola.EmailDominio ON Pessoa.emailDominio = EmailDominio.id)", cn);
             SqlDataReader reader = cmd.ExecuteReader();
             // Create list of Objects given the query results
-            List<Funcionario> funcionarios = new List<Funcionario>();
+            List<Funcionario> docentes = new List<Funcionario>();
             while (reader.Read())
             {
                 Funcionario d = new Funcionario();
@@ -216,7 +216,7 @@ namespace Funcionarios
                 d.salario = Double.Parse(reader["salario"].ToString());
                 d.telemovel = Int32.Parse(reader["telemovel"].ToString());
                 d.email = reader["emailComposed"].ToString();
-                funcionarios.Add(d);
+                docentes.Add(d);
                 counter++;
             }
 
