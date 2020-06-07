@@ -118,40 +118,52 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Biblioteca" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Biblioteca.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Ajuda" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Ajuda.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Livro" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Livro.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Funcionários" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Funcionários.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Estudantes" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="Estudantes1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Estudantes.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Esconder" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Esconder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Docentes" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Docentes.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Nao Docente" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Nao Docente.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="bloco" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bloco.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Estudantes1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="Funcionários" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Funcionários.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Estudante" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Estudante.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Ajuda" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Ajuda.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Estudantes" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Estudantes.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Funcionario" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Funcionario.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Livro" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Livro.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Turmas" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Turmas.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Estudante" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Estudante.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Esconder" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Esconder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Biblioteca" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Biblioteca.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Nao Docente" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Nao Docente.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Funcionario" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Funcionario.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Turno" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Turno.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Funcao" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Funcao.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="grupoDisciplinar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\grupoDisciplinar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
