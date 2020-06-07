@@ -14,32 +14,24 @@ using System.Diagnostics;
 
 namespace Funcionarios
 {
-    public partial class NaoDocenteTurnos : Form
+    public partial class NaoDocentesFuncoes : Form
     {
         // Attributes
         private SqlConnection cn;
         private Form previous;
-        private NaoDocente nd;
         private int current = 0, counter = 0;
-        private List<Bloco> blocos;
-        private List<NDFuncao> funcoes;
 
         // Constructor
-        public NaoDocenteTurnos(SqlConnection cn, NaoDocente nd, Form f)
+        public NaoDocentesFuncoes(SqlConnection cn, Form f)
         {
             this.cn = cn;
             this.previous = f;
-            this.nd = nd;
-            this.blocos = new List<Bloco>();
-            this.funcoes = new List<NDFuncao>();
             InitializeComponent();
             // ObjectListView Column groups
             // http://objectlistview.sourceforge.net/python/groupListView.html
-            /*this.turno.GroupKeyGetter = delegate (object rowObject) {
-                // Group emails by domain (text after @ symbol)
-                NDTrabalhaBloco func = (NDTrabalhaBloco)rowObject;
-                return "Das " + func.turno.horaInicio.ToString(@"hh", null) + " às " + func.turno.horaFim.ToString(@"hh", null);
-            };*/
+            this.nome.GroupKeyGetter = delegate (object rowObject) {
+                return "Nome";
+            };
             // ObjectListView Aditional preferences
             this.listObjects.FullRowSelect = true; //Make selection select the full row (and not only a cell)
             this.listObjects.SelectedIndex = 0; //Make the first row selected ad default
@@ -49,66 +41,10 @@ namespace Funcionarios
 
         //  Methods
 
-        private void loadBlocos()
-        {
-            // Execute SQL query to get Docente rows
-            SqlCommand cmd = new SqlCommand("SELECT * FROM GestaoEscola.Bloco", cn);
-            SqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
-            {
-                Bloco t = new Bloco();
-                t.coordenadas = reader["coordenadas"].ToString();
-                t.nome = reader["nome"].ToString();
-                panelFormFieldBloco.Items.Add(t.nome);
-                blocos.Add(t);
-            }
-
-            // Close reader
-            reader.Close();
-        }
-
-        private Bloco getBloco(String coord)
-        {
-            foreach (Bloco b in blocos)
-            {
-                if (coord.Equals(b.coordenadas, StringComparison.InvariantCultureIgnoreCase))
-                    return b;
-            }
-            return null;
-        }
-
-        private void loadFuncoes()
-        {
-            // Execute SQL query to get Docente rows
-            SqlCommand cmd = new SqlCommand("SELECT * FROM GestaoEscola.ND_Funcao", cn);
-            SqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
-            {
-                NDFuncao t = new NDFuncao();
-                t.codigo= Int32.Parse(reader["codigo"].ToString());
-                t.nome = reader["nome"].ToString();
-                panelFormFieldFuncao.Items.Add(t.nome);
-                funcoes.Add(t);
-            }
-
-            // Close reader
-            reader.Close();
-        }
-
-        private NDFuncao getFuncao(int codigo)
-        {
-            foreach (NDFuncao f in funcoes)
-            {
-                if (codigo==f.codigo)
-                    return f;
-            }
-            return null;
-        }
-
         private void updateStats()
         {
             // Update interface subtitle with the number of rows being shown
-            janelaSubtitulo.Text = "A mostrar " + listObjects.Items.Count.ToString() + " registos do funcionário "+nd.nmec.ToString() + "\r\nATENÇÃO! Todas as funções devem ser atribuídas dentro do turno do funcionário, das "+nd.turno.str;
+            janelaSubtitulo.Text = "A mostrar " + listObjects.Items.Count.ToString() + " funções";
         }
 
         private void showObject()
@@ -116,10 +52,10 @@ namespace Funcionarios
             // Get Object
             if (listObjects.Items.Count == 0 | current < 0)
                 return;
-            NDTrabalhaBloco f = (NDTrabalhaBloco)listObjects.SelectedObjects[0];
+            NDFuncao f = (NDFuncao)listObjects.SelectedObjects[0];
             // Set labels values
-            panelObjectTitulo.Text = f.turno.str;
-            panelObjectSubtitulo.Text = f.bloco.nome + ", como " + f.funcao.nome;
+            panelObjectTitulo.Text = "Função";
+            panelObjectSubtitulo.Text = f.nome;
             // Show panel
             if (!panelObject.Visible)
                 panelObject.Visible = true;
@@ -131,12 +67,9 @@ namespace Funcionarios
             // Get Object
             if (listObjects.Items.Count == 0 | current < 0)
                 return;
-            NDTrabalhaBloco f = (NDTrabalhaBloco)listObjects.SelectedObjects[0];
+            NDFuncao f = (NDFuncao)listObjects.SelectedObjects[0];
             // Set textboxes value
-            panelFormFieldBloco.Text = f.bloco.nome;
-            panelFormFieldFuncao.Text = f.funcao.nome;
-            panelFormFieldHoraInicio.Text = f.turno.horaInicio.ToString();
-            panelFormFieldHoraFim.Text = f.turno.horaFim.ToString();
+            panelFormFieldNome.Text = f.nome;
             // Set title and description
             panelFormTitulo.Text = "Editar função";
             panelFormDescricao.Text = "Altere os dados e submita o formulário";
@@ -149,10 +82,7 @@ namespace Funcionarios
         private void addObject()
         {
             // Clear all fields
-            panelFormFieldBloco.SelectedIndex = 0;
-            panelFormFieldFuncao.SelectedIndex = 0;
-            panelFormFieldHoraInicio.Text = "00:00:00";
-            panelFormFieldHoraFim.Text = "00:00:00";
+            panelFormFieldNome.Text = "";
             // Set title and description
             panelFormTitulo.Text = "Adicionar uma nova função";
             panelFormDescricao.Text = "Preencha os dados e submita o formulário";
@@ -167,9 +97,9 @@ namespace Funcionarios
             // Get Object
             if (listObjects.Items.Count == 0 | current < 0)
                 return;
-            NDTrabalhaBloco f = (NDTrabalhaBloco)listObjects.SelectedObjects[0];
+            NDFuncao f = (NDFuncao)listObjects.SelectedObjects[0];
             // Confirm delete
-            DialogResult msgb = MessageBox.Show("Tem a certeza que quer eliminar esta função?", "Esta operação é irreversível!", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+            DialogResult msgb = MessageBox.Show("Tem a certeza que quer eliminar esta a função '"+f.nome+"'?", "Esta operação é irreversível!", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
             if (msgb == DialogResult.No)
                 return;
             MessageBox.Show("Funcionalidade em implementação..."); 
@@ -189,26 +119,17 @@ namespace Funcionarios
 
         private void FormLoad_Handler(object sender, EventArgs e)
         {
-            // Get turnos
-            loadBlocos();
-            loadFuncoes();
-
             // Execute SQL query to get Docente rows
-            SqlCommand cmd = new SqlCommand("SELECT * FROM GestaoEscola.ND_trabalha_Bloco WHERE NMec="+nd.nmec.ToString(), cn);
+            SqlCommand cmd = new SqlCommand("SELECT * FROM GestaoEscola.ND_Funcao", cn);
             SqlDataReader reader = cmd.ExecuteReader();
             // Create list of Objects given the query results
-            List<NDTrabalhaBloco> tuplos = new List<NDTrabalhaBloco>();
+            List<NDFuncao> tuplos = new List<NDFuncao>();
             while (reader.Read())
             {
-                NDTrabalhaBloco d = new NDTrabalhaBloco();
-                d.nd = nd;
-                d.funcao = getFuncao(Int32.Parse(reader["codFuncao"].ToString()));
-                d.bloco = getBloco(reader["Bcoordenadas"].ToString());
-                Turno t = new Turno();
-                t.horaInicio = TimeSpan.Parse(reader["horaInicio"].ToString());
-                t.horaFim = TimeSpan.Parse(reader["horaFim"].ToString());
-                d.turno = t;
-                tuplos.Add(d);
+                NDFuncao t = new NDFuncao();
+                t.codigo = Int32.Parse(reader["codigo"].ToString());
+                t.nome = reader["nome"].ToString();
+                tuplos.Add(t);
                 counter++;
             }
 
@@ -262,19 +183,8 @@ namespace Funcionarios
 
         private void panelFormButton_Click(object sender, EventArgs e)
         {
-            // Validate if function ship is inside Nao Docente main ship
-            Turno novoTurno = new Turno();
-            novoTurno.horaInicio = TimeSpan.Parse(panelFormFieldHoraInicio.Text);
-            novoTurno.horaFim = TimeSpan.Parse(panelFormFieldHoraFim.Text);
-            if (!Turno.isInside(novoTurno, nd.turno))
-                MessageBox.Show(
-                    "O horário da função deve estar dentro do turno do funcionário!",
-                    "Erro!",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error
-                );
-            //TODO (Distinguish new and edit operation)
             MessageBox.Show("Funcionalidade em implementação...");
+            //TODO (Distinguish new and edit operation)
         }
 
         private void funcionariosListView_SelectedIndexChanged(object sender, EventArgs e)

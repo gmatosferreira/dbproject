@@ -172,7 +172,7 @@ namespace Funcionarios
                 return;
             NaoDocente f = (NaoDocente)listObjects.SelectedObjects[0];
             // Confirm delete
-            DialogResult msgb = MessageBox.Show("Esta operação é irreversível!", "Tem a certeza que quer eliminar o funcionário " + f.nmec.ToString() +"?", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+            DialogResult msgb = MessageBox.Show("Tem a certeza que quer eliminar o funcionário " + f.nmec.ToString() +"?", "Esta operação é irreversível!", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
             if (msgb == DialogResult.No)
                 return;
             MessageBox.Show("Funcionalidade em implementação..."); 

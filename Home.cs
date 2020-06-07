@@ -171,6 +171,32 @@ namespace Funcionarios
             //b.ShowDialog(); 
         }
 
-        
+        private void menuTurnosPanel_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Turnos f = new Turnos(cn, this);
+            f.ShowDialog();
+        }
+
+        private void menuFuncoesNDPanel_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            NaoDocentesFuncoes f = new NaoDocentesFuncoes(cn, this);
+            f.ShowDialog();
+        }
+
+        private void menuTiposBlocosPanel_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            BlocosTipos f = new BlocosTipos(cn, this);
+            f.ShowDialog();
+        }
+
+        private void menuGruposDisciplinaresPanel_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            GruposDisciplinares f = new GruposDisciplinares(cn, this);
+            f.ShowDialog();
+        }
     }
 }
