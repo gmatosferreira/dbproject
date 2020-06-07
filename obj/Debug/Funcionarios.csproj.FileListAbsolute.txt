@@ -55,3 +55,4 @@ C:\Users\danie\Desktop\BD\dbproject\obj\Debug\Funcionarios.csproj.CopyComplete
 C:\Users\GonçaloMatos\MEOCloud\UA2A\2S\BD\P\Projeto\dbproject\obj\Debug\Funcionarios.NaoDocentes.resources
 >>>>>>> tempBranch
 C:\Users\GonçaloMatos\MEOCloud\UA2A\2S\BD\P\Projeto\dbproject\obj\Debug\Funcionarios.Estudantes.resources
+C:\Users\GonçaloMatos\MEOCloud\UA2A\2S\BD\P\Projeto\dbproject\obj\Debug\Funcionarios.NaoDocenteTurnos.resources

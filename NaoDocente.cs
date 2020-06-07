@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Funcionarios
 {
-    class NaoDocente : Funcionario
+    public class NaoDocente : Funcionario
     {
         private Turno _turno;
 

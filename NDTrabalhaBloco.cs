@@ -8,40 +8,35 @@ namespace Funcionarios
 {
     class NDTrabalhaBloco
     {
-        private int _nmec, _codigoFuncao;
-        private String _blocoCoordenadas;
-        private TimeSpan _horaInicio, _horaFim;
+        private NaoDocente _nd;
+        private NDFuncao _funcao;
+        private Bloco _bloco;
+        private Turno _turno;
 
         public NDTrabalhaBloco() { }
 
-        public int nmec
+        public NaoDocente nd
         {
-            get { return this._nmec; }
-            set { this._nmec = value; }
+            get { return this._nd; }
+            set { this._nd = value; }
         }
 
-        public int codigoFuncao
+        public NDFuncao funcao
         {
-            get { return this._codigoFuncao; }
-            set { this._codigoFuncao = value; }
+            get { return this._funcao; }
+            set { this._funcao = value; }
         }
 
-        public String blocoCoordenadas
+        public Bloco bloco
         {
-            get { return this._blocoCoordenadas; }
-            set { this._blocoCoordenadas = value; }
+            get { return this._bloco; }
+            set { this._bloco = value; }
         }
 
-        public TimeSpan horaInicio
+        public Turno turno
         {
-            get { return this._horaInicio; }
-            set { this._horaInicio = value; }
-        }
-
-        public TimeSpan horaFim
-        {
-            get { return this._horaFim; }
-            set { this._horaFim = value; }
+            get { return this._turno; }
+            set { this._turno = value; }
         }
 
     }

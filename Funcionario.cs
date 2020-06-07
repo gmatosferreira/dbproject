@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Funcionarios
 {
-    class Funcionario
+    public class Funcionario
     {
         private int _nmec, _telemovel;
         private double _salario;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Funcionarios
 {
-    class Turno
+    public class Turno
     {
         private int _codigo;
         private TimeSpan _horaInicio, _horaFim;
@@ -34,6 +34,17 @@ namespace Funcionarios
         public String str
         {
             get { return _horaInicio.ToString(@"hh\:mm\:ss", null) + " às " + _horaFim.ToString(@"hh\:mm\:ss", null); }
+        }
+
+        public static bool isInside(Turno t1, Turno t2)
+        {
+            if (t1.horaInicio.CompareTo(t2.horaInicio) >= 0) {
+                if (t1.horaFim.CompareTo(t2.horaFim) <= 0)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }
