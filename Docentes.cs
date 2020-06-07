@@ -66,7 +66,7 @@ namespace Funcionarios
 
         //  Methods
 
-        private void getGruposDisciplinares()
+        private void loadGruposDisciplinares()
         {
             // Execute SQL query
             SqlCommand cmd = new SqlCommand("SELECT * FROM GestaoEscola.GrupoDisciplinar;", cn);
@@ -234,7 +234,7 @@ namespace Funcionarios
         private void Funcionarios_Load(object sender, EventArgs e)
         {
             // Load grupos disciplinares
-            getGruposDisciplinares();
+            loadGruposDisciplinares();
 
             // Execute SQL query
             //SqlCommand cmd = new SqlCommand("SELECT Pessoa.NMec, Pessoa.nome, Pessoa.telemovel, Funcionario.Salario, GrupoDisciplinar.nome AS grupoDisciplinarNome, GrupoDisciplinar.num AS grupoDisciplinarNum, CONCAT(email, '@', dominio) AS emailComposed FROM((( (GestaoEscola.Docente JOIN GestaoEscola.Funcionario ON Docente.NMec = Funcionario.PNMec) JOIN GestaoEscola.Pessoa ON Docente.NMec = Pessoa.NMec) JOIN GestaoEscola.EmailDominio ON Pessoa.emailDominio = EmailDominio.id) JOIN GestaoEscola.GrupoDisciplinar ON Docente.grupoDisciplinar = GrupoDisciplinar.num)", cn);

@@ -30,5 +30,10 @@ namespace Funcionarios
             get { return this._horaFim; }
             set { this._horaFim = value; }
         }
+
+        public String str
+        {
+            get { return _horaInicio.ToString(@"hh\:mm\:ss", null) + " às " + _horaFim.ToString(@"hh\:mm\:ss", null); }
+        }
     }
 }

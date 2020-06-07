@@ -56,6 +56,11 @@ namespace Funcionarios
                 NaoDocente func = (NaoDocente)rowObject;
                 return func.email.Split('@')[1];
             };
+            this.turno.GroupKeyGetter = delegate (object rowObject) {
+                // Group emails by domain (text after @ symbol)
+                NaoDocente func = (NaoDocente)rowObject;
+                return "Das " + func.turno.horaInicio.ToString(@"hh", null) + " às " + func.turno.horaFim.ToString(@"hh", null);
+            };
             // ObjectListView Aditional preferences
             this.listObjects.FullRowSelect = true; //Make selection select the full row (and not only a cell)
             this.listObjects.SelectedIndex = 0; //Make the first row selected ad default
@@ -66,7 +71,7 @@ namespace Funcionarios
 
         //  Methods
 
-        private void getTurnos()
+        private void loadTurnos()
         {
             // Execute SQL query to get Docente rows
             SqlCommand cmd = new SqlCommand("SELECT * FROM GestaoEscola.Turno", cn);
@@ -77,13 +82,24 @@ namespace Funcionarios
                 t.codigo = Int32.Parse(reader["codigo"].ToString());
                 t.horaInicio = TimeSpan.Parse(reader["horaInicio"].ToString());
                 t.horaFim= TimeSpan.Parse(reader["horaFim"].ToString());
-                panelFormFieldTurno.Items.Add(t.horaInicio.ToString(@"hh\:mm\:ss", null));
+                panelFormFieldTurno.Items.Add(t.str);
                 turnos.Add(t);
             }
 
             // Close reader
             reader.Close();
         }
+
+        private Turno getTurno(int codigo)
+        {
+            foreach (Turno t in turnos)
+            {
+                if (codigo == t.codigo)
+                    return t;
+            }
+            return null;
+        }
+
         private void updateStats()
         {
             // Update interface subtitle with the number of rows being shown
@@ -117,7 +133,7 @@ namespace Funcionarios
             panelFormFieldContacto.Text = f.telemovel.ToString();
             panelFormFieldEmail.Text = f.email;
             panelFormFieldSalario.Text = f.salario.ToString();
-            //panelFormFieldGrupoDisciplinar.Text = f.grupoDisciplinarStr;
+            panelFormFieldTurno.Text = f.turno.str;
             // Disable fields not changable
             panelFormFieldNMec.Enabled = false;
             // Set title and description
@@ -195,8 +211,8 @@ namespace Funcionarios
                         case "Contacto":
                             toFilter = func.telemovel.ToString();
                             break;
-                        case "Email":
-                            toFilter = func.email;
+                        case "Turno":
+                            toFilter = func.turno.str;
                             break;
                     }
                     if (toFilter.ToLower().Contains(val.ToLower()))
@@ -221,7 +237,7 @@ namespace Funcionarios
         private void FormLoad_Handler(object sender, EventArgs e)
         {
             // Get turnos
-            getTurnos();
+            loadTurnos();
 
             // Execute SQL query to get Docente rows
             SqlCommand cmd = new SqlCommand("SELECT Pessoa.NMec, Pessoa.nome, Pessoa.telemovel, Funcionario.Salario, NaoDocente.turno, CONCAT(email, '@', dominio) AS emailComposed FROM(( (GestaoEscola.NaoDocente JOIN GestaoEscola.Funcionario ON NaoDocente.NMec = Funcionario.PNMec) JOIN GestaoEscola.Pessoa ON NaoDocente.NMec = Pessoa.NMec) JOIN GestaoEscola.EmailDominio ON Pessoa.emailDominio = EmailDominio.id)", cn);
@@ -236,6 +252,7 @@ namespace Funcionarios
                 d.salario = Double.Parse(reader["salario"].ToString());
                 d.telemovel = Int32.Parse(reader["telemovel"].ToString());
                 d.email = reader["emailComposed"].ToString();
+                d.turno = getTurno(Int32.Parse(reader["turno"].ToString()));
                 tuplos.Add(d);
                 counter++;
             }

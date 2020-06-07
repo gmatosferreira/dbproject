@@ -42,7 +42,7 @@
             this.panelFormHide = new System.Windows.Forms.PictureBox();
             this.listObjects = new BrightIdeasSoftware.ObjectListView();
             this.nmec = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.grupoDisciplinar = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.turno = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.salario = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.nome = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.tel = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -167,7 +167,7 @@
             // 
             // panelFormButton
             // 
-            this.panelFormButton.Location = new System.Drawing.Point(415, 164);
+            this.panelFormButton.Location = new System.Drawing.Point(415, 168);
             this.panelFormButton.Name = "panelFormButton";
             this.panelFormButton.Size = new System.Drawing.Size(139, 23);
             this.panelFormButton.TabIndex = 25;
@@ -194,7 +194,7 @@
             // listObjects
             // 
             this.listObjects.AllColumns.Add(this.nmec);
-            this.listObjects.AllColumns.Add(this.grupoDisciplinar);
+            this.listObjects.AllColumns.Add(this.turno);
             this.listObjects.AllColumns.Add(this.salario);
             this.listObjects.AllColumns.Add(this.nome);
             this.listObjects.AllColumns.Add(this.tel);
@@ -202,7 +202,7 @@
             this.listObjects.CellEditUseWholeCell = false;
             this.listObjects.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.nmec,
-            this.grupoDisciplinar,
+            this.turno,
             this.salario,
             this.nome,
             this.tel,
@@ -223,10 +223,10 @@
             this.nmec.Text = "NMec";
             this.nmec.Width = 77;
             // 
-            // grupoDisciplinar
+            // turno
             // 
-            this.grupoDisciplinar.AspectName = "grupoDisciplinarStr";
-            this.grupoDisciplinar.Text = "Grupo Disciplinar";
+            this.turno.AspectName = "turno.str";
+            this.turno.Text = "Turno";
             // 
             // salario
             // 
@@ -489,7 +489,7 @@
             this.pesquisaAtributo.FormattingEnabled = true;
             this.pesquisaAtributo.Items.AddRange(new object[] {
             "Número mecanográfico",
-            "Grupo disciplinar",
+            "Turno",
             "Salário",
             "Nome",
             "Contacto",
@@ -613,7 +613,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label7;
-        private BrightIdeasSoftware.OLVColumn grupoDisciplinar;
+        private BrightIdeasSoftware.OLVColumn turno;
         private System.Windows.Forms.ComboBox panelFormFieldTurno;
         private System.Windows.Forms.Label label8;
     }
