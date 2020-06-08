@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Estudantes));
             this.pesquisaAtributo = new System.Windows.Forms.ComboBox();
             this.pesquisaLabel = new System.Windows.Forms.Label();
             this.pesquisaTexto = new System.Windows.Forms.TextBox();
@@ -546,6 +547,7 @@
             this.Controls.Add(this.janelaSubtitulo);
             this.Controls.Add(this.janelaLogo);
             this.Controls.Add(this.janelaTitulo);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Estudantes";
             this.Text = "Sistema de Gestão Escolar | Estudantes";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Estudantes_FormClosed);

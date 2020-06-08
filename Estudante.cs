@@ -10,9 +10,15 @@ namespace Funcionarios
     {
         private int _nmec, _telemovel, _telemovelEE;
         private String _nome, _nomeEE, _email, _emailEE;
+        private Turma _turma;
 
         public Estudante() {}
 
+        public Turma turma
+        {
+            get { return this.turma; }
+            set { this.turma = turma; }
+        }
         public int nmec
         {
             get { return this._nmec; }

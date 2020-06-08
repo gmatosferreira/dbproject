@@ -160,8 +160,8 @@ namespace Funcionarios
         private void menuTurmasPanel_Click(object sender, EventArgs e)
         {
             this.Hide();
-            //Turmas t = new Turmas(cn, this); 
-            //t.ShowDialog(); 
+            Turmas t = new Turmas(cn, this); 
+            t.ShowDialog(); 
         }
 
         private void menuBibliotecaPanel_Click(object sender, EventArgs e)

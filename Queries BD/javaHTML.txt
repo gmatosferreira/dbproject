@@ -1,0 +1,10 @@
+StringBuilder sb = new StringBuilder("<div class=\"card col-3 p-0 mx-auto\">");
+		sb.append(String.format("<img class=\"card-img-top\" src=\"%s\">", imagem));
+		sb.append("<div class=\"card-body\">");
+		sb.append(String.format("<h5 class=\"card-title\">%s</h5>", nome));
+		sb.append(String.format("<p class=\"card-text\">%s</p>", origem));
+		sb.append(String.format("<p class=\"card-text font-weight-bold\">%.2f€ por %s</p>", preco, embalagem));
+		sb.append("</div></div>");
+		return sb.toString();
+
+// esccrever ficheiros html em java

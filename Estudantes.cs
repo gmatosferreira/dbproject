@@ -217,7 +217,6 @@ namespace Funcionarios
                 counter++;
             }
 
-
             // ObjectListView
             // Add Objects to list view
             listObjects.SetObjects(estudantes);
@@ -269,7 +268,45 @@ namespace Funcionarios
         private void panelFormButton_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Funcionalidade em implementação...");
-            //TODO (Distinguish new and edit operation)
+            int nmec = int.Parse(panelFormFieldNMec.Text);
+            String nome = panelFormFieldNome.Text;
+            String nomeEE = panelFormFieldNomeEE.Text;
+            int tel = int.Parse(panelFormFieldContacto.Text);
+            int telEE = int.Parse(panelFormFieldContactoEE.Text);
+            String[] email = panelFormFieldEmail.Text.Split('@');
+            String[] emailEE = panelFormFieldEmailEE.Text.Split('@');
+            SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM GestaoEscola.EmailDominio WHERE dominio=@dominio;", cn); 
+            cmd.Parameters.AddWithValue("@dominio", email[1]); //evita sql injection
+            int emailCount = (int)cmd.ExecuteScalar();
+            int dominioEst = 0;
+            if (emailCount > 0) { //??????????????? DEVEMOS ADICIONAR QDO N TA OU APENAS NOTIFICAR Q N É VALIDO?
+                cmd = new SqlCommand("SELECT id FROM GestaoEscola.EmailDominio WHERE dominio='" + email[1] + "';", cn);
+                SqlDataReader reader = cmd.ExecuteReader();
+                reader.Close();
+            }
+            MessageBox.Show(dominioEst.ToString());
+            SqlCommand cmd1 = new SqlCommand("SELECT id FROM GestaoEscola.EmailDominio WHERE dominio='" + emailEE[1] + "';", cn);
+            SqlDataReader r1 = cmd1.ExecuteReader();
+                        /* if (panelFormFieldNMec.Enabled) // true -> adicionar
+             {
+                 SqlCommand cmd = new SqlCommand("INSERT INTO GestaoEscola.Pessoa values(@nmec,@nome ,@tel, @email[0], @dominioEst); " +
+                     "INSERT INTO GestaoEscola.Estudante values(@nmec, @nomeEE, @telEE, @emailEE[0], @dominioEE); ", cn);
+                 cmd.ExecuteNonQuery();
+
+             }
+             else
+             { //false-> editar
+                 SqlCommand cmd = new SqlCommand("UPDATE GestaoEscola.Pessoa SET ????????????????; " +
+                    "UPDATE GestaoEscola.Estudante SET ??????????? ", cn);
+                 cmd.ExecuteNonQuery();
+             }*/
+        }
+
+        private void getTurma()
+        {
+            // Execute SQL query to get Docente rows
+            SqlCommand cmd = new SqlCommand("SELECT * FROM GestaoEscola.EstudanteTurma WHERE estudanteNMec=", cn);
+            //ACABAR
         }
 
         private void pesquisaTexto_TextChanged(object sender, EventArgs e)

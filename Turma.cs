@@ -9,17 +9,15 @@ namespace Funcionarios
     class Turma
     {
         private int _nivel, _anoLetivo;
-            private String _nomeDT, _nome;
-
-            public Turma() { }
-
+        private String _nomeDT, _nome;
+        
             public int nivel
             {
                 get { return this._nivel; }
                 set { this._nivel = value; }
             }
 
-            public int anpLetivo
+            public int anoLetivo
             {
                 get { return this._anoLetivo; }
                 set { this._anoLetivo = value; }
