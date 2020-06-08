@@ -160,13 +160,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-<<<<<<< Updated upstream
-    <None Include="ClassDiagram1.cd" />
-=======
     <EmbeddedResource Include="Turmas.resx">
       <DependentUpon>Turmas.cs</DependentUpon>
     </EmbeddedResource>
->>>>>>> Stashed changes
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

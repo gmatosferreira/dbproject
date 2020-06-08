@@ -61,7 +61,11 @@ C:\Users\GonçaloMatos\MEOCloud\UA2A\2S\BD\P\Projeto\dbproject\obj\Debug\Funcion
 C:\Users\GonçaloMatos\MEOCloud\UA2A\2S\BD\P\Projeto\dbproject\obj\Debug\Funcionarios.NaoDocentesFuncoes.resources
 C:\Users\GonçaloMatos\MEOCloud\UA2A\2S\BD\P\Projeto\dbproject\obj\Debug\Funcionarios.BlocosTipos.resources
 C:\Users\GonçaloMatos\MEOCloud\UA2A\2S\BD\P\Projeto\dbproject\obj\Debug\Funcionarios.GruposDisciplinares.resources
-=======
 C:\Users\danie\Desktop\BD\dbproject\obj\Debug\Funcionarios.NaoDocentes.resources
 C:\Users\danie\Desktop\BD\dbproject\obj\Debug\Funcionarios.Turmas.resources
 >>>>>>> Stashed changes
+C:\Users\danie\Desktop\BD\dbproject\obj\Debug\Funcionarios.BlocosTipos.resources
+C:\Users\danie\Desktop\BD\dbproject\obj\Debug\Funcionarios.GruposDisciplinares.resources
+C:\Users\danie\Desktop\BD\dbproject\obj\Debug\Funcionarios.NaoDocentesFuncoes.resources
+C:\Users\danie\Desktop\BD\dbproject\obj\Debug\Funcionarios.Turnos.resources
+C:\Users\danie\Desktop\BD\dbproject\obj\Debug\Funcionarios.NaoDocenteTurnos.resources
