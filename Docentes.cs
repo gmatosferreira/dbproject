@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -397,7 +397,7 @@ namespace Funcionarios
 
             // Execute SQL query
             //SqlCommand cmd = new SqlCommand("SELECT Pessoa.NMec, Pessoa.nome, Pessoa.telemovel, Funcionario.Salario, GrupoDisciplinar.nome AS grupoDisciplinarNome, GrupoDisciplinar.num AS grupoDisciplinarNum, CONCAT(email, '@', dominio) AS emailComposed FROM((( (GestaoEscola.Docente JOIN GestaoEscola.Funcionario ON Docente.NMec = Funcionario.PNMec) JOIN GestaoEscola.Pessoa ON Docente.NMec = Pessoa.NMec) JOIN GestaoEscola.EmailDominio ON Pessoa.emailDominio = EmailDominio.id) JOIN GestaoEscola.GrupoDisciplinar ON Docente.grupoDisciplinar = GrupoDisciplinar.num)", cn);
-            SqlCommand cmd = new SqlCommand("SELECT Pessoa.NMec, Pessoa.nome, Pessoa.telemovel, Funcionario.Salario, Docente.grupoDisciplinar, CONCAT(email, '@', dominio) AS emailComposed FROM(( (GestaoEscola.Docente JOIN GestaoEscola.Funcionario ON Docente.NMec = Funcionario.PNMec) JOIN GestaoEscola.Pessoa ON Docente.NMec = Pessoa.NMec) JOIN GestaoEscola.EmailDominio ON Pessoa.emailDominio = EmailDominio.id) ", cn);
+            SqlCommand cmd = new SqlCommand("SELECT * FROM vw_Docentes", cn);
             SqlDataReader reader = cmd.ExecuteReader();
             // Create list of Objects given the query results
             List<Funcionario> docentes = new List<Funcionario>();
