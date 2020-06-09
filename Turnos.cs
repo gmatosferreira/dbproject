@@ -29,11 +29,6 @@ namespace Funcionarios
             InitializeComponent(); 
             // ObjectListView Column groups 
             // http://objectlistview.sourceforge.net/python/groupListView.html 
-            /*this.turno.GroupKeyGetter = delegate (object rowObject) { 
-                // Group emails by domain (text after @ symbol) 
-                NDTrabalhaBloco func = (NDTrabalhaBloco)rowObject; 
-                return "Das " + func.turno.horaInicio.ToString(@"hh", null) + " às " + func.turno.horaFim.ToString(@"hh", null); 
-            };*/ 
             // ObjectListView Aditional preferences 
             this.listObjects.FullRowSelect = true; //Make selection select the full row (and not only a cell) 
             this.listObjects.SelectedIndex = 0; //Make the first row selected ad default 
@@ -151,7 +146,11 @@ namespace Funcionarios
                     MessageBoxButtons.OK, 
                     MessageBoxIcon.Information 
                 );
+                // Update stats
                 updateStats();
+                // Hide panels 
+                panelForm.Visible = false;
+                panelObject.Visible = false;
             }
             else 
             { 
@@ -161,10 +160,7 @@ namespace Funcionarios
                     MessageBoxButtons.OK, 
                     MessageBoxIcon.Error 
                 ); 
-            } 
-            // Hide panels 
-            panelForm.Visible = false; 
-            panelObject.Visible = false; 
+            }  
         } 
  
         private Boolean formValid() 
@@ -269,7 +265,13 @@ namespace Funcionarios
                     MessageBoxButtons.OK, 
                     MessageBoxIcon.Information 
                 );
+                // Update objects displayed on interface 
+                listObjects.BuildList(true);
+                // Update stats
                 updateStats();
+                // Hide panels 
+                panelForm.Visible = false;
+                panelObject.Visible = false;
             }
             else 
             { 
@@ -280,9 +282,6 @@ namespace Funcionarios
                     MessageBoxIcon.Error 
                 ); 
             } 
-            // Hide panels 
-            panelForm.Visible = false; 
-            panelObject.Visible = false; 
         } 
  
         // Event handlers 

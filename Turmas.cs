@@ -189,7 +189,7 @@ namespace Funcionarios
         }
 
         private void estudantes_Click(object sender, EventArgs e)
-        {https://docs.microsoft.com/en-us/dotnet/framework/winforms/controls/add-and-remove-items-from-a-wf-combobox
+        { //https://docs.microsoft.com/en-us/dotnet/framework/winforms/controls/add-and-remove-items-from-a-wf-combobox
             //abrir o form dos estudantes
         }
 
