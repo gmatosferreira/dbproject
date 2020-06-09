@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -124,6 +124,7 @@ namespace Funcionarios
             // Show panel
             if (!panelObject.Visible)
                 panelObject.Visible = true;
+            panelForm.Visible = false;
 
         }
 
@@ -169,7 +170,6 @@ namespace Funcionarios
             // Make panel visible
             if (!panelForm.Visible)
                 panelForm.Visible = true;
-
             panelObject.Visible = false;
         }
 
