@@ -27,7 +27,21 @@ namespace Funcionarios
 
         public static bool isEmail(String s)
         {
-            return validate(rgEmail, s);
+            // In adition to pattern, check each side length because of db varchar() length restrictions
+            if(validate(rgEmail, s))
+            {
+                if (s.Trim().Split('@')[0].Length <= 64 || s.Trim().Split('@')[0].Length <= 255)
+                    return true;
+            }
+            return false;
+        }
+
+        public static bool isPhoneNumber(String s)
+        {
+            // Aditional validation because Int32 conversion does not accept numbers with 10 digits!
+            if (s.Trim().Length != 9)
+                return false;
+            return validate(rgInt, s);
         }
 
         private static bool validate(Regex r, String s)

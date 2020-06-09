@@ -252,7 +252,7 @@ namespace Funcionarios
                 error = true;
                 sb.Append(" Salário");
             }
-            if (!RegexExpressions.isInteger(panelFormFieldContacto.Text))
+            if (!RegexExpressions.isPhoneNumber(panelFormFieldContacto.Text))
             {
                 error = true;
                 sb.Append(" Telemovel");
