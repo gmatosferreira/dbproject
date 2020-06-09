@@ -169,25 +169,8 @@ namespace Funcionarios
             // Make panel visible
             if (!panelForm.Visible)
                 panelForm.Visible = true;
-        }
 
-        private void deleteObject()
-        {
-            // Get Object
-            if (listObjects.Items.Count == 0 | current < 0)
-                return;
-            Funcionario f = (Funcionario)listObjects.SelectedObjects[0];
-            // Confirm delete
-            DialogResult msgb = MessageBox.Show("Tem a certeza que quer eliminar o funcionário " + f.nmec.ToString() +"?", "Esta operação é irreversível!", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
-            if (msgb == DialogResult.No)
-                return;
-            listObjects.Items.RemoveAt(listObjects.SelectedIndex);
-            //MessageBox.Show("Funcionalidade em implementação..."); 
-            //TODO
-            // Hide panels
-            panelForm.Visible = false;
             panelObject.Visible = false;
-            updateStats();
         }
 
         private void pesquisar()
@@ -235,6 +218,70 @@ namespace Funcionarios
             // Hide data panel (both edit and data)
             panelObject.Visible = false;
             panelForm.Visible = false;
+        }
+
+        private void deleteObject()
+        {
+            // Get Object
+            if (listObjects.Items.Count == 0 | current < 0)
+                return;
+            Funcionario f = (Funcionario)listObjects.SelectedObjects[0];
+            int itemIndex = listObjects.SelectedIndex;
+            // Confirm delete
+            DialogResult msgb = MessageBox.Show("Tem a certeza que quer eliminar o funcionário " + f.nmec.ToString() + "?", "Esta operação é irreversível!", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+            if (msgb == DialogResult.No)
+                return;
+            // Delete tuple on db 
+            String commandText = "DELETE FROM GestaoEscola.Docente WHERE NMec = @ID";
+            SqlCommand command = new SqlCommand(commandText, cn);
+            // Add vars 
+            command.Parameters.Add("@ID", SqlDbType.Int);
+            command.Parameters["@ID"].Value = f.nmec;
+
+            // Execute query 
+            int rowsAffected = 0;
+            try
+            {
+                rowsAffected = command.ExecuteNonQuery();
+                Console.WriteLine(String.Format("rowsAffected {0}", rowsAffected));
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(
+                    "Ocorreu um erro, tente novamente!\r\n" + ex.ToString(),
+                    "Erro!",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+                return;
+            }
+            // If successful query 
+            if (rowsAffected == 1)
+            {
+                // Remove object from interface list 
+                listObjects.Items.RemoveAt(itemIndex);
+                // Show user feedback 
+                MessageBox.Show(
+                    "O tuplo foi eliminado com sucesso da base de dados!",
+                    "Sucesso!",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information
+                );
+                // Update stats
+                updateStats();
+                // Hide panels 
+                panelForm.Visible = false;
+                panelObject.Visible = false;
+            }
+            else
+            {
+                MessageBox.Show(
+                    "Ocorreu um erro, tente novamente!",
+                    "Erro!",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+            }
         }
 
         private Boolean formValid()
