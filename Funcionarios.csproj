@@ -69,6 +69,7 @@
     <Compile Include="NaoDocentesFuncoes.Designer.cs">
       <DependentUpon>NaoDocentesFuncoes.cs</DependentUpon>
     </Compile>
+    <Compile Include="RegexExpressions.cs" />
     <Compile Include="Turnos.cs">
       <SubType>Form</SubType>
     </Compile>

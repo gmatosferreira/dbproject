@@ -46,5 +46,14 @@ namespace Funcionarios
             set { this._email = value; }
         }
 
+        public void clone(Funcionario f)
+        {
+            this.nmec = f.nmec;
+            this.telemovel = f.telemovel;
+            this.salario = f.salario;
+            this.nome = f.nome;
+            this.email = f.email;
+        }
+
     }
 }

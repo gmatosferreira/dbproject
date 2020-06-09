@@ -18,5 +18,11 @@ namespace Funcionarios
             set { this._grupoDisciplinar = value; }
         }
 
+        public void clone(Docente d)
+        {
+            base.clone(d); // base is same as super in Java
+            this.grupoDisciplinar = d.grupoDisciplinar;
+        }
+
     }
 }

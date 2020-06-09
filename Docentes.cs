@@ -11,6 +11,7 @@ using System.Data.SqlClient;
 using System.Text.RegularExpressions;
 using BrightIdeasSoftware;
 using BrightIdeasSoftware;
+using System.Diagnostics.Eventing.Reader;
 
 namespace Funcionarios
 {
@@ -95,6 +96,16 @@ namespace Funcionarios
             return null;
         }
 
+        private GrupoDisciplinar getGrupoDisciplinar(String nome)
+        {
+            foreach (GrupoDisciplinar gd in gruposDisciplinares)
+            {
+                if (nome.Equals(gd.nome, StringComparison.InvariantCultureIgnoreCase))
+                    return gd;
+            }
+            return null;
+        }
+
         private void updateStats()
         {
             // Update interface subtitle with the number of rows being shown
@@ -170,11 +181,13 @@ namespace Funcionarios
             DialogResult msgb = MessageBox.Show("Tem a certeza que quer eliminar o funcionário " + f.nmec.ToString() +"?", "Esta operação é irreversível!", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
             if (msgb == DialogResult.No)
                 return;
-            MessageBox.Show("Funcionalidade em implementação..."); 
+            listObjects.Items.RemoveAt(listObjects.SelectedIndex);
+            //MessageBox.Show("Funcionalidade em implementação..."); 
             //TODO
             // Hide panels
             panelForm.Visible = false;
             panelObject.Visible = false;
+            updateStats();
         }
 
         private void pesquisar()
@@ -222,6 +235,151 @@ namespace Funcionarios
             // Hide data panel (both edit and data)
             panelObject.Visible = false;
             panelForm.Visible = false;
+        }
+
+        private Boolean formValid()
+        {
+            // Check if specific fields are valid
+            bool error = false;
+            StringBuilder sb= new StringBuilder();
+            if (!RegexExpressions.isInteger(panelFormFieldNMec.Text))
+            {
+                error = true;
+                sb.Append(" NMec");
+            }
+            if (!RegexExpressions.isDouble(panelFormFieldSalario.Text))
+            {
+                error = true;
+                sb.Append(" Salário");
+            }
+            if (!RegexExpressions.isInteger(panelFormFieldContacto.Text))
+            {
+                error = true;
+                sb.Append(" Telemovel");
+            }
+            if (!RegexExpressions.isEmail(panelFormFieldEmail.Text))
+            {
+                error = true;
+                sb.Append(" Email");
+            }
+            // Check others
+            if (panelFormFieldNome.Text=="" || panelFormFieldNome.Text.Length>65)
+            {
+                error = true;
+                sb.Append(" Nome (max 65 caracteres)");
+            }
+            // Give user feedback
+            if (error)
+            {
+                MessageBox.Show(
+                   "Confirme que preencheu corretamente os seguintes campos:"+sb.ToString(),
+                   "Atenção!",
+                   MessageBoxButtons.YesNoCancel,
+                   MessageBoxIcon.Exclamation
+               );
+            }
+            return !error;
+        }
+
+        private void submitForm(Docente docente)
+        {
+            bool edit = (docente != null);
+
+            // Get form data 
+            int nmec = Int32.Parse(panelFormFieldNMec.Text);
+            String nome = panelFormFieldNome.Text;
+            Double salario = Double.Parse(panelFormFieldSalario.Text);
+            int telemovel = Int32.Parse(panelFormFieldContacto.Text);
+            String emailPrefixo = panelFormFieldEmail.Text.Split('@')[0];
+            String emailDominio = panelFormFieldEmail.Text.Split('@')[1];
+            GrupoDisciplinar grupoDisciplinar = getGrupoDisciplinar(panelFormFieldGrupoDisciplinar.Text);
+
+            // Create command 
+            String commandText = "pr_Docentes";
+            SqlCommand command = new SqlCommand(commandText, cn);
+            command.CommandType = CommandType.StoredProcedure;
+            // Add vars 
+            command.Parameters.Add("@NMec", SqlDbType.Int);
+            command.Parameters["@NMec"].Value = nmec;
+            command.Parameters.Add("@Nome", SqlDbType.VarChar);
+            command.Parameters["@Nome"].Value = nome;
+            command.Parameters.Add("@Telemovel", SqlDbType.Int);
+            command.Parameters["@Telemovel"].Value = telemovel;
+            command.Parameters.Add("@Email", SqlDbType.VarChar);
+            command.Parameters["@Email"].Value = emailPrefixo;
+            command.Parameters.Add("@EmailDominio", SqlDbType.VarChar);
+            command.Parameters["@EmailDominio"].Value = emailDominio;
+            command.Parameters.Add("@Salario", SqlDbType.Money);
+            command.Parameters["@Salario"].Value = salario;
+            command.Parameters.Add("@GrupoDisciplinar", SqlDbType.Int);
+            command.Parameters["@GrupoDisciplinar"].Value = grupoDisciplinar.num;
+            command.Parameters.Add("@Edit", SqlDbType.Bit);
+            command.Parameters["@Edit"].Value = 0;
+            if (edit)
+                command.Parameters["@Edit"].Value = 1;
+            // Return value stuff
+            var returnParameter = command.Parameters.Add("@ReturnVal", SqlDbType.Int);
+            returnParameter.Direction = ParameterDirection.ReturnValue;
+            // Execute query 
+            int rowsAffected = 0;
+            int returnValue;
+            try
+            {
+                rowsAffected = command.ExecuteNonQuery();
+                returnValue = (int)returnParameter.Value;
+                Console.WriteLine(String.Format("rowsAffected {0}", rowsAffected));
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(
+                    "Ocorreu um erro, verifique que preencheu todos os dados corretamente e tente novamente!\r\n" + ex.ToString(),
+                    "Erro!",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+                return;
+            }
+            // If query is successful 
+            if (rowsAffected == 3 && returnValue==1)
+            {
+                // If add operation, construct object (was null)
+                if (!edit)
+                    docente = new Docente();
+                docente.nmec = nmec;
+                docente.nome = nome;
+                docente.email = emailPrefixo + "@" + emailDominio;
+                docente.telemovel = telemovel;
+                docente.salario = salario;
+                docente.grupoDisciplinar = grupoDisciplinar;
+                if (!edit)
+                    listObjects.AddObject(docente);
+                // SHow feedback to user 
+                String successMessage = "O docente foi adicionado com sucesso!";
+                if (edit)
+                    successMessage = "O docente foi editado com sucesso";
+                MessageBox.Show(
+                    successMessage,
+                    "Sucesso!",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information
+                );
+                // Update objects displayed on interface 
+                listObjects.BuildList(true);
+                // Update stats
+                updateStats();
+                // Hide panels 
+                panelForm.Visible = false;
+                panelObject.Visible = false;
+            }
+            else
+            {
+                MessageBox.Show(
+                    "Ocorreu um erro, verifique que preencheu todos os dados corretamente e tente novamente!",
+                    "Erro!",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+            }
         }
 
         // Event handlers
@@ -308,8 +466,19 @@ namespace Funcionarios
 
         private void panelFormButton_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Funcionalidade em implementação...");
-            //TODO (Distinguish new and edit operation)
+            if (formValid())
+            {
+                // Edit 
+                if (listObjects.SelectedIndex >= 0)
+                {
+                    submitForm((Docente)listObjects.SelectedObjects[0]);
+                }
+                // Add new  
+                else
+                {
+                    submitForm(null);
+                }
+            }
         }
 
         private void pesquisaTexto_TextChanged(object sender, EventArgs e)
