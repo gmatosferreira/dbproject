@@ -74,9 +74,8 @@ namespace Funcionarios
             Turma t = (Turma)listObjects.SelectedObjects[0];
             // Set textboxes value
             panelFormFieldNome.Text = t.nome;
-            panelFormFieldNomeDT.Text = t.nomeDT;
             panelFormFieldNivel.Text = t.nivel.ToString();
-            panelFormFieldAno.Text = t.anoLetivo.ToString();
+            panelFormFieldAno.Text = String.Format("{0:2000}", t.anoLetivo.ToString());
 
             // Disable fields not changable
             panelFormFieldNome.Enabled = false;
@@ -101,7 +100,6 @@ namespace Funcionarios
         {
             // Clear all fields
             panelFormFieldNome.Text = "";
-            panelFormFieldNomeDT.Text = "";
             panelFormFieldNivel.Text = "";
             panelFormFieldAno.Text = "";
 
@@ -134,7 +132,7 @@ namespace Funcionarios
 
         private void Turmas_Load(object sender, EventArgs e)
         {
-            SqlCommand cmd = new SqlCommand("SELECT nome, nivel, anoLetivo, diretorDeTurma FROM GestaoEscola.Turma", cn);
+            SqlCommand cmd = new SqlCommand("SELECT Turma.nome, nivel, anoLetivo, diretorDeTurma, Pessoa.nome AS nomeDT FROM GestaoEscola.Turma JOIN GestaoEscola.Pessoa ON diretorDeTurma = NMec", cn);
             SqlDataReader reader = cmd.ExecuteReader();
             // Create list of Objects given the query results
             List<Turma> turmas = new List<Turma>();
@@ -143,8 +141,9 @@ namespace Funcionarios
                 Turma t = new Turma();
                 t.nivel = Int32.Parse(reader["nivel"].ToString());
                 t.nome = reader["nome"].ToString();
-                t.nomeDT = reader["diretorDeTurma"].ToString();
-                t.anoLetivo = Int32.Parse(reader["anoLetivo"].ToString());
+                t.nomeDT = reader["nomeDT"].ToString();
+                t.nMecDT = int.Parse(reader["diretorDeTurma"].ToString());
+                t.anoLetivo = int.Parse(String.Format("{0:2000}", reader["anoLetivo"]));
                 turmas.Add(t);
                 counter++;
             }
@@ -167,6 +166,31 @@ namespace Funcionarios
             {
                 showObject();
             }
+        }
+
+        private void panelFormButton_Click(object sender, EventArgs e)
+        {  //ACABAR -> https://docs.microsoft.com/en-us/dotnet/framework/winforms/controls/add-and-remove-items-from-a-wf-combobox
+            /*  String commandText = "INSERT INTO GestaoEscola.Turma VALUES (6, '6X', 1234,20)";
+              SqlCommand command = new SqlCommand(commandText, cn);
+              try
+              {
+                  command.ExecuteNonQuery();
+              }
+              catch (SqlException ex)
+              {
+                  MessageBox.Show(
+                      "Ocorreu um erro, verifique que preencheu todos os dados corretamente e tente novamente!\r\n" + ex.ToString(),
+                      "Erro!",
+                      MessageBoxButtons.OK,
+                      MessageBoxIcon.Error
+                  );
+                  return;
+              }*/
+        }
+
+        private void estudantes_Click(object sender, EventArgs e)
+        {https://docs.microsoft.com/en-us/dotnet/framework/winforms/controls/add-and-remove-items-from-a-wf-combobox
+            //abrir o form dos estudantes
         }
 
         private void pesquisar(object sender, EventArgs e)
@@ -211,5 +235,4 @@ namespace Funcionarios
             panelForm.Visible = false;
         }
     }
-    // TODO: AJUDA, VER NOME DT E ANO LETIVO... etc
 }

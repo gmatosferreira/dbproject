@@ -120,14 +120,15 @@ namespace Funcionarios
             SqlCommand command = new SqlCommand(commandText, cn); 
             // Add vars 
             command.Parameters.Add("@ID", SqlDbType.Int); 
-            command.Parameters["@ID"].Value = lastId + 1; 
+            command.Parameters["@ID"].Value = lastId;
+
             // Execute query 
             int rowsAffected = 0; 
             try 
             { 
                 rowsAffected = command.ExecuteNonQuery(); 
-                Console.WriteLine(String.Format("rowsAffected {0}", rowsAffected)); 
-            } 
+                Console.WriteLine(String.Format("rowsAffected {0}", rowsAffected));
+            }
             catch (SqlException ex) 
             { 
                 MessageBox.Show( 
@@ -149,8 +150,9 @@ namespace Funcionarios
                     "Sucesso!", 
                     MessageBoxButtons.OK, 
                     MessageBoxIcon.Information 
-                ); 
-            } 
+                );
+                updateStats();
+            }
             else 
             { 
                 MessageBox.Show( 
@@ -211,15 +213,18 @@ namespace Funcionarios
                 commandText = "UPDATE GestaoEscola.Turno SET horaInicio = @HORAINICIO, horaFim = @HORAFIM WHERE codigo = @ID"; 
             SqlCommand command = new SqlCommand(commandText, cn); 
             // Add vars 
-            command.Parameters.Add("@ID", SqlDbType.Int); 
-            command.Parameters["@ID"].Value = lastId + 1; 
-            command.Parameters.Add("@HORAINICIO", SqlDbType.Time); 
+            command.Parameters.Add("@ID", SqlDbType.Int);
+            if (edit)
+                command.Parameters["@ID"].Value = lastId;
+            else
+                command.Parameters["@ID"].Value = lastId +1 ;
+            command.Parameters.AddWithValue("@HORAINICIO", horaInicio); 
             command.Parameters["@HORAINICIO"].Value = horaInicio; 
             command.Parameters.Add("@HORAFIM", SqlDbType.Time); 
-            command.Parameters["@HORAFIM"].Value = horaFim; 
+            command.Parameters["@HORAFIM"].Value = horaFim;
             // Execute query 
-            int rowsAffected = 0; 
-            try 
+            int rowsAffected = 0;
+            try
             { 
                 rowsAffected = command.ExecuteNonQuery(); 
                 Console.WriteLine(String.Format("rowsAffected {0}", rowsAffected)); 
@@ -257,14 +262,15 @@ namespace Funcionarios
                 // SHow feedback to user 
                 String successMessage = "O turno foi adicionado com sucesso!"; 
                 if (edit) 
-                    successMessage = "O turno foi editado com sucesso"; 
+                    successMessage = "O turno foi editado com sucesso";
                 MessageBox.Show( 
                     successMessage, 
                     "Sucesso!", 
                     MessageBoxButtons.OK, 
                     MessageBoxIcon.Information 
-                ); 
-            } 
+                );
+                updateStats();
+            }
             else 
             { 
                 MessageBox.Show( 
