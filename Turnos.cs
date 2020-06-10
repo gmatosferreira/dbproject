@@ -181,7 +181,17 @@ namespace Funcionarios
         { 
             // Validate if function shift is inside Nao Docente main shift 
             TimeSpan horaInicio = TimeSpan.Parse(panelFormFieldHoraInicio.Text); 
-            TimeSpan horaFim = TimeSpan.Parse(panelFormFieldHoraFim.Text); 
+            TimeSpan horaFim = TimeSpan.Parse(panelFormFieldHoraFim.Text);
+            if (horaInicio.CompareTo(horaFim) == 0)
+            {
+                MessageBox.Show(
+                    "As horas de início de fim não podem ser iguais!",
+                    "Erro!",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+                return false;
+            }
             DialogResult userfeedback = DialogResult.Yes; 
             if (horaInicio.CompareTo(horaFim) > 0) 
             { 
@@ -193,16 +203,6 @@ namespace Funcionarios
                 ); 
                 if (userfeedback != DialogResult.Yes) 
                     return false; 
-            } 
-            else if (horaInicio.CompareTo(horaFim) == 0) 
-            { 
-                MessageBox.Show( 
-                    "As horas de início de fim não podem ser iguais!", 
-                    "Erro!", 
-                    MessageBoxButtons.OK, 
-                    MessageBoxIcon.Error 
-                ); 
-                return false; 
             } 
             return true; 
         } 
