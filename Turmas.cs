@@ -16,12 +16,17 @@ namespace Funcionarios
     {
         private SqlConnection cn;
         private Form previous;
-        private int current = 0, counter = 0;
+        private bool edit = false;
+        private int current = 0, counter = 0; 
+        List<String> docentesNaoDT;
+
         public Turmas(SqlConnection cn, Form prev)
         {
             this.cn = cn;
             this.previous = prev;
             InitializeComponent();
+            this.docentesNaoDT = new List<String>();
+
             this.nome.GroupKeyGetter = delegate (object rowObject)
             {
                 // When the same is returned by every object, all of them are put together in one group
@@ -75,15 +80,20 @@ namespace Funcionarios
             // Set textboxes value
             panelFormFieldNome.Text = t.nome;
             panelFormFieldNivel.Text = t.nivel.ToString();
-            panelFormFieldAno.Text = String.Format("{0:2000}", t.anoLetivo.ToString());
+            //String.Format("{0:2000}", t.anoLetivo.ToString());
+            // TODOOO                                             !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1111
+            //dataInicio.Value = 
+            //dataFim.Value = 
+
 
             // Disable fields not changable
             panelFormFieldNome.Enabled = false;
             panelFormFieldNivel.Enabled = false;
-            panelFormFieldAno.Enabled = false;
+            dataInicio.Enabled = false;
+            dataFim.Enabled = false;
 
             // Set title and description
-            panelFormTitulo.Text = "Editar turma " + nome;
+            panelFormTitulo.Text = "Editar turma " + t.nome;
             panelFormDescricao.Text = "Altere os dados e submita o formulário";
             panelFormButton.Text = "Submeter";
             // Make panel visible
@@ -101,12 +111,16 @@ namespace Funcionarios
             // Clear all fields
             panelFormFieldNome.Text = "";
             panelFormFieldNivel.Text = "";
-            panelFormFieldAno.Text = "";
+            dataInicio.Refresh();
+            dataFim.Refresh();
+            comboBoxDT.SelectedIndex = 0;
+
 
             // Enable fields that are not editable
             panelFormFieldNome.Enabled = true;
             panelFormFieldNivel.Enabled = true;
-            panelFormFieldAno.Enabled = true;
+            dataInicio.Enabled = true;
+            dataFim.Enabled = true;
 
             // Set title and description
             panelFormTitulo.Text = "Adicionar uma nova turma";
@@ -157,6 +171,8 @@ namespace Funcionarios
 
             // Close reader
             reader.Close();
+
+            inicializarComboBox();
         }
 
         private void listObjects_SelectedIndexChanged(object sender, EventArgs e)
@@ -167,30 +183,117 @@ namespace Funcionarios
                 showObject();
             }
         }
+        private void panelFormButton_Click(object sender, EventArgs e) {
+            if (listObjects.SelectedIndex >= 0)
+            {
+                submitForm((Turma)listObjects.SelectedObjects[0]);
+            }
+            // Add new  
+            else {
+                submitForm(null);
+            }
+        }
 
-        private void panelFormButton_Click(object sender, EventArgs e)
-        {  //ACABAR -> https://docs.microsoft.com/en-us/dotnet/framework/winforms/controls/add-and-remove-items-from-a-wf-combobox
-            /*  String commandText = "INSERT INTO GestaoEscola.Turma VALUES (6, '6X', 1234,20)";
-              SqlCommand command = new SqlCommand(commandText, cn);
-              try
-              {
-                  command.ExecuteNonQuery();
-              }
-              catch (SqlException ex)
-              {
-                  MessageBox.Show(
-                      "Ocorreu um erro, verifique que preencheu todos os dados corretamente e tente novamente!\r\n" + ex.ToString(),
-                      "Erro!",
-                      MessageBoxButtons.OK,
-                      MessageBoxIcon.Error
-                  );
-                  return;
-              }*/
+        private void submitForm(Turma turma)
+        {
+            bool edit = (turma != null);
+            String cmdTxt = "";
+            String diretorInfo = comboBoxDT.SelectedItem.ToString();
+            // dados
+            int nivel = int.Parse(panelFormFieldNivel.Text);
+            String nomeT = panelFormFieldNome.Text;
+            DateTime inicio = dataInicio.Value;
+            DateTime fim = dataFim.Value;
+
+            int nMecDT = int.Parse(diretorInfo.Split('-')[0]);
+            String nomeDT = diretorInfo.Split('-')[1];
+            if (edit) //editar
+                cmdTxt = "UPDATE GestaoEscola.Turma SET diretorDeTurma=@nMecDT WHERE nivel=@nivel AND nome=@nomeT AND anoLetivo=@ano";
+            else
+                cmdTxt = "INSERT INTO GestaoEscola.Turma VALUES (@nivel, @nomeT,@nMecDT, @ano);";
+
+            SqlCommand command = new SqlCommand(cmdTxt, cn);
+            int rowsAffected = 0;
+            try
+            {
+                command.Parameters.AddWithValue("@nivel", nivel);
+                command.Parameters.AddWithValue("@nomeT", nomeT);
+                //command.Parameters.AddWithValue("@ano", anoLet);
+
+                if (comboBoxDT.SelectedIndex >= 0)
+                {
+                    command.Parameters.AddWithValue("@nMecDT", nMecDT);
+                }
+                rowsAffected = command.ExecuteNonQuery();
+                Console.WriteLine(String.Format("rowsAffected {0}", rowsAffected));
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(
+                    "Ocorreu um erro, verifique que preencheu todos os dados corretamente e tente novamente!\r\n" + ex.ToString(),
+                    "Erro!",
+                     MessageBoxButtons.OK,
+                     MessageBoxIcon.Error
+                );
+                return;
+            }
+
+            // If query is successful 
+            if (rowsAffected >= 1)
+            {
+                // If add operation 
+                if (!edit)
+                {
+                    // Add tuple to interface list 
+                    Turma t = new Turma();
+                    t.nivel = nivel;
+                    //t.anoLetivo = int.Parse(String.Format("{0:2000}", anoLet.ToString()));
+                    t.nMecDT = nMecDT;
+                    t.nomeDT = nomeDT;
+                    t.nome = nomeT;
+                    listObjects.AddObject(t);
+                }
+                else
+                {
+                    // Get object on interface list and change attributes 
+                    turma.nomeDT = nomeDT;
+                    turma.nMecDT = nMecDT;
+                }
+                // SHow feedback to user 
+                String successMessage = "A turma foi adicionada com sucesso!";
+                if (edit)
+                    successMessage = "A turna foi editada com sucesso";
+                MessageBox.Show(
+                    successMessage,
+                    "Sucesso!",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information
+                );
+                updateStats();
+                inicializarComboBox();
+                comboBoxDT.Refresh();
+            }
+            else
+            {
+                MessageBox.Show(
+                    "Ocorreu um erro, verifique que preencheu todos os dados corretamente e tente novamente!",
+                    "Erro!",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+            }
+            // Hide panels 
+            panelForm.Visible = false;
+            panelObject.Visible = false;
         }
 
         private void estudantes_Click(object sender, EventArgs e)
-        { //https://docs.microsoft.com/en-us/dotnet/framework/winforms/controls/add-and-remove-items-from-a-wf-combobox
-            //abrir o form dos estudantes
+        {
+            if (listObjects.SelectedIndex >= 0) {
+                Turma t2 = (Turma)listObjects.SelectedObjects[0];
+                EstudantesTurma listaEstudantes = new EstudantesTurma(this,t2.nivel, t2.nome,t2.anoLetivo);
+            }
+            //abrir o form dos estudantes            
         }
 
         private void pesquisar(object sender, EventArgs e)
@@ -224,7 +327,7 @@ namespace Funcionarios
                             toFilter = t.anoLetivo.ToString();
                             break;
                     }
-                    if (toFilter.Contains(val))
+                    if (toFilter.ToLower().Contains(val.ToLower()))
                         return true;
                     return false;
                 });
@@ -233,6 +336,22 @@ namespace Funcionarios
             // Hide data panel (both edit and data)
             panelObject.Visible = false;
             panelForm.Visible = false;
+        }
+
+        private void inicializarComboBox()
+        {
+            comboBoxDT.Items.Clear();
+            SqlCommand cmd = new SqlCommand("GestaoEscola.DiretoresTurmaSP", cn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            int c = 0;
+            SqlDataReader r = cmd.ExecuteReader();            
+            while (r.Read())
+            {
+                // lista de docentes nao diretores de turma e nmec
+                String s = r["NMec"].ToString() + "-" + r["nome"].ToString();
+                comboBoxDT.Items.Insert(c, s);
+                c++;
+            }
         }
     }
 }

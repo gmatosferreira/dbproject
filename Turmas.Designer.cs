@@ -62,9 +62,11 @@
             this.panelFormFieldNivel = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.panelFormFieldAno = new System.Windows.Forms.TextBox();
             this.panelForm = new System.Windows.Forms.Panel();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.dataFim = new System.Windows.Forms.DateTimePicker();
+            this.dataInicio = new System.Windows.Forms.DateTimePicker();
+            this.comboBoxDT = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.janelaLogo)).BeginInit();
             this.panelObject.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelObjectHide)).BeginInit();
@@ -340,7 +342,7 @@
             // panelFormFieldNome
             // 
             this.panelFormFieldNome.Enabled = false;
-            this.panelFormFieldNome.Location = new System.Drawing.Point(61, 73);
+            this.panelFormFieldNome.Location = new System.Drawing.Point(34, 72);
             this.panelFormFieldNome.Name = "panelFormFieldNome";
             this.panelFormFieldNome.Size = new System.Drawing.Size(139, 20);
             this.panelFormFieldNome.TabIndex = 25;
@@ -348,7 +350,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(58, 57);
+            this.label5.Location = new System.Drawing.Point(31, 56);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(35, 13);
             this.label5.TabIndex = 26;
@@ -370,7 +372,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(262, 57);
+            this.label2.Location = new System.Drawing.Point(200, 56);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(86, 13);
             this.label2.TabIndex = 28;
@@ -379,7 +381,7 @@
             // 
             // panelFormButton
             // 
-            this.panelFormButton.Location = new System.Drawing.Point(429, 122);
+            this.panelFormButton.Location = new System.Drawing.Point(429, 151);
             this.panelFormButton.Name = "panelFormButton";
             this.panelFormButton.Size = new System.Drawing.Size(139, 23);
             this.panelFormButton.TabIndex = 25;
@@ -404,7 +406,7 @@
             // panelFormFieldNivel
             // 
             this.panelFormFieldNivel.Enabled = false;
-            this.panelFormFieldNivel.Location = new System.Drawing.Point(61, 122);
+            this.panelFormFieldNivel.Location = new System.Drawing.Point(34, 121);
             this.panelFormFieldNivel.Name = "panelFormFieldNivel";
             this.panelFormFieldNivel.Size = new System.Drawing.Size(139, 20);
             this.panelFormFieldNivel.TabIndex = 34;
@@ -412,7 +414,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(58, 106);
+            this.label3.Location = new System.Drawing.Point(31, 105);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(31, 13);
             this.label3.TabIndex = 35;
@@ -422,24 +424,19 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(262, 107);
+            this.label4.Location = new System.Drawing.Point(200, 105);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(58, 13);
             this.label4.TabIndex = 36;
             this.label4.Text = "Ano Letivo";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // panelFormFieldAno
-            // 
-            this.panelFormFieldAno.Location = new System.Drawing.Point(265, 123);
-            this.panelFormFieldAno.Name = "panelFormFieldAno";
-            this.panelFormFieldAno.Size = new System.Drawing.Size(139, 20);
-            this.panelFormFieldAno.TabIndex = 37;
-            // 
             // panelForm
             // 
-            this.panelForm.Controls.Add(this.comboBox1);
-            this.panelForm.Controls.Add(this.panelFormFieldAno);
+            this.panelForm.Controls.Add(this.label1);
+            this.panelForm.Controls.Add(this.dataFim);
+            this.panelForm.Controls.Add(this.dataInicio);
+            this.panelForm.Controls.Add(this.comboBoxDT);
             this.panelForm.Controls.Add(this.label4);
             this.panelForm.Controls.Add(this.label3);
             this.panelForm.Controls.Add(this.panelFormFieldNivel);
@@ -456,14 +453,41 @@
             this.panelForm.TabIndex = 43;
             this.panelForm.Visible = false;
             // 
-            // comboBox1
+            // dataFim
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(265, 72);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(149, 21);
-            this.comboBox1.Sorted = true;
-            this.comboBox1.TabIndex = 40;
+            this.dataFim.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dataFim.Location = new System.Drawing.Point(331, 121);
+            this.dataFim.Name = "dataFim";
+            this.dataFim.Size = new System.Drawing.Size(97, 20);
+            this.dataFim.TabIndex = 42;
+            this.dataFim.Value = new System.DateTime(2020, 6, 11, 16, 26, 0, 0);
+            // 
+            // dataInicio
+            // 
+            this.dataInicio.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dataInicio.Location = new System.Drawing.Point(203, 122);
+            this.dataInicio.Name = "dataInicio";
+            this.dataInicio.Size = new System.Drawing.Size(97, 20);
+            this.dataInicio.TabIndex = 41;
+            // 
+            // comboBoxDT
+            // 
+            this.comboBoxDT.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxDT.FormattingEnabled = true;
+            this.comboBoxDT.Location = new System.Drawing.Point(203, 72);
+            this.comboBoxDT.Name = "comboBoxDT";
+            this.comboBoxDT.Size = new System.Drawing.Size(149, 21);
+            this.comboBoxDT.Sorted = true;
+            this.comboBoxDT.TabIndex = 40;
+            // 
+            // label1
+            // 
+            this.label1.Location = new System.Drawing.Point(300, 125);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(25, 13);
+            this.label1.TabIndex = 43;
+            this.label1.Text = "até: ";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // Turmas
             // 
@@ -538,8 +562,10 @@
         private System.Windows.Forms.TextBox panelFormFieldNivel;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox panelFormFieldAno;
         private System.Windows.Forms.Panel panelForm;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comboBoxDT;
+        private System.Windows.Forms.DateTimePicker dataFim;
+        private System.Windows.Forms.DateTimePicker dataInicio;
+        private System.Windows.Forms.Label label1;
     }
 }
