@@ -512,7 +512,6 @@
             this.Controls.Add(this.janelaSubtitulo);
             this.Controls.Add(this.janelaLogo);
             this.Controls.Add(this.janelaTitulo);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Bibliotecas";
             this.Text = "Sistema de Gestão Escolar | Bibliotecas";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Funcionarios_FormClosed);
