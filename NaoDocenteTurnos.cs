@@ -260,9 +260,11 @@ namespace Funcionarios
         private Boolean formValid()
         {            
             // Validate if function ship is inside Nao Docente main ship
+            
             Turno novoTurno = new Turno();
             novoTurno.horaInicio = TimeSpan.Parse(panelFormFieldHoraInicio.Text);
             novoTurno.horaFim = TimeSpan.Parse(panelFormFieldHoraFim.Text);
+            /*
             if (!Turno.isInside(novoTurno, nd.turno))
             {
                 MessageBox.Show(
@@ -273,6 +275,7 @@ namespace Funcionarios
                 );
                 return false;
             }
+            */
             // Other time validations 
             if (novoTurno.horaInicio.CompareTo(novoTurno.horaFim) == 0)
             {
@@ -287,13 +290,13 @@ namespace Funcionarios
             DialogResult userfeedback = DialogResult.Yes;
             if (novoTurno.horaInicio.CompareTo(novoTurno.horaFim) > 0)
             {
-                userfeedback = MessageBox.Show(
-                    "O horário de início é maior ou igual ao de fim! Tem a certeza que pretende continuar?",
-                    "Atenção!",
-                    MessageBoxButtons.YesNoCancel,
-                    MessageBoxIcon.Exclamation
+                MessageBox.Show(
+                    "O horário de início é maior ou igual ao de fim!",
+                    "Erro!",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
                 );
-                if (userfeedback != DialogResult.Yes)
+                return false;
                     return false;
             }
             return true;
@@ -340,8 +343,28 @@ namespace Funcionarios
             }
             catch (SqlException ex)
             {
+                String errorMessage = "Ocorreu um erro, verifique que preencheu todos os dados corretamente e tente novamente!";
+                for (int i = 0; i < ex.Errors.Count; i++)
+                {
+                    if (ex.Errors[i].Message.IndexOf("A hora de início deve ser menor que a de fim", StringComparison.OrdinalIgnoreCase) >= 0)
+                    {
+                        errorMessage = ex.Errors[i].Message;
+                        break;
+                    }
+                    else if (ex.Errors[i].Message.IndexOf("O horário da nova função deve estar dentro do turno principal do funcionário", StringComparison.OrdinalIgnoreCase) >= 0)
+                    {
+                        errorMessage = ex.Errors[i].Message;
+                        break;
+                    }
+                    else if (ex.Errors[i].Message.IndexOf("O horário da nova função colide com o horário de outra função já atribuída", StringComparison.OrdinalIgnoreCase) >= 0)
+                    {
+                        errorMessage = ex.Errors[i].Message;
+                        break;
+                    }
+
+                }
                 MessageBox.Show(
-                    "Ocorreu um erro, verifique que preencheu todos os dados corretamente e tente novamente!\r\n" + ex.ToString(),
+                    errorMessage+"\r\n\r\n" + ex.ToString(),
                     "Erro!",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error
@@ -349,7 +372,7 @@ namespace Funcionarios
                 return;
             }
             // If query is successful 
-            if (rowsAffected == 1)
+            if (rowsAffected == 2)
             {
                 // If add operation 
                 if (!edit)
