@@ -1,4 +1,4 @@
-using System; 
+﻿using System; 
 using System.Collections.Generic; 
 using System.ComponentModel; 
 using System.Data; 
@@ -152,7 +152,7 @@ namespace Funcionarios
                 listObjects.Items.RemoveAt(itemIndex); 
                 // Show user feedback 
                 MessageBox.Show( 
-                    "O tuplo foi eliminado com sucess da base de dados!", 
+                    "O tuplo foi eliminado com sucesso da base de dados!", 
                     "Sucesso!", 
                     MessageBoxButtons.OK, 
                     MessageBoxIcon.Information 
@@ -225,10 +225,10 @@ namespace Funcionarios
             // Add vars 
             command.Parameters.Add("@ID", SqlDbType.Int);
             if (edit)
-                command.Parameters["@ID"].Value = lastId;
+                command.Parameters["@ID"].Value = turno.codigo;
             else
                 command.Parameters["@ID"].Value = lastId +1 ;
-            command.Parameters.AddWithValue("@HORAINICIO", horaInicio); 
+            command.Parameters.Add("@HORAINICIO", SqlDbType.Time); 
             command.Parameters["@HORAINICIO"].Value = horaInicio; 
             command.Parameters.Add("@HORAFIM", SqlDbType.Time); 
             command.Parameters["@HORAFIM"].Value = horaFim;
@@ -258,11 +258,11 @@ namespace Funcionarios
                     // Update lastId  
                     lastId++; 
                     // Add tuple to interface list 
-                    Turno t = new Turno(); 
-                    t.codigo = lastId; 
-                    t.horaInicio = horaInicio; 
-                    t.horaFim = horaFim; 
-                    listObjects.AddObject(t); 
+                    turno = new Turno();
+                    turno.codigo = lastId;
+                    turno.horaInicio = horaInicio;
+                    turno.horaFim = horaFim; 
+                    listObjects.AddObject(turno); 
                 } else 
                 { 
                     // Get object on interface list and change attributes 

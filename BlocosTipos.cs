@@ -205,7 +205,7 @@ namespace Funcionarios
             // Add vars 
             command.Parameters.Add("@ID", SqlDbType.Int);
             if (edit)
-                command.Parameters["@ID"].Value = lastId;
+                command.Parameters["@ID"].Value = bloco.codigo;
             else
                 command.Parameters["@ID"].Value = lastId + 1;
             command.Parameters.Add("@Nome", SqlDbType.VarChar, 15);
