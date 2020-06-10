@@ -357,7 +357,6 @@ namespace Funcionarios
                 // Edit 
                 if (listObjects.SelectedIndex >= 0)
                 {
-                    MessageBox.Show("EDITT");
                     submitForm((BlocoTipo)listObjects.SelectedObjects[0]);
                 }
                 // Add new  
