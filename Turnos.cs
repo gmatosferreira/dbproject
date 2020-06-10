@@ -109,33 +109,42 @@ namespace Funcionarios
             // Confirm delete 
             DialogResult msgb = MessageBox.Show("Tem a certeza que quer eliminar este turno ("+f.str+")?", "Esta operação é irreversível!", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation); 
             if (msgb == DialogResult.No) 
-                return; 
-            // Delete tuple on db 
-            String commandText = "DELETE FROM GestaoEscola.Turno WHERE codigo = @ID"; 
-            SqlCommand command = new SqlCommand(commandText, cn); 
+                return;
+            // Create command 
+            String commandText = "pr_TurnosDELETE";
+            SqlCommand command = new SqlCommand(commandText, cn);
+            command.CommandType = CommandType.StoredProcedure;
             // Add vars 
-            command.Parameters.Add("@ID", SqlDbType.Int); 
-            command.Parameters["@ID"].Value = lastId;
+            command.Parameters.Add("@Codigo", SqlDbType.Int);
+            command.Parameters["@Codigo"].Value = f.codigo;
+            command.Parameters.Add("@Feedback", SqlDbType.VarChar, 4000).Direction=ParameterDirection.Output;
+            // Return value stuff
+            command.Parameters.Add("@ReturnVal", SqlDbType.Int).Direction = ParameterDirection.ReturnValue;
 
             // Execute query 
-            int rowsAffected = 0; 
+            int rowsAffected = 0;
+            int returnValue;
+            String returnMessage = "";
             try 
             { 
-                rowsAffected = command.ExecuteNonQuery(); 
+                rowsAffected = command.ExecuteNonQuery();
+                returnValue = (int)command.Parameters["@ReturnVal"].Value;
+                returnMessage = (String)command.Parameters["@Feedback"].Value;
                 Console.WriteLine(String.Format("rowsAffected {0}", rowsAffected));
             }
             catch (SqlException ex) 
-            { 
+            {
+                MessageBox.Show(ex.GetType().ToString());
                 MessageBox.Show( 
-                    "Ocorreu um erro, tente novamente!\r\n" + ex.ToString(), 
+                    "Ocorreu um erro, tente novamente!\r\n\r\n" + ex.ToString(), 
                     "Erro!", 
                     MessageBoxButtons.OK, 
                     MessageBoxIcon.Error 
                 ); 
                 return; 
-            } 
+            }
             // If successful query 
-            if (rowsAffected==1) 
+            if (rowsAffected==1 && returnValue==1) 
             { 
                 // Remove object from interface list 
                 listObjects.Items.RemoveAt(itemIndex); 
@@ -153,9 +162,12 @@ namespace Funcionarios
                 panelObject.Visible = false;
             }
             else 
-            { 
+            {
+                String errorMessage = "Ocorreu um erro, tente novamente!";
+                if (returnMessage.Contains("conflicted with the REFERENCE constraint \"FK"))
+                    errorMessage = "Este turno não pode ser eliminado enquanto estiver atribuído a um funcionário!";
                 MessageBox.Show( 
-                    "Ocorreu um erro, tente novamente!", 
+                    errorMessage + "\r\n\r\n" + returnMessage, 
                     "Erro!", 
                     MessageBoxButtons.OK, 
                     MessageBoxIcon.Error 
