@@ -12,7 +12,7 @@ using System.Text.RegularExpressions;
 using BrightIdeasSoftware;
 
 namespace Funcionarios
-{//TODO: FALTA O BUTAO DE AJUDA!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+{
     public partial class Estudantes : Form
     {
         // Attributes
@@ -138,7 +138,6 @@ namespace Funcionarios
             if (msgb == DialogResult.No)
                 return;
             MessageBox.Show("Funcionalidade em implementação...");
-            //TODO
             // Hide panels
             panelForm.Visible = false;
             panelObject.Visible = false;
@@ -199,7 +198,7 @@ namespace Funcionarios
         private void Estudantes_Load(object sender, EventArgs e)
         {
             // Execute SQL query
-            SqlCommand cmd = new SqlCommand("SELECT Estudante.NMec, nome, telemovel, NomeEE, contactoEE, CONCAT(EmailEE, '@', dominio) AS EEemailComposed, CONCAT(email, '@', dominio) AS emailComposed FROM((GestaoEscola.Estudante JOIN GestaoEscola.Pessoa ON Estudante.NMec = Pessoa.NMec) JOIN GestaoEscola.EmailDominio ON Pessoa.emailDominio = EmailDominio.id)", cn);
+            SqlCommand cmd = new SqlCommand("SELECT Estudante.NMec, nome, telemovel, NomeEE, contactoEE, CONCAT(EmailEE, '@', dominio) AS EEemailComposed, CONCAT(email, '@', dominio) AS emailComposed FROM((GestaoEscola.Estudante JOIN GestaoEscola.Pessoa ON Estudante.NMec = Pessoa.NMec) JOIN GestaoEscola.EmailDominio ON Pessoa.emailDominio = EmailDominio.id) WHERE nomeEE IS NOT NULL", cn);
             SqlDataReader reader = cmd.ExecuteReader();
             // Create list of Objects given the query results
             List<Estudante> estudantes = new List<Estudante>();
@@ -265,48 +264,187 @@ namespace Funcionarios
             }
         }
 
-        private void panelFormButton_Click(object sender, EventArgs e)
+        private Boolean formValid()
         {
-            MessageBox.Show("Funcionalidade em implementação...");
-            int nmec = int.Parse(panelFormFieldNMec.Text);
-            String nome = panelFormFieldNome.Text;
-            String nomeEE = panelFormFieldNomeEE.Text;
-            int tel = int.Parse(panelFormFieldContacto.Text);
-            int telEE = int.Parse(panelFormFieldContactoEE.Text);
-            String[] email = panelFormFieldEmail.Text.Split('@');
-            String[] emailEE = panelFormFieldEmailEE.Text.Split('@');
-            SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM GestaoEscola.EmailDominio WHERE dominio=@dominio;", cn); 
-            cmd.Parameters.AddWithValue("@dominio", email[1]); //evita sql injection
-            int emailCount = (int)cmd.ExecuteScalar();
-            int dominioEst = 0;
-            if (emailCount > 0) { //??????????????? DEVEMOS ADICIONAR QDO N TA OU APENAS NOTIFICAR Q N É VALIDO?
-                cmd = new SqlCommand("SELECT id FROM GestaoEscola.EmailDominio WHERE dominio='" + email[1] + "';", cn);
-                SqlDataReader reader = cmd.ExecuteReader();
-                reader.Close();
+            // Check if specific fields are valid
+            bool error = false;
+            StringBuilder sb = new StringBuilder();
+            if (!RegexExpressions.isInteger(panelFormFieldNMec.Text))
+            {
+                error = true;
+                sb.Append(" NMec");
             }
-            MessageBox.Show(dominioEst.ToString());
-            SqlCommand cmd1 = new SqlCommand("SELECT id FROM GestaoEscola.EmailDominio WHERE dominio='" + emailEE[1] + "';", cn);
-            SqlDataReader r1 = cmd1.ExecuteReader();
-                        /* if (panelFormFieldNMec.Enabled) // true -> adicionar
-             {
-                 SqlCommand cmd = new SqlCommand("INSERT INTO GestaoEscola.Pessoa values(@nmec,@nome ,@tel, @email[0], @dominioEst); " +
-                     "INSERT INTO GestaoEscola.Estudante values(@nmec, @nomeEE, @telEE, @emailEE[0], @dominioEE); ", cn);
-                 cmd.ExecuteNonQuery();
+            if (!RegexExpressions.isPhoneNumber(panelFormFieldContacto.Text))
+            {
+                error = true;
+                sb.Append(" Telemovel");
+            }
+            if (!RegexExpressions.isPhoneNumber(panelFormFieldContactoEE.Text))
+            {
+                error = true;
+                sb.Append(" Telemovel EE");
+            }
+            if (!RegexExpressions.isEmail(panelFormFieldEmail.Text))
+            {
+                error = true;
+                sb.Append(" Email");
+            }
+            if (!RegexExpressions.isEmail(panelFormFieldEmailEE.Text))
+            {
+                error = true;
+                sb.Append(" Email EE");
+            }
+            // Check others
+            if (panelFormFieldNome.Text == "" || panelFormFieldNome.Text.Length > 65)
+            {
+                error = true;
+                sb.Append(" Nome (max 65 caracteres)");
+            }
 
-             }
-             else
-             { //false-> editar
-                 SqlCommand cmd = new SqlCommand("UPDATE GestaoEscola.Pessoa SET ????????????????; " +
-                    "UPDATE GestaoEscola.Estudante SET ??????????? ", cn);
-                 cmd.ExecuteNonQuery();
-             }*/
+            if (panelFormFieldNomeEE.Text == "" || panelFormFieldNomeEE.Text.Length > 65)
+            {
+                error = true;
+                sb.Append(" Nome EE (max 65 caracteres)");
+            }
+
+            // Give user feedback
+            if (error)
+            {
+                MessageBox.Show(
+                   "Confirme que preencheu corretamente os seguintes campos:" + sb.ToString(),
+                   "Atenção!",
+                   MessageBoxButtons.YesNoCancel,
+                   MessageBoxIcon.Exclamation
+               );
+            }
+            return !error;
         }
 
-        private void getTurma()
+        private void panelFormButton_Click(object sender, EventArgs e)
         {
-            // Execute SQL query to get Docente rows
-            SqlCommand cmd = new SqlCommand("SELECT * FROM GestaoEscola.EstudanteTurma WHERE estudanteNMec=", cn);
-            //ACABAR
+            if (formValid())
+            {
+                // Edit 
+                if (listObjects.SelectedIndex >= 0)
+                {
+                    submitForm((Estudante)listObjects.SelectedObjects[0]);
+                }
+                // Add new  
+                else
+                {
+                    submitForm(null);
+                }
+            }
+        }
+
+        private void submitForm(Estudante e)
+        {
+            bool edit = (e != null);
+
+            // Get form data 
+            int nmec = Int32.Parse(panelFormFieldNMec.Text);
+            String nome = panelFormFieldNome.Text;
+            String nomeEE = panelFormFieldNomeEE.Text;
+            int tel = Int32.Parse(panelFormFieldContacto.Text);
+            int telEE = Int32.Parse(panelFormFieldContactoEE.Text);
+            String emailPrefixo = panelFormFieldEmail.Text.Split('@')[0];
+            String emailDominio = panelFormFieldEmail.Text.Split('@')[1];
+            String emailPrefixoEE = panelFormFieldEmailEE.Text.Split('@')[0];
+            String emailDominioEE = panelFormFieldEmailEE.Text.Split('@')[1];
+
+            // Create command 
+            String commandText = "GestaoEscola.EstudanteSP";
+            SqlCommand command = new SqlCommand(commandText, cn);
+            command.CommandType = CommandType.StoredProcedure;
+
+            // Add vars 
+            command.Parameters.Add("@NMec", SqlDbType.Int);
+            command.Parameters["@NMec"].Value = nmec;
+            command.Parameters.Add("@Nome", SqlDbType.VarChar);
+            command.Parameters["@Nome"].Value = nome;
+            command.Parameters.Add("@Telemovel", SqlDbType.Int);
+            command.Parameters["@Telemovel"].Value = tel;
+            command.Parameters.Add("@Email", SqlDbType.VarChar);
+            command.Parameters["@Email"].Value = emailPrefixo;
+            command.Parameters.Add("@EmailDominio", SqlDbType.VarChar);
+            command.Parameters["@EmailDominio"].Value = emailDominio;
+            command.Parameters.Add("@NomeEE", SqlDbType.VarChar);
+            command.Parameters["@NomeEE"].Value = nomeEE;
+            command.Parameters.Add("@TelemovelEE", SqlDbType.Int);
+            command.Parameters["@TelemovelEE"].Value = telEE;
+            command.Parameters.Add("@EmailEE", SqlDbType.VarChar);
+            command.Parameters["@EmailEE"].Value = emailPrefixoEE;
+            command.Parameters.Add("@EmailDominioEE", SqlDbType.VarChar);
+            command.Parameters["@EmailDominioEE"].Value = emailDominioEE;
+            command.Parameters.Add("@Edit", SqlDbType.Bit);
+            command.Parameters["@Edit"].Value = 0;
+
+            if (edit)
+                command.Parameters["@Edit"].Value = 1;
+            // Return value stuff
+            var returnParameter = command.Parameters.Add("@ReturnVal", SqlDbType.Int);
+            returnParameter.Direction = ParameterDirection.ReturnValue;
+            // Execute query 
+            int rowsAffected = 0;
+            int returnValue;
+            try
+            {
+                rowsAffected = command.ExecuteNonQuery();
+                returnValue = (int)returnParameter.Value;
+                Console.WriteLine(String.Format("rowsAffected {0}", rowsAffected));
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(
+                    "Ocorreu um erro, verifique que preencheu todos os dados corretamente e tente novamente!\r\n" + ex.ToString(),
+                    "Erro!",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+                return;
+            }
+            // If query is successful 
+            if (rowsAffected == 2 && returnValue == 1)
+            {
+                // If add operation, construct object (was null)
+                if (!edit)
+                    e = new Estudante();
+                e.nmec = nmec;
+                e.nome = nome;
+                e.email = emailPrefixo + "@" + emailDominio;
+                e.telemovel = tel;
+                e.nomeEE = nomeEE;
+                e.emailEE = emailPrefixoEE + "@" + emailDominioEE;
+                e.telemovelEE = telEE;
+                if (!edit)
+                    listObjects.AddObject(e);
+                // SHow feedback to user 
+                String successMessage = "O estudante foi adicionado com sucesso!";
+                if (edit)
+                    successMessage = "O estudante foi editado com sucesso";
+                MessageBox.Show(
+                    successMessage,
+                    "Sucesso!",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information
+                );
+                // Update objects displayed on interface 
+                listObjects.BuildList(true);
+                // Update stats
+                updateStats();
+                // Hide panels 
+                panelForm.Visible = false;
+                panelObject.Visible = false;
+            }
+            else
+            {
+                MessageBox.Show(
+                    "Ocorreu um erro, verifique que preencheu todos os dados corretamente e tente novamente!",
+                    "Erro!",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+            }
         }
 
         private void pesquisaTexto_TextChanged(object sender, EventArgs e)

@@ -57,6 +57,12 @@
     <Compile Include="BlocosTipos.Designer.cs">
       <DependentUpon>BlocosTipos.cs</DependentUpon>
     </Compile>
+    <Compile Include="EstudantesTurma.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EstudantesTurma.Designer.cs">
+      <DependentUpon>EstudantesTurma.cs</DependentUpon>
+    </Compile>
     <Compile Include="GruposDisciplinares.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -130,6 +136,9 @@
     <Compile Include="Turno.cs" />
     <EmbeddedResource Include="BlocosTipos.resx">
       <DependentUpon>BlocosTipos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EstudantesTurma.resx">
+      <DependentUpon>EstudantesTurma.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GruposDisciplinares.resx">
       <DependentUpon>GruposDisciplinares.cs</DependentUpon>
