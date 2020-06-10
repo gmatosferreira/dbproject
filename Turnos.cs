@@ -1,4 +1,4 @@
-﻿using System; 
+using System; 
 using System.Collections.Generic; 
 using System.ComponentModel; 
 using System.Data; 
@@ -90,7 +90,9 @@ namespace Funcionarios
             // Set title and description 
             panelFormTitulo.Text = "Adicionar um novo turno"; 
             panelFormDescricao.Text = "Preencha os dados e submita o formulário"; 
-            panelFormButton.Text = "Criar turno"; 
+            panelFormButton.Text = "Criar turno";
+            // Deselect pre selected row
+            listObjects.DeselectAll();
             // Make form panel visible 
             if (!panelForm.Visible) 
                 panelForm.Visible = true; 

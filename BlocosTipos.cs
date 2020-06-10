@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -88,6 +88,8 @@ namespace Funcionarios
             panelFormTitulo.Text = "Adicionar um novo tipo de bloco";
             panelFormDescricao.Text = "Preencha os dados e submita o formulário";
             panelFormButton.Text = "Criar tipo";
+            // Deselect pre selected row
+            listObjects.DeselectAll();
             // Make panel visible
             if (!panelForm.Visible)
                 panelForm.Visible = true;

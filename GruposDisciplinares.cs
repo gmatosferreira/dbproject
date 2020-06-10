@@ -87,6 +87,8 @@ namespace Funcionarios
             panelFormTitulo.Text = "Adicionar um novo grupo disciplinar";
             panelFormDescricao.Text = "Preencha os dados e submita o formulário";
             panelFormButton.Text = "Criar grupo";
+            // Deselect pre selected row
+            listObjects.DeselectAll();
             // Make panel visible
             if (!panelForm.Visible)
                 panelForm.Visible = true;

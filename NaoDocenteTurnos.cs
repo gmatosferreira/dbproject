@@ -123,6 +123,7 @@ namespace Funcionarios
             // Show panel
             if (!panelObject.Visible)
                 panelObject.Visible = true;
+            panelForm.Visible = false;
 
         }
 
@@ -157,9 +158,12 @@ namespace Funcionarios
             panelFormTitulo.Text = "Adicionar uma nova função";
             panelFormDescricao.Text = "Preencha os dados e submita o formulário";
             panelFormButton.Text = "Criar função";
+            // Deselect pre selected row
+            listObjects.DeselectAll();
             // Make panel visible
             if (!panelForm.Visible)
                 panelForm.Visible = true;
+            panelObject.Visible = false;
         }
 
         private void deleteObject()

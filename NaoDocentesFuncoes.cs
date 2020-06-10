@@ -88,6 +88,8 @@ namespace Funcionarios
             panelFormTitulo.Text = "Adicionar uma nova função";
             panelFormDescricao.Text = "Preencha os dados e submita o formulário";
             panelFormButton.Text = "Criar função";
+            // Deselect pre selected row
+            listObjects.DeselectAll();
             // Make panel visible
             if (!panelForm.Visible)
                 panelForm.Visible = true;
