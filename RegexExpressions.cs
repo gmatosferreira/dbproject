@@ -15,6 +15,9 @@ namespace Funcionarios
         private static Regex rgDouble = new Regex(@"^[0-9]+(.[0-9]+)?");
         private static Regex rgEmail = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
         private static Regex rgCoordinates = new Regex(@"^([-+]?)([\d]{1,2})(((\.)(\d+)(,)))(\s*)(([-+]?)([\d]{1,3})((\.)(\d+))?)$");
+        private static Regex rgISBN = new Regex(@"^(?=(?:\D*\d){10}(?:(?:\D*\d){3})?$)[\d-]+$");
+
+        
 
         public static bool isInteger(String s)
         {
@@ -48,6 +51,11 @@ namespace Funcionarios
         public static bool isCoordinates(String s)
         {
             return validate(rgCoordinates, s);
+        }
+
+        public static bool isISBN(String s)
+        {
+            return validate(rgISBN, s);
         }
 
         private static bool validate(Regex r, String s)

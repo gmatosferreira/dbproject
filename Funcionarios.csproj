@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Biblioteca.cs" />
     <Compile Include="BlocoTipo.cs" />
     <Compile Include="Bloco.cs" />
     <Compile Include="BlocosTipos.cs">
@@ -57,12 +58,20 @@
     <Compile Include="BlocosTipos.Designer.cs">
       <DependentUpon>BlocosTipos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Bibliotecas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Bibliotecas.Designer.cs">
+      <DependentUpon>Bibliotecas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LivroEstado.cs" />
     <Compile Include="GruposDisciplinares.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="GruposDisciplinares.Designer.cs">
       <DependentUpon>GruposDisciplinares.cs</DependentUpon>
     </Compile>
+    <Compile Include="Livro.cs" />
     <Compile Include="NaoDocentesFuncoes.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -130,6 +139,10 @@
     <Compile Include="Turno.cs" />
     <EmbeddedResource Include="BlocosTipos.resx">
       <DependentUpon>BlocosTipos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bibliotecas.resx">
+      <DependentUpon>Bibliotecas.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="GruposDisciplinares.resx">
       <DependentUpon>GruposDisciplinares.cs</DependentUpon>
