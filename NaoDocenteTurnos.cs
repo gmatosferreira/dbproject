@@ -77,6 +77,16 @@ namespace Funcionarios
             return null;
         }
 
+        private Bloco getBlocoByNome(String nome)
+        {
+            foreach (Bloco b in blocos)
+            {
+                if (nome.Equals(b.nome, StringComparison.InvariantCultureIgnoreCase))
+                    return b;
+            }
+            return null;
+        }
+
         private void loadFuncoes()
         {
             // Execute SQL query to get Docente rows
@@ -100,6 +110,16 @@ namespace Funcionarios
             foreach (NDFuncao f in funcoes)
             {
                 if (codigo==f.codigo)
+                    return f;
+            }
+            return null;
+        }
+
+        private NDFuncao getFuncao(String nome)
+        {
+            foreach (NDFuncao f in funcoes)
+            {
+                if (nome.Equals(f.nome, StringComparison.InvariantCultureIgnoreCase))
                     return f;
             }
             return null;
@@ -142,6 +162,9 @@ namespace Funcionarios
             panelFormTitulo.Text = "Editar função";
             panelFormDescricao.Text = "Altere os dados e submita o formulário";
             panelFormButton.Text = "Submeter";
+            // Block time fields (primary key, not changable)
+            panelFormFieldHoraInicio.Enabled = false;
+            panelFormFieldHoraFim.Enabled = false;
             // Make panel visible
             if (!panelForm.Visible)
                 panelForm.Visible = true;
@@ -158,6 +181,9 @@ namespace Funcionarios
             panelFormTitulo.Text = "Adicionar uma nova função";
             panelFormDescricao.Text = "Preencha os dados e submita o formulário";
             panelFormButton.Text = "Criar função";
+            // Enable time fields (primary key, not changable)
+            panelFormFieldHoraInicio.Enabled = true;
+            panelFormFieldHoraFim.Enabled = true;
             // Deselect pre selected row
             listObjects.DeselectAll();
             // Make panel visible
@@ -172,16 +198,208 @@ namespace Funcionarios
             if (listObjects.Items.Count == 0 | current < 0)
                 return;
             NDTrabalhaBloco f = (NDTrabalhaBloco)listObjects.SelectedObjects[0];
+            int itemIndex = listObjects.SelectedIndex;
             // Confirm delete
             DialogResult msgb = MessageBox.Show("Tem a certeza que quer eliminar esta função?", "Esta operação é irreversível!", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
             if (msgb == DialogResult.No)
                 return;
-            MessageBox.Show("Funcionalidade em implementação..."); 
-            //TODO
-            // Hide panels
-            panelForm.Visible = false;
-            panelObject.Visible = false;
+            // Create command 
+            String commandText = "DELETE FROM GestaoEscola.ND_trabalha_Bloco WHERE NMec = @NMec AND horaInicio = @HoraInicio";
+            SqlCommand command = new SqlCommand(commandText, cn);
+            // Add vars 
+            command.Parameters.Add("@NMec", SqlDbType.Int);
+            command.Parameters["@NMec"].Value = nd.nmec;
+            command.Parameters.Add("@HoraInicio", SqlDbType.Time);
+            command.Parameters["@HoraInicio"].Value = nd.turno.horaInicio;
+            // Execute query  
+            int rowsAffected = 0;  
+            try  
+            {  
+                rowsAffected = command.ExecuteNonQuery();  
+                Console.WriteLine(String.Format("rowsAffected {0}", rowsAffected)); 
+            } 
+            catch (SqlException ex)  
+            {  
+                MessageBox.Show(  
+                    "Ocorreu um erro, tente novamente!\r\n" + ex.ToString(),  
+                    "Erro!",  
+                    MessageBoxButtons.OK,  
+                    MessageBoxIcon.Error  
+                );  
+                return;  
+            }  
+            // If successful query  
+            if (rowsAffected==1)  
+            {  
+                // Remove object from interface list  
+                listObjects.Items.RemoveAt(itemIndex);  
+                // Show user feedback  
+                MessageBox.Show(  
+                    "O tuplo foi eliminado com sucesso da base de dados!",  
+                    "Sucesso!",  
+                    MessageBoxButtons.OK,  
+                    MessageBoxIcon.Information  
+                ); 
+                // Update stats 
+                updateStats(); 
+                // Hide panels  
+                panelForm.Visible = false; 
+                panelObject.Visible = false; 
+            } 
+            else  
+            {  
+                MessageBox.Show(  
+                    "Ocorreu um erro, tente novamente!",  
+                    "Erro!",  
+                    MessageBoxButtons.OK,  
+                    MessageBoxIcon.Error  
+                );  
+            }   
         }
+
+        private Boolean formValid()
+        {            
+            // Validate if function ship is inside Nao Docente main ship
+            Turno novoTurno = new Turno();
+            novoTurno.horaInicio = TimeSpan.Parse(panelFormFieldHoraInicio.Text);
+            novoTurno.horaFim = TimeSpan.Parse(panelFormFieldHoraFim.Text);
+            if (!Turno.isInside(novoTurno, nd.turno))
+            {
+                MessageBox.Show(
+                    "O horário da função deve estar dentro do turno do funcionário!",
+                    "Erro!",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+                return false;
+            }
+            // Other time validations 
+            if (novoTurno.horaInicio.CompareTo(novoTurno.horaFim) == 0)
+            {
+                MessageBox.Show(
+                    "As horas de início de fim não podem ser iguais!",
+                    "Erro!",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+                return false;
+            }
+            DialogResult userfeedback = DialogResult.Yes;
+            if (novoTurno.horaInicio.CompareTo(novoTurno.horaFim) > 0)
+            {
+                userfeedback = MessageBox.Show(
+                    "O horário de início é maior ou igual ao de fim! Tem a certeza que pretende continuar?",
+                    "Atenção!",
+                    MessageBoxButtons.YesNoCancel,
+                    MessageBoxIcon.Exclamation
+                );
+                if (userfeedback != DialogResult.Yes)
+                    return false;
+            }
+            return true;
+        }
+
+        private void submitForm(NDTrabalhaBloco ndtb)
+        {
+            /* 
+             If submition for edit t!=null 
+             If new submition t==null 
+             */
+            bool edit = (ndtb != null);
+            // Get form data 
+            TimeSpan horaInicio = TimeSpan.Parse(panelFormFieldHoraInicio.Text);
+            TimeSpan horaFim = TimeSpan.Parse(panelFormFieldHoraFim.Text);
+            Bloco bloco = getBlocoByNome(panelFormFieldBloco.Text);
+            NDFuncao funcao = getFuncao(panelFormFieldFuncao.Text);
+            // Create command 
+            String commandText = "INSERT INTO GestaoEscola.ND_trabalha_Bloco VALUES (@BCoordenadas, @NMec, @CodFuncao, @HoraInicio, @HoraFim)";
+            if (edit)
+                commandText = "UPDATE GestaoEscola.ND_trabalha_Bloco SET Bcoordenadas = @BCoordenadas, codFuncao = @CodFuncao WHERE NMec = @NMec AND horaInicio = @HoraInicio";
+            SqlCommand command = new SqlCommand(commandText, cn);
+            // Add vars 
+            command.Parameters.Add("@BCoordenadas", SqlDbType.VarChar);
+            command.Parameters["@BCoordenadas"].Value = bloco.coordenadas.Trim();
+            MessageBox.Show(bloco.coordenadas.Trim());
+            command.Parameters.Add("@NMec", SqlDbType.Int);
+            command.Parameters["@NMec"].Value = nd.nmec;
+            command.Parameters.Add("@CodFuncao", SqlDbType.Int);
+            command.Parameters["@CodFuncao"].Value = funcao.codigo;
+            command.Parameters.Add("@HoraInicio", SqlDbType.Time);
+            command.Parameters["@HoraInicio"].Value = horaInicio;
+            if (!edit)
+            {
+                command.Parameters.Add("@HoraFim", SqlDbType.Time);
+                command.Parameters["@HoraFim"].Value = horaFim;
+            }
+            // Execute query 
+            int rowsAffected = 0;
+            try
+            {
+                rowsAffected = command.ExecuteNonQuery();
+                Console.WriteLine(String.Format("rowsAffected {0}", rowsAffected));
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(
+                    "Ocorreu um erro, verifique que preencheu todos os dados corretamente e tente novamente!\r\n" + ex.ToString(),
+                    "Erro!",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+                return;
+            }
+            // If query is successful 
+            if (rowsAffected == 1)
+            {
+                // If add operation 
+                if (!edit)
+                {
+                    // Add tuple to interface list 
+                    ndtb = new NDTrabalhaBloco();
+                    ndtb.bloco = bloco;
+                    ndtb.nd = nd;
+                    ndtb.funcao = funcao;
+                    ndtb.turno = new Turno();
+                    ndtb.turno.horaInicio = horaInicio;
+                    ndtb.turno.horaFim = horaFim;
+                    listObjects.AddObject(ndtb);
+                }
+                else
+                {
+                    // Get object on interface list and change attributes 
+                    ndtb.funcao = funcao;
+                    ndtb.turno.horaInicio = horaInicio;
+                    ndtb.turno.horaFim = horaFim;
+                }
+                // SHow feedback to user 
+                String successMessage = "A função foi adicionada com sucesso ao funcionário!";
+                if (edit)
+                    successMessage = "A função foi editada com sucesso no funcionário";
+                MessageBox.Show(
+                    successMessage,
+                    "Sucesso!",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information
+                );
+                // Update objects displayed on interface 
+                listObjects.BuildList(true);
+                // Update stats
+                updateStats();
+                // Hide panels 
+                panelForm.Visible = false;
+                panelObject.Visible = false;
+            }
+            else
+            {
+                MessageBox.Show(
+                    "Ocorreu um erro, verifique que preencheu todos os dados corretamente e tente novamente!",
+                    "Erro!",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+            }
+        }
+
 
         // Event handlers
         private void FormClosed_Handler(object sender, FormClosedEventArgs e)
@@ -266,19 +484,20 @@ namespace Funcionarios
 
         private void panelFormButton_Click(object sender, EventArgs e)
         {
-            // Validate if function ship is inside Nao Docente main ship
-            Turno novoTurno = new Turno();
-            novoTurno.horaInicio = TimeSpan.Parse(panelFormFieldHoraInicio.Text);
-            novoTurno.horaFim = TimeSpan.Parse(panelFormFieldHoraFim.Text);
-            if (!Turno.isInside(novoTurno, nd.turno))
-                MessageBox.Show(
-                    "O horário da função deve estar dentro do turno do funcionário!",
-                    "Erro!",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error
-                );
-            //TODO (Distinguish new and edit operation)
-            MessageBox.Show("Funcionalidade em implementação...");
+            // Execute operation 
+            if (formValid())
+            {
+                // Edit 
+                if (listObjects.SelectedIndex >= 0)
+                {
+                    submitForm((NDTrabalhaBloco)listObjects.SelectedObjects[0]);
+                }
+                // Add new  
+                else
+                {
+                    submitForm(null);
+                }
+            }
         }
 
         private void funcionariosListView_SelectedIndexChanged(object sender, EventArgs e)
