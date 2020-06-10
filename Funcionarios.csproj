@@ -70,6 +70,12 @@
       <DependentUpon>NaoDocentesFuncoes.cs</DependentUpon>
     </Compile>
     <Compile Include="RegexExpressions.cs" />
+    <Compile Include="Blocos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Blocos.Designer.cs">
+      <DependentUpon>Blocos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Turnos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -130,6 +136,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NaoDocentesFuncoes.resx">
       <DependentUpon>NaoDocentesFuncoes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Blocos.resx">
+      <DependentUpon>Blocos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Turnos.resx">
       <DependentUpon>Turnos.cs</DependentUpon>

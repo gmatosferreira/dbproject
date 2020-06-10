@@ -55,5 +55,14 @@ namespace Funcionarios
             this.email = f.email;
         }
 
+        public String ToString()
+        {
+            StringBuilder sb = new StringBuilder(_nome);
+            sb.Append(" (");
+            sb.Append(_nmec);
+            sb.Append(")");
+            return sb.ToString();
+
+        }
     }
 }

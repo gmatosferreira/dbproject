@@ -698,6 +698,7 @@
             this.menuBlocosPanel.Name = "menuBlocosPanel";
             this.menuBlocosPanel.Size = new System.Drawing.Size(101, 106);
             this.menuBlocosPanel.TabIndex = 6;
+            this.menuBlocosPanel.Click += new System.EventHandler(this.menuBlocosPanel_Click);
             // 
             // label14
             // 

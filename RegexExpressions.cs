@@ -14,6 +14,7 @@ namespace Funcionarios
         private static Regex rgInt = new Regex(@"^[0-9]+");
         private static Regex rgDouble = new Regex(@"^[0-9]+(.[0-9]+)?");
         private static Regex rgEmail = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+        private static Regex rgCoordinates = new Regex(@"^([-+]?)([\d]{1,2})(((\.)(\d+)(,)))(\s*)(([-+]?)([\d]{1,3})((\.)(\d+))?)$");
 
         public static bool isInteger(String s)
         {
@@ -42,6 +43,11 @@ namespace Funcionarios
             if (s.Trim().Length != 9)
                 return false;
             return validate(rgInt, s);
+        }
+
+        public static bool isCoordinates(String s)
+        {
+            return validate(rgCoordinates, s);
         }
 
         private static bool validate(Regex r, String s)

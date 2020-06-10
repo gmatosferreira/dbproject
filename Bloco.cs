@@ -11,7 +11,7 @@ namespace Funcionarios
         private int _codigo;
         private String _nome, _coordenadas;
         private BlocoTipo _tipo;
-        private NaoDocente _supervisor; // Not implemented yet
+        private NaoDocente _supervisor;
 
         public Bloco() { }
 
@@ -37,6 +37,12 @@ namespace Funcionarios
         {
             get { return this._tipo; }
             set { this._tipo = value; }
+        }
+
+        public NaoDocente supervisor
+        {
+            get { return this._supervisor; }
+            set { this._supervisor = value; }
         }
 
         public String str

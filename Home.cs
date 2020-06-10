@@ -198,5 +198,12 @@ namespace Funcionarios
             GruposDisciplinares f = new GruposDisciplinares(cn, this);
             f.ShowDialog();
         }
+
+        private void menuBlocosPanel_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Blocos f = new Blocos(cn, this);
+            f.ShowDialog();
+        }
     }
 }
