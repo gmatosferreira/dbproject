@@ -37,6 +37,9 @@
             this.panelObjectEliminar = new System.Windows.Forms.Button();
             this.buttonAdicionarObject = new System.Windows.Forms.Button();
             this.panelFormButton = new System.Windows.Forms.Button();
+            this.ajudaBtn = new System.Windows.Forms.PictureBox();
+            this.panelFormHide = new System.Windows.Forms.PictureBox();
+            this.panelObjectHide = new System.Windows.Forms.PictureBox();
             this.listObjects = new BrightIdeasSoftware.ObjectListView();
             this.horaInicio = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.horaFim = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -50,16 +53,13 @@
             this.label2 = new System.Windows.Forms.Label();
             this.panelFormTitulo = new System.Windows.Forms.Label();
             this.panelFormDescricao = new System.Windows.Forms.Label();
-            this.ajudaBtn = new System.Windows.Forms.PictureBox();
-            this.panelFormHide = new System.Windows.Forms.PictureBox();
-            this.panelObjectHide = new System.Windows.Forms.PictureBox();
             this.janelaLogo = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.listObjects)).BeginInit();
-            this.panelObject.SuspendLayout();
-            this.panelForm.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ajudaBtn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelFormHide)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelObjectHide)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.listObjects)).BeginInit();
+            this.panelObject.SuspendLayout();
+            this.panelForm.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.janelaLogo)).BeginInit();
             this.SuspendLayout();
             // 
@@ -125,6 +125,50 @@
             this.Ajuda.SetToolTip(this.panelFormButton, "0");
             this.panelFormButton.UseVisualStyleBackColor = true;
             this.panelFormButton.Click += new System.EventHandler(this.panelFormButton_Click);
+            // 
+            // ajudaBtn
+            // 
+            this.ajudaBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.ajudaBtn.Cursor = System.Windows.Forms.Cursors.Help;
+            this.ajudaBtn.Image = global::Funcionarios.Properties.Resources.Ajuda;
+            this.ajudaBtn.InitialImage = null;
+            this.ajudaBtn.Location = new System.Drawing.Point(459, 23);
+            this.ajudaBtn.Name = "ajudaBtn";
+            this.ajudaBtn.Size = new System.Drawing.Size(38, 47);
+            this.ajudaBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.ajudaBtn.TabIndex = 16;
+            this.ajudaBtn.TabStop = false;
+            this.Ajuda.SetToolTip(this.ajudaBtn, resources.GetString("ajudaBtn.ToolTip"));
+            // 
+            // panelFormHide
+            // 
+            this.panelFormHide.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.panelFormHide.Cursor = System.Windows.Forms.Cursors.Default;
+            this.panelFormHide.Image = global::Funcionarios.Properties.Resources.Esconder;
+            this.panelFormHide.InitialImage = null;
+            this.panelFormHide.Location = new System.Drawing.Point(438, 14);
+            this.panelFormHide.Name = "panelFormHide";
+            this.panelFormHide.Size = new System.Drawing.Size(14, 18);
+            this.panelFormHide.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.panelFormHide.TabIndex = 24;
+            this.panelFormHide.TabStop = false;
+            this.Ajuda.SetToolTip(this.panelFormHide, "Esconder");
+            this.panelFormHide.Click += new System.EventHandler(this.panelFormHide_Click);
+            // 
+            // panelObjectHide
+            // 
+            this.panelObjectHide.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.panelObjectHide.Cursor = System.Windows.Forms.Cursors.Default;
+            this.panelObjectHide.Image = global::Funcionarios.Properties.Resources.Esconder;
+            this.panelObjectHide.InitialImage = null;
+            this.panelObjectHide.Location = new System.Drawing.Point(131, 16);
+            this.panelObjectHide.Name = "panelObjectHide";
+            this.panelObjectHide.Size = new System.Drawing.Size(14, 18);
+            this.panelObjectHide.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.panelObjectHide.TabIndex = 23;
+            this.panelObjectHide.TabStop = false;
+            this.Ajuda.SetToolTip(this.panelObjectHide, "Esconder");
+            this.panelObjectHide.Click += new System.EventHandler(this.panelObjectEsconder_Click);
             // 
             // listObjects
             // 
@@ -267,50 +311,6 @@
             this.panelFormDescricao.Text = "XXXXX";
             this.panelFormDescricao.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // ajudaBtn
-            // 
-            this.ajudaBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ajudaBtn.Cursor = System.Windows.Forms.Cursors.Help;
-            this.ajudaBtn.Image = global::Funcionarios.Properties.Resources.Ajuda;
-            this.ajudaBtn.InitialImage = null;
-            this.ajudaBtn.Location = new System.Drawing.Point(459, 23);
-            this.ajudaBtn.Name = "ajudaBtn";
-            this.ajudaBtn.Size = new System.Drawing.Size(38, 47);
-            this.ajudaBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.ajudaBtn.TabIndex = 16;
-            this.ajudaBtn.TabStop = false;
-            this.Ajuda.SetToolTip(this.ajudaBtn, resources.GetString("ajudaBtn.ToolTip"));
-            // 
-            // panelFormHide
-            // 
-            this.panelFormHide.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.panelFormHide.Cursor = System.Windows.Forms.Cursors.Default;
-            this.panelFormHide.Image = global::Funcionarios.Properties.Resources.Esconder;
-            this.panelFormHide.InitialImage = null;
-            this.panelFormHide.Location = new System.Drawing.Point(438, 14);
-            this.panelFormHide.Name = "panelFormHide";
-            this.panelFormHide.Size = new System.Drawing.Size(14, 18);
-            this.panelFormHide.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.panelFormHide.TabIndex = 24;
-            this.panelFormHide.TabStop = false;
-            this.Ajuda.SetToolTip(this.panelFormHide, "Esconder");
-            this.panelFormHide.Click += new System.EventHandler(this.panelFormHide_Click);
-            // 
-            // panelObjectHide
-            // 
-            this.panelObjectHide.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.panelObjectHide.Cursor = System.Windows.Forms.Cursors.Default;
-            this.panelObjectHide.Image = global::Funcionarios.Properties.Resources.Esconder;
-            this.panelObjectHide.InitialImage = null;
-            this.panelObjectHide.Location = new System.Drawing.Point(131, 16);
-            this.panelObjectHide.Name = "panelObjectHide";
-            this.panelObjectHide.Size = new System.Drawing.Size(14, 18);
-            this.panelObjectHide.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.panelObjectHide.TabIndex = 23;
-            this.panelObjectHide.TabStop = false;
-            this.Ajuda.SetToolTip(this.panelObjectHide, "Esconder");
-            this.panelObjectHide.Click += new System.EventHandler(this.panelObjectEsconder_Click);
-            // 
             // janelaLogo
             // 
             this.janelaLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
@@ -341,14 +341,14 @@
             this.Text = "Sistema de Gestão Escolar | Turnos";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormClosed_Handler);
             this.Load += new System.EventHandler(this.FormLoad_Handler);
+            ((System.ComponentModel.ISupportInitialize)(this.ajudaBtn)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelFormHide)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelObjectHide)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.listObjects)).EndInit();
             this.panelObject.ResumeLayout(false);
             this.panelObject.PerformLayout();
             this.panelForm.ResumeLayout(false);
             this.panelForm.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ajudaBtn)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.panelFormHide)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.panelObjectHide)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.janelaLogo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -255,5 +255,14 @@
   <ItemGroup>
     <None Include="Resources\grupoDisciplinar.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Livro2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Requisicao.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TiposBloco.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

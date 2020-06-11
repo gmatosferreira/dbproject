@@ -645,7 +645,7 @@
             // pictureBox11
             // 
             this.pictureBox11.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pictureBox11.Image = global::Funcionarios.Properties.Resources.bloco;
+            this.pictureBox11.Image = global::Funcionarios.Properties.Resources.TiposBloco;
             this.pictureBox11.InitialImage = null;
             this.pictureBox11.Location = new System.Drawing.Point(28, 15);
             this.pictureBox11.Name = "pictureBox11";

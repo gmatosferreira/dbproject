@@ -207,6 +207,7 @@ namespace Funcionarios
             janelaSubtitulo.Text = b.nome;
             panelFormRequisicaoLegendaEntrega.Text = "A entrega desta biblioteca é de hoje a " + b.diasEntregaLivros.ToString() + " dias";
             panelFormRequisicaoLegendaEntrega.Visible = true;
+            panelObjectRequisicaoLegenda.Visible = true;
 
             // Get Catálogo
             SqlCommand cmd = new SqlCommand("SELECT * FROM vw_LivrosComEstadoCompletos WHERE biblioteca = @Biblioteca", cn);
@@ -1015,6 +1016,7 @@ namespace Funcionarios
 
                 janelaSubtitulo.Text = "Selecione a biblioteca";
                 panelFormRequisicaoLegendaEntrega.Visible = false;
+                panelObjectRequisicaoLegenda.Visible = false;
 
                 // Show user feedback 
                 MessageBox.Show(

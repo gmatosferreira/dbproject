@@ -130,6 +130,9 @@
   <data name="Funcionários" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Funcionários.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Estudantes2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Estudantes.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Estudante" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Estudante.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -148,11 +151,17 @@
   <data name="Turmas" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Turmas.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Livro2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Livro2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Esconder" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Esconder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Biblioteca" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Biblioteca.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Requisicao" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Requisicao.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Nao Docente" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Nao Docente.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -166,7 +175,7 @@
   <data name="Funcao" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Funcao.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Estudantes2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Estudantes.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="TiposBloco" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TiposBloco.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

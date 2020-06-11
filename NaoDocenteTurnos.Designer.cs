@@ -39,6 +39,7 @@
             this.panelObjectHide = new System.Windows.Forms.PictureBox();
             this.panelFormButton = new System.Windows.Forms.Button();
             this.panelFormHide = new System.Windows.Forms.PictureBox();
+            this.ajudaBtn = new System.Windows.Forms.PictureBox();
             this.listObjects = new BrightIdeasSoftware.ObjectListView();
             this.turno = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.bloco = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -48,6 +49,7 @@
             this.panelObjectTitulo = new System.Windows.Forms.Label();
             this.janelaLogo = new System.Windows.Forms.PictureBox();
             this.panelForm = new System.Windows.Forms.Panel();
+            this.panelFormFieldHoraFim = new System.Windows.Forms.DateTimePicker();
             this.panelFormFieldHoraInicio = new System.Windows.Forms.DateTimePicker();
             this.panelFormFieldFuncao = new System.Windows.Forms.ComboBox();
             this.panelFormFieldBloco = new System.Windows.Forms.ComboBox();
@@ -57,15 +59,13 @@
             this.panelFormTitulo = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.panelFormDescricao = new System.Windows.Forms.Label();
-            this.ajudaBtn = new System.Windows.Forms.PictureBox();
-            this.panelFormFieldHoraFim = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.panelObjectHide)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelFormHide)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ajudaBtn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.listObjects)).BeginInit();
             this.panelObject.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.janelaLogo)).BeginInit();
             this.panelForm.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ajudaBtn)).BeginInit();
             this.SuspendLayout();
             // 
             // janelaSubtitulo
@@ -160,6 +160,20 @@
             this.panelFormHide.TabStop = false;
             this.Ajuda.SetToolTip(this.panelFormHide, "Esconder");
             this.panelFormHide.Click += new System.EventHandler(this.panelFormHide_Click);
+            // 
+            // ajudaBtn
+            // 
+            this.ajudaBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.ajudaBtn.Cursor = System.Windows.Forms.Cursors.Help;
+            this.ajudaBtn.Image = global::Funcionarios.Properties.Resources.Ajuda;
+            this.ajudaBtn.InitialImage = null;
+            this.ajudaBtn.Location = new System.Drawing.Point(573, 440);
+            this.ajudaBtn.Name = "ajudaBtn";
+            this.ajudaBtn.Size = new System.Drawing.Size(38, 47);
+            this.ajudaBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.ajudaBtn.TabIndex = 16;
+            this.ajudaBtn.TabStop = false;
+            this.Ajuda.SetToolTip(this.ajudaBtn, resources.GetString("ajudaBtn.ToolTip"));
             // 
             // listObjects
             // 
@@ -267,6 +281,15 @@
             this.panelForm.TabIndex = 24;
             this.panelForm.Visible = false;
             // 
+            // panelFormFieldHoraFim
+            // 
+            this.panelFormFieldHoraFim.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.panelFormFieldHoraFim.Location = new System.Drawing.Point(229, 134);
+            this.panelFormFieldHoraFim.Name = "panelFormFieldHoraFim";
+            this.panelFormFieldHoraFim.ShowUpDown = true;
+            this.panelFormFieldHoraFim.Size = new System.Drawing.Size(139, 20);
+            this.panelFormFieldHoraFim.TabIndex = 40;
+            // 
             // panelFormFieldHoraInicio
             // 
             this.panelFormFieldHoraInicio.Format = System.Windows.Forms.DateTimePickerFormat.Time;
@@ -356,29 +379,6 @@
             this.panelFormDescricao.Text = "XXXXX";
             this.panelFormDescricao.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // ajudaBtn
-            // 
-            this.ajudaBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ajudaBtn.Cursor = System.Windows.Forms.Cursors.Help;
-            this.ajudaBtn.Image = global::Funcionarios.Properties.Resources.Ajuda;
-            this.ajudaBtn.InitialImage = null;
-            this.ajudaBtn.Location = new System.Drawing.Point(573, 440);
-            this.ajudaBtn.Name = "ajudaBtn";
-            this.ajudaBtn.Size = new System.Drawing.Size(38, 47);
-            this.ajudaBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.ajudaBtn.TabIndex = 16;
-            this.ajudaBtn.TabStop = false;
-            this.Ajuda.SetToolTip(this.ajudaBtn, resources.GetString("ajudaBtn.ToolTip"));
-            // 
-            // panelFormFieldHoraFim
-            // 
-            this.panelFormFieldHoraFim.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.panelFormFieldHoraFim.Location = new System.Drawing.Point(229, 134);
-            this.panelFormFieldHoraFim.Name = "panelFormFieldHoraFim";
-            this.panelFormFieldHoraFim.ShowUpDown = true;
-            this.panelFormFieldHoraFim.Size = new System.Drawing.Size(139, 20);
-            this.panelFormFieldHoraFim.TabIndex = 40;
-            // 
             // NaoDocenteTurnos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -399,13 +399,13 @@
             this.Load += new System.EventHandler(this.FormLoad_Handler);
             ((System.ComponentModel.ISupportInitialize)(this.panelObjectHide)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelFormHide)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ajudaBtn)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.listObjects)).EndInit();
             this.panelObject.ResumeLayout(false);
             this.panelObject.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.janelaLogo)).EndInit();
             this.panelForm.ResumeLayout(false);
             this.panelForm.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ajudaBtn)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

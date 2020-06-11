@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Bibliotecas));
             this.janelaSubtitulo = new System.Windows.Forms.Label();
             this.janelaTitulo = new System.Windows.Forms.Label();
             this.Ajuda = new System.Windows.Forms.ToolTip(this.components);
@@ -36,14 +37,18 @@
             this.panelObjectCatalogoEliminar = new System.Windows.Forms.Button();
             this.buttonAdicionarObjectCatalogo = new System.Windows.Forms.Button();
             this.panelFormCatalogoBotaoSubmeter = new System.Windows.Forms.Button();
-            this.panelFormCatalogoHide = new System.Windows.Forms.PictureBox();
-            this.panelObjectCatalogoHide = new System.Windows.Forms.PictureBox();
             this.buttonAdicionarObjectRequisicoes = new System.Windows.Forms.Button();
-            this.panelFormRequisicaoEsconder = new System.Windows.Forms.PictureBox();
             this.panelFormRequisicaoSubmeter = new System.Windows.Forms.Button();
-            this.panelObjectRequisicaoEsconder = new System.Windows.Forms.PictureBox();
             this.panelObjectRequisicaoEliminar = new System.Windows.Forms.Button();
             this.panelObjectRequisicaoEntregar = new System.Windows.Forms.Button();
+            this.bibliotecaAdicionar = new System.Windows.Forms.Button();
+            this.bibliotecaEditar = new System.Windows.Forms.Button();
+            this.bibliotecaEliminar = new System.Windows.Forms.Button();
+            this.bibliotecaFormSubmeter = new System.Windows.Forms.Button();
+            this.panelFormRequisicaoEsconder = new System.Windows.Forms.PictureBox();
+            this.panelObjectRequisicaoEsconder = new System.Windows.Forms.PictureBox();
+            this.panelFormCatalogoHide = new System.Windows.Forms.PictureBox();
+            this.panelObjectCatalogoHide = new System.Windows.Forms.PictureBox();
             this.listCatalogo = new BrightIdeasSoftware.ObjectListView();
             this.catalogoIDInterno = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.catalogoISBN = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -74,7 +79,6 @@
             this.pesquisaCatalogoSelect = new System.Windows.Forms.ComboBox();
             this.escolhaBiblioteca = new System.Windows.Forms.ComboBox();
             this.catalogoTitle = new System.Windows.Forms.Label();
-            this.janelaLogo = new System.Windows.Forms.PictureBox();
             this.listRequisicoes = new BrightIdeasSoftware.ObjectListView();
             this.requisicaoLivro = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.requisicaoPessoa = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -85,6 +89,7 @@
             this.pesquisaRequisicoesLabel = new System.Windows.Forms.Label();
             this.pesquisaRequisicoesText = new System.Windows.Forms.TextBox();
             this.panelFormRequisicao = new System.Windows.Forms.Panel();
+            this.label5 = new System.Windows.Forms.Label();
             this.panelFormRequisicaoFieldPessoa = new System.Windows.Forms.ComboBox();
             this.panelFormRequisicaoFieldLivro = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -95,14 +100,9 @@
             this.panelObjectRequisicaoSubtitulo = new System.Windows.Forms.Label();
             this.panelObjectRequisicaoTitulo = new System.Windows.Forms.Label();
             this.panelObjectRequisicaoImage = new System.Windows.Forms.PictureBox();
-            this.label5 = new System.Windows.Forms.Label();
             this.panelFormRequisicaoLegendaEntrega = new System.Windows.Forms.Label();
-            this.bibliotecaAdicionar = new System.Windows.Forms.Button();
-            this.bibliotecaEditar = new System.Windows.Forms.Button();
-            this.bibliotecaEliminar = new System.Windows.Forms.Button();
             this.bibliotecaFormHorarioEncerramento = new System.Windows.Forms.DateTimePicker();
             this.bibliotecaFormHorarioAbertura = new System.Windows.Forms.DateTimePicker();
-            this.bibliotecaFormSubmeter = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.bibliotecaFormNome = new System.Windows.Forms.TextBox();
@@ -110,24 +110,26 @@
             this.bibliotecaFormDiasParaEntrega = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.bibliotecaFormPanel = new System.Windows.Forms.Panel();
-            this.label13 = new System.Windows.Forms.Label();
-            this.bibliotecaFormTitulo = new System.Windows.Forms.Label();
-            this.pesquisaRequisicoesSelect = new System.Windows.Forms.ComboBox();
             this.bibliotecaFormSupervisor = new System.Windows.Forms.ComboBox();
-            ((System.ComponentModel.ISupportInitialize)(this.panelFormCatalogoHide)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.panelObjectCatalogoHide)).BeginInit();
+            this.bibliotecaFormTitulo = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.pesquisaRequisicoesSelect = new System.Windows.Forms.ComboBox();
+            this.janelaLogo = new System.Windows.Forms.PictureBox();
+            this.panelObjectRequisicaoLegenda = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.panelFormRequisicaoEsconder)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelObjectRequisicaoEsconder)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelFormCatalogoHide)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelObjectCatalogoHide)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.listCatalogo)).BeginInit();
             this.panelObjectCatalogo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelObjectImage)).BeginInit();
             this.panelFormCatalogo.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.janelaLogo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.listRequisicoes)).BeginInit();
             this.panelFormRequisicao.SuspendLayout();
             this.panelObjectRequisicao.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelObjectRequisicaoImage)).BeginInit();
             this.bibliotecaFormPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.janelaLogo)).BeginInit();
             this.SuspendLayout();
             // 
             // janelaSubtitulo
@@ -194,6 +196,127 @@
             this.panelFormCatalogoBotaoSubmeter.UseVisualStyleBackColor = true;
             this.panelFormCatalogoBotaoSubmeter.Click += new System.EventHandler(this.panelFormCatalogoSubmit_Click);
             // 
+            // buttonAdicionarObjectRequisicoes
+            // 
+            this.buttonAdicionarObjectRequisicoes.Location = new System.Drawing.Point(622, 115);
+            this.buttonAdicionarObjectRequisicoes.Name = "buttonAdicionarObjectRequisicoes";
+            this.buttonAdicionarObjectRequisicoes.Size = new System.Drawing.Size(22, 28);
+            this.buttonAdicionarObjectRequisicoes.TabIndex = 32;
+            this.buttonAdicionarObjectRequisicoes.Text = "+";
+            this.Ajuda.SetToolTip(this.buttonAdicionarObjectRequisicoes, "Adicionar livro novo");
+            this.buttonAdicionarObjectRequisicoes.UseVisualStyleBackColor = true;
+            this.buttonAdicionarObjectRequisicoes.Visible = false;
+            this.buttonAdicionarObjectRequisicoes.Click += new System.EventHandler(this.panelObjectRequisicaoAdicionar_Click);
+            // 
+            // panelFormRequisicaoSubmeter
+            // 
+            this.panelFormRequisicaoSubmeter.Location = new System.Drawing.Point(68, 208);
+            this.panelFormRequisicaoSubmeter.Name = "panelFormRequisicaoSubmeter";
+            this.panelFormRequisicaoSubmeter.Size = new System.Drawing.Size(139, 23);
+            this.panelFormRequisicaoSubmeter.TabIndex = 25;
+            this.panelFormRequisicaoSubmeter.Text = "Botao";
+            this.Ajuda.SetToolTip(this.panelFormRequisicaoSubmeter, "0");
+            this.panelFormRequisicaoSubmeter.UseVisualStyleBackColor = true;
+            this.panelFormRequisicaoSubmeter.Click += new System.EventHandler(this.panelFormRequisicaoSubmit_Click);
+            // 
+            // panelObjectRequisicaoEliminar
+            // 
+            this.panelObjectRequisicaoEliminar.Location = new System.Drawing.Point(77, 169);
+            this.panelObjectRequisicaoEliminar.Name = "panelObjectRequisicaoEliminar";
+            this.panelObjectRequisicaoEliminar.Size = new System.Drawing.Size(75, 23);
+            this.panelObjectRequisicaoEliminar.TabIndex = 20;
+            this.panelObjectRequisicaoEliminar.Text = "Eliminar";
+            this.Ajuda.SetToolTip(this.panelObjectRequisicaoEliminar, "0");
+            this.panelObjectRequisicaoEliminar.UseVisualStyleBackColor = true;
+            this.panelObjectRequisicaoEliminar.Click += new System.EventHandler(this.panelObjectRequisicaoEliminar_Click);
+            // 
+            // panelObjectRequisicaoEntregar
+            // 
+            this.panelObjectRequisicaoEntregar.Location = new System.Drawing.Point(77, 208);
+            this.panelObjectRequisicaoEntregar.Name = "panelObjectRequisicaoEntregar";
+            this.panelObjectRequisicaoEntregar.Size = new System.Drawing.Size(75, 23);
+            this.panelObjectRequisicaoEntregar.TabIndex = 24;
+            this.panelObjectRequisicaoEntregar.Text = "Entregar";
+            this.Ajuda.SetToolTip(this.panelObjectRequisicaoEntregar, "0");
+            this.panelObjectRequisicaoEntregar.UseVisualStyleBackColor = true;
+            this.panelObjectRequisicaoEntregar.Click += new System.EventHandler(this.panelObjectRequisicaoEntregar_Click);
+            // 
+            // bibliotecaAdicionar
+            // 
+            this.bibliotecaAdicionar.Location = new System.Drawing.Point(393, 54);
+            this.bibliotecaAdicionar.Name = "bibliotecaAdicionar";
+            this.bibliotecaAdicionar.Size = new System.Drawing.Size(90, 21);
+            this.bibliotecaAdicionar.TabIndex = 40;
+            this.bibliotecaAdicionar.Text = "Adicionar nova";
+            this.Ajuda.SetToolTip(this.bibliotecaAdicionar, "0");
+            this.bibliotecaAdicionar.UseVisualStyleBackColor = true;
+            this.bibliotecaAdicionar.Click += new System.EventHandler(this.bibliotecaAdicionar_Click);
+            // 
+            // bibliotecaEditar
+            // 
+            this.bibliotecaEditar.Location = new System.Drawing.Point(297, 28);
+            this.bibliotecaEditar.Name = "bibliotecaEditar";
+            this.bibliotecaEditar.Size = new System.Drawing.Size(90, 47);
+            this.bibliotecaEditar.TabIndex = 41;
+            this.bibliotecaEditar.Text = "Editar biblioteca";
+            this.Ajuda.SetToolTip(this.bibliotecaEditar, "0");
+            this.bibliotecaEditar.UseVisualStyleBackColor = true;
+            this.bibliotecaEditar.Visible = false;
+            this.bibliotecaEditar.Click += new System.EventHandler(this.bibliotecaEditar_Click);
+            // 
+            // bibliotecaEliminar
+            // 
+            this.bibliotecaEliminar.Location = new System.Drawing.Point(393, 28);
+            this.bibliotecaEliminar.Name = "bibliotecaEliminar";
+            this.bibliotecaEliminar.Size = new System.Drawing.Size(90, 20);
+            this.bibliotecaEliminar.TabIndex = 42;
+            this.bibliotecaEliminar.Text = "Eliminar biblioteca";
+            this.Ajuda.SetToolTip(this.bibliotecaEliminar, "0");
+            this.bibliotecaEliminar.UseVisualStyleBackColor = true;
+            this.bibliotecaEliminar.Visible = false;
+            this.bibliotecaEliminar.Click += new System.EventHandler(this.bibliotecaEliminar_Click);
+            // 
+            // bibliotecaFormSubmeter
+            // 
+            this.bibliotecaFormSubmeter.Location = new System.Drawing.Point(409, 50);
+            this.bibliotecaFormSubmeter.Name = "bibliotecaFormSubmeter";
+            this.bibliotecaFormSubmeter.Size = new System.Drawing.Size(82, 25);
+            this.bibliotecaFormSubmeter.TabIndex = 44;
+            this.bibliotecaFormSubmeter.Text = "Botao";
+            this.Ajuda.SetToolTip(this.bibliotecaFormSubmeter, "0");
+            this.bibliotecaFormSubmeter.UseVisualStyleBackColor = true;
+            this.bibliotecaFormSubmeter.Click += new System.EventHandler(this.bibliotecaFormSubmeter_Click);
+            // 
+            // panelFormRequisicaoEsconder
+            // 
+            this.panelFormRequisicaoEsconder.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.panelFormRequisicaoEsconder.Cursor = System.Windows.Forms.Cursors.Default;
+            this.panelFormRequisicaoEsconder.Image = global::Funcionarios.Properties.Resources.Esconder;
+            this.panelFormRequisicaoEsconder.InitialImage = null;
+            this.panelFormRequisicaoEsconder.Location = new System.Drawing.Point(193, 12);
+            this.panelFormRequisicaoEsconder.Name = "panelFormRequisicaoEsconder";
+            this.panelFormRequisicaoEsconder.Size = new System.Drawing.Size(14, 18);
+            this.panelFormRequisicaoEsconder.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.panelFormRequisicaoEsconder.TabIndex = 24;
+            this.panelFormRequisicaoEsconder.TabStop = false;
+            this.Ajuda.SetToolTip(this.panelFormRequisicaoEsconder, "Esconder");
+            this.panelFormRequisicaoEsconder.Click += new System.EventHandler(this.panelFormRequisicaoHide_Click);
+            // 
+            // panelObjectRequisicaoEsconder
+            // 
+            this.panelObjectRequisicaoEsconder.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.panelObjectRequisicaoEsconder.Cursor = System.Windows.Forms.Cursors.Default;
+            this.panelObjectRequisicaoEsconder.Image = global::Funcionarios.Properties.Resources.Esconder;
+            this.panelObjectRequisicaoEsconder.InitialImage = null;
+            this.panelObjectRequisicaoEsconder.Location = new System.Drawing.Point(191, 12);
+            this.panelObjectRequisicaoEsconder.Name = "panelObjectRequisicaoEsconder";
+            this.panelObjectRequisicaoEsconder.Size = new System.Drawing.Size(14, 18);
+            this.panelObjectRequisicaoEsconder.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.panelObjectRequisicaoEsconder.TabIndex = 23;
+            this.panelObjectRequisicaoEsconder.TabStop = false;
+            this.Ajuda.SetToolTip(this.panelObjectRequisicaoEsconder, "Esconder");
+            this.panelObjectRequisicaoEsconder.Click += new System.EventHandler(this.panelObjectRequisicaoEntregar_Click);
+            // 
             // panelFormCatalogoHide
             // 
             this.panelFormCatalogoHide.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
@@ -223,81 +346,6 @@
             this.panelObjectCatalogoHide.TabStop = false;
             this.Ajuda.SetToolTip(this.panelObjectCatalogoHide, "Esconder");
             this.panelObjectCatalogoHide.Click += new System.EventHandler(this.panelObjectCatalogoEsconder_Click);
-            // 
-            // buttonAdicionarObjectRequisicoes
-            // 
-            this.buttonAdicionarObjectRequisicoes.Location = new System.Drawing.Point(622, 115);
-            this.buttonAdicionarObjectRequisicoes.Name = "buttonAdicionarObjectRequisicoes";
-            this.buttonAdicionarObjectRequisicoes.Size = new System.Drawing.Size(22, 28);
-            this.buttonAdicionarObjectRequisicoes.TabIndex = 32;
-            this.buttonAdicionarObjectRequisicoes.Text = "+";
-            this.Ajuda.SetToolTip(this.buttonAdicionarObjectRequisicoes, "Adicionar livro novo");
-            this.buttonAdicionarObjectRequisicoes.UseVisualStyleBackColor = true;
-            this.buttonAdicionarObjectRequisicoes.Visible = false;
-            this.buttonAdicionarObjectRequisicoes.Click += new System.EventHandler(this.panelObjectRequisicaoAdicionar_Click);
-            // 
-            // panelFormRequisicaoEsconder
-            // 
-            this.panelFormRequisicaoEsconder.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.panelFormRequisicaoEsconder.Cursor = System.Windows.Forms.Cursors.Default;
-            this.panelFormRequisicaoEsconder.Image = global::Funcionarios.Properties.Resources.Esconder;
-            this.panelFormRequisicaoEsconder.InitialImage = null;
-            this.panelFormRequisicaoEsconder.Location = new System.Drawing.Point(193, 12);
-            this.panelFormRequisicaoEsconder.Name = "panelFormRequisicaoEsconder";
-            this.panelFormRequisicaoEsconder.Size = new System.Drawing.Size(14, 18);
-            this.panelFormRequisicaoEsconder.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.panelFormRequisicaoEsconder.TabIndex = 24;
-            this.panelFormRequisicaoEsconder.TabStop = false;
-            this.Ajuda.SetToolTip(this.panelFormRequisicaoEsconder, "Esconder");
-            this.panelFormRequisicaoEsconder.Click += new System.EventHandler(this.panelFormRequisicaoHide_Click);
-            // 
-            // panelFormRequisicaoSubmeter
-            // 
-            this.panelFormRequisicaoSubmeter.Location = new System.Drawing.Point(68, 208);
-            this.panelFormRequisicaoSubmeter.Name = "panelFormRequisicaoSubmeter";
-            this.panelFormRequisicaoSubmeter.Size = new System.Drawing.Size(139, 23);
-            this.panelFormRequisicaoSubmeter.TabIndex = 25;
-            this.panelFormRequisicaoSubmeter.Text = "Botao";
-            this.Ajuda.SetToolTip(this.panelFormRequisicaoSubmeter, "0");
-            this.panelFormRequisicaoSubmeter.UseVisualStyleBackColor = true;
-            this.panelFormRequisicaoSubmeter.Click += new System.EventHandler(this.panelFormRequisicaoSubmit_Click);
-            // 
-            // panelObjectRequisicaoEsconder
-            // 
-            this.panelObjectRequisicaoEsconder.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.panelObjectRequisicaoEsconder.Cursor = System.Windows.Forms.Cursors.Default;
-            this.panelObjectRequisicaoEsconder.Image = global::Funcionarios.Properties.Resources.Esconder;
-            this.panelObjectRequisicaoEsconder.InitialImage = null;
-            this.panelObjectRequisicaoEsconder.Location = new System.Drawing.Point(191, 12);
-            this.panelObjectRequisicaoEsconder.Name = "panelObjectRequisicaoEsconder";
-            this.panelObjectRequisicaoEsconder.Size = new System.Drawing.Size(14, 18);
-            this.panelObjectRequisicaoEsconder.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.panelObjectRequisicaoEsconder.TabIndex = 23;
-            this.panelObjectRequisicaoEsconder.TabStop = false;
-            this.Ajuda.SetToolTip(this.panelObjectRequisicaoEsconder, "Esconder");
-            this.panelObjectRequisicaoEsconder.Click += new System.EventHandler(this.panelObjectRequisicaoEntregar_Click);
-            // 
-            // panelObjectRequisicaoEliminar
-            // 
-            this.panelObjectRequisicaoEliminar.Location = new System.Drawing.Point(77, 169);
-            this.panelObjectRequisicaoEliminar.Name = "panelObjectRequisicaoEliminar";
-            this.panelObjectRequisicaoEliminar.Size = new System.Drawing.Size(75, 23);
-            this.panelObjectRequisicaoEliminar.TabIndex = 20;
-            this.panelObjectRequisicaoEliminar.Text = "Eliminar";
-            this.Ajuda.SetToolTip(this.panelObjectRequisicaoEliminar, "0");
-            this.panelObjectRequisicaoEliminar.UseVisualStyleBackColor = true;
-            this.panelObjectRequisicaoEliminar.Click += new System.EventHandler(this.panelObjectRequisicaoEliminar_Click);
-            // 
-            // panelObjectRequisicaoEntregar
-            // 
-            this.panelObjectRequisicaoEntregar.Location = new System.Drawing.Point(77, 208);
-            this.panelObjectRequisicaoEntregar.Name = "panelObjectRequisicaoEntregar";
-            this.panelObjectRequisicaoEntregar.Size = new System.Drawing.Size(75, 23);
-            this.panelObjectRequisicaoEntregar.TabIndex = 24;
-            this.panelObjectRequisicaoEntregar.Text = "Entregar";
-            this.Ajuda.SetToolTip(this.panelObjectRequisicaoEntregar, "0");
-            this.panelObjectRequisicaoEntregar.UseVisualStyleBackColor = true;
-            this.panelObjectRequisicaoEntregar.Click += new System.EventHandler(this.panelObjectRequisicaoEntregar_Click);
             // 
             // listCatalogo
             // 
@@ -410,7 +458,7 @@
             // panelObjectImage
             // 
             this.panelObjectImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.panelObjectImage.Image = global::Funcionarios.Properties.Resources.Funcionario;
+            this.panelObjectImage.Image = global::Funcionarios.Properties.Resources.Livro2;
             this.panelObjectImage.InitialImage = null;
             this.panelObjectImage.Location = new System.Drawing.Point(40, 29);
             this.panelObjectImage.Name = "panelObjectImage";
@@ -609,18 +657,6 @@
             this.catalogoTitle.Text = "Catálogo";
             this.catalogoTitle.Visible = false;
             // 
-            // janelaLogo
-            // 
-            this.janelaLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.janelaLogo.Image = global::Funcionarios.Properties.Resources.Biblioteca;
-            this.janelaLogo.InitialImage = null;
-            this.janelaLogo.Location = new System.Drawing.Point(22, 23);
-            this.janelaLogo.Name = "janelaLogo";
-            this.janelaLogo.Size = new System.Drawing.Size(39, 45);
-            this.janelaLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.janelaLogo.TabIndex = 14;
-            this.janelaLogo.TabStop = false;
-            // 
             // listRequisicoes
             // 
             this.listRequisicoes.AllColumns.Add(this.requisicaoLivro);
@@ -726,6 +762,15 @@
             this.panelFormRequisicao.TabIndex = 36;
             this.panelFormRequisicao.Visible = false;
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(20, 244);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(190, 13);
+            this.label5.TabIndex = 37;
+            this.label5.Text = "A requisição é registada no dia de hoje";
+            // 
             // panelFormRequisicaoFieldPessoa
             // 
             this.panelFormRequisicaoFieldPessoa.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -825,7 +870,7 @@
             // panelObjectRequisicaoImage
             // 
             this.panelObjectRequisicaoImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.panelObjectRequisicaoImage.Image = global::Funcionarios.Properties.Resources.Funcionario;
+            this.panelObjectRequisicaoImage.Image = global::Funcionarios.Properties.Resources.Requisicao;
             this.panelObjectRequisicaoImage.InitialImage = null;
             this.panelObjectRequisicaoImage.Location = new System.Drawing.Point(87, 26);
             this.panelObjectRequisicaoImage.Name = "panelObjectRequisicaoImage";
@@ -833,15 +878,6 @@
             this.panelObjectRequisicaoImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.panelObjectRequisicaoImage.TabIndex = 18;
             this.panelObjectRequisicaoImage.TabStop = false;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(20, 244);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(190, 13);
-            this.label5.TabIndex = 37;
-            this.label5.Text = "A requisição é registada no dia de hoje";
             // 
             // panelFormRequisicaoLegendaEntrega
             // 
@@ -852,41 +888,6 @@
             this.panelFormRequisicaoLegendaEntrega.TabIndex = 39;
             this.panelFormRequisicaoLegendaEntrega.Text = "A entrega desta biblioteca de hoje a X dias";
             this.panelFormRequisicaoLegendaEntrega.Visible = false;
-            // 
-            // bibliotecaAdicionar
-            // 
-            this.bibliotecaAdicionar.Location = new System.Drawing.Point(393, 54);
-            this.bibliotecaAdicionar.Name = "bibliotecaAdicionar";
-            this.bibliotecaAdicionar.Size = new System.Drawing.Size(90, 21);
-            this.bibliotecaAdicionar.TabIndex = 40;
-            this.bibliotecaAdicionar.Text = "Adicionar nova";
-            this.Ajuda.SetToolTip(this.bibliotecaAdicionar, "0");
-            this.bibliotecaAdicionar.UseVisualStyleBackColor = true;
-            this.bibliotecaAdicionar.Click += new System.EventHandler(this.bibliotecaAdicionar_Click);
-            // 
-            // bibliotecaEditar
-            // 
-            this.bibliotecaEditar.Location = new System.Drawing.Point(297, 28);
-            this.bibliotecaEditar.Name = "bibliotecaEditar";
-            this.bibliotecaEditar.Size = new System.Drawing.Size(90, 47);
-            this.bibliotecaEditar.TabIndex = 41;
-            this.bibliotecaEditar.Text = "Editar biblioteca";
-            this.Ajuda.SetToolTip(this.bibliotecaEditar, "0");
-            this.bibliotecaEditar.UseVisualStyleBackColor = true;
-            this.bibliotecaEditar.Visible = false;
-            this.bibliotecaEditar.Click += new System.EventHandler(this.bibliotecaEditar_Click);
-            // 
-            // bibliotecaEliminar
-            // 
-            this.bibliotecaEliminar.Location = new System.Drawing.Point(393, 28);
-            this.bibliotecaEliminar.Name = "bibliotecaEliminar";
-            this.bibliotecaEliminar.Size = new System.Drawing.Size(90, 20);
-            this.bibliotecaEliminar.TabIndex = 42;
-            this.bibliotecaEliminar.Text = "Eliminar biblioteca";
-            this.Ajuda.SetToolTip(this.bibliotecaEliminar, "0");
-            this.bibliotecaEliminar.UseVisualStyleBackColor = true;
-            this.bibliotecaEliminar.Visible = false;
-            this.bibliotecaEliminar.Click += new System.EventHandler(this.bibliotecaEliminar_Click);
             // 
             // bibliotecaFormHorarioEncerramento
             // 
@@ -907,17 +908,6 @@
             this.bibliotecaFormHorarioAbertura.Size = new System.Drawing.Size(70, 20);
             this.bibliotecaFormHorarioAbertura.TabIndex = 47;
             this.bibliotecaFormHorarioAbertura.Value = new System.DateTime(2020, 6, 11, 0, 0, 0, 0);
-            // 
-            // bibliotecaFormSubmeter
-            // 
-            this.bibliotecaFormSubmeter.Location = new System.Drawing.Point(409, 50);
-            this.bibliotecaFormSubmeter.Name = "bibliotecaFormSubmeter";
-            this.bibliotecaFormSubmeter.Size = new System.Drawing.Size(82, 25);
-            this.bibliotecaFormSubmeter.TabIndex = 44;
-            this.bibliotecaFormSubmeter.Text = "Botao";
-            this.Ajuda.SetToolTip(this.bibliotecaFormSubmeter, "0");
-            this.bibliotecaFormSubmeter.UseVisualStyleBackColor = true;
-            this.bibliotecaFormSubmeter.Click += new System.EventHandler(this.bibliotecaFormSubmeter_Click);
             // 
             // label7
             // 
@@ -993,15 +983,14 @@
             this.bibliotecaFormPanel.TabIndex = 53;
             this.bibliotecaFormPanel.Visible = false;
             // 
-            // label13
+            // bibliotecaFormSupervisor
             // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(218, 3);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(57, 13);
-            this.label13.TabIndex = 53;
-            this.label13.Text = "Supervisor";
-            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.bibliotecaFormSupervisor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.bibliotecaFormSupervisor.FormattingEnabled = true;
+            this.bibliotecaFormSupervisor.Location = new System.Drawing.Point(221, 15);
+            this.bibliotecaFormSupervisor.Name = "bibliotecaFormSupervisor";
+            this.bibliotecaFormSupervisor.Size = new System.Drawing.Size(91, 21);
+            this.bibliotecaFormSupervisor.TabIndex = 39;
             // 
             // bibliotecaFormTitulo
             // 
@@ -1014,6 +1003,16 @@
             this.bibliotecaFormTitulo.TabIndex = 54;
             this.bibliotecaFormTitulo.Text = "Título";
             this.bibliotecaFormTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(218, 3);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(57, 13);
+            this.label13.TabIndex = 53;
+            this.label13.Text = "Supervisor";
+            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // pesquisaRequisicoesSelect
             // 
@@ -1032,20 +1031,34 @@
             this.pesquisaRequisicoesSelect.Visible = false;
             this.pesquisaRequisicoesSelect.SelectedIndexChanged += new System.EventHandler(this.pesquisaRequisicaoAtributo_SelectedIndexChanged);
             // 
-            // bibliotecaFormSupervisor
+            // janelaLogo
             // 
-            this.bibliotecaFormSupervisor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.bibliotecaFormSupervisor.FormattingEnabled = true;
-            this.bibliotecaFormSupervisor.Location = new System.Drawing.Point(221, 15);
-            this.bibliotecaFormSupervisor.Name = "bibliotecaFormSupervisor";
-            this.bibliotecaFormSupervisor.Size = new System.Drawing.Size(91, 21);
-            this.bibliotecaFormSupervisor.TabIndex = 39;
+            this.janelaLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.janelaLogo.Image = global::Funcionarios.Properties.Resources.Biblioteca;
+            this.janelaLogo.InitialImage = null;
+            this.janelaLogo.Location = new System.Drawing.Point(22, 23);
+            this.janelaLogo.Name = "janelaLogo";
+            this.janelaLogo.Size = new System.Drawing.Size(39, 45);
+            this.janelaLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.janelaLogo.TabIndex = 14;
+            this.janelaLogo.TabStop = false;
+            // 
+            // panelObjectRequisicaoLegenda
+            // 
+            this.panelObjectRequisicaoLegenda.AutoSize = true;
+            this.panelObjectRequisicaoLegenda.Location = new System.Drawing.Point(521, 680);
+            this.panelObjectRequisicaoLegenda.Name = "panelObjectRequisicaoLegenda";
+            this.panelObjectRequisicaoLegenda.Size = new System.Drawing.Size(254, 13);
+            this.panelObjectRequisicaoLegenda.TabIndex = 54;
+            this.panelObjectRequisicaoLegenda.Text = "Só podem ser eliminadas requisições registadas hoje";
+            this.panelObjectRequisicaoLegenda.Visible = false;
             // 
             // Bibliotecas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1028, 711);
+            this.Controls.Add(this.panelObjectRequisicaoLegenda);
             this.Controls.Add(this.bibliotecaFormPanel);
             this.Controls.Add(this.bibliotecaEliminar);
             this.Controls.Add(this.bibliotecaEditar);
@@ -1071,21 +1084,21 @@
             this.Controls.Add(this.janelaSubtitulo);
             this.Controls.Add(this.janelaLogo);
             this.Controls.Add(this.janelaTitulo);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Bibliotecas";
             this.Text = "Sistema de Gestão Escolar | Bibliotecas";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Funcionarios_FormClosed);
             this.Load += new System.EventHandler(this.Funcionarios_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.panelFormCatalogoHide)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.panelObjectCatalogoHide)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelFormRequisicaoEsconder)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelObjectRequisicaoEsconder)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelFormCatalogoHide)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelObjectCatalogoHide)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.listCatalogo)).EndInit();
             this.panelObjectCatalogo.ResumeLayout(false);
             this.panelObjectCatalogo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelObjectImage)).EndInit();
             this.panelFormCatalogo.ResumeLayout(false);
             this.panelFormCatalogo.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.janelaLogo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.listRequisicoes)).EndInit();
             this.panelFormRequisicao.ResumeLayout(false);
             this.panelFormRequisicao.PerformLayout();
@@ -1094,6 +1107,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelObjectRequisicaoImage)).EndInit();
             this.bibliotecaFormPanel.ResumeLayout(false);
             this.bibliotecaFormPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.janelaLogo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1185,5 +1199,6 @@
         private System.Windows.Forms.Label bibliotecaFormTitulo;
         private System.Windows.Forms.ComboBox bibliotecaFormSupervisor;
         private System.Windows.Forms.ComboBox pesquisaRequisicoesSelect;
+        private System.Windows.Forms.Label panelObjectRequisicaoLegenda;
     }
 }
