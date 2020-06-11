@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Funcionarios
 {
-    enum LivroEstado
+    public enum LivroEstado
     {
         EMPRESTADO,
         DISPONÍVEL

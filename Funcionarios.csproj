@@ -70,6 +70,7 @@
     <Compile Include="Bibliotecas.Designer.cs">
       <DependentUpon>Bibliotecas.cs</DependentUpon>
     </Compile>
+    <Compile Include="Pessoa.cs" />
     <Compile Include="LivroEstado.cs" />
     <Compile Include="GruposDisciplinares.cs">
       <SubType>Form</SubType>
@@ -91,6 +92,7 @@
     <Compile Include="Blocos.Designer.cs">
       <DependentUpon>Blocos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Requisicao.cs" />
     <Compile Include="Turnos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -143,6 +145,9 @@
       <DependentUpon>Turmas.cs</DependentUpon>
     </Compile>
     <Compile Include="Turno.cs" />
+    <EmbeddedResource Include="Bibliotecas.resx">
+      <DependentUpon>Bibliotecas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="BlocosTipos.resx">
       <DependentUpon>BlocosTipos.cs</DependentUpon>
     </EmbeddedResource>

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Funcionarios
 {
-    class Livro
+    public class Livro
     {
         private String _ISBN, _titulo, _autores, _editora;
         private int _anoEdicao, _idinterno;
@@ -55,5 +55,11 @@ namespace Funcionarios
             get { return this._estado; }
             set { this._estado = value; }
         }
+
+        public String str
+        {
+            get { return String.Format("{0}, {1} ({2})", _ISBN, _idinterno, _titulo); }
+        }
+
     }
 }
