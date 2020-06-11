@@ -63,10 +63,10 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.panelForm = new System.Windows.Forms.Panel();
-            this.dataFim = new System.Windows.Forms.DateTimePicker();
+            this.label1 = new System.Windows.Forms.Label();
+            this.dataFimForm = new System.Windows.Forms.DateTimePicker();
             this.dataInicio = new System.Windows.Forms.DateTimePicker();
             this.comboBoxDT = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.janelaLogo)).BeginInit();
             this.panelObject.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelObjectHide)).BeginInit();
@@ -115,8 +115,7 @@
             this.pesquisaAtributo.Items.AddRange(new object[] {
             "Nome de Turma",
             "Nome Diretor de Turma",
-            "Nivel",
-            "Ano Letivo"});
+            "Nivel"});
             this.pesquisaAtributo.Location = new System.Drawing.Point(460, 42);
             this.pesquisaAtributo.Name = "pesquisaAtributo";
             this.pesquisaAtributo.Size = new System.Drawing.Size(149, 21);
@@ -244,6 +243,7 @@
             this.listObjects.Location = new System.Drawing.Point(12, 113);
             this.listObjects.Name = "listObjects";
             this.listObjects.Size = new System.Drawing.Size(580, 336);
+            this.listObjects.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.listObjects.TabIndex = 41;
             this.listObjects.UseCompatibleStateImageBehavior = false;
             this.listObjects.View = System.Windows.Forms.View.Details;
@@ -265,13 +265,13 @@
             // 
             this.nomeDT.AspectName = "nomeDT";
             this.nomeDT.Text = "Nome DT";
-            this.nomeDT.Width = 300;
+            this.nomeDT.Width = 190;
             // 
             // anoLetivo
             // 
-            this.anoLetivo.AspectName = "anoLetivo";
+            this.anoLetivo.AspectName = "strAnoLetivo";
             this.anoLetivo.Text = "Ano Letivo";
-            this.anoLetivo.Width = 100;
+            this.anoLetivo.Width = 211;
             // 
             // buttonAdicionarObject
             // 
@@ -434,7 +434,7 @@
             // panelForm
             // 
             this.panelForm.Controls.Add(this.label1);
-            this.panelForm.Controls.Add(this.dataFim);
+            this.panelForm.Controls.Add(this.dataFimForm);
             this.panelForm.Controls.Add(this.dataInicio);
             this.panelForm.Controls.Add(this.comboBoxDT);
             this.panelForm.Controls.Add(this.label4);
@@ -453,14 +453,23 @@
             this.panelForm.TabIndex = 43;
             this.panelForm.Visible = false;
             // 
-            // dataFim
+            // label1
             // 
-            this.dataFim.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dataFim.Location = new System.Drawing.Point(331, 121);
-            this.dataFim.Name = "dataFim";
-            this.dataFim.Size = new System.Drawing.Size(97, 20);
-            this.dataFim.TabIndex = 42;
-            this.dataFim.Value = new System.DateTime(2020, 6, 11, 16, 26, 0, 0);
+            this.label1.Location = new System.Drawing.Point(300, 125);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(25, 13);
+            this.label1.TabIndex = 43;
+            this.label1.Text = "até: ";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // dataFimForm
+            // 
+            this.dataFimForm.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dataFimForm.Location = new System.Drawing.Point(331, 121);
+            this.dataFimForm.Name = "dataFimForm";
+            this.dataFimForm.Size = new System.Drawing.Size(97, 20);
+            this.dataFimForm.TabIndex = 42;
+            this.dataFimForm.Value = new System.DateTime(2020, 6, 11, 16, 26, 0, 0);
             // 
             // dataInicio
             // 
@@ -479,15 +488,6 @@
             this.comboBoxDT.Size = new System.Drawing.Size(149, 21);
             this.comboBoxDT.Sorted = true;
             this.comboBoxDT.TabIndex = 40;
-            // 
-            // label1
-            // 
-            this.label1.Location = new System.Drawing.Point(300, 125);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(25, 13);
-            this.label1.TabIndex = 43;
-            this.label1.Text = "até: ";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // Turmas
             // 
@@ -564,7 +564,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Panel panelForm;
         private System.Windows.Forms.ComboBox comboBoxDT;
-        private System.Windows.Forms.DateTimePicker dataFim;
+        private System.Windows.Forms.DateTimePicker dataFimForm;
         private System.Windows.Forms.DateTimePicker dataInicio;
         private System.Windows.Forms.Label label1;
     }

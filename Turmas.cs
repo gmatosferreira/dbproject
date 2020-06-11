@@ -80,17 +80,15 @@ namespace Funcionarios
             // Set textboxes value
             panelFormFieldNome.Text = t.nome;
             panelFormFieldNivel.Text = t.nivel.ToString();
-            //String.Format("{0:2000}", t.anoLetivo.ToString());
-            // TODOOO                                             !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1111
-            //dataInicio.Value = 
-            //dataFim.Value = 
+            dataInicio.Value = t.dataInicio;
+            dataFimForm.Value = t.dataF;
 
 
             // Disable fields not changable
             panelFormFieldNome.Enabled = false;
             panelFormFieldNivel.Enabled = false;
             dataInicio.Enabled = false;
-            dataFim.Enabled = false;
+            dataFimForm.Enabled = false;
 
             // Set title and description
             panelFormTitulo.Text = "Editar turma " + t.nome;
@@ -112,15 +110,14 @@ namespace Funcionarios
             panelFormFieldNome.Text = "";
             panelFormFieldNivel.Text = "";
             dataInicio.Refresh();
-            dataFim.Refresh();
+            dataFimForm.Refresh();
             comboBoxDT.SelectedIndex = 0;
-
 
             // Enable fields that are not editable
             panelFormFieldNome.Enabled = true;
             panelFormFieldNivel.Enabled = true;
             dataInicio.Enabled = true;
-            dataFim.Enabled = true;
+            dataFimForm.Enabled = true;
 
             // Set title and description
             panelFormTitulo.Text = "Adicionar uma nova turma";
@@ -146,18 +143,25 @@ namespace Funcionarios
 
         private void Turmas_Load(object sender, EventArgs e)
         {
-            SqlCommand cmd = new SqlCommand("SELECT Turma.nome, nivel, anoLetivo, diretorDeTurma, Pessoa.nome AS nomeDT FROM GestaoEscola.Turma JOIN GestaoEscola.Pessoa ON diretorDeTurma = NMec", cn);
+            SqlCommand cmd = new SqlCommand("SELECT Turma.nome, anoLetivo, nivel,dataInicio,dataFim, diretorDeTurma, Pessoa.nome AS nomeDT FROM GestaoEscola.Turma JOIN GestaoEscola.Pessoa ON diretorDeTurma = NMec LEFT JOIN  GestaoEscola.AnoLetivo ON anoLetivo=codigo", cn);
             SqlDataReader reader = cmd.ExecuteReader();
             // Create list of Objects given the query results
             List<Turma> turmas = new List<Turma>();
             while (reader.Read())
             {
                 Turma t = new Turma();
-                t.nivel = Int32.Parse(reader["nivel"].ToString());
+                t.nivel = int.Parse(reader["nivel"].ToString());
                 t.nome = reader["nome"].ToString();
                 t.nomeDT = reader["nomeDT"].ToString();
                 t.nMecDT = int.Parse(reader["diretorDeTurma"].ToString());
-                t.anoLetivo = int.Parse(String.Format("{0:2000}", reader["anoLetivo"]));
+                t.anoID = Int32.Parse(reader["anoLetivo"].ToString());
+
+                //data Inicio
+                t.dataInicio = DateTime.Parse(reader["dataInicio"].ToString());
+
+                //data Fim
+                t.dataF = DateTime.Parse(reader["dataFim"].ToString());
+
                 turmas.Add(t);
                 counter++;
             }
@@ -184,15 +188,54 @@ namespace Funcionarios
             }
         }
         private void panelFormButton_Click(object sender, EventArgs e) {
-            if (listObjects.SelectedIndex >= 0)
+            if (formValid())
             {
-                submitForm((Turma)listObjects.SelectedObjects[0]);
-            }
-            // Add new  
-            else {
-                submitForm(null);
+                if (listObjects.SelectedIndex >= 0)
+                {
+                    submitForm((Turma)listObjects.SelectedObjects[0]);
+                }
+                // Add new  
+                else
+                {
+                    submitForm(null);
+                }
             }
         }
+
+        private Boolean formValid()
+        {
+            // Check if specific fields are valid
+            bool error = false;
+            StringBuilder sb = new StringBuilder();
+            if (!RegexExpressions.isInteger(panelFormFieldNivel.Text))
+            {
+                error = true;
+                sb.Append(" Nivel");
+            }
+           
+            // Check others
+            if (panelFormFieldNome.Text == "" || panelFormFieldNome.Text.Length > 5)
+            {
+                error = true;
+                sb.Append(" Nome de turma (max 5 caracteres)");
+            }
+            // Give user feedback
+            if (dataInicio.Value > dataFimForm.Value) {
+                error = true;
+                sb.Append(" A data de inicio de ano letivo deve ser inferior à data de fim");
+            }
+            if (error)
+            {
+                MessageBox.Show(
+                   "Confirme que preencheu corretamente os seguintes campos:" + sb.ToString(),
+                   "Atenção!",
+                   MessageBoxButtons.YesNoCancel,
+                   MessageBoxIcon.Exclamation
+               );
+            }
+            return !error;
+        }
+
 
         private void submitForm(Turma turma)
         {
@@ -203,28 +246,41 @@ namespace Funcionarios
             int nivel = int.Parse(panelFormFieldNivel.Text);
             String nomeT = panelFormFieldNome.Text;
             DateTime inicio = dataInicio.Value;
-            DateTime fim = dataFim.Value;
-
+            DateTime fim = dataFimForm.Value;
             int nMecDT = int.Parse(diretorInfo.Split('-')[0]);
             String nomeDT = diretorInfo.Split('-')[1];
-            if (edit) //editar
-                cmdTxt = "UPDATE GestaoEscola.Turma SET diretorDeTurma=@nMecDT WHERE nivel=@nivel AND nome=@nomeT AND anoLetivo=@ano";
-            else
-                cmdTxt = "INSERT INTO GestaoEscola.Turma VALUES (@nivel, @nomeT,@nMecDT, @ano);";
 
-            SqlCommand command = new SqlCommand(cmdTxt, cn);
+            // Create command 
+            String commandText = "GestaoEscola.TurmaSP";
+            SqlCommand command = new SqlCommand(commandText, cn);
+            command.CommandType = CommandType.StoredProcedure;
+
+            // Add vars 
+            command.Parameters.Add("@nivel", SqlDbType.Int);
+            command.Parameters["@nivel"].Value = nivel;
+            command.Parameters.Add("@nome", SqlDbType.VarChar);
+            command.Parameters["@nome"].Value = nomeT;
+            command.Parameters.Add("@nmecDT", SqlDbType.Int);
+            command.Parameters["@nmecDT"].Value = nMecDT;
+            command.Parameters.Add("@dataInicio", SqlDbType.Date);
+            command.Parameters["@dataInicio"].Value = inicio;
+            command.Parameters.Add("@dataFim", SqlDbType.Date);
+            command.Parameters["@dataFim"].Value = fim;
+            command.Parameters.Add("@Edit", SqlDbType.Bit);
+            command.Parameters["@Edit"].Value = 0;
+
+            if (edit)
+                command.Parameters["@Edit"].Value = 1;
+            // Return value stuff
+            var returnParameter = command.Parameters.Add("@ReturnVal", SqlDbType.Int);
+            returnParameter.Direction = ParameterDirection.ReturnValue;
+            // Execute query 
             int rowsAffected = 0;
+            int returnValue;
             try
             {
-                command.Parameters.AddWithValue("@nivel", nivel);
-                command.Parameters.AddWithValue("@nomeT", nomeT);
-                //command.Parameters.AddWithValue("@ano", anoLet);
-
-                if (comboBoxDT.SelectedIndex >= 0)
-                {
-                    command.Parameters.AddWithValue("@nMecDT", nMecDT);
-                }
                 rowsAffected = command.ExecuteNonQuery();
+                returnValue = (int)returnParameter.Value;
                 Console.WriteLine(String.Format("rowsAffected {0}", rowsAffected));
             }
             catch (SqlException ex)
@@ -232,46 +288,60 @@ namespace Funcionarios
                 MessageBox.Show(
                     "Ocorreu um erro, verifique que preencheu todos os dados corretamente e tente novamente!\r\n" + ex.ToString(),
                     "Erro!",
-                     MessageBoxButtons.OK,
-                     MessageBoxIcon.Error
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
                 );
                 return;
             }
-
-            // If query is successful 
-            if (rowsAffected >= 1)
-            {
-                // If add operation 
+            if (rowsAffected == 3 && returnValue == 1) {
+                // If add operation, construct object (was null)
                 if (!edit)
-                {
-                    // Add tuple to interface list 
-                    Turma t = new Turma();
-                    t.nivel = nivel;
-                    //t.anoLetivo = int.Parse(String.Format("{0:2000}", anoLet.ToString()));
-                    t.nMecDT = nMecDT;
-                    t.nomeDT = nomeDT;
-                    t.nome = nomeT;
-                    listObjects.AddObject(t);
-                }
-                else
-                {
-                    // Get object on interface list and change attributes 
-                    turma.nomeDT = nomeDT;
-                    turma.nMecDT = nMecDT;
-                }
+                    turma = new Turma();
+                turma.dataF = fim;
+                turma.dataInicio = inicio;
+                turma.nome = nomeT;
+                turma.nMecDT = nMecDT;
+                turma.nomeDT = nomeDT;
+                turma.nivel = nivel;
+
+                if (!edit)
+                    listObjects.AddObject(turma);
                 // SHow feedback to user 
                 String successMessage = "A turma foi adicionada com sucesso!";
-                if (edit)
-                    successMessage = "A turna foi editada com sucesso";
                 MessageBox.Show(
                     successMessage,
                     "Sucesso!",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information
                 );
-                updateStats();
+                // Update objects displayed on interface 
+                listObjects.BuildList(true);
+                // Update stats
                 inicializarComboBox();
-                comboBoxDT.Refresh();
+                updateStats();
+                // Hide panels 
+                panelForm.Visible = false;
+                panelObject.Visible = false;
+            }
+
+            // If query is successful for edit
+            if (rowsAffected == 2 && returnValue == 1)
+            {
+                String successMessage = "A turma foi editada com sucesso";
+                MessageBox.Show(
+                    successMessage,
+                    "Sucesso!",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information
+                );
+                // Update objects displayed on interface 
+                listObjects.BuildList(true);
+                // Update stats
+                inicializarComboBox();
+                updateStats();
+                // Hide panels 
+                panelForm.Visible = false;
+                panelObject.Visible = false;
             }
             else
             {
@@ -282,18 +352,15 @@ namespace Funcionarios
                     MessageBoxIcon.Error
                 );
             }
-            // Hide panels 
-            panelForm.Visible = false;
-            panelObject.Visible = false;
         }
 
         private void estudantes_Click(object sender, EventArgs e)
         {
             if (listObjects.SelectedIndex >= 0) {
                 Turma t2 = (Turma)listObjects.SelectedObjects[0];
-                EstudantesTurma listaEstudantes = new EstudantesTurma(this,t2.nivel, t2.nome,t2.anoLetivo);
+                EstudantesTurma listaEstudantes = new EstudantesTurma(cn,this,t2.nivel, t2.nome,t2.anoID);
+                listaEstudantes.Show();
             }
-            //abrir o form dos estudantes            
         }
 
         private void pesquisar(object sender, EventArgs e)
@@ -322,9 +389,6 @@ namespace Funcionarios
                             break;
                         case "Nivel":
                             toFilter = t.nivel.ToString();
-                            break;
-                        case "Ano Letivo":
-                            toFilter = t.anoLetivo.ToString();
                             break;
                     }
                     if (toFilter.ToLower().Contains(val.ToLower()))

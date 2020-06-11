@@ -28,14 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EstudantesTurma));
-            this.ajudaBtn = new System.Windows.Forms.PictureBox();
             this.buttonAdicionarObject = new System.Windows.Forms.Button();
             this.listObjects = new BrightIdeasSoftware.ObjectListView();
             this.NMec = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.NomeEstudante = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.janelaSubtitulo = new System.Windows.Forms.Label();
-            this.janelaLogo = new System.Windows.Forms.PictureBox();
             this.janelaTitulo = new System.Windows.Forms.Label();
             this.panelObject = new System.Windows.Forms.Panel();
             this.panelObjectHide = new System.Windows.Forms.PictureBox();
@@ -45,43 +42,35 @@
             this.button2 = new System.Windows.Forms.Button();
             this.panelFormTitulo = new System.Windows.Forms.Label();
             this.panelFormButton = new System.Windows.Forms.Button();
-            this.panelForm = new System.Windows.Forms.Panel();
+            this.panelFormAddAluno = new System.Windows.Forms.Panel();
+            this.hidde1 = new System.Windows.Forms.PictureBox();
             this.comboEstudantesSemTurma = new System.Windows.Forms.ComboBox();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.panelRecado = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.docenteCombo = new System.Windows.Forms.ComboBox();
+            this.hide2 = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.assuntoText = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.MensagemText = new System.Windows.Forms.RichTextBox();
+            this.destinarioCombo = new System.Windows.Forms.ComboBox();
             this.enviarRecado = new System.Windows.Forms.Button();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.ajudaBtn)).BeginInit();
+            this.janelaLogo = new System.Windows.Forms.PictureBox();
+            this.ajudaBtn = new System.Windows.Forms.PictureBox();
+            this.pesquisaAtributo = new System.Windows.Forms.ComboBox();
+            this.pesquisaLabel = new System.Windows.Forms.Label();
+            this.pesquisaTexto = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.listObjects)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.janelaLogo)).BeginInit();
             this.panelObject.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelObjectHide)).BeginInit();
-            this.panelForm.SuspendLayout();
-            this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.panelFormAddAluno.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.hidde1)).BeginInit();
+            this.panelRecado.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.hide2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.janelaLogo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ajudaBtn)).BeginInit();
             this.SuspendLayout();
-            // 
-            // ajudaBtn
-            // 
-            this.ajudaBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ajudaBtn.Cursor = System.Windows.Forms.Cursors.Help;
-            this.ajudaBtn.Image = global::Funcionarios.Properties.Resources.Ajuda;
-            this.ajudaBtn.InitialImage = null;
-            this.ajudaBtn.Location = new System.Drawing.Point(739, 19);
-            this.ajudaBtn.Name = "ajudaBtn";
-            this.ajudaBtn.Size = new System.Drawing.Size(38, 47);
-            this.ajudaBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.ajudaBtn.TabIndex = 23;
-            this.ajudaBtn.TabStop = false;
             // 
             // buttonAdicionarObject
             // 
@@ -91,6 +80,7 @@
             this.buttonAdicionarObject.TabIndex = 24;
             this.buttonAdicionarObject.Text = "Adicionar Aluno";
             this.buttonAdicionarObject.UseVisualStyleBackColor = true;
+            this.buttonAdicionarObject.Click += new System.EventHandler(this.buttonAdicionarObject_Click);
             // 
             // listObjects
             // 
@@ -108,6 +98,7 @@
             this.listObjects.TabIndex = 25;
             this.listObjects.UseCompatibleStateImageBehavior = false;
             this.listObjects.View = System.Windows.Forms.View.Details;
+            this.listObjects.SelectedIndexChanged += new System.EventHandler(this.listObjects_SelectedIndexChanged);
             // 
             // NMec
             // 
@@ -129,18 +120,6 @@
             this.janelaSubtitulo.Size = new System.Drawing.Size(142, 13);
             this.janelaSubtitulo.TabIndex = 28;
             this.janelaSubtitulo.Text = "Esta turma tem X estudantes";
-            // 
-            // janelaLogo
-            // 
-            this.janelaLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.janelaLogo.Image = global::Funcionarios.Properties.Resources.Estudantes2;
-            this.janelaLogo.InitialImage = null;
-            this.janelaLogo.Location = new System.Drawing.Point(23, 22);
-            this.janelaLogo.Name = "janelaLogo";
-            this.janelaLogo.Size = new System.Drawing.Size(39, 45);
-            this.janelaLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.janelaLogo.TabIndex = 27;
-            this.janelaLogo.TabStop = false;
             // 
             // janelaTitulo
             // 
@@ -176,6 +155,7 @@
             this.panelObjectHide.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.panelObjectHide.TabIndex = 23;
             this.panelObjectHide.TabStop = false;
+            this.panelObjectHide.Click += new System.EventHandler(this.panelObjectHide_Click);
             // 
             // panelObjectEliminar
             // 
@@ -185,6 +165,7 @@
             this.panelObjectEliminar.TabIndex = 21;
             this.panelObjectEliminar.Text = "Eliminar";
             this.panelObjectEliminar.UseVisualStyleBackColor = true;
+            this.panelObjectEliminar.Click += new System.EventHandler(this.panelObjectEliminar_Click);
             // 
             // panelObjectSubtitulo
             // 
@@ -216,6 +197,7 @@
             this.button2.TabIndex = 31;
             this.button2.Text = "Escrever Recado";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // panelFormTitulo
             // 
@@ -237,18 +219,33 @@
             this.panelFormButton.TabIndex = 25;
             this.panelFormButton.Text = "Botao";
             this.panelFormButton.UseVisualStyleBackColor = true;
+            this.panelFormButton.Click += new System.EventHandler(this.panelFormButton_Click);
             // 
-            // panelForm
+            // panelFormAddAluno
             // 
-            this.panelForm.Controls.Add(this.pictureBox2);
-            this.panelForm.Controls.Add(this.comboEstudantesSemTurma);
-            this.panelForm.Controls.Add(this.panelFormButton);
-            this.panelForm.Controls.Add(this.panelFormTitulo);
-            this.panelForm.Location = new System.Drawing.Point(578, 365);
-            this.panelForm.Name = "panelForm";
-            this.panelForm.Size = new System.Drawing.Size(207, 223);
-            this.panelForm.TabIndex = 30;
-            this.panelForm.Visible = false;
+            this.panelFormAddAluno.Controls.Add(this.hidde1);
+            this.panelFormAddAluno.Controls.Add(this.comboEstudantesSemTurma);
+            this.panelFormAddAluno.Controls.Add(this.panelFormButton);
+            this.panelFormAddAluno.Controls.Add(this.panelFormTitulo);
+            this.panelFormAddAluno.Location = new System.Drawing.Point(578, 365);
+            this.panelFormAddAluno.Name = "panelFormAddAluno";
+            this.panelFormAddAluno.Size = new System.Drawing.Size(207, 223);
+            this.panelFormAddAluno.TabIndex = 30;
+            this.panelFormAddAluno.Visible = false;
+            // 
+            // hidde1
+            // 
+            this.hidde1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.hidde1.Cursor = System.Windows.Forms.Cursors.Default;
+            this.hidde1.Image = global::Funcionarios.Properties.Resources.Esconder;
+            this.hidde1.InitialImage = null;
+            this.hidde1.Location = new System.Drawing.Point(182, 5);
+            this.hidde1.Name = "hidde1";
+            this.hidde1.Size = new System.Drawing.Size(17, 22);
+            this.hidde1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.hidde1.TabIndex = 42;
+            this.hidde1.TabStop = false;
+            this.hidde1.Click += new System.EventHandler(this.hidde1_Click);
             // 
             // comboEstudantesSemTurma
             // 
@@ -260,23 +257,59 @@
             this.comboEstudantesSemTurma.Sorted = true;
             this.comboEstudantesSemTurma.TabIndex = 41;
             // 
-            // panel1
+            // panelRecado
             // 
-            this.panel1.Controls.Add(this.label4);
-            this.panel1.Controls.Add(this.comboBox2);
-            this.panel1.Controls.Add(this.pictureBox1);
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.textBox1);
-            this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.richTextBox1);
-            this.panel1.Controls.Add(this.comboBox1);
-            this.panel1.Controls.Add(this.enviarRecado);
-            this.panel1.Location = new System.Drawing.Point(12, 321);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(534, 267);
-            this.panel1.TabIndex = 32;
-            this.panel1.Visible = false;
+            this.panelRecado.Controls.Add(this.label4);
+            this.panelRecado.Controls.Add(this.docenteCombo);
+            this.panelRecado.Controls.Add(this.hide2);
+            this.panelRecado.Controls.Add(this.label2);
+            this.panelRecado.Controls.Add(this.assuntoText);
+            this.panelRecado.Controls.Add(this.label3);
+            this.panelRecado.Controls.Add(this.label1);
+            this.panelRecado.Controls.Add(this.MensagemText);
+            this.panelRecado.Controls.Add(this.destinarioCombo);
+            this.panelRecado.Controls.Add(this.enviarRecado);
+            this.panelRecado.Location = new System.Drawing.Point(12, 321);
+            this.panelRecado.Name = "panelRecado";
+            this.panelRecado.Size = new System.Drawing.Size(534, 267);
+            this.panelRecado.TabIndex = 32;
+            this.panelRecado.Visible = false;
+            // 
+            // label4
+            // 
+            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(8, 33);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(65, 17);
+            this.label4.TabIndex = 50;
+            this.label4.Text = "Docente:";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // docenteCombo
+            // 
+            this.docenteCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.docenteCombo.FormattingEnabled = true;
+            this.docenteCombo.Location = new System.Drawing.Point(77, 32);
+            this.docenteCombo.Name = "docenteCombo";
+            this.docenteCombo.Size = new System.Drawing.Size(204, 21);
+            this.docenteCombo.Sorted = true;
+            this.docenteCombo.TabIndex = 49;
+            // 
+            // hide2
+            // 
+            this.hide2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.hide2.Cursor = System.Windows.Forms.Cursors.Default;
+            this.hide2.Image = global::Funcionarios.Properties.Resources.Esconder;
+            this.hide2.InitialImage = null;
+            this.hide2.Location = new System.Drawing.Point(503, 3);
+            this.hide2.Name = "hide2";
+            this.hide2.Size = new System.Drawing.Size(17, 22);
+            this.hide2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.hide2.TabIndex = 48;
+            this.hide2.TabStop = false;
+            this.hide2.Click += new System.EventHandler(this.hide2_Click);
             // 
             // label2
             // 
@@ -290,12 +323,12 @@
             this.label2.Text = "Assunto:";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // textBox1
+            // assuntoText
             // 
-            this.textBox1.Location = new System.Drawing.Point(77, 5);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(385, 20);
-            this.textBox1.TabIndex = 46;
+            this.assuntoText.Location = new System.Drawing.Point(77, 5);
+            this.assuntoText.Name = "assuntoText";
+            this.assuntoText.Size = new System.Drawing.Size(385, 20);
+            this.assuntoText.TabIndex = 46;
             // 
             // label3
             // 
@@ -321,23 +354,23 @@
             this.label1.Text = "Para:";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // richTextBox1
+            // MensagemText
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(11, 80);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(520, 161);
-            this.richTextBox1.TabIndex = 43;
-            this.richTextBox1.Text = "";
+            this.MensagemText.Location = new System.Drawing.Point(11, 80);
+            this.MensagemText.Name = "MensagemText";
+            this.MensagemText.Size = new System.Drawing.Size(520, 161);
+            this.MensagemText.TabIndex = 43;
+            this.MensagemText.Text = "";
             // 
-            // comboBox1
+            // destinarioCombo
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(346, 31);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(185, 21);
-            this.comboBox1.Sorted = true;
-            this.comboBox1.TabIndex = 42;
+            this.destinarioCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.destinarioCombo.FormattingEnabled = true;
+            this.destinarioCombo.Location = new System.Drawing.Point(346, 31);
+            this.destinarioCombo.Name = "destinarioCombo";
+            this.destinarioCombo.Size = new System.Drawing.Size(185, 21);
+            this.destinarioCombo.Sorted = true;
+            this.destinarioCombo.TabIndex = 42;
             // 
             // enviarRecado
             // 
@@ -347,63 +380,74 @@
             this.enviarRecado.TabIndex = 21;
             this.enviarRecado.Text = "Enviar";
             this.enviarRecado.UseVisualStyleBackColor = true;
+            this.enviarRecado.Click += new System.EventHandler(this.enviarRecado_Click);
             // 
-            // pictureBox2
+            // janelaLogo
             // 
-            this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pictureBox2.Cursor = System.Windows.Forms.Cursors.Default;
-            this.pictureBox2.Image = global::Funcionarios.Properties.Resources.Esconder;
-            this.pictureBox2.InitialImage = null;
-            this.pictureBox2.Location = new System.Drawing.Point(182, 5);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(17, 22);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 42;
-            this.pictureBox2.TabStop = false;
+            this.janelaLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.janelaLogo.Image = global::Funcionarios.Properties.Resources.Estudantes2;
+            this.janelaLogo.InitialImage = null;
+            this.janelaLogo.Location = new System.Drawing.Point(23, 22);
+            this.janelaLogo.Name = "janelaLogo";
+            this.janelaLogo.Size = new System.Drawing.Size(39, 45);
+            this.janelaLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.janelaLogo.TabIndex = 27;
+            this.janelaLogo.TabStop = false;
             // 
-            // pictureBox1
+            // ajudaBtn
             // 
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Default;
-            this.pictureBox1.Image = global::Funcionarios.Properties.Resources.Esconder;
-            this.pictureBox1.InitialImage = null;
-            this.pictureBox1.Location = new System.Drawing.Point(503, 3);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(17, 22);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 48;
-            this.pictureBox1.TabStop = false;
+            this.ajudaBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.ajudaBtn.Cursor = System.Windows.Forms.Cursors.Help;
+            this.ajudaBtn.Image = global::Funcionarios.Properties.Resources.Ajuda;
+            this.ajudaBtn.InitialImage = null;
+            this.ajudaBtn.Location = new System.Drawing.Point(739, 19);
+            this.ajudaBtn.Name = "ajudaBtn";
+            this.ajudaBtn.Size = new System.Drawing.Size(38, 47);
+            this.ajudaBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.ajudaBtn.TabIndex = 23;
+            this.ajudaBtn.TabStop = false;
             // 
-            // comboBox2
+            // pesquisaAtributo
             // 
-            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(77, 32);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(204, 21);
-            this.comboBox2.Sorted = true;
-            this.comboBox2.TabIndex = 49;
+            this.pesquisaAtributo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.pesquisaAtributo.FormattingEnabled = true;
+            this.pesquisaAtributo.Items.AddRange(new object[] {
+            "Número mecanográfico",
+            "Nome"});
+            this.pesquisaAtributo.Location = new System.Drawing.Point(394, 28);
+            this.pesquisaAtributo.Name = "pesquisaAtributo";
+            this.pesquisaAtributo.Size = new System.Drawing.Size(149, 21);
+            this.pesquisaAtributo.TabIndex = 35;
             // 
-            // label4
+            // pesquisaLabel
             // 
-            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(8, 33);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(65, 17);
-            this.label4.TabIndex = 50;
-            this.label4.Text = "Docente:";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.pesquisaLabel.AutoSize = true;
+            this.pesquisaLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pesquisaLabel.Location = new System.Drawing.Point(493, 8);
+            this.pesquisaLabel.Name = "pesquisaLabel";
+            this.pesquisaLabel.Size = new System.Drawing.Size(50, 13);
+            this.pesquisaLabel.TabIndex = 34;
+            this.pesquisaLabel.Text = "Pesquisa";
+            this.pesquisaLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // pesquisaTexto
+            // 
+            this.pesquisaTexto.Location = new System.Drawing.Point(378, 55);
+            this.pesquisaTexto.Name = "pesquisaTexto";
+            this.pesquisaTexto.Size = new System.Drawing.Size(165, 20);
+            this.pesquisaTexto.TabIndex = 33;
             // 
             // EstudantesTurma
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 593);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.pesquisaAtributo);
+            this.Controls.Add(this.pesquisaLabel);
+            this.Controls.Add(this.pesquisaTexto);
+            this.Controls.Add(this.panelRecado);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.panelForm);
+            this.Controls.Add(this.panelFormAddAluno);
             this.Controls.Add(this.panelObject);
             this.Controls.Add(this.janelaSubtitulo);
             this.Controls.Add(this.janelaLogo);
@@ -415,18 +459,18 @@
             this.Text = "Sistema de Gestão Escolar | Lista de Estudantes da Turma";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.EstudantesTurma_FormClosed);
             this.Load += new System.EventHandler(this.EstudantesTurma_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.ajudaBtn)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.listObjects)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.janelaLogo)).EndInit();
             this.panelObject.ResumeLayout(false);
             this.panelObject.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelObjectHide)).EndInit();
-            this.panelForm.ResumeLayout(false);
-            this.panelForm.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.panelFormAddAluno.ResumeLayout(false);
+            this.panelFormAddAluno.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.hidde1)).EndInit();
+            this.panelRecado.ResumeLayout(false);
+            this.panelRecado.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.hide2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.janelaLogo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ajudaBtn)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -450,19 +494,22 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label panelFormTitulo;
         private System.Windows.Forms.Button panelFormButton;
-        private System.Windows.Forms.Panel panelForm;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panelFormAddAluno;
+        private System.Windows.Forms.Panel panelRecado;
         private System.Windows.Forms.Button enviarRecado;
         private System.Windows.Forms.ComboBox comboEstudantesSemTurma;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox assuntoText;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.RichTextBox MensagemText;
+        private System.Windows.Forms.ComboBox destinarioCombo;
+        private System.Windows.Forms.PictureBox hidde1;
+        private System.Windows.Forms.PictureBox hide2;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox docenteCombo;
+        private System.Windows.Forms.ComboBox pesquisaAtributo;
+        private System.Windows.Forms.Label pesquisaLabel;
+        private System.Windows.Forms.TextBox pesquisaTexto;
     }
 }
