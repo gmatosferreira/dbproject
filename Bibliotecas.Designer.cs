@@ -97,7 +97,7 @@
             this.panelObjectRequisicaoTitulo = new System.Windows.Forms.Label();
             this.panelObjectRequisicaoImage = new System.Windows.Forms.PictureBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
+            this.panelFormRequisicaoLegendaEntrega = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.panelFormCatalogoHide)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelObjectCatalogoHide)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelFormRequisicaoEsconder)).BeginInit();
@@ -722,7 +722,7 @@
             this.panelFormRequisicao.Controls.Add(this.panelFormRequisicaoSubtitulo);
             this.panelFormRequisicao.Location = new System.Drawing.Point(774, 422);
             this.panelFormRequisicao.Name = "panelFormRequisicao";
-            this.panelFormRequisicao.Size = new System.Drawing.Size(226, 284);
+            this.panelFormRequisicao.Size = new System.Drawing.Size(242, 284);
             this.panelFormRequisicao.TabIndex = 36;
             this.panelFormRequisicao.Visible = false;
             // 
@@ -759,7 +759,7 @@
             this.panelFormRequisicaoTitulo.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.panelFormRequisicaoTitulo.AutoSize = true;
             this.panelFormRequisicaoTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panelFormRequisicaoTitulo.Location = new System.Drawing.Point(16, 14);
+            this.panelFormRequisicaoTitulo.Location = new System.Drawing.Point(24, 14);
             this.panelFormRequisicaoTitulo.Name = "panelFormRequisicaoTitulo";
             this.panelFormRequisicaoTitulo.Size = new System.Drawing.Size(47, 20);
             this.panelFormRequisicaoTitulo.TabIndex = 24;
@@ -843,21 +843,21 @@
             this.label5.TabIndex = 37;
             this.label5.Text = "A requisição é registada no dia de hoje";
             // 
-            // label7
+            // panelFormRequisicaoLegendaEntrega
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(794, 679);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(145, 13);
-            this.label7.TabIndex = 39;
-            this.label7.Text = "e a entrega de hoje a 14 dias";
+            this.panelFormRequisicaoLegendaEntrega.AutoSize = true;
+            this.panelFormRequisicaoLegendaEntrega.Location = new System.Drawing.Point(794, 679);
+            this.panelFormRequisicaoLegendaEntrega.Name = "panelFormRequisicaoLegendaEntrega";
+            this.panelFormRequisicaoLegendaEntrega.Size = new System.Drawing.Size(209, 13);
+            this.panelFormRequisicaoLegendaEntrega.TabIndex = 39;
+            this.panelFormRequisicaoLegendaEntrega.Text = "A entrega desta biblioteca de hoje a X dias";
             // 
             // Bibliotecas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1028, 711);
-            this.Controls.Add(this.label7);
+            this.Controls.Add(this.panelFormRequisicaoLegendaEntrega);
             this.Controls.Add(this.panelFormRequisicao);
             this.Controls.Add(this.panelObjectRequisicao);
             this.Controls.Add(this.requisicoesTitle);
@@ -973,6 +973,6 @@
         private System.Windows.Forms.ComboBox panelFormRequisicaoFieldPessoa;
         private System.Windows.Forms.ComboBox panelFormRequisicaoFieldLivro;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label panelFormRequisicaoLegendaEntrega;
     }
 }

@@ -165,6 +165,7 @@ namespace Funcionarios
                 b.horario.horaFim = TimeSpan.Parse(reader["horaEncerramento"].ToString());
                 b.supervisor = getNaoDocente(Int32.Parse(reader["supervisor"].ToString()));
                 b.nome = reader["nome"].ToString();
+                b.diasEntregaLivros = Int32.Parse(reader["diasEntregaLivros"].ToString());
                 escolhaBiblioteca.Items.Add(b.nome);
                 bibliotecas.Add(b);
             }
@@ -203,6 +204,7 @@ namespace Funcionarios
 
             // Muda todo o contexto da interface para os dados da biblioteca passada como argumento
             janelaSubtitulo.Text = b.nome;
+            panelFormRequisicaoLegendaEntrega.Text = "A entrega desta biblioteca é de hoje a " + b.diasEntregaLivros.ToString() + " dias";
 
             // Get Catálogo
             SqlCommand cmd = new SqlCommand("SELECT * FROM vw_LivrosComEstadoCompletos WHERE biblioteca = @Biblioteca", cn);
@@ -717,19 +719,20 @@ namespace Funcionarios
             if (listCatalogo.Items.Count == 0 | current < 0)
                 return;
             Requisicao f = (Requisicao)listRequisicoes.SelectedObjects[0];
-            int itemIndex = listCatalogo.SelectedIndex;
+            int itemIndex = listRequisicoes.SelectedIndex;
             // Confirm delete
             DialogResult msgb = MessageBox.Show("Tem a certeza que quer eliminar a requisicao do livro " + f.livro.titulo + " pela pessoa " + f.pessoa.nmec.ToString() + "?", "Esta operação é irreversível!", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
             if (msgb == DialogResult.No)
                 return;
             // Delete tuple on db 
-            String commandText = "DELETE FROM GestaoEscola.Requisicao WHERE livro = @ISBN AND biblioteca = @Biblioteca AND livroIDInterno = @ID AND dataRequisicao = @DataRequisicao";
+            String commandText = "DELETE FROM GestaoEscola.Requisicao WHERE livro = @ISBN AND biblioteca = @Biblioteca AND livroIDInterno = @ID AND dataRequisicao = @DataRequisicao AND pessoaNMec = @NMec";
             SqlCommand command = new SqlCommand(commandText, cn);
             // Add vars 
             command.Parameters.Add("@ISBN", SqlDbType.VarChar).Value = f.livro.ISBN;
             command.Parameters.Add("@ID", SqlDbType.Int).Value = f.livro.idinterno;
             command.Parameters.Add("@Biblioteca", SqlDbType.VarChar).Value = bibliotecaAtual.nome;
             command.Parameters.Add("@DataRequisicao", SqlDbType.Date).Value = f.dataRequisicao;
+            command.Parameters.Add("@NMec", SqlDbType.Int).Value = f.pessoa.nmec;
 
             // Execute query 
             int rowsAffected = 0;
@@ -834,17 +837,17 @@ namespace Funcionarios
             // Create command 
             String commandText = "INSERT INTO GestaoEscola.Requisicao VALUES (@ISBN,@Biblioteca,@ID,@PessoaNMEC,@DataRequisicao,@DataEntrega,0)";
             if (edit)
-                commandText = "UPDATE GestaoEscola.Requisicao SET entregue = @Entregue WHERE livro = @ISBN AND biblioteca = @Biblioteca AND livroIDInterno = @ID AND dataRequisicao = @DataRequisicao";
+                commandText = "UPDATE GestaoEscola.Requisicao SET entregue = @Entregue WHERE livro = @ISBN AND biblioteca = @Biblioteca AND livroIDInterno = @ID AND dataRequisicao = @DataRequisicao AND pessoaNMec = @PessoaNMEC";
             SqlCommand command = new SqlCommand(commandText, cn);
             // Add vars 
             command.Parameters.Add("@ISBN", SqlDbType.VarChar).Value = livro.ISBN;
             command.Parameters.Add("@Biblioteca", SqlDbType.VarChar).Value = bibliotecaAtual.nome;
             command.Parameters.Add("@ID", SqlDbType.Int).Value = livro.idinterno;
             command.Parameters.Add("@DataRequisicao", SqlDbType.Date).Value = DateTime.Today;
+            command.Parameters.Add("@PessoaNMEC", SqlDbType.Int).Value = pessoa.nmec;
             if (!edit)
             {
-                command.Parameters.Add("@PessoaNMEC", SqlDbType.Int).Value = pessoa.nmec;
-                command.Parameters.Add("@DataEntrega", SqlDbType.Date).Value = DateTime.Today.AddDays(14);
+                command.Parameters.Add("@DataEntrega", SqlDbType.Date).Value = DateTime.Today.AddDays(bibliotecaAtual.diasEntregaLivros);
             } else
             {
                 command.Parameters["@DataRequisicao"].Value = r.dataRequisicao;
