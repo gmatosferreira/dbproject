@@ -7,7 +7,7 @@ CREATE TABLE GestaoEscola.Requisicao(
 	dataRequisicao				DATE			NOT NULL,
 	dataEntrega					DATE			NOT NULL,
 	entregue					BIT				DEFAULT 0,
-	PRIMARY KEY(biblioteca, livro, livroIDInterno,dataRequisicao),
+	PRIMARY KEY(biblioteca, livro, livroIDInterno,dataRequisicao,pessoaNMec),
 	FOREIGN KEY(livro, biblioteca, livroIDInterno) REFERENCES GestaoEscola.Livro(ISBN, biblioteca, IDInterno),
 	FOREIGN KEY(pessoaNMec)	    REFERENCES GestaoEscola.Pessoa(NMec),
 	CHECK(dataEntrega > dataRequisicao) 
