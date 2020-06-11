@@ -11,6 +11,7 @@ namespace Funcionarios
         private String _nome;
         private Turno _horario;
         private NaoDocente _supervisor;
+        private int _diasEntregaLivros;
 
         public Biblioteca() { }
 
@@ -30,6 +31,12 @@ namespace Funcionarios
         {
             get { return this._supervisor; }
             set { this._supervisor = value; }
+        }
+
+        public int diasEntregaLivros
+        {
+            get { return this._diasEntregaLivros; }
+            set { this._diasEntregaLivros = value; }
         }
     }
 }
