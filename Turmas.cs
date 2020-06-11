@@ -358,7 +358,7 @@ namespace Funcionarios
         {
             if (listObjects.SelectedIndex >= 0) {
                 Turma t2 = (Turma)listObjects.SelectedObjects[0];
-                EstudantesTurma listaEstudantes = new EstudantesTurma(this,t2.nivel, t2.nome,t2.anoID);
+                EstudantesTurma listaEstudantes = new EstudantesTurma(cn,this,t2.nivel, t2.nome,t2.anoID);
                 listaEstudantes.Show();
             }
         }

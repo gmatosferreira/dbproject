@@ -70,6 +70,7 @@
     <Compile Include="Bibliotecas.Designer.cs">
       <DependentUpon>Bibliotecas.cs</DependentUpon>
     </Compile>
+    <Compile Include="EstudanteTurma.cs" />
     <Compile Include="LivroEstado.cs" />
     <Compile Include="GruposDisciplinares.cs">
       <SubType>Form</SubType>
@@ -145,6 +146,9 @@
     <Compile Include="Turno.cs" />
     <EmbeddedResource Include="BlocosTipos.resx">
       <DependentUpon>BlocosTipos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EstudantesTurma.resx">
+      <DependentUpon>EstudantesTurma.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GruposDisciplinares.resx">
       <DependentUpon>GruposDisciplinares.cs</DependentUpon>
