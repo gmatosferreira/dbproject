@@ -82,7 +82,6 @@
             this.requisicaoDataRequisicao = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.requisicaoDataEntrega = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.requisicoesTitle = new System.Windows.Forms.Label();
-            this.pesquisaRequisicoesSelect = new System.Windows.Forms.ComboBox();
             this.pesquisaRequisicoesLabel = new System.Windows.Forms.Label();
             this.pesquisaRequisicoesText = new System.Windows.Forms.TextBox();
             this.panelFormRequisicao = new System.Windows.Forms.Panel();
@@ -98,6 +97,23 @@
             this.panelObjectRequisicaoImage = new System.Windows.Forms.PictureBox();
             this.label5 = new System.Windows.Forms.Label();
             this.panelFormRequisicaoLegendaEntrega = new System.Windows.Forms.Label();
+            this.bibliotecaAdicionar = new System.Windows.Forms.Button();
+            this.bibliotecaEditar = new System.Windows.Forms.Button();
+            this.bibliotecaEliminar = new System.Windows.Forms.Button();
+            this.bibliotecaFormHorarioEncerramento = new System.Windows.Forms.DateTimePicker();
+            this.bibliotecaFormHorarioAbertura = new System.Windows.Forms.DateTimePicker();
+            this.bibliotecaFormSubmeter = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.bibliotecaFormNome = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.bibliotecaFormDiasParaEntrega = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.bibliotecaFormPanel = new System.Windows.Forms.Panel();
+            this.label13 = new System.Windows.Forms.Label();
+            this.bibliotecaFormTitulo = new System.Windows.Forms.Label();
+            this.pesquisaRequisicoesSelect = new System.Windows.Forms.ComboBox();
+            this.bibliotecaFormSupervisor = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.panelFormCatalogoHide)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelObjectCatalogoHide)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelFormRequisicaoEsconder)).BeginInit();
@@ -111,6 +127,7 @@
             this.panelFormRequisicao.SuspendLayout();
             this.panelObjectRequisicao.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelObjectRequisicaoImage)).BeginInit();
+            this.bibliotecaFormPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // janelaSubtitulo
@@ -671,23 +688,6 @@
             this.requisicoesTitle.Text = "Requisições";
             this.requisicoesTitle.Visible = false;
             // 
-            // pesquisaRequisicoesSelect
-            // 
-            this.pesquisaRequisicoesSelect.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.pesquisaRequisicoesSelect.FormattingEnabled = true;
-            this.pesquisaRequisicoesSelect.Items.AddRange(new object[] {
-            "Livro",
-            "Pessoa",
-            "Estado",
-            "Data de entrega",
-            "Data de devolução"});
-            this.pesquisaRequisicoesSelect.Location = new System.Drawing.Point(715, 123);
-            this.pesquisaRequisicoesSelect.Name = "pesquisaRequisicoesSelect";
-            this.pesquisaRequisicoesSelect.Size = new System.Drawing.Size(135, 21);
-            this.pesquisaRequisicoesSelect.TabIndex = 35;
-            this.pesquisaRequisicoesSelect.Visible = false;
-            this.pesquisaRequisicoesSelect.SelectedIndexChanged += new System.EventHandler(this.pesquisaRequisicaoAtributo_SelectedIndexChanged);
-            // 
             // pesquisaRequisicoesLabel
             // 
             this.pesquisaRequisicoesLabel.AutoSize = true;
@@ -851,12 +851,205 @@
             this.panelFormRequisicaoLegendaEntrega.Size = new System.Drawing.Size(209, 13);
             this.panelFormRequisicaoLegendaEntrega.TabIndex = 39;
             this.panelFormRequisicaoLegendaEntrega.Text = "A entrega desta biblioteca de hoje a X dias";
+            this.panelFormRequisicaoLegendaEntrega.Visible = false;
+            // 
+            // bibliotecaAdicionar
+            // 
+            this.bibliotecaAdicionar.Location = new System.Drawing.Point(393, 54);
+            this.bibliotecaAdicionar.Name = "bibliotecaAdicionar";
+            this.bibliotecaAdicionar.Size = new System.Drawing.Size(90, 21);
+            this.bibliotecaAdicionar.TabIndex = 40;
+            this.bibliotecaAdicionar.Text = "Adicionar nova";
+            this.Ajuda.SetToolTip(this.bibliotecaAdicionar, "0");
+            this.bibliotecaAdicionar.UseVisualStyleBackColor = true;
+            this.bibliotecaAdicionar.Click += new System.EventHandler(this.bibliotecaAdicionar_Click);
+            // 
+            // bibliotecaEditar
+            // 
+            this.bibliotecaEditar.Location = new System.Drawing.Point(297, 28);
+            this.bibliotecaEditar.Name = "bibliotecaEditar";
+            this.bibliotecaEditar.Size = new System.Drawing.Size(90, 47);
+            this.bibliotecaEditar.TabIndex = 41;
+            this.bibliotecaEditar.Text = "Editar biblioteca";
+            this.Ajuda.SetToolTip(this.bibliotecaEditar, "0");
+            this.bibliotecaEditar.UseVisualStyleBackColor = true;
+            this.bibliotecaEditar.Visible = false;
+            this.bibliotecaEditar.Click += new System.EventHandler(this.bibliotecaEditar_Click);
+            // 
+            // bibliotecaEliminar
+            // 
+            this.bibliotecaEliminar.Location = new System.Drawing.Point(393, 28);
+            this.bibliotecaEliminar.Name = "bibliotecaEliminar";
+            this.bibliotecaEliminar.Size = new System.Drawing.Size(90, 20);
+            this.bibliotecaEliminar.TabIndex = 42;
+            this.bibliotecaEliminar.Text = "Eliminar biblioteca";
+            this.Ajuda.SetToolTip(this.bibliotecaEliminar, "0");
+            this.bibliotecaEliminar.UseVisualStyleBackColor = true;
+            this.bibliotecaEliminar.Visible = false;
+            this.bibliotecaEliminar.Click += new System.EventHandler(this.bibliotecaEliminar_Click);
+            // 
+            // bibliotecaFormHorarioEncerramento
+            // 
+            this.bibliotecaFormHorarioEncerramento.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.bibliotecaFormHorarioEncerramento.Location = new System.Drawing.Point(324, 55);
+            this.bibliotecaFormHorarioEncerramento.Name = "bibliotecaFormHorarioEncerramento";
+            this.bibliotecaFormHorarioEncerramento.ShowUpDown = true;
+            this.bibliotecaFormHorarioEncerramento.Size = new System.Drawing.Size(70, 20);
+            this.bibliotecaFormHorarioEncerramento.TabIndex = 48;
+            this.bibliotecaFormHorarioEncerramento.Value = new System.DateTime(2020, 6, 11, 0, 0, 0, 0);
+            // 
+            // bibliotecaFormHorarioAbertura
+            // 
+            this.bibliotecaFormHorarioAbertura.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.bibliotecaFormHorarioAbertura.Location = new System.Drawing.Point(324, 17);
+            this.bibliotecaFormHorarioAbertura.Name = "bibliotecaFormHorarioAbertura";
+            this.bibliotecaFormHorarioAbertura.ShowUpDown = true;
+            this.bibliotecaFormHorarioAbertura.Size = new System.Drawing.Size(70, 20);
+            this.bibliotecaFormHorarioAbertura.TabIndex = 47;
+            this.bibliotecaFormHorarioAbertura.Value = new System.DateTime(2020, 6, 11, 0, 0, 0, 0);
+            // 
+            // bibliotecaFormSubmeter
+            // 
+            this.bibliotecaFormSubmeter.Location = new System.Drawing.Point(409, 50);
+            this.bibliotecaFormSubmeter.Name = "bibliotecaFormSubmeter";
+            this.bibliotecaFormSubmeter.Size = new System.Drawing.Size(82, 25);
+            this.bibliotecaFormSubmeter.TabIndex = 44;
+            this.bibliotecaFormSubmeter.Text = "Botao";
+            this.Ajuda.SetToolTip(this.bibliotecaFormSubmeter, "0");
+            this.bibliotecaFormSubmeter.UseVisualStyleBackColor = true;
+            this.bibliotecaFormSubmeter.Click += new System.EventHandler(this.bibliotecaFormSubmeter_Click);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(321, 42);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(73, 13);
+            this.label7.TabIndex = 46;
+            this.label7.Text = "Encerramento";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(321, 4);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(47, 13);
+            this.label9.TabIndex = 45;
+            this.label9.Text = "Abertura";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // bibliotecaFormNome
+            // 
+            this.bibliotecaFormNome.Location = new System.Drawing.Point(78, 53);
+            this.bibliotecaFormNome.Name = "bibliotecaFormNome";
+            this.bibliotecaFormNome.Size = new System.Drawing.Size(137, 20);
+            this.bibliotecaFormNome.TabIndex = 50;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(75, 37);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(35, 13);
+            this.label10.TabIndex = 49;
+            this.label10.Text = "Nome";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // bibliotecaFormDiasParaEntrega
+            // 
+            this.bibliotecaFormDiasParaEntrega.Location = new System.Drawing.Point(221, 55);
+            this.bibliotecaFormDiasParaEntrega.Name = "bibliotecaFormDiasParaEntrega";
+            this.bibliotecaFormDiasParaEntrega.Size = new System.Drawing.Size(91, 20);
+            this.bibliotecaFormDiasParaEntrega.TabIndex = 52;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(218, 42);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(81, 13);
+            this.label12.TabIndex = 51;
+            this.label12.Text = "Dias p/ entrega";
+            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // bibliotecaFormPanel
+            // 
+            this.bibliotecaFormPanel.Controls.Add(this.bibliotecaFormSupervisor);
+            this.bibliotecaFormPanel.Controls.Add(this.bibliotecaFormTitulo);
+            this.bibliotecaFormPanel.Controls.Add(this.label13);
+            this.bibliotecaFormPanel.Controls.Add(this.bibliotecaFormDiasParaEntrega);
+            this.bibliotecaFormPanel.Controls.Add(this.label9);
+            this.bibliotecaFormPanel.Controls.Add(this.label12);
+            this.bibliotecaFormPanel.Controls.Add(this.label7);
+            this.bibliotecaFormPanel.Controls.Add(this.bibliotecaFormNome);
+            this.bibliotecaFormPanel.Controls.Add(this.bibliotecaFormSubmeter);
+            this.bibliotecaFormPanel.Controls.Add(this.label10);
+            this.bibliotecaFormPanel.Controls.Add(this.bibliotecaFormHorarioAbertura);
+            this.bibliotecaFormPanel.Controls.Add(this.bibliotecaFormHorarioEncerramento);
+            this.bibliotecaFormPanel.Location = new System.Drawing.Point(509, 12);
+            this.bibliotecaFormPanel.Name = "bibliotecaFormPanel";
+            this.bibliotecaFormPanel.Size = new System.Drawing.Size(507, 88);
+            this.bibliotecaFormPanel.TabIndex = 53;
+            this.bibliotecaFormPanel.Visible = false;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(218, 3);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(57, 13);
+            this.label13.TabIndex = 53;
+            this.label13.Text = "Supervisor";
+            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // bibliotecaFormTitulo
+            // 
+            this.bibliotecaFormTitulo.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.bibliotecaFormTitulo.AutoSize = true;
+            this.bibliotecaFormTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bibliotecaFormTitulo.Location = new System.Drawing.Point(74, 3);
+            this.bibliotecaFormTitulo.Name = "bibliotecaFormTitulo";
+            this.bibliotecaFormTitulo.Size = new System.Drawing.Size(47, 20);
+            this.bibliotecaFormTitulo.TabIndex = 54;
+            this.bibliotecaFormTitulo.Text = "Título";
+            this.bibliotecaFormTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // pesquisaRequisicoesSelect
+            // 
+            this.pesquisaRequisicoesSelect.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.pesquisaRequisicoesSelect.FormattingEnabled = true;
+            this.pesquisaRequisicoesSelect.Items.AddRange(new object[] {
+            "Livro",
+            "Pessoa",
+            "Estado",
+            "Data de entrega",
+            "Data de devolução"});
+            this.pesquisaRequisicoesSelect.Location = new System.Drawing.Point(715, 123);
+            this.pesquisaRequisicoesSelect.Name = "pesquisaRequisicoesSelect";
+            this.pesquisaRequisicoesSelect.Size = new System.Drawing.Size(135, 21);
+            this.pesquisaRequisicoesSelect.TabIndex = 35;
+            this.pesquisaRequisicoesSelect.Visible = false;
+            this.pesquisaRequisicoesSelect.SelectedIndexChanged += new System.EventHandler(this.pesquisaRequisicaoAtributo_SelectedIndexChanged);
+            // 
+            // bibliotecaFormSupervisor
+            // 
+            this.bibliotecaFormSupervisor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.bibliotecaFormSupervisor.FormattingEnabled = true;
+            this.bibliotecaFormSupervisor.Location = new System.Drawing.Point(221, 15);
+            this.bibliotecaFormSupervisor.Name = "bibliotecaFormSupervisor";
+            this.bibliotecaFormSupervisor.Size = new System.Drawing.Size(91, 21);
+            this.bibliotecaFormSupervisor.TabIndex = 39;
             // 
             // Bibliotecas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1028, 711);
+            this.Controls.Add(this.bibliotecaFormPanel);
+            this.Controls.Add(this.bibliotecaEliminar);
+            this.Controls.Add(this.bibliotecaEditar);
+            this.Controls.Add(this.bibliotecaAdicionar);
             this.Controls.Add(this.panelFormRequisicaoLegendaEntrega);
             this.Controls.Add(this.panelFormRequisicao);
             this.Controls.Add(this.panelObjectRequisicao);
@@ -899,6 +1092,8 @@
             this.panelObjectRequisicao.ResumeLayout(false);
             this.panelObjectRequisicao.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelObjectRequisicaoImage)).EndInit();
+            this.bibliotecaFormPanel.ResumeLayout(false);
+            this.bibliotecaFormPanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -952,7 +1147,6 @@
         private BrightIdeasSoftware.OLVColumn requisicaoDataEntrega;
         private BrightIdeasSoftware.OLVColumn requisicaoEstado;
         private System.Windows.Forms.Label requisicoesTitle;
-        private System.Windows.Forms.ComboBox pesquisaRequisicoesSelect;
         private System.Windows.Forms.Label pesquisaRequisicoesLabel;
         private System.Windows.Forms.TextBox pesquisaRequisicoesText;
         private System.Windows.Forms.Button buttonAdicionarObjectRequisicoes;
@@ -974,5 +1168,22 @@
         private System.Windows.Forms.ComboBox panelFormRequisicaoFieldLivro;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label panelFormRequisicaoLegendaEntrega;
+        private System.Windows.Forms.Button bibliotecaAdicionar;
+        private System.Windows.Forms.Button bibliotecaEditar;
+        private System.Windows.Forms.Button bibliotecaEliminar;
+        private System.Windows.Forms.DateTimePicker bibliotecaFormHorarioEncerramento;
+        private System.Windows.Forms.DateTimePicker bibliotecaFormHorarioAbertura;
+        private System.Windows.Forms.Button bibliotecaFormSubmeter;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox bibliotecaFormNome;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox bibliotecaFormDiasParaEntrega;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Panel bibliotecaFormPanel;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label bibliotecaFormTitulo;
+        private System.Windows.Forms.ComboBox bibliotecaFormSupervisor;
+        private System.Windows.Forms.ComboBox pesquisaRequisicoesSelect;
     }
 }

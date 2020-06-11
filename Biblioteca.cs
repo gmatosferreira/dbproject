@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Funcionarios
 {
-    class Biblioteca
+    public class Biblioteca
     {
         private String _nome;
         private Turno _horario;

@@ -83,8 +83,8 @@ namespace Funcionarios
             { 
                 NaoDocente d = new NaoDocente(); 
                 d.nmec = Int32.Parse(reader["NMec"].ToString()); 
-                d.nome = reader["nome"].ToString(); 
-                //panelFormFieldSupervisor.Items.Add(d.ToString()); 
+                d.nome = reader["nome"].ToString();
+                bibliotecaFormSupervisor.Items.Add(d.ToString());
                 naodocentes.Add(d); 
                 counter++; 
             } 
@@ -195,6 +195,7 @@ namespace Funcionarios
             panelObjectCatalogo.Visible = false;
             panelFormRequisicao.Visible = false;
             panelObjectRequisicao.Visible = false;
+            bibliotecaFormPanel.Visible = false;
 
             // Clear all data showed
             listCatalogo.Items.Clear();
@@ -205,6 +206,7 @@ namespace Funcionarios
             // Muda todo o contexto da interface para os dados da biblioteca passada como argumento
             janelaSubtitulo.Text = b.nome;
             panelFormRequisicaoLegendaEntrega.Text = "A entrega desta biblioteca é de hoje a " + b.diasEntregaLivros.ToString() + " dias";
+            panelFormRequisicaoLegendaEntrega.Visible = true;
 
             // Get Catálogo
             SqlCommand cmd = new SqlCommand("SELECT * FROM vw_LivrosComEstadoCompletos WHERE biblioteca = @Biblioteca", cn);
@@ -277,6 +279,9 @@ namespace Funcionarios
             pesquisaRequisicoesSelect.Visible = true;
             pesquisaRequisicoesText.Visible = true;
             listRequisicoes.Visible = true;
+
+            bibliotecaEditar.Visible = true;
+            bibliotecaEliminar.Visible = true;
 
 
             // ObjectListView
@@ -922,6 +927,248 @@ namespace Funcionarios
             }
         }
 
+        // Biblioteca
+
+        public void adicionarBiblioteca()
+        {
+            // Clear form fields
+            bibliotecaFormNome.Text = "";
+            bibliotecaFormDiasParaEntrega.Text = "";
+            bibliotecaFormHorarioAbertura.ResetText();
+            bibliotecaFormHorarioEncerramento.ResetText();
+            bibliotecaFormSupervisor.SelectedIndex = 0;
+            // Change texts
+            bibliotecaFormTitulo.Text = "Adicionar biblioteca";
+            bibliotecaFormSubmeter.Text = "Adicionar";
+            // Show form
+            bibliotecaFormPanel.Visible = true;
+        }
+
+        public void editarBiblioteca(Biblioteca b)
+        {
+            // Clear form fields
+            bibliotecaFormNome.Text = b.nome;
+            bibliotecaFormDiasParaEntrega.Text = b.diasEntregaLivros.ToString();
+            bibliotecaFormHorarioAbertura.Text = b.horario.horaInicio.ToString();
+            bibliotecaFormHorarioEncerramento.Text = b.horario.horaFim.ToString();
+            bibliotecaFormSupervisor.SelectedIndex = 0;
+            // Change texts
+            bibliotecaFormTitulo.Text = "Editar biblioteca";
+            // Change btn text
+            bibliotecaFormSubmeter.Text = "Editar";
+            // Show form
+            bibliotecaFormPanel.Visible = true;
+        }
+
+        private void deleteBiblioteca(Biblioteca b)
+        {
+            // Confirm delete
+            DialogResult msgb = MessageBox.Show("Tem a certeza que quer eliminar a biblioteca " + bibliotecaAtual.nome + "?", "Esta operação é irreversível!", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+            if (msgb == DialogResult.No)
+                return;
+            // Delete tuple on db 
+            String commandText = "DELETE FROM GestaoEscola.Biblioteca WHERE nome = @Nome";
+            SqlCommand command = new SqlCommand(commandText, cn);
+            // Add vars 
+            command.Parameters.Add("@Nome", SqlDbType.VarChar).Value = b.nome;
+
+            // Execute query 
+            int rowsAffected = 0;
+            try
+            {
+                rowsAffected = command.ExecuteNonQuery();
+                Console.WriteLine(String.Format("rowsAffected {0}", rowsAffected));
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(
+                    "Ocorreu um erro, tente novamente!\r\n\r\n" + ex.ToString(),
+                    "Erro!",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+                return;
+            }
+            // If successful query 
+            if (rowsAffected == 1)
+            {
+                // Remove records
+                escolhaBiblioteca.Items.Remove(b.nome);
+                bibliotecas.Remove(b);
+                // Hide biblioteca management elements
+                bibliotecaEditar.Visible = false;
+                bibliotecaEliminar.Visible = false;
+
+                catalogoTitle.Visible = false;
+                buttonAdicionarObjectCatalogo.Visible = false;
+                pesquisaCatalogoLabel.Visible = false;
+                pesquisaCatalogoSelect.Visible = false;
+                pesquisaCatalogoTexto.Visible = false;
+                listCatalogo.Visible = false;
+
+                requisicoesTitle.Visible = false;
+                buttonAdicionarObjectRequisicoes.Visible = false;
+                pesquisaRequisicoesLabel.Visible = false;
+                pesquisaRequisicoesSelect.Visible = false;
+                pesquisaRequisicoesText.Visible = false;
+                listRequisicoes.Visible = false;
+
+                janelaSubtitulo.Text = "Selecione a biblioteca";
+                panelFormRequisicaoLegendaEntrega.Visible = false;
+
+                // Show user feedback 
+                MessageBox.Show(
+                    "A biblioteca foi eliminada com sucesso da base de dados!",
+                    "Sucesso!",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information
+                );
+            }
+            else
+            {
+                MessageBox.Show(
+                    "Ocorreu um erro, tente novamente!",
+                    "Erro!",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+            }
+        }
+
+        private Boolean formValidBiblioteca()
+        {
+            // Check if specific fields are valid
+            bool error = false;
+            StringBuilder sb = new StringBuilder();
+            if (!RegexExpressions.isInteger(bibliotecaFormDiasParaEntrega.Text))
+            {
+                error = true;
+                sb.Append(" Dias para entrega");
+            }
+            // Check others
+            if (bibliotecaFormNome.Text == "" || bibliotecaFormNome.Text.Length > 20)
+            {
+                error = true;
+                sb.Append(" Nome (max 20 caracteres)");
+            }
+            if (bibliotecaFormHorarioAbertura.Text == "")
+            {
+                error = true;
+                sb.Append(" Hora de abertura");
+            }
+            if (bibliotecaFormHorarioEncerramento.Text == "")
+            {
+                error = true;
+                sb.Append(" Hora de encerramento");
+            }
+            // Give user feedback
+            if (error)
+            {
+                MessageBox.Show(
+                   "Confirme que preencheu corretamente os seguintes campos:" + sb.ToString(),
+                   "Atenção!",
+                   MessageBoxButtons.YesNoCancel,
+                   MessageBoxIcon.Exclamation
+               );
+            }
+            return !error;
+        }
+
+        private void submitFormBiblioteca(Biblioteca b)
+        {
+            bool edit = (b != null);
+
+            // Get form data 
+            String nome = bibliotecaFormNome.Text;
+            TimeSpan horaAbertura = TimeSpan.Parse(bibliotecaFormHorarioAbertura.Text);
+            TimeSpan horaEncerramento = TimeSpan.Parse(bibliotecaFormHorarioEncerramento.Text);
+            int diasEntregaLivros = Int32.Parse(bibliotecaFormDiasParaEntrega.Text);
+            NaoDocente supervisor = getNaoDocente(bibliotecaFormSupervisor.Text);
+
+            // Create command 
+            String commandText = "INSERT INTO GestaoEscola.Biblioteca VALUES (@Nome,@HoraAbertura,@HoraEncerramento,@NMecSupervisor,@DiasEntrega)";
+            if (edit)
+                commandText = "UPDATE GestaoEscola.Biblioteca SET horaAbertura = @HoraAbertura, horaEncerramento = @HoraEncerramento, supervisor = @NMecSupervisor, diasEntregaLivros = @DiasEntrega WHERE nome = @Nome";
+            SqlCommand command = new SqlCommand(commandText, cn);
+            // Add vars 
+            command.Parameters.Add("@Nome", SqlDbType.VarChar).Value = nome;
+            if (edit)
+                command.Parameters["@Nome"].Value = b.nome;
+            command.Parameters.Add("@HoraAbertura", SqlDbType.Time).Value = horaAbertura;
+            command.Parameters.Add("@HoraEncerramento", SqlDbType.Time).Value = horaEncerramento;
+            command.Parameters.Add("@NMecSupervisor", SqlDbType.Int).Value = supervisor.nmec;
+            command.Parameters.Add("@DiasEntrega", SqlDbType.Int).Value = diasEntregaLivros; ;
+
+            // Execute query 
+            int rowsAffected = 0;
+            try
+            {
+                rowsAffected = command.ExecuteNonQuery();
+                Console.WriteLine(String.Format("rowsAffected {0}", rowsAffected));
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(
+                    "Ocorreu um erro, verifique que preencheu todos os dados corretamente e tente novamente!\r\n\r\n" + ex.ToString(),
+                    "Erro!",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+                return;
+            }
+            // If query is successful 
+            if (rowsAffected == 1)
+            {
+
+                if (!edit)
+                {
+                    b = new Biblioteca();
+                    b.nome = nome;
+                    b.horario = new Turno();
+                    b.horario.horaInicio = horaAbertura;
+                    b.horario.horaFim = horaEncerramento;
+                    b.diasEntregaLivros = diasEntregaLivros;
+                    b.supervisor = supervisor;
+                    escolhaBiblioteca.Items.Add(b.nome);
+                    bibliotecas.Add(b);
+                } else
+                {
+                    b.horario = new Turno();
+                    b.horario.horaInicio = horaAbertura;
+                    b.horario.horaFim = horaEncerramento;
+                    b.diasEntregaLivros = diasEntregaLivros;
+                    b.supervisor = supervisor;
+                    changeBibliotecaContext(bibliotecaAtual);
+                }
+
+                bibliotecaFormPanel.Visible = false;
+
+                // SHow feedback to user 
+                String successMessage = "A biblioteca foi criada com sucesso!";
+                if (edit)
+                    successMessage = "Os dados da biblioteca foram editados com sucesso";
+                MessageBox.Show(
+                    successMessage,
+                    "Sucesso!",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information
+                );
+
+                // Update objects displayed on interface 
+                if (edit)
+                    changeBibliotecaContext(bibliotecaAtual);
+            }
+            else
+            {
+                MessageBox.Show(
+                    "Ocorreu um erro, verifique que preencheu todos os dados corretamente e tente novamente!",
+                    "Erro!",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+            }
+        }
+
         // Event handlers
         private void Funcionarios_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -1077,6 +1324,34 @@ namespace Funcionarios
             {
                 submitFormRequisicao(null);
             }
+        }
+
+        private void bibliotecaEditar_Click(object sender, EventArgs e)
+        {
+            editarBiblioteca(bibliotecaAtual);
+        }
+
+        private void bibliotecaEliminar_Click(object sender, EventArgs e)
+        {
+            deleteBiblioteca(bibliotecaAtual);
+        }
+
+        private void bibliotecaFormSubmeter_Click(object sender, EventArgs e)
+        {
+            if (formValidBiblioteca())
+            {
+                if (bibliotecaFormSubmeter.Text.Equals("Adicionar"))
+                    submitFormBiblioteca(null);
+                else
+                    submitFormBiblioteca(bibliotecaAtual);
+            }
+                
+        }
+
+        // Biblioteca
+        private void bibliotecaAdicionar_Click(object sender, EventArgs e)
+        {
+            adicionarBiblioteca();
         }
 
     }
