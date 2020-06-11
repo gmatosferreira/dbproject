@@ -411,7 +411,6 @@
             this.Controls.Add(this.listObjects);
             this.Controls.Add(this.ajudaBtn);
             this.Controls.Add(this.buttonAdicionarObject);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "EstudantesTurma";
             this.Text = "Sistema de Gestão Escolar | Lista de Estudantes da Turma";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.EstudantesTurma_FormClosed);

@@ -1,6 +1,6 @@
 -- https://stackoverflow.com/a/7994065
 
--- Preventd EXCEPTIONS on DELETE operations on Turnos due to FK restrictions
+-- Preventd EXCEPTIONS on DELETE operations on NDFUncao due to FK restrictions
 ALTER PROCEDURE pr_NDFuncaoDELETE @Codigo int, @Feedback varchar(4000) OUTPUT
 AS
 BEGIN

@@ -167,8 +167,8 @@ namespace Funcionarios
         private void menuBibliotecaPanel_Click(object sender, EventArgs e)
         {
             this.Hide();
-            //Bibliotecas b = new Bibliotecas(cn, this); 
-            //b.ShowDialog(); 
+            Bibliotecas b = new Bibliotecas(cn, this); 
+            b.ShowDialog(); 
         }
 
         private void menuTurnosPanel_Click(object sender, EventArgs e)
