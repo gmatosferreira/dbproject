@@ -55,16 +55,6 @@ BEGIN
     BEGIN TRANSACTION 
         SAVE TRANSACTION SavepointTranBegin
         IF @Edit=0
-            INSERT INTO GestaoEscola.AnoLetivo VALUES (@anoLetivoID,@dataInicio,@dataFim)
-        ELSE
-            UPDATE GestaoEscola.AnoLetivo SET dataInicio=@dataInicio, dataFim=@dataFim WHERE codigo=@anoLetivoID
-        IF (@@ROWCOUNT!=1)
-            BEGIN
-				PRINT 'Error! There was an error creating tuple on GestaoEscola.AnoLetivo! Aborting...'
-				SET @State = -1
-				ROLLBACK TRAN SavepointTranBegin
-            END
-        IF @Edit=0
             INSERT INTO GestaoEscola.Turma VALUES (@nivel, @nome, @nmecDT, @anoLetivoID)
         ELSE
 			UPDATE GestaoEscola.Turma SET diretorDeTurma=@nmecDT WHERE (nivel=@nivel AND nome=@nome AND anoLetivo=@anoLetivoID)
