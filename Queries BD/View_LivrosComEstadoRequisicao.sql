@@ -5,12 +5,12 @@ SELECT
 	Livro.ISBN, 
 	Livro.biblioteca,
 	Livro.IDInterno,
-	COUNT(NULLIF(Requisicao.entregue, 0))-COUNT(*) as estado
+	COUNT(NULLIF(Requisicao.entregue, 0))-COUNT(Requisicao.entregue) as estado
 	-- estado=-1 para emprestado
 	-- estado=0 para disponível
 FROM 
 (
-	GestaoEscola.Livro JOIN GestaoEscola.Requisicao
+	GestaoEscola.Livro LEFT JOIN GestaoEscola.Requisicao
 	ON Livro.ISBN = Requisicao.livro
 	AND Livro.biblioteca = Requisicao.biblioteca
 	AND Livro.IDInterno = Requisicao.livroIDInterno
