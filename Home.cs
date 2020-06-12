@@ -64,7 +64,7 @@ namespace Funcionarios
         private void getStats()
         {
             // Make SQL requests for every table to get the number of rows of each one 
-            SqlCommand cmd = new SqlCommand("SELECT COUNT(NMec) AS N FROM GestaoEscola.Docente", cn);
+            SqlCommand cmd = new SqlCommand("SELECT COUNT(NMec) AS N FROM vw_Docentes", cn);
             SqlDataReader reader = cmd.ExecuteReader();
             //docentes 
             reader.Read();
@@ -73,7 +73,7 @@ namespace Funcionarios
             reader.Close();
 
             // naoDocente 
-            cmd = new SqlCommand("SELECT COUNT(NMec) AS N FROM GestaoEscola.NaoDocente", cn);
+            cmd = new SqlCommand("SELECT COUNT(NMec) AS N FROM vw_NaoDocentes", cn);
             reader = cmd.ExecuteReader();
             reader.Read();
             statsNaoDocentesLabel.Text = reader["N"].ToString();
