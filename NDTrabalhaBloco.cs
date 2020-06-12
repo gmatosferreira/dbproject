@@ -39,5 +39,10 @@ namespace Funcionarios
             set { this._turno = value; }
         }
 
+        public String str
+        {
+            get { return _turno.str+"\r\nTeste"; }
+        }
+
     }
 }

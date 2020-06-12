@@ -71,6 +71,12 @@
       <DependentUpon>Bibliotecas.cs</DependentUpon>
     </Compile>
     <Compile Include="EstudanteTurma.cs" />
+    <Compile Include="NaoDocenteHorario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NaoDocenteHorario.Designer.cs">
+      <DependentUpon>NaoDocenteHorario.cs</DependentUpon>
+    </Compile>
     <Compile Include="Pessoa.cs" />
     <Compile Include="LivroEstado.cs" />
     <Compile Include="GruposDisciplinares.cs">
@@ -163,6 +169,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Blocos.resx">
       <DependentUpon>Blocos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NaoDocenteHorario.resx">
+      <DependentUpon>NaoDocenteHorario.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Turnos.resx">
       <DependentUpon>Turnos.cs</DependentUpon>
@@ -263,6 +272,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\TiposBloco.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Horário.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

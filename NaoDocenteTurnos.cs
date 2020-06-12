@@ -210,7 +210,7 @@ namespace Funcionarios
             command.Parameters.Add("@NMec", SqlDbType.Int);
             command.Parameters["@NMec"].Value = nd.nmec;
             command.Parameters.Add("@HoraInicio", SqlDbType.Time);
-            command.Parameters["@HoraInicio"].Value = nd.turno.horaInicio;
+            command.Parameters["@HoraInicio"].Value = f.turno.horaInicio;
             // Execute query  
             int rowsAffected = 0;  
             try  
@@ -322,7 +322,6 @@ namespace Funcionarios
             // Add vars 
             command.Parameters.Add("@BCoordenadas", SqlDbType.VarChar);
             command.Parameters["@BCoordenadas"].Value = bloco.coordenadas.Trim();
-            MessageBox.Show(bloco.coordenadas.Trim());
             command.Parameters.Add("@NMec", SqlDbType.Int);
             command.Parameters["@NMec"].Value = nd.nmec;
             command.Parameters.Add("@CodFuncao", SqlDbType.Int);
@@ -372,7 +371,7 @@ namespace Funcionarios
                 return;
             }
             // If query is successful 
-            if (rowsAffected == 2)
+            if (!edit && rowsAffected == 2 || edit && rowsAffected==1)
             {
                 // If add operation 
                 if (!edit)

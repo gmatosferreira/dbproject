@@ -74,6 +74,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.panelObjectVerHorario = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.panelObjectHide)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ajudaBtn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelFormHide)).BeginInit();
@@ -194,9 +195,9 @@
             // 
             // panelObjectGerirFuncoes
             // 
-            this.panelObjectGerirFuncoes.Location = new System.Drawing.Point(24, 299);
+            this.panelObjectGerirFuncoes.Location = new System.Drawing.Point(0, 299);
             this.panelObjectGerirFuncoes.Name = "panelObjectGerirFuncoes";
-            this.panelObjectGerirFuncoes.Size = new System.Drawing.Size(111, 37);
+            this.panelObjectGerirFuncoes.Size = new System.Drawing.Size(73, 37);
             this.panelObjectGerirFuncoes.TabIndex = 24;
             this.panelObjectGerirFuncoes.Text = "Gerir funções";
             this.Ajuda.SetToolTip(this.panelObjectGerirFuncoes, "0");
@@ -268,6 +269,7 @@
             // 
             // panelObject
             // 
+            this.panelObject.Controls.Add(this.panelObjectVerHorario);
             this.panelObject.Controls.Add(this.panelObjectGerirFuncoes);
             this.panelObject.Controls.Add(this.panelObjectHide);
             this.panelObject.Controls.Add(this.panelObjectEliminar);
@@ -547,6 +549,17 @@
             this.label7.Text = "Dúvidas?";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // panelObjectVerHorario
+            // 
+            this.panelObjectVerHorario.Location = new System.Drawing.Point(79, 299);
+            this.panelObjectVerHorario.Name = "panelObjectVerHorario";
+            this.panelObjectVerHorario.Size = new System.Drawing.Size(73, 37);
+            this.panelObjectVerHorario.TabIndex = 25;
+            this.panelObjectVerHorario.Text = "Consultar horário";
+            this.Ajuda.SetToolTip(this.panelObjectVerHorario, "0");
+            this.panelObjectVerHorario.UseVisualStyleBackColor = true;
+            this.panelObjectVerHorario.Click += new System.EventHandler(this.panelObjectVerHorario_Click);
+            // 
             // NaoDocentes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -631,5 +644,6 @@
         private System.Windows.Forms.ComboBox panelFormFieldTurno;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button panelObjectGerirFuncoes;
+        private System.Windows.Forms.Button panelObjectVerHorario;
     }
 }

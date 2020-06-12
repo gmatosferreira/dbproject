@@ -504,6 +504,17 @@ namespace Funcionarios
             f.ShowDialog();
         }
 
+        private void panelObjectVerHorario_Click(object sender, EventArgs e)
+        {
+            // Get Object
+            if (listObjects.Items.Count == 0 | current < 0)
+                return;
+            NaoDocente nd = (NaoDocente)listObjects.SelectedObjects[0];
+            //this.Hide();
+            NaoDocenteHorario f = new NaoDocenteHorario(cn, nd, this);
+            f.ShowDialog();
+        }
+
         private void funcionariosListView_SelectedIndexChanged(object sender, EventArgs e)
         {
             // When new row selected, show it's Object data
