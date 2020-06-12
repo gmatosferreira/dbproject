@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Funcionarios
 {
-    class GrupoDisciplinar
+    public class GrupoDisciplinar
     {
         private int _num;
         private String _nome;

@@ -544,7 +544,13 @@ namespace Funcionarios
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            // Get Object
+            if (listObjects.Items.Count == 0 | current < 0)
+                return;
+            
+            Docente d1 = (Docente)listObjects.SelectedObjects[0];
+            Aulas a = new Aulas(cn, this, d1);
+            a.ShowDialog();
         }
 
         private void funcionariosListView_SelectedIndexChanged(object sender, EventArgs e)
