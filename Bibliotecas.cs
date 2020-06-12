@@ -431,8 +431,18 @@ namespace Funcionarios
             }
             catch (SqlException ex)
             {
+                String errorMessage = "Ocorreu um erro, tente novamente!";
+                for (int i = 0; i < ex.Errors.Count; i++)
+                {
+                    if (ex.Errors[i].Message.IndexOf("REFERENCE constraint \"FK", StringComparison.OrdinalIgnoreCase) >= 0)
+                    {
+                        errorMessage = "Não pode apagar um livro para o qual existam requisições associadas!";
+                        break;
+                    }
+
+                }
                 MessageBox.Show(
-                    "Ocorreu um erro, tente novamente!\r\n\r\n" + ex.ToString(),
+                    errorMessage + "\r\n\r\n" + ex.ToString(),
                     "Erro!",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error
@@ -637,7 +647,7 @@ namespace Funcionarios
             if (f.dataRequisicao == DateTime.Today)
                 panelObjectRequisicaoEliminar.Enabled = true;
             else
-                panelObjectRequisicaoEliminar.Enabled = false;
+                panelObjectRequisicaoEliminar.Enabled = true;
             // Set entrega text
             if (f.entregue)
                 panelObjectRequisicaoEntregar.Text = "Reverter entrega";
@@ -749,8 +759,18 @@ namespace Funcionarios
             }
             catch (SqlException ex)
             {
+                String errorMessage = "Ocorreu um erro, tente novamente!";
+                for (int i = 0; i < ex.Errors.Count; i++)
+                {
+                    if (ex.Errors[i].Message.IndexOf("Não é permitido eliminar uma Requisicao cuja dataRequisicao não seja a de hoje", StringComparison.OrdinalIgnoreCase) >= 0)
+                    {
+                        errorMessage = ex.Errors[i].Message;
+                        break;
+                    }
+
+                }
                 MessageBox.Show(
-                    "Ocorreu um erro, tente novamente!\r\n\r\n" + ex.ToString(),
+                    errorMessage + "\r\n\r\n" + ex.ToString(),
                     "Erro!",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error
@@ -873,8 +893,18 @@ namespace Funcionarios
             }
             catch (SqlException ex)
             {
+                String errorMessage = "Ocorreu um erro, verifique que preencheu todos os dados corretamente e tente novamente!";
+                for (int i = 0; i < ex.Errors.Count; i++)
+                {
+                    if (ex.Errors[i].Message.IndexOf("A requisição não pode ser registada, pois o livro já se encontra requisitado", StringComparison.OrdinalIgnoreCase) >= 0)
+                    {
+                        errorMessage = ex.Errors[i].Message;
+                        break;
+                    }
+
+                }
                 MessageBox.Show(
-                    "Ocorreu um erro, verifique que preencheu todos os dados corretamente e tente novamente!\r\n\r\n" + ex.ToString(),
+                    errorMessage + "\r\n\r\n" + ex.ToString(),
                     "Erro!",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error
@@ -882,7 +912,7 @@ namespace Funcionarios
                 return;
             }
             // If query is successful 
-            if (rowsAffected == 1)
+            if (rowsAffected == 2) //2 lines because of Trigger
             {
                 if (!edit)
                 {
@@ -982,8 +1012,18 @@ namespace Funcionarios
             }
             catch (SqlException ex)
             {
+                String errorMessage = "Ocorreu um erro, tente novamente!";
+                for (int i = 0; i < ex.Errors.Count; i++)
+                {
+                    if (ex.Errors[i].Message.IndexOf("REFERENCE constraint \"FK", StringComparison.OrdinalIgnoreCase) >= 0)
+                    {
+                        errorMessage = "Não pode apagar uma biblioteca com livros ou requisições associadas!";
+                        break;
+                    }
+
+                }
                 MessageBox.Show(
-                    "Ocorreu um erro, tente novamente!\r\n\r\n" + ex.ToString(),
+                    errorMessage + "\r\n\r\n" + ex.ToString(),
                     "Erro!",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error
