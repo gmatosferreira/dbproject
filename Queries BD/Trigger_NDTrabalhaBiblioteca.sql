@@ -1,16 +1,16 @@
--- Prevent INSERT operations on NDTrabalhaBloco
+-- Prevent INSERT operations on NDTrabalhaBbilioteca
 -- To validate if ND has already a job at ththe timespan of the new one
-CREATE TRIGGER tr_NDTrabalhaBlocoInsert ON GestaoEscola.ND_trabalha_Bloco
+CREATE TRIGGER tr_NDTrabalhaBibliotecaInsert ON GestaoEscola.ND_trabalha_Biblioteca
 INSTEAD OF INSERT
 AS
 BEGIN
     -- Get arguments of command
-    DECLARE @BCoordenadas varchar(40)
+    DECLARE @Biblioteca varchar(20)
     DECLARE @NMec int
     DECLARE @CodFuncao int
     DECLARE @HoraInicio time
     DECLARE @HoraFim time 
-    SELECT @BCoordenadas=Bcoordenadas, @NMec=NMec, @CodFuncao=codFuncao, @HoraInicio=horaInicio, @HoraFim=horaFim FROM INSERTED
+    SELECT @Biblioteca=biblioteca, @NMec=NMec, @CodFuncao=codFuncao, @HoraInicio=horaInicio, @HoraFim=horaFim FROM INSERTED
 
     -- Check if starting is smaller than finishing time
     if (@HoraFim<=@HoraInicio)
@@ -32,16 +32,14 @@ BEGIN
     IF @TurnoValido=-2
         RAISERROR ('O horário da nova função colide com o horário de outra função já atribuída!' ,16,1)
 
-
     IF @TurnoValido=1
     BEGIN
         PRINT 'Success, creating tuple ob db!'
         -- Add work shift (if no error was thrown before)
-        INSERT INTO GestaoEscola.ND_trabalha_Bloco (Bcoordenadas, NMec, codFuncao, horaInicio, horaFim) VALUES (@BCoordenadas, @NMec, @CodFuncao, @HoraInicio, @HoraFim)
+        INSERT INTO GestaoEscola.ND_trabalha_Biblioteca (biblioteca, NMec, codFuncao, horaInicio, horaFim) VALUES (@Biblioteca, @NMec, @CodFuncao, @HoraInicio, @HoraFim)
     END
-
 END
 
-DROP TRIGGER GestaoEscola.tr_NDTrabalhaBlocoInsert;
+DROP TRIGGER GestaoEscola.tr_NDTrabalhaBibliotecaInsert;
 
 -- SEEE https://stackoverflow.com/a/31949874

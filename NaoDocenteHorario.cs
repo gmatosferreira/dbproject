@@ -74,6 +74,22 @@ namespace Funcionarios
             return null;
         }
 
+        private void loadBibliotecas()
+        {
+            // Execute SQL query to get Docente rows
+            SqlCommand cmd = new SqlCommand("SELECT * FROM GestaoEscola.Biblioteca", cn);
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                Bloco t = new Bloco();
+                t.nome = "Biblioteca " + reader["nome"].ToString();
+                blocos.Add(t);
+            }
+
+            // Close reader
+            reader.Close();
+        }
+
         private void loadFuncoes()
         {
             // Execute SQL query to get Docente rows
@@ -130,6 +146,7 @@ namespace Funcionarios
         {
             // Get turnos
             loadBlocos();
+            loadBibliotecas();
             loadFuncoes();
 
             // Execute SQL query to get Docente rows
@@ -150,7 +167,25 @@ namespace Funcionarios
                 addToInterface(d);
                 counter++;
             }
+            // Close reader
+            reader.Close();
 
+            // Execute SQL query to get trabalha_Biblioteca rows
+            cmd = new SqlCommand("SELECT * FROM GestaoEscola.ND_trabalha_Biblioteca WHERE NMec=" + nd.nmec.ToString(), cn);
+            reader = cmd.ExecuteReader();
+            // Create list of Objects given the query results
+            while (reader.Read())
+            {
+                NDTrabalhaBloco d = new NDTrabalhaBloco();
+                d.nd = nd;
+                d.funcao = getFuncao(Int32.Parse(reader["codFuncao"].ToString()));
+                d.bloco = getBlocoByNome("Biblioteca " + reader["biblioteca"].ToString());
+                Turno t = new Turno();
+                t.horaInicio = TimeSpan.Parse(reader["horaInicio"].ToString());
+                t.horaFim = TimeSpan.Parse(reader["horaFim"].ToString());
+                d.turno = t;
+                addToInterface(d);
+            }
             // Close reader
             reader.Close();
 

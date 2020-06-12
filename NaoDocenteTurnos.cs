@@ -35,11 +35,6 @@ namespace Funcionarios
             InitializeComponent();
             // ObjectListView Column groups
             // http://objectlistview.sourceforge.net/python/groupListView.html
-            /*this.turno.GroupKeyGetter = delegate (object rowObject) {
-                // Group emails by domain (text after @ symbol)
-                NDTrabalhaBloco func = (NDTrabalhaBloco)rowObject;
-                return "Das " + func.turno.horaInicio.ToString(@"hh", null) + " às " + func.turno.horaFim.ToString(@"hh", null);
-            };*/
             // ObjectListView Aditional preferences
             this.listObjects.FullRowSelect = true; //Make selection select the full row (and not only a cell)
             this.listObjects.SelectedIndex = 0; //Make the first row selected ad default
@@ -58,7 +53,7 @@ namespace Funcionarios
             {
                 Bloco t = new Bloco();
                 t.coordenadas = reader["coordenadas"].ToString();
-                t.nome = reader["nome"].ToString();
+                t.nome = "Bloco "+reader["nome"].ToString();
                 panelFormFieldBloco.Items.Add(t.nome);
                 blocos.Add(t);
             }
@@ -85,6 +80,23 @@ namespace Funcionarios
                     return b;
             }
             return null;
+        }
+
+        private void loadBibliotecas()
+        {
+            // Execute SQL query to get Docente rows
+            SqlCommand cmd = new SqlCommand("SELECT * FROM GestaoEscola.Biblioteca", cn);
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                Bloco t = new Bloco();
+                t.nome = "Biblioteca "+reader["nome"].ToString();
+                panelFormFieldBloco.Items.Add(t.nome);
+                blocos.Add(t);
+            }
+
+            // Close reader
+            reader.Close();
         }
 
         private void loadFuncoes()
@@ -205,6 +217,8 @@ namespace Funcionarios
                 return;
             // Create command 
             String commandText = "DELETE FROM GestaoEscola.ND_trabalha_Bloco WHERE NMec = @NMec AND horaInicio = @HoraInicio";
+            if (f.bloco.nome.Substring(0, 5).Equals("Bibli"))
+                commandText = "DELETE FROM GestaoEscola.ND_trabalha_Biblioteca WHERE NMec = @NMec AND horaInicio = @HoraInicio";
             SqlCommand command = new SqlCommand(commandText, cn);
             // Add vars 
             command.Parameters.Add("@NMec", SqlDbType.Int);
@@ -264,7 +278,7 @@ namespace Funcionarios
             Turno novoTurno = new Turno();
             novoTurno.horaInicio = TimeSpan.Parse(panelFormFieldHoraInicio.Text);
             novoTurno.horaFim = TimeSpan.Parse(panelFormFieldHoraFim.Text);
-            /*
+            /* Moved this validation for DB (Trigger)
             if (!Turno.isInside(novoTurno, nd.turno))
             {
                 MessageBox.Show(
@@ -287,7 +301,6 @@ namespace Funcionarios
                 );
                 return false;
             }
-            DialogResult userfeedback = DialogResult.Yes;
             if (novoTurno.horaInicio.CompareTo(novoTurno.horaFim) > 0)
             {
                 MessageBox.Show(
@@ -297,7 +310,6 @@ namespace Funcionarios
                     MessageBoxIcon.Error
                 );
                 return false;
-                    return false;
             }
             return true;
         }
@@ -315,13 +327,34 @@ namespace Funcionarios
             Bloco bloco = getBlocoByNome(panelFormFieldBloco.Text);
             NDFuncao funcao = getFuncao(panelFormFieldFuncao.Text);
             // Create command 
-            String commandText = "INSERT INTO GestaoEscola.ND_trabalha_Bloco VALUES (@BCoordenadas, @NMec, @CodFuncao, @HoraInicio, @HoraFim)";
+            bool biblioteca = bloco.nome.Substring(0, 5).Contains("Bibli");
+            String commandText = "INSERT INTO GestaoEscola.ND_trabalha_Bloco VALUES (@IDBloco, @NMec, @CodFuncao, @HoraInicio, @HoraFim)";
+            if (biblioteca)
+                commandText = "INSERT INTO GestaoEscola.ND_trabalha_Biblioteca VALUES (@IDBloco, @NMec, @CodFuncao, @HoraInicio, @HoraFim)";
             if (edit)
-                commandText = "UPDATE GestaoEscola.ND_trabalha_Bloco SET Bcoordenadas = @BCoordenadas, codFuncao = @CodFuncao WHERE NMec = @NMec AND horaInicio = @HoraInicio";
+            {
+                if (ndtb.bloco.nome.Substring(0,5).Equals("Bibli") && !biblioteca || ndtb.bloco.nome.Substring(0, 5).Equals("Bloco") && biblioteca)
+                {
+                    MessageBox.Show(
+                        "Ainda não é possível alterar o local de uma função de um bloco para uma biblioteca e vice-versa. Para fazer esta alteração deve eliminar a função atual e criar uma nova.",
+                        "Operação não suportada!",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Exclamation
+                    );
+                    return;
+                }
+                if (!biblioteca)
+                    commandText = "UPDATE GestaoEscola.ND_trabalha_Bloco SET Bcoordenadas = @IDBloco, codFuncao = @CodFuncao WHERE NMec = @NMec AND horaInicio = @HoraInicio";
+                else
+                    commandText = "UPDATE GestaoEscola.ND_trabalha_Biblioteca SET biblioteca = @IDBloco, codFuncao = @CodFuncao WHERE NMec = @NMec AND horaInicio = @HoraInicio";
+            }
             SqlCommand command = new SqlCommand(commandText, cn);
             // Add vars 
-            command.Parameters.Add("@BCoordenadas", SqlDbType.VarChar);
-            command.Parameters["@BCoordenadas"].Value = bloco.coordenadas.Trim();
+            command.Parameters.Add("@IDBloco", SqlDbType.VarChar);
+            if (!biblioteca) // Bloco
+                command.Parameters["@IDBloco"].Value = bloco.coordenadas.Trim();
+            else // Biblioteca
+                command.Parameters["@IDBloco"].Value = bloco.nome.Substring(11, bloco.nome.Length-11);
             command.Parameters.Add("@NMec", SqlDbType.Int);
             command.Parameters["@NMec"].Value = nd.nmec;
             command.Parameters.Add("@CodFuncao", SqlDbType.Int);
@@ -360,7 +393,11 @@ namespace Funcionarios
                         errorMessage = ex.Errors[i].Message;
                         break;
                     }
-
+                    else if (ex.Errors[i].Message.IndexOf("Ocorreu um erro interno à base de dados", StringComparison.OrdinalIgnoreCase) >= 0)
+                    {
+                        errorMessage = ex.Errors[i].Message;
+                        break;
+                    }
                 }
                 MessageBox.Show(
                     errorMessage+"\r\n\r\n" + ex.ToString(),
@@ -390,8 +427,7 @@ namespace Funcionarios
                 {
                     // Get object on interface list and change attributes 
                     ndtb.funcao = funcao;
-                    ndtb.turno.horaInicio = horaInicio;
-                    ndtb.turno.horaFim = horaFim;
+                    ndtb.bloco = bloco;
                 }
                 // SHow feedback to user 
                 String successMessage = "A função foi adicionada com sucesso ao funcionário!";
@@ -435,9 +471,10 @@ namespace Funcionarios
         {
             // Get turnos
             loadBlocos();
+            loadBibliotecas();
             loadFuncoes();
 
-            // Execute SQL query to get Docente rows
+            // Execute SQL query to get trabalha_Bloco rows
             SqlCommand cmd = new SqlCommand("SELECT * FROM GestaoEscola.ND_trabalha_Bloco WHERE NMec="+nd.nmec.ToString(), cn);
             SqlDataReader reader = cmd.ExecuteReader();
             // Create list of Objects given the query results
@@ -453,9 +490,26 @@ namespace Funcionarios
                 t.horaFim = TimeSpan.Parse(reader["horaFim"].ToString());
                 d.turno = t;
                 tuplos.Add(d);
-                counter++;
             }
+            // Close reader
+            reader.Close();
 
+            // Execute SQL query to get trabalha_Biblioteca rows
+            cmd = new SqlCommand("SELECT * FROM GestaoEscola.ND_trabalha_Biblioteca WHERE NMec=" + nd.nmec.ToString(), cn);
+            reader = cmd.ExecuteReader();
+            // Create list of Objects given the query results
+            while (reader.Read())
+            {
+                NDTrabalhaBloco d = new NDTrabalhaBloco();
+                d.nd = nd;
+                d.funcao = getFuncao(Int32.Parse(reader["codFuncao"].ToString()));
+                d.bloco = getBlocoByNome("Biblioteca "+reader["biblioteca"].ToString());
+                Turno t = new Turno();
+                t.horaInicio = TimeSpan.Parse(reader["horaInicio"].ToString());
+                t.horaFim = TimeSpan.Parse(reader["horaFim"].ToString());
+                d.turno = t;
+                tuplos.Add(d);
+            }
             // Close reader
             reader.Close();
 
