@@ -8,9 +8,9 @@ namespace Funcionarios
 {
     class Aula
     {
-        private int _sala, _diaS, _docente;
+        private int _sala, _diaSemana, _docente;
         private String _disciplina;
-        private DateTime _hInicio, _hFim;
+        private TimeSpan _hInicio, _hFim;
         private Turma _turma;
 
         public Aula() { }
@@ -20,10 +20,10 @@ namespace Funcionarios
             get { return this._sala; }
             set { this._sala = value; }
         }
-        public int diaS
+        public int diaSemana
         {
-            get { return this._diaS; }
-            set { this._diaS = value; }
+            get { return this._diaSemana; }
+            set { this._diaSemana = value; }
         }
         public int docente
         {
@@ -35,12 +35,12 @@ namespace Funcionarios
             get { return this._disciplina; }
             set { this._disciplina = value; }
         }
-        public DateTime hInicio
+        public TimeSpan hInicio
         {
             get { return this._hInicio; }
             set { this._hInicio = value; }
         }
-        public DateTime hFim
+        public TimeSpan hFim
         {
             get { return this._hFim; }
             set { this._hFim = value; }
@@ -50,12 +50,38 @@ namespace Funcionarios
             get { return this._turma; }
             set { this._turma = value; }
         }
+        public String turmaNome
+        {
+            get { return turma.nome; }
+        }
+        public String turmaAno
+        {
+            get { return turma.strAnoLetivo; }
+        }
+
         public String horario
         {
             get { return _hInicio.ToString(@"hh\:mm\:ss", null) + " às " + _hFim.ToString(@"hh\:mm\:ss", null); }
         }
-        public String anoStr { 
-            get { return turma.strAnoLetivo;  }
+
+        public String diaS {
+            get
+            {
+                switch(_diaSemana){
+                    case 1:
+                        return "Segunda-Feira";
+                    case 2:
+                        return "Terça-Feira";
+                    case 3:
+                        return "Quarta-Feira";
+                    case 4:
+                        return "Quinta-Feira";
+                    case 5:
+                        return "Sexta-Feira";
+                    default:
+                        return "";
+                }
+            }
         }
     }
 }

@@ -137,7 +137,58 @@ namespace Funcionarios
             DialogResult msgb = MessageBox.Show("Esta operação é irreversível!", "Tem a certeza que quer eliminar o estudante " + e.nmec.ToString() + "?", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
             if (msgb == DialogResult.No)
                 return;
-            MessageBox.Show("Funcionalidade em implementação...");
+            // Delete tuple on db 
+            String commandText = "DELETE FROM GestaoEscola.Estudante WHERE NMec = @ID";
+            SqlCommand command = new SqlCommand(commandText, cn);
+            // Add vars 
+            command.Parameters.Add("@ID", SqlDbType.Int);
+            command.Parameters["@ID"].Value = e.nmec;
+
+            // Execute query 
+            int rowsAffected = 0;
+            try
+            {
+                rowsAffected = command.ExecuteNonQuery();
+                Console.WriteLine(String.Format("rowsAffected {0}", rowsAffected));
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(
+                    "Ocorreu um erro, tente novamente!\r\n" + ex.ToString(),
+                    "Erro!",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+                return;
+            }
+            // If successful query 
+            if (rowsAffected == 3)
+            {
+                // Remove object from interface list 
+                listObjects.RemoveObject(e);
+                // Show user feedback 
+                MessageBox.Show(
+                    "O tuplo foi eliminado com sucesso da base de dados!",
+                    "Sucesso!",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information
+                );
+                // Update stats
+                updateStats();
+                // Hide panels 
+                panelForm.Visible = false;
+                panelObject.Visible = false;
+            }
+            else
+            {
+                MessageBox.Show(
+                    "Ocorreu um erro, tente novamente!",
+                    "Erro!",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+            }
+
             // Hide panels
             panelForm.Visible = false;
             panelObject.Visible = false;

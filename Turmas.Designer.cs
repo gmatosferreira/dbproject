@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Turmas));
             this.janelaSubtitulo = new System.Windows.Forms.Label();
             this.janelaTitulo = new System.Windows.Forms.Label();
@@ -67,6 +68,7 @@
             this.dataFimForm = new System.Windows.Forms.DateTimePicker();
             this.dataInicio = new System.Windows.Forms.DateTimePicker();
             this.comboBoxDT = new System.Windows.Forms.ComboBox();
+            this.Ajuda = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.janelaLogo)).BeginInit();
             this.panelObject.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelObjectHide)).BeginInit();
@@ -567,5 +569,6 @@
         private System.Windows.Forms.DateTimePicker dataFimForm;
         private System.Windows.Forms.DateTimePicker dataInicio;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ToolTip Ajuda;
     }
 }

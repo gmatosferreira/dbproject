@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Funcionarios
 {
-    class Docente : Funcionario
+    public class Docente : Funcionario
     {
-        private GrupoDisciplinar _grupoDisciplinar;
+        public GrupoDisciplinar _grupoDisciplinar;
 
         public Docente() { }
 
