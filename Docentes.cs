@@ -542,6 +542,11 @@ namespace Funcionarios
             pesquisar();
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void funcionariosListView_SelectedIndexChanged(object sender, EventArgs e)
         {
             // When new row selected, show it's Object data

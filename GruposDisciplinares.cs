@@ -348,6 +348,73 @@ namespace Funcionarios
             }
         }
 
+        private void addDiscButton_Click(object sender, EventArgs e)
+        {
+            if(listObjects.SelectedIndex >= 0)
+                panelDisc.Visible = true;
+        }
+
+        private void criarDisciplina_Click(object sender, EventArgs e)
+        {
+            if (disciplinaNome.Text.Length <= 30) {
+                String commandText = "INSERT INTO GestaoEscola.Disciplina VALUES(1, @nome, @grupo)";
+                SqlCommand command = new SqlCommand(commandText, cn);
+                // Add vars 
+                command.Parameters.Add("@nome", SqlDbType.VarChar);
+                command.Parameters["@nome"].Value = disciplinaNome.Text;
+                command.Parameters.Add("@grupo", SqlDbType.Int);
+                GrupoDisciplinar g = (GrupoDisciplinar)listObjects.SelectedObject;
+                command.Parameters["@grupo"].Value = g.num;
+
+                // Execute query  
+                int rowsAffected = 0;
+                try
+                {
+                    rowsAffected = command.ExecuteNonQuery();
+                    Console.WriteLine(String.Format("rowsAffected {0}", rowsAffected));
+                }
+                catch (SqlException ex)
+                {
+                    MessageBox.Show(
+                        "Ocorreu um erro, tente novamente!\r\n" + ex.ToString(),
+                        "Erro!",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error
+                    );
+                    return;
+                }
+                // If successful query  
+                if (rowsAffected == 2)
+                {
+                    MessageBox.Show("Disciplina adicionada ao grupo disciplinar com sucesso!");
+                }
+                else
+                {
+                    MessageBox.Show(
+                  "Essa disciplina já existe!",
+                  "Erro na submissão!",
+                  MessageBoxButtons.OK,
+                  MessageBoxIcon.Error
+                    );
+                }
+            }
+            else
+            {
+                MessageBox.Show(
+                    "Ocorreu um erro, o tamanho máximo do nome da disciplina é de 30 caracteres!",
+                    "Erro!",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+            }
+            panelDisc.Visible = false;
+        }
+
+        private void hideDisciplina_Click(object sender, EventArgs e)
+        {
+            panelDisc.Visible = false;
+        }
+
         private void panelFormButton_Click(object sender, EventArgs e)
         {
             // Execute operation 

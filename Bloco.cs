@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Funcionarios
 {
-    class Bloco
+    public class Bloco
     {
         private int _codigo;
         private String _nome, _coordenadas;

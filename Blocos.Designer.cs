@@ -40,6 +40,7 @@
             this.panelFormButton = new System.Windows.Forms.Button();
             this.panelFormHide = new System.Windows.Forms.PictureBox();
             this.ajudaBtn = new System.Windows.Forms.PictureBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.listObjects = new BrightIdeasSoftware.ObjectListView();
             this.coordenadas = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.nome = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -90,7 +91,7 @@
             // 
             // panelObjectEditar
             // 
-            this.panelObjectEditar.Location = new System.Drawing.Point(40, 105);
+            this.panelObjectEditar.Location = new System.Drawing.Point(40, 118);
             this.panelObjectEditar.Name = "panelObjectEditar";
             this.panelObjectEditar.Size = new System.Drawing.Size(75, 23);
             this.panelObjectEditar.TabIndex = 20;
@@ -101,7 +102,7 @@
             // 
             // panelObjectEliminar
             // 
-            this.panelObjectEliminar.Location = new System.Drawing.Point(40, 145);
+            this.panelObjectEliminar.Location = new System.Drawing.Point(40, 147);
             this.panelObjectEliminar.Name = "panelObjectEliminar";
             this.panelObjectEliminar.Size = new System.Drawing.Size(75, 23);
             this.panelObjectEliminar.TabIndex = 21;
@@ -176,6 +177,17 @@
             this.ajudaBtn.TabStop = false;
             this.Ajuda.SetToolTip(this.ajudaBtn, resources.GetString("ajudaBtn.ToolTip"));
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(40, 89);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 24;
+            this.button1.Text = "Ver Salas";
+            this.Ajuda.SetToolTip(this.button1, "0");
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // listObjects
             // 
             this.listObjects.AllColumns.Add(this.coordenadas);
@@ -225,6 +237,7 @@
             // 
             // panelObject
             // 
+            this.panelObject.Controls.Add(this.button1);
             this.panelObject.Controls.Add(this.panelObjectHide);
             this.panelObject.Controls.Add(this.panelObjectEliminar);
             this.panelObject.Controls.Add(this.panelObjectEditar);
@@ -239,7 +252,7 @@
             // panelObjectSubtitulo
             // 
             this.panelObjectSubtitulo.AutoSize = true;
-            this.panelObjectSubtitulo.Location = new System.Drawing.Point(39, 77);
+            this.panelObjectSubtitulo.Location = new System.Drawing.Point(28, 56);
             this.panelObjectSubtitulo.Name = "panelObjectSubtitulo";
             this.panelObjectSubtitulo.Size = new System.Drawing.Size(42, 13);
             this.panelObjectSubtitulo.TabIndex = 20;
@@ -251,7 +264,7 @@
             this.panelObjectTitulo.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.panelObjectTitulo.AutoSize = true;
             this.panelObjectTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panelObjectTitulo.Location = new System.Drawing.Point(49, 46);
+            this.panelObjectTitulo.Location = new System.Drawing.Point(48, 27);
             this.panelObjectTitulo.Name = "panelObjectTitulo";
             this.panelObjectTitulo.Size = new System.Drawing.Size(47, 20);
             this.panelObjectTitulo.TabIndex = 20;
@@ -447,5 +460,6 @@
         private System.Windows.Forms.Label label1;
         private BrightIdeasSoftware.OLVColumn supervisor;
         private BrightIdeasSoftware.OLVColumn tipo;
+        private System.Windows.Forms.Button button1;
     }
 }

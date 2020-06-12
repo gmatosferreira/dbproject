@@ -198,7 +198,7 @@ namespace Funcionarios
         private void Estudantes_Load(object sender, EventArgs e)
         {
             // Execute SQL query
-            SqlCommand cmd = new SqlCommand("SELECT Estudante.NMec, nome, telemovel, NomeEE, contactoEE, CONCAT(EmailEE, '@', dominio) AS EEemailComposed, CONCAT(email, '@', dominio) AS emailComposed FROM((GestaoEscola.Estudante JOIN GestaoEscola.Pessoa ON Estudante.NMec = Pessoa.NMec) JOIN GestaoEscola.EmailDominio ON Pessoa.emailDominio = EmailDominio.id) WHERE nomeEE IS NOT NULL", cn);
+            SqlCommand cmd = new SqlCommand("SELECT * FROM vw_Estudantes WHERE nomeEE IS NOT NULL", cn);
             SqlDataReader reader = cmd.ExecuteReader();
             // Create list of Objects given the query results
             List<Estudante> estudantes = new List<Estudante>();

@@ -356,11 +356,11 @@ namespace Funcionarios
 
         private void estudantes_Click(object sender, EventArgs e)
         {
-            if (listObjects.SelectedIndex >= 0) {
+            if (listObjects.Items.Count == 0 | current < 0)
+                return;
                 Turma t2 = (Turma)listObjects.SelectedObjects[0];
                 EstudantesTurma listaEstudantes = new EstudantesTurma(cn,this,t2.nivel, t2.nome,t2.anoID);
-                listaEstudantes.Show();
-            }
+                listaEstudantes.ShowDialog();
         }
 
         private void pesquisar(object sender, EventArgs e)
@@ -416,6 +416,7 @@ namespace Funcionarios
                 comboBoxDT.Items.Insert(c, s);
                 c++;
             }
+            r.Close();
         }
     }
 }

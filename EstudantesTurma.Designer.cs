@@ -28,13 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EstudantesTurma));
             this.buttonAdicionarObject = new System.Windows.Forms.Button();
             this.listObjects = new BrightIdeasSoftware.ObjectListView();
-            this.NMec = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.NomeEstudante = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.nmec = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.nome = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.janelaSubtitulo = new System.Windows.Forms.Label();
             this.janelaTitulo = new System.Windows.Forms.Label();
             this.panelObject = new System.Windows.Forms.Panel();
+            this.panelObjectImage = new System.Windows.Forms.PictureBox();
             this.panelObjectHide = new System.Windows.Forms.PictureBox();
             this.panelObjectEliminar = new System.Windows.Forms.Button();
             this.panelObjectSubtitulo = new System.Windows.Forms.Label();
@@ -63,6 +65,7 @@
             this.pesquisaTexto = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.listObjects)).BeginInit();
             this.panelObject.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.panelObjectImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelObjectHide)).BeginInit();
             this.panelFormAddAluno.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.hidde1)).BeginInit();
@@ -74,9 +77,9 @@
             // 
             // buttonAdicionarObject
             // 
-            this.buttonAdicionarObject.Location = new System.Drawing.Point(683, 312);
+            this.buttonAdicionarObject.Location = new System.Drawing.Point(680, 81);
             this.buttonAdicionarObject.Name = "buttonAdicionarObject";
-            this.buttonAdicionarObject.Size = new System.Drawing.Size(102, 47);
+            this.buttonAdicionarObject.Size = new System.Drawing.Size(102, 41);
             this.buttonAdicionarObject.TabIndex = 24;
             this.buttonAdicionarObject.Text = "Adicionar Aluno";
             this.buttonAdicionarObject.UseVisualStyleBackColor = true;
@@ -84,12 +87,12 @@
             // 
             // listObjects
             // 
-            this.listObjects.AllColumns.Add(this.NMec);
-            this.listObjects.AllColumns.Add(this.NomeEstudante);
+            this.listObjects.AllColumns.Add(this.nmec);
+            this.listObjects.AllColumns.Add(this.nome);
             this.listObjects.CellEditUseWholeCell = false;
             this.listObjects.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.NMec,
-            this.NomeEstudante});
+            this.nmec,
+            this.nome});
             this.listObjects.Cursor = System.Windows.Forms.Cursors.Default;
             this.listObjects.HideSelection = false;
             this.listObjects.Location = new System.Drawing.Point(12, 81);
@@ -100,17 +103,17 @@
             this.listObjects.View = System.Windows.Forms.View.Details;
             this.listObjects.SelectedIndexChanged += new System.EventHandler(this.listObjects_SelectedIndexChanged);
             // 
-            // NMec
+            // nmec
             // 
-            this.NMec.AspectName = "NMec";
-            this.NMec.Text = "NMec";
-            this.NMec.Width = 121;
+            this.nmec.AspectName = "nmec";
+            this.nmec.Text = "NMec";
+            this.nmec.Width = 121;
             // 
-            // NomeEstudante
+            // nome
             // 
-            this.NomeEstudante.AspectName = "NomeEstudante";
-            this.NomeEstudante.Text = "Nome";
-            this.NomeEstudante.Width = 375;
+            this.nome.AspectName = "nome";
+            this.nome.Text = "Nome Estudante";
+            this.nome.Width = 406;
             // 
             // janelaSubtitulo
             // 
@@ -133,15 +136,28 @@
             // 
             // panelObject
             // 
+            this.panelObject.Controls.Add(this.panelObjectImage);
             this.panelObject.Controls.Add(this.panelObjectHide);
             this.panelObject.Controls.Add(this.panelObjectEliminar);
             this.panelObject.Controls.Add(this.panelObjectSubtitulo);
             this.panelObject.Controls.Add(this.panelObjectTitulo);
-            this.panelObject.Location = new System.Drawing.Point(578, 81);
+            this.panelObject.Location = new System.Drawing.Point(576, 128);
             this.panelObject.Name = "panelObject";
-            this.panelObject.Size = new System.Drawing.Size(199, 213);
+            this.panelObject.Size = new System.Drawing.Size(199, 187);
             this.panelObject.TabIndex = 29;
             this.panelObject.Visible = false;
+            // 
+            // panelObjectImage
+            // 
+            this.panelObjectImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.panelObjectImage.Image = global::Funcionarios.Properties.Resources.Estudante;
+            this.panelObjectImage.InitialImage = null;
+            this.panelObjectImage.Location = new System.Drawing.Point(67, 3);
+            this.panelObjectImage.Name = "panelObjectImage";
+            this.panelObjectImage.Size = new System.Drawing.Size(59, 59);
+            this.panelObjectImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.panelObjectImage.TabIndex = 24;
+            this.panelObjectImage.TabStop = false;
             // 
             // panelObjectHide
             // 
@@ -149,9 +165,9 @@
             this.panelObjectHide.Cursor = System.Windows.Forms.Cursors.Default;
             this.panelObjectHide.Image = global::Funcionarios.Properties.Resources.Esconder;
             this.panelObjectHide.InitialImage = null;
-            this.panelObjectHide.Location = new System.Drawing.Point(161, 13);
+            this.panelObjectHide.Location = new System.Drawing.Point(174, 3);
             this.panelObjectHide.Name = "panelObjectHide";
-            this.panelObjectHide.Size = new System.Drawing.Size(24, 23);
+            this.panelObjectHide.Size = new System.Drawing.Size(21, 23);
             this.panelObjectHide.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.panelObjectHide.TabIndex = 23;
             this.panelObjectHide.TabStop = false;
@@ -159,7 +175,7 @@
             // 
             // panelObjectEliminar
             // 
-            this.panelObjectEliminar.Location = new System.Drawing.Point(64, 152);
+            this.panelObjectEliminar.Location = new System.Drawing.Point(63, 132);
             this.panelObjectEliminar.Name = "panelObjectEliminar";
             this.panelObjectEliminar.Size = new System.Drawing.Size(75, 28);
             this.panelObjectEliminar.TabIndex = 21;
@@ -170,9 +186,10 @@
             // panelObjectSubtitulo
             // 
             this.panelObjectSubtitulo.AutoSize = true;
-            this.panelObjectSubtitulo.Location = new System.Drawing.Point(77, 93);
+            this.panelObjectSubtitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.panelObjectSubtitulo.Location = new System.Drawing.Point(73, 100);
             this.panelObjectSubtitulo.Name = "panelObjectSubtitulo";
-            this.panelObjectSubtitulo.Size = new System.Drawing.Size(42, 13);
+            this.panelObjectSubtitulo.Size = new System.Drawing.Size(53, 17);
             this.panelObjectSubtitulo.TabIndex = 20;
             this.panelObjectSubtitulo.Text = "XXXXX";
             this.panelObjectSubtitulo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -182,7 +199,7 @@
             this.panelObjectTitulo.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.panelObjectTitulo.AutoSize = true;
             this.panelObjectTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panelObjectTitulo.Location = new System.Drawing.Point(68, 58);
+            this.panelObjectTitulo.Location = new System.Drawing.Point(50, 72);
             this.panelObjectTitulo.Name = "panelObjectTitulo";
             this.panelObjectTitulo.Size = new System.Drawing.Size(51, 20);
             this.panelObjectTitulo.TabIndex = 20;
@@ -191,9 +208,9 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(578, 312);
+            this.button2.Location = new System.Drawing.Point(575, 81);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(102, 47);
+            this.button2.Size = new System.Drawing.Size(102, 41);
             this.button2.TabIndex = 31;
             this.button2.Text = "Escrever Recado";
             this.button2.UseVisualStyleBackColor = true;
@@ -204,7 +221,7 @@
             this.panelFormTitulo.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.panelFormTitulo.AutoSize = true;
             this.panelFormTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panelFormTitulo.Location = new System.Drawing.Point(54, 21);
+            this.panelFormTitulo.Location = new System.Drawing.Point(60, 48);
             this.panelFormTitulo.Name = "panelFormTitulo";
             this.panelFormTitulo.Size = new System.Drawing.Size(90, 20);
             this.panelFormTitulo.TabIndex = 24;
@@ -213,11 +230,11 @@
             // 
             // panelFormButton
             // 
-            this.panelFormButton.Location = new System.Drawing.Point(58, 163);
+            this.panelFormButton.Location = new System.Drawing.Point(55, 142);
             this.panelFormButton.Name = "panelFormButton";
             this.panelFormButton.Size = new System.Drawing.Size(95, 25);
             this.panelFormButton.TabIndex = 25;
-            this.panelFormButton.Text = "Botao";
+            this.panelFormButton.Text = "Adicionar";
             this.panelFormButton.UseVisualStyleBackColor = true;
             this.panelFormButton.Click += new System.EventHandler(this.panelFormButton_Click);
             // 
@@ -227,9 +244,9 @@
             this.panelFormAddAluno.Controls.Add(this.comboEstudantesSemTurma);
             this.panelFormAddAluno.Controls.Add(this.panelFormButton);
             this.panelFormAddAluno.Controls.Add(this.panelFormTitulo);
-            this.panelFormAddAluno.Location = new System.Drawing.Point(578, 365);
+            this.panelFormAddAluno.Location = new System.Drawing.Point(575, 375);
             this.panelFormAddAluno.Name = "panelFormAddAluno";
-            this.panelFormAddAluno.Size = new System.Drawing.Size(207, 223);
+            this.panelFormAddAluno.Size = new System.Drawing.Size(207, 206);
             this.panelFormAddAluno.TabIndex = 30;
             this.panelFormAddAluno.Visible = false;
             // 
@@ -251,7 +268,7 @@
             // 
             this.comboEstudantesSemTurma.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboEstudantesSemTurma.FormattingEnabled = true;
-            this.comboEstudantesSemTurma.Location = new System.Drawing.Point(17, 67);
+            this.comboEstudantesSemTurma.Location = new System.Drawing.Point(19, 92);
             this.comboEstudantesSemTurma.Name = "comboEstudantesSemTurma";
             this.comboEstudantesSemTurma.Size = new System.Drawing.Size(177, 21);
             this.comboEstudantesSemTurma.Sorted = true;
@@ -356,9 +373,12 @@
             // 
             // MensagemText
             // 
-            this.MensagemText.Location = new System.Drawing.Point(11, 80);
+            this.MensagemText.AutoWordSelection = true;
+            this.MensagemText.BackColor = System.Drawing.Color.Linen;
+            this.MensagemText.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.MensagemText.Location = new System.Drawing.Point(3, 80);
             this.MensagemText.Name = "MensagemText";
-            this.MensagemText.Size = new System.Drawing.Size(520, 161);
+            this.MensagemText.Size = new System.Drawing.Size(528, 161);
             this.MensagemText.TabIndex = 43;
             this.MensagemText.Text = "";
             // 
@@ -366,7 +386,7 @@
             // 
             this.destinarioCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.destinarioCombo.FormattingEnabled = true;
-            this.destinarioCombo.Location = new System.Drawing.Point(346, 31);
+            this.destinarioCombo.Location = new System.Drawing.Point(346, 33);
             this.destinarioCombo.Name = "destinarioCombo";
             this.destinarioCombo.Size = new System.Drawing.Size(185, 21);
             this.destinarioCombo.Sorted = true;
@@ -400,7 +420,7 @@
             this.ajudaBtn.Cursor = System.Windows.Forms.Cursors.Help;
             this.ajudaBtn.Image = global::Funcionarios.Properties.Resources.Ajuda;
             this.ajudaBtn.InitialImage = null;
-            this.ajudaBtn.Location = new System.Drawing.Point(739, 19);
+            this.ajudaBtn.Location = new System.Drawing.Point(733, 12);
             this.ajudaBtn.Name = "ajudaBtn";
             this.ajudaBtn.Size = new System.Drawing.Size(38, 47);
             this.ajudaBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -436,6 +456,7 @@
             this.pesquisaTexto.Name = "pesquisaTexto";
             this.pesquisaTexto.Size = new System.Drawing.Size(165, 20);
             this.pesquisaTexto.TabIndex = 33;
+            this.pesquisaTexto.TextChanged += new System.EventHandler(this.pesquisaTexto_TextChanged);
             // 
             // EstudantesTurma
             // 
@@ -447,6 +468,7 @@
             this.Controls.Add(this.pesquisaTexto);
             this.Controls.Add(this.panelRecado);
             this.Controls.Add(this.button2);
+            this.Controls.Add(this.buttonAdicionarObject);
             this.Controls.Add(this.panelFormAddAluno);
             this.Controls.Add(this.panelObject);
             this.Controls.Add(this.janelaSubtitulo);
@@ -454,14 +476,15 @@
             this.Controls.Add(this.janelaTitulo);
             this.Controls.Add(this.listObjects);
             this.Controls.Add(this.ajudaBtn);
-            this.Controls.Add(this.buttonAdicionarObject);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "EstudantesTurma";
-            this.Text = "Sistema de Gestão Escolar | Lista de Estudantes da Turma";
+            this.Text = "Sistema de Gestão Escolar | Turma | Lista de Estudantes";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.EstudantesTurma_FormClosed);
             this.Load += new System.EventHandler(this.EstudantesTurma_Load);
             ((System.ComponentModel.ISupportInitialize)(this.listObjects)).EndInit();
             this.panelObject.ResumeLayout(false);
             this.panelObject.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.panelObjectImage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelObjectHide)).EndInit();
             this.panelFormAddAluno.ResumeLayout(false);
             this.panelFormAddAluno.PerformLayout();
@@ -481,13 +504,12 @@
         private System.Windows.Forms.PictureBox ajudaBtn;
         private System.Windows.Forms.Button buttonAdicionarObject;
         private BrightIdeasSoftware.ObjectListView listObjects;
-        private BrightIdeasSoftware.OLVColumn NMec;
-        private BrightIdeasSoftware.OLVColumn NomeEstudante;
+        private BrightIdeasSoftware.OLVColumn nmec;
+        private BrightIdeasSoftware.OLVColumn nome;
         private System.Windows.Forms.Label janelaSubtitulo;
         private System.Windows.Forms.PictureBox janelaLogo;
         private System.Windows.Forms.Label janelaTitulo;
         private System.Windows.Forms.Panel panelObject;
-        private System.Windows.Forms.PictureBox panelObjectHide;
         private System.Windows.Forms.Button panelObjectEliminar;
         private System.Windows.Forms.Label panelObjectSubtitulo;
         private System.Windows.Forms.Label panelObjectTitulo;
@@ -511,5 +533,7 @@
         private System.Windows.Forms.ComboBox pesquisaAtributo;
         private System.Windows.Forms.Label pesquisaLabel;
         private System.Windows.Forms.TextBox pesquisaTexto;
+        private System.Windows.Forms.PictureBox panelObjectHide;
+        private System.Windows.Forms.PictureBox panelObjectImage;
     }
 }

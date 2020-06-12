@@ -49,7 +49,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Aula.cs" />
+    <Compile Include="Aulas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Aulas.Designer.cs">
+      <DependentUpon>Aulas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Biblioteca.cs" />
+    <Compile Include="BlocoSala.cs" />
+    <Compile Include="BlocoSalas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BlocoSalas.Designer.cs">
+      <DependentUpon>BlocoSalas.cs</DependentUpon>
+    </Compile>
     <Compile Include="BlocoTipo.cs" />
     <Compile Include="Bloco.cs" />
     <Compile Include="BlocosTipos.cs">
@@ -146,8 +160,14 @@
       <DependentUpon>Turmas.cs</DependentUpon>
     </Compile>
     <Compile Include="Turno.cs" />
+    <EmbeddedResource Include="Aulas.resx">
+      <DependentUpon>Aulas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Bibliotecas.resx">
       <DependentUpon>Bibliotecas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BlocoSalas.resx">
+      <DependentUpon>BlocoSalas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="BlocosTipos.resx">
       <DependentUpon>BlocosTipos.cs</DependentUpon>
@@ -263,6 +283,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\TiposBloco.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sala.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Aula.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

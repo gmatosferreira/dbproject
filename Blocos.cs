@@ -479,8 +479,20 @@ namespace Funcionarios
             { 
                 deleteObject(); 
             } 
-        } 
- 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            // Get Object
+            if (listObjects.Items.Count == 0 | current < 0)
+                return;
+            Bloco b1 = (Bloco)listObjects.SelectedObjects[0];
+
+            //this.Hide();
+            BlocoSalas f = new BlocoSalas(this,cn, b1);
+            f.ShowDialog();
+        }
+
         private void panelFormButton_Click(object sender, EventArgs e) 
         {             
             // Execute operation 

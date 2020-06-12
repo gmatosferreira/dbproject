@@ -40,6 +40,7 @@
             this.ajudaBtn = new System.Windows.Forms.PictureBox();
             this.panelFormButton = new System.Windows.Forms.Button();
             this.panelFormHide = new System.Windows.Forms.PictureBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.listObjects = new BrightIdeasSoftware.ObjectListView();
             this.nmec = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.grupoDisciplinar = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -105,7 +106,7 @@
             // 
             // panelObjectEditar
             // 
-            this.panelObjectEditar.Location = new System.Drawing.Point(40, 236);
+            this.panelObjectEditar.Location = new System.Drawing.Point(39, 247);
             this.panelObjectEditar.Name = "panelObjectEditar";
             this.panelObjectEditar.Size = new System.Drawing.Size(75, 23);
             this.panelObjectEditar.TabIndex = 20;
@@ -191,6 +192,17 @@
             this.Ajuda.SetToolTip(this.panelFormHide, "Esconder");
             this.panelFormHide.Click += new System.EventHandler(this.panelFormHide_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(39, 218);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 24;
+            this.button1.Text = "Ver Aulas";
+            this.Ajuda.SetToolTip(this.button1, "0");
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // listObjects
             // 
             this.listObjects.AllColumns.Add(this.nmec);
@@ -256,6 +268,7 @@
             // 
             // panelObject
             // 
+            this.panelObject.Controls.Add(this.button1);
             this.panelObject.Controls.Add(this.panelObjectHide);
             this.panelObject.Controls.Add(this.panelObjectEliminar);
             this.panelObject.Controls.Add(this.panelObjectEditar);
@@ -617,5 +630,6 @@
         private System.Windows.Forms.ComboBox panelFormFieldGrupoDisciplinar;
         private System.Windows.Forms.Label label8;
         private BrightIdeasSoftware.OLVColumn grupoDisciplinar;
+        private System.Windows.Forms.Button button1;
     }
 }
