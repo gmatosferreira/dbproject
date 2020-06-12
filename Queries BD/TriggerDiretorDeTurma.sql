@@ -1,5 +1,3 @@
---select * from GestaoEscola.Turma;
---select * from GestaoEscola.Docente;
 CREATE TRIGGER GestaoEscola.TriggerDiretorDeTurma on GestaoEscola.Turma
 INSTEAD OF INSERT,UPDATE AS BEGIN
 IF (SELECT count(*) FROM inserted) = 1

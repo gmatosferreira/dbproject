@@ -205,6 +205,5 @@ namespace Funcionarios
             Blocos f = new Blocos(cn, this);
             f.ShowDialog();
         }
-
     }
 }

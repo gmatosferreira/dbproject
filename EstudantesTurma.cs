@@ -29,11 +29,11 @@ namespace Funcionarios
             this.anoLetivo = anoLetivo;
             this.cn = cn;
 
-            this.NMec.GroupKeyGetter = delegate (object rowObject) {
+            this.nmec.GroupKeyGetter = delegate (object rowObject) {
                 // When the same is returned by every object, all of them are put together in one group
                 return "Número mecanográfico";
             };
-            this.NomeEstudante.GroupKeyGetter = delegate (object rowObject)
+            this.nome.GroupKeyGetter = delegate (object rowObject)
             {
                 return "Nome";
             };
@@ -72,8 +72,6 @@ namespace Funcionarios
 
             // Update stats
             updateStats();
-            // "SELECT * FROM GestaoEscola.EstudanteTurma WHERE nivel="+nivel+" AND nome='"+nomeT+"' AND anoLetivo="+anoLetivo";"
-
         }
 
         private void showObject()
@@ -369,8 +367,54 @@ namespace Funcionarios
 
         private void panelFormButton_Click(object sender, EventArgs e)
         {
-            // criar qq coisa pra adicionar a tabela EstudanteTurma
+            // Get form data 
+            int nmecE = Int32.Parse(comboEstudantesSemTurma.SelectedItem.ToString().Split('-')[0]);
+            String nomeE = comboEstudantesSemTurma.SelectedItem.ToString().Split('-')[1];
+
+            // Create command 
+            String commandText = "INSERT INTO GestaoEscola.EstudanteTurma VALUES (@nmec, @turmaNivel, @turmaNome, @ano)";
+            SqlCommand command = new SqlCommand(commandText, cn);
+            // Add vars 
+            command.Parameters.Add("@nmec", SqlDbType.Int);
+            command.Parameters["@nmec"].Value = nmecE;
+            command.Parameters.Add("@turmaNivel", SqlDbType.Int);
+            command.Parameters["@turmaNivel"].Value = nivel;
+            command.Parameters.Add("@turmaNome", SqlDbType.VarChar);
+            command.Parameters["@turmaNome"].Value = nomeT;
+            command.Parameters.Add("@ano", SqlDbType.Int);
+            command.Parameters["@ano"].Value = anoLetivo;
+
+            // Execute query 
+            int rowsAffected = 0;
+            try
+            {
+                rowsAffected = command.ExecuteNonQuery();
+                Console.WriteLine(String.Format("rowsAffected {0}", rowsAffected));
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(
+                    "Ocorreu um erro, verifique que preencheu todos os dados corretamente e tente novamente!\r\n" + ex.ToString(),
+                    "Erro!",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+                return;
+            }
+
+            EstudanteTurma et = new EstudanteTurma();
+            et.nivelT = nivel;
+            et.nomeT = nomeT;
+            et.anoLetivoID = anoLetivo;
+            et.nmec = nmecE;
+            et.nome = nomeE;
+            tuplos.Add(et);
+            listObjects.AddObject(et);
+            listObjects.BuildList(true);
+
             inicializarComboBoxAdd();
+            updateStats();
+            panelFormAddAluno.Visible = false;
         }
 
         private void EstudantesTurma_FormClosed(object sender, FormClosedEventArgs e)
@@ -392,7 +436,14 @@ namespace Funcionarios
                 comboEstudantesSemTurma.Items.Insert(c, s);
                 c++;
             }
+            r.Close();
         }
+
+        private void pesquisaTexto_TextChanged(object sender, EventArgs e)
+        {
+            pesquisar();
+        }
+
         private void inicializarComboBoxFrom()
         {
             docenteCombo.Items.Clear();
@@ -406,6 +457,7 @@ namespace Funcionarios
                 docenteCombo.Items.Insert(c, s);
                 c++;
             }
+            r.Close();
         }
 
         private void inicializarComboBoxTo()
