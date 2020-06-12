@@ -510,6 +510,13 @@ namespace Funcionarios
             pesquisar();
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Estudante est = (Estudante)listObjects.SelectedObjects[0];
+            Mensagens m = new Mensagens(this, cn, est);
+            m.Show();
+        }
+
         private void estudantesListView_SelectedIndexChanged(object sender, EventArgs e)
         {
             // When new row selected, show it's Object data

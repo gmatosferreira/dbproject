@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Funcionarios
 { 
-    class Estudante
+    public class Estudante
     {
         private int _nmec, _telemovel, _telemovelEE;
         private String _nome, _nomeEE, _email, _emailEE;

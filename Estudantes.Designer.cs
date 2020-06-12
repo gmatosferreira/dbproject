@@ -72,6 +72,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.ajudaBtn = new System.Windows.Forms.PictureBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.panelObject.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelObjectHide)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelObjectImage)).BeginInit();
@@ -129,6 +130,7 @@
             // 
             // panelObject
             // 
+            this.panelObject.Controls.Add(this.button1);
             this.panelObject.Controls.Add(this.panelObjectHide);
             this.panelObject.Controls.Add(this.panelObjectEliminar);
             this.panelObject.Controls.Add(this.panelObjectEditar);
@@ -167,7 +169,7 @@
             // 
             // panelObjectEditar
             // 
-            this.panelObjectEditar.Location = new System.Drawing.Point(40, 236);
+            this.panelObjectEditar.Location = new System.Drawing.Point(40, 247);
             this.panelObjectEditar.Name = "panelObjectEditar";
             this.panelObjectEditar.Size = new System.Drawing.Size(75, 23);
             this.panelObjectEditar.TabIndex = 20;
@@ -531,6 +533,16 @@
             this.label7.Text = "Dúvidas?";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(40, 207);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 34);
+            this.button1.TabIndex = 24;
+            this.button1.Text = "Ver Recados";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Estudantes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -614,5 +626,6 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox panelFormFieldContacto;
         private BrightIdeasSoftware.OLVColumn nomeEE;
+        private System.Windows.Forms.Button button1;
     }
 }
