@@ -34,6 +34,7 @@
             this.pesquisaTexto = new System.Windows.Forms.TextBox();
             this.buttonAdicionarObject = new System.Windows.Forms.Button();
             this.panelObject = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.panelObjectHide = new System.Windows.Forms.PictureBox();
             this.panelObjectEliminar = new System.Windows.Forms.Button();
             this.panelObjectEditar = new System.Windows.Forms.Button();
@@ -72,7 +73,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.ajudaBtn = new System.Windows.Forms.PictureBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             this.panelObject.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelObjectHide)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelObjectImage)).BeginInit();
@@ -86,6 +86,7 @@
             // 
             // pesquisaAtributo
             // 
+            this.pesquisaAtributo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.pesquisaAtributo.FormattingEnabled = true;
             this.pesquisaAtributo.Items.AddRange(new object[] {
             "Número mecanográfico",
@@ -142,6 +143,16 @@
             this.panelObject.Size = new System.Drawing.Size(152, 336);
             this.panelObject.TabIndex = 32;
             this.panelObject.Visible = false;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(40, 207);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 34);
+            this.button1.TabIndex = 24;
+            this.button1.Text = "Ver Recados";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // panelObjectHide
             // 
@@ -532,16 +543,6 @@
             this.label7.TabIndex = 25;
             this.label7.Text = "Dúvidas?";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(40, 207);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 34);
-            this.button1.TabIndex = 24;
-            this.button1.Text = "Ver Recados";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Estudantes
             // 

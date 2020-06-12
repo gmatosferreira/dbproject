@@ -113,6 +113,7 @@
             // 
             // pesquisaAtributo
             // 
+            this.pesquisaAtributo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.pesquisaAtributo.FormattingEnabled = true;
             this.pesquisaAtributo.Items.AddRange(new object[] {
             "Nome de Turma",

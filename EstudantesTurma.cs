@@ -437,6 +437,11 @@ namespace Funcionarios
             pesquisar();
         }
 
+        private void pesquisaAtributo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            pesquisar();
+        }
+
         private void inicializarComboBoxFrom()
         {
             docenteCombo.Items.Clear();

@@ -277,23 +277,20 @@ namespace Funcionarios
                     String toFilter = "";
                     switch (atr)
                     {
-                        case "Disciplina":
-                            toFilter = aula.disciplina;
+                        case "Sala":
+                            toFilter = aula.sala.ToString();
+                            break;
+                        case "Horario":
+                            toFilter = aula.horario;
+                            break;
+                        case "Dia da Semana":
+                            toFilter = aula.diaS;
                             break;
                         case "Turma":
                             toFilter = aula.turma.nome;
                             break;
                         case "Ano Letivo":
                             toFilter = aula.turma.strAnoLetivo;
-                            break;
-                        case "Dia da Semana":
-                            toFilter = aula.diaS;
-                            break;
-                        case "Sala":
-                            toFilter = aula.sala.ToString();
-                            break;
-                        case "Horario":
-                            toFilter = aula.horario;
                             break;
                     }
                     if (toFilter.ToLower().Contains(val.ToLower()))
@@ -455,6 +452,16 @@ namespace Funcionarios
                     return t;
             }
             return null;
+        }
+
+        private void pesquisaTexto_TextChanged(object sender, EventArgs e)
+        {
+            pesquisar();
+        }
+
+        private void pesquisaAtributo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            pesquisar();
         }
 
         private void submitForm(Aula a)

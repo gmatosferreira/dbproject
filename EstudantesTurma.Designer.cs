@@ -438,6 +438,7 @@
             this.pesquisaAtributo.Name = "pesquisaAtributo";
             this.pesquisaAtributo.Size = new System.Drawing.Size(149, 21);
             this.pesquisaAtributo.TabIndex = 35;
+            this.pesquisaAtributo.SelectedIndexChanged += new System.EventHandler(this.pesquisaAtributo_SelectedIndexChanged);
             // 
             // pesquisaLabel
             // 

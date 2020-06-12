@@ -46,14 +46,16 @@
             this.janelaSubtitulo = new System.Windows.Forms.Label();
             this.janelaTitulo = new System.Windows.Forms.Label();
             this.panelForm = new System.Windows.Forms.Panel();
+            this.comboSala = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.comboDiaSemana = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.panelFormFieldHoraFim = new System.Windows.Forms.DateTimePicker();
             this.panelFormFieldHoraInicio = new System.Windows.Forms.DateTimePicker();
             this.comboTurma = new System.Windows.Forms.ComboBox();
+            this.panelFormButton = new System.Windows.Forms.Button();
             this.comboDisciplina = new System.Windows.Forms.ComboBox();
             this.panelFormHide = new System.Windows.Forms.PictureBox();
-            this.panelFormButton = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -66,8 +68,6 @@
             this.pesquisaAtributo = new System.Windows.Forms.ComboBox();
             this.pesquisaLabel = new System.Windows.Forms.Label();
             this.pesquisaTexto = new System.Windows.Forms.TextBox();
-            this.comboSala = new System.Windows.Forms.ComboBox();
-            this.label6 = new System.Windows.Forms.Label();
             this.panelObject.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelObjectHide)).BeginInit();
@@ -266,6 +266,25 @@
             this.panelForm.TabIndex = 27;
             this.panelForm.Visible = false;
             // 
+            // comboSala
+            // 
+            this.comboSala.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboSala.FormattingEnabled = true;
+            this.comboSala.Location = new System.Drawing.Point(244, 149);
+            this.comboSala.Name = "comboSala";
+            this.comboSala.Size = new System.Drawing.Size(58, 21);
+            this.comboSala.TabIndex = 44;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(254, 133);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(28, 13);
+            this.label6.TabIndex = 43;
+            this.label6.Text = "Sala";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // comboDiaSemana
             // 
             this.comboDiaSemana.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -318,6 +337,16 @@
             this.comboTurma.Size = new System.Drawing.Size(58, 21);
             this.comboTurma.TabIndex = 38;
             // 
+            // panelFormButton
+            // 
+            this.panelFormButton.Location = new System.Drawing.Point(349, 143);
+            this.panelFormButton.Name = "panelFormButton";
+            this.panelFormButton.Size = new System.Drawing.Size(126, 31);
+            this.panelFormButton.TabIndex = 25;
+            this.panelFormButton.Text = "Botao";
+            this.panelFormButton.UseVisualStyleBackColor = true;
+            this.panelFormButton.Click += new System.EventHandler(this.panelFormButton_Click);
+            // 
             // comboDisciplina
             // 
             this.comboDisciplina.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -340,16 +369,6 @@
             this.panelFormHide.TabIndex = 24;
             this.panelFormHide.TabStop = false;
             this.panelFormHide.Click += new System.EventHandler(this.panelFormHide_Click);
-            // 
-            // panelFormButton
-            // 
-            this.panelFormButton.Location = new System.Drawing.Point(349, 143);
-            this.panelFormButton.Name = "panelFormButton";
-            this.panelFormButton.Size = new System.Drawing.Size(126, 31);
-            this.panelFormButton.TabIndex = 25;
-            this.panelFormButton.Text = "Botao";
-            this.panelFormButton.UseVisualStyleBackColor = true;
-            this.panelFormButton.Click += new System.EventHandler(this.panelFormButton_Click);
             // 
             // label3
             // 
@@ -463,6 +482,7 @@
             this.pesquisaAtributo.Name = "pesquisaAtributo";
             this.pesquisaAtributo.Size = new System.Drawing.Size(149, 21);
             this.pesquisaAtributo.TabIndex = 38;
+            this.pesquisaAtributo.SelectedIndexChanged += new System.EventHandler(this.pesquisaAtributo_SelectedIndexChanged);
             // 
             // pesquisaLabel
             // 
@@ -481,25 +501,7 @@
             this.pesquisaTexto.Name = "pesquisaTexto";
             this.pesquisaTexto.Size = new System.Drawing.Size(165, 20);
             this.pesquisaTexto.TabIndex = 36;
-            // 
-            // comboSala
-            // 
-            this.comboSala.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboSala.FormattingEnabled = true;
-            this.comboSala.Location = new System.Drawing.Point(244, 149);
-            this.comboSala.Name = "comboSala";
-            this.comboSala.Size = new System.Drawing.Size(58, 21);
-            this.comboSala.TabIndex = 44;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(254, 133);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(28, 13);
-            this.label6.TabIndex = 43;
-            this.label6.Text = "Sala";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.pesquisaTexto.TextChanged += new System.EventHandler(this.pesquisaTexto_TextChanged);
             // 
             // Aulas
             // 
