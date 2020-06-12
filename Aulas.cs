@@ -85,6 +85,7 @@ namespace Funcionarios
                 Aula a = new Aula();
                 a.docente = d.nmec;
                 a.disciplina = r["disciplina"].ToString();
+                comboDisciplina.Items.Insert(comboDisciplina.Items.Count, a.disciplina);
                 a.diaSemana = Int32.Parse(r["diaSemana"].ToString());
                 a.hInicio = TimeSpan.Parse(r["horaInicio"].ToString());
                 a.hFim = TimeSpan.Parse(r["horaFim"].ToString());
@@ -235,7 +236,7 @@ namespace Funcionarios
             panelFormFieldHoraFim.Text = a.hFim.ToString();
             comboDiaSemana.SelectedItem = a.diaS;
             comboDisciplina.SelectedItem = a.disciplina;
-            comboSala.SelectedItem = a.sala;
+            comboSala.Text = a.sala.ToString();
             comboTurma.SelectedItem = a.turma.nome;
 
             // Disable fields that are not editable
@@ -461,7 +462,7 @@ namespace Funcionarios
             bool edit = (a != null);
 
             // Get form data 
-            int sala = Int32.Parse(comboSala.Text);
+            int sala = Int32.Parse(comboSala.SelectedItem.ToString());
             string disciplina = comboDisciplina.Text;
             String nTurma = comboTurma.Text;
             TimeSpan horaInicio = TimeSpan.Parse(panelFormFieldHoraInicio.Text);
