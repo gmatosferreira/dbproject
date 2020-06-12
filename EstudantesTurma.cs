@@ -155,96 +155,100 @@ namespace Funcionarios
             panelFormAddAluno.Visible = false;
         }
 
-        private Boolean formValid() //usar no recado !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        private Boolean formValid() 
         {
             // Check if specific fields are valid
             bool error = false;
             StringBuilder sb = new StringBuilder();
-           /* if (!RegexExpressions.isInteger(panelFormFieldNMec.Text))
+            
+            if (assuntoText.Text == "" || assuntoText.Text.Length > 30)
             {
                 error = true;
-                sb.Append(" NMec");
+                sb.Append(" Assunto (max 30 caracteres).");
             }
-            if (!RegexExpressions.isDouble(panelFormFieldSalario.Text))
+            if (MensagemText.Text == "" )
             {
                 error = true;
-                sb.Append(" Salário");
+                sb.Append(" Mensagem vazia!");
             }
-            if (!RegexExpressions.isPhoneNumber(panelFormFieldContacto.Text))
-            {
+            if (destinarioCombo.Text.Length == 0) {
                 error = true;
-                sb.Append(" Telemovel");
+                sb.Append(" Escolha um destinatário.");
             }
-            if (!RegexExpressions.isEmail(panelFormFieldEmail.Text))
+            if (docenteCombo.Text.Length == 0)
             {
                 error = true;
-                sb.Append(" Email");
+                sb.Append(" Escolha um docente.");
             }
-            // Check others
-            if (panelFormFieldNome.Text == "" || panelFormFieldNome.Text.Length > 65)
-            {
-                error = true;
-                sb.Append(" Nome (max 65 caracteres)");
-            }*/
             // Give user feedback
             if (error)
             {
                 MessageBox.Show(
                    "Confirme que preencheu corretamente os seguintes campos:" + sb.ToString(),
                    "Atenção!",
-                   MessageBoxButtons.YesNoCancel,
+                   MessageBoxButtons.OK,
                    MessageBoxIcon.Exclamation
                );
             }
             return !error;
         }
-        /*
-        private void submitForm(NaoDocente ndocente)
+       
+        private void submitForm(Object o)
         {
-            bool edit = (ndocente != null);
+            Type tipo = o.GetType();
+            bool recado = (tipo.Equals(typeof(Recado)));
 
             // Get form data 
-            int nmec = Int32.Parse(panelFormFieldNMec.Text);
-            String nome = panelFormFieldNome.Text;
-            Double salario = Double.Parse(panelFormFieldSalario.Text);
-            int telemovel = Int32.Parse(panelFormFieldContacto.Text);
-            String emailPrefixo = panelFormFieldEmail.Text.Split('@')[0];
-            String emailDominio = panelFormFieldEmail.Text.Split('@')[1];
-            Turno turno = getTurno(panelFormFieldTurno.Text);
+            String mensagem = MensagemText.Text;
+            String assunto = assuntoText.Text;
+            String nomeDocente = docenteCombo.SelectedItem.ToString().Split('-')[1];
+            int nmecDocente = Int32.Parse(docenteCombo.SelectedItem.ToString().Split('-')[0]);
+            String estudante = "";
+            int numEstudante = 0;
+            DateTime data = DateTime.Now;
+            TimeSpan hora = DateTime.Now.TimeOfDay;
+            MessageBox.Show(hora.ToString());
 
+            if (recado)
+            {
+                estudante = destinarioCombo.SelectedItem.ToString().Split('-')[1];
+                numEstudante = Int32.Parse(destinarioCombo.SelectedItem.ToString().Split('-')[0]);
+            }
             // Create command 
-            String commandText = "pr_NaoDocentes";
-            SqlCommand command = new SqlCommand(commandText, cn);
+            SqlCommand command = new SqlCommand("GestaoEscola.mensagensSP", cn);
             command.CommandType = CommandType.StoredProcedure;
+
             // Add vars 
-            command.Parameters.Add("@NMec", SqlDbType.Int);
-            command.Parameters["@NMec"].Value = nmec;
-            command.Parameters.Add("@Nome", SqlDbType.VarChar);
-            command.Parameters["@Nome"].Value = nome;
-            command.Parameters.Add("@Telemovel", SqlDbType.Int);
-            command.Parameters["@Telemovel"].Value = telemovel;
-            command.Parameters.Add("@Email", SqlDbType.VarChar);
-            command.Parameters["@Email"].Value = emailPrefixo;
-            command.Parameters.Add("@EmailDominio", SqlDbType.VarChar);
-            command.Parameters["@EmailDominio"].Value = emailDominio;
-            command.Parameters.Add("@Salario", SqlDbType.Money);
-            command.Parameters["@Salario"].Value = salario;
-            command.Parameters.Add("@Turno", SqlDbType.Int);
-            command.Parameters["@Turno"].Value = turno.codigo;
-            command.Parameters.Add("@Edit", SqlDbType.Bit);
-            command.Parameters["@Edit"].Value = 0;
-            if (edit)
-                command.Parameters["@Edit"].Value = 1;
-            // Return value stuff
-            var returnParameter = command.Parameters.Add("@ReturnVal", SqlDbType.Int);
-            returnParameter.Direction = ParameterDirection.ReturnValue;
+            command.Parameters.Add("@docenteNmec", SqlDbType.Int);
+            command.Parameters["@docenteNmec"].Value = nmecDocente;
+            command.Parameters.Add("@assunto", SqlDbType.VarChar);
+            command.Parameters["@assunto"].Value = assunto;
+            command.Parameters.Add("@mensagem", SqlDbType.Text);
+            command.Parameters["@mensagem"].Value = mensagem;
+            command.Parameters.Add("@nomeT", SqlDbType.VarChar);
+            command.Parameters["@nomeT"].Value = nomeT;
+            command.Parameters.Add("@nivelT", SqlDbType.Int);
+            command.Parameters["@nivelT"].Value = nivel;
+            command.Parameters.Add("@ano", SqlDbType.Int);
+            command.Parameters["@ano"].Value = anoLetivo ;
+            command.Parameters.Add("@NmecEst", SqlDbType.Int);
+            command.Parameters["@NmecEst"].Value = numEstudante;
+            command.Parameters.Add("@dataA", SqlDbType.Date);
+            command.Parameters["@dataA"].Value = data;
+            command.Parameters.Add("@hora", SqlDbType.Time);
+            command.Parameters["@hora"].Value = hora;
+            command.Parameters.Add("@dataR", SqlDbType.DateTime);
+            command.Parameters["@dataR"].Value = data;
+            command.Parameters.Add("@Recado", SqlDbType.Bit);
+            if(recado)
+                command.Parameters["@Recado"].Value = 1;
+            else
+                command.Parameters["@Recado"].Value = 0;
             // Execute query 
             int rowsAffected = 0;
-            int returnValue;
             try
             {
                 rowsAffected = command.ExecuteNonQuery();
-                returnValue = (int)returnParameter.Value;
                 Console.WriteLine(String.Format("rowsAffected {0}", rowsAffected));
             }
             catch (SqlException ex)
@@ -258,36 +262,19 @@ namespace Funcionarios
                 return;
             }
             // If query is successful 
-            if (rowsAffected == 3 && returnValue == 1)
-            {
-                // If add operation, construct object (was null)
-                if (!edit)
-                    ndocente = new NaoDocente();
-                ndocente.nmec = nmec;
-                ndocente.nome = nome;
-                ndocente.email = emailPrefixo + "@" + emailDominio;
-                ndocente.telemovel = telemovel;
-                ndocente.salario = salario;
-                ndocente.turno = turno;
-                if (!edit)
-                    listObjects.AddObject(ndocente);
-                // SHow feedback to user 
-                String successMessage = "O não docente foi adicionado com sucesso!";
-                if (edit)
-                    successMessage = "O não docente foi editado com sucesso";
+            if (rowsAffected == 1)
+            {              
+                String successMessage = "O anúncio foi enviado para a turma com sucesso!";
+                if (recado)
+                    successMessage = "O recado foi enviado para o aluno com sucesso";
                 MessageBox.Show(
                     successMessage,
                     "Sucesso!",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information
                 );
-                // Update objects displayed on interface 
-                listObjects.BuildList(true);
-                // Update stats
-                updateStats();
                 // Hide panels 
-                panelForm.Visible = false;
-                panelObject.Visible = false;
+                panelRecado.Visible = false;
             }
             else
             {
@@ -299,7 +286,7 @@ namespace Funcionarios
                 );
             }
         }
-        */
+
 
         private void updateStats()
         {
@@ -348,14 +335,20 @@ namespace Funcionarios
 
         private void enviarRecado_Click(object sender, EventArgs e)
         {
-            // if(todos)
-                //Recado r = new Recado();
-                //submitForm(r);
-            //if(!todos)
-                //Anuncio a = new Anuncio();
-                //submitForm(a);
-            panelRecado.Visible = false;
-
+            if (formValid()) { 
+                String destinatario = destinarioCombo.SelectedItem.ToString();
+                if (destinatario.Equals("Todos"))
+                {
+                    Anuncio a = new Anuncio();
+                    submitForm(a);
+                }
+                else
+                {
+                    Recado r = new Recado();
+                    submitForm(r);
+                }
+                panelRecado.Visible = false;
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
