@@ -116,7 +116,7 @@ namespace Funcionarios
         private void loadPessoas()
         {
             // Execute SQL query to get Docente rows
-            SqlCommand cmd = new SqlCommand("SELECT * FROM GestaoEscola.Pessoa", cn);
+            SqlCommand cmd = new SqlCommand("SELECT * FROM GestaoEscola.Pessoa WHERE nome IS NOT NULL AND email IS NOT NULL AND telemovel IS NOT NULL", cn);
             SqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
@@ -256,6 +256,12 @@ namespace Funcionarios
                     }
                 }
                 r.pessoa = getPessoa(Int32.Parse(reader["pessoaNMec"].ToString()));
+                if (r.pessoa == null)
+                {
+                    // If Pessoa personal data has been erased from the DB
+                    r.pessoa = new Pessoa();
+                    r.pessoa.nmec = Int32.Parse(reader["pessoaNMec"].ToString());
+                }
                 Console.WriteLine("Pessoa: {0}", r.pessoa);
                 r.dataRequisicao = DateTime.Parse(reader["dataRequisicao"].ToString());
                 r.dataEntrega = DateTime.Parse(reader["dataEntrega"].ToString());

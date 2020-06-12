@@ -84,6 +84,7 @@
             // 
             // horario0002
             // 
+            this.horario0002.BackColor = System.Drawing.SystemColors.Control;
             this.horario0002.Location = new System.Drawing.Point(48, 147);
             this.horario0002.Name = "horario0002";
             this.horario0002.ReadOnly = true;

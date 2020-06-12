@@ -204,7 +204,7 @@
             // bloco
             // 
             this.bloco.AspectName = "bloco.str";
-            this.bloco.Text = "Bloco";
+            this.bloco.Text = "Local";
             this.bloco.Width = 143;
             // 
             // funcao

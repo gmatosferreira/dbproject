@@ -1,4 +1,4 @@
-CREATE VIEW vw_NaoDocentes 
+ALTER VIEW vw_NaoDocentes 
 AS 
 SELECT
    Pessoa.NMec,
@@ -20,3 +20,4 @@ FROM
          GestaoEscola.EmailDominio 
          ON Pessoa.emailDominio = EmailDominio.id
    )
+WHERE Pessoa.nome IS NOT NULL AND Pessoa.email IS NOT NULL AND Pessoa.telemovel IS NOT NULL

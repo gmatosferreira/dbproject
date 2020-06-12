@@ -185,15 +185,72 @@ namespace Funcionarios
             if (listObjects.Items.Count == 0 | current < 0)
                 return;
             NaoDocente f = (NaoDocente)listObjects.SelectedObjects[0];
+            int itemIndex = listObjects.SelectedIndex;
             // Confirm delete
-            DialogResult msgb = MessageBox.Show("Tem a certeza que quer eliminar o funcionário " + f.nmec.ToString() +"?", "Esta operação é irreversível!", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+            DialogResult msgb = MessageBox.Show("Tem a certeza que quer eliminar o funcionário " + f.nmec.ToString() +"?", "Operação delicada", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
             if (msgb == DialogResult.No)
                 return;
-            MessageBox.Show("Funcionalidade em implementação..."); 
-            //TODO
-            // Hide panels
-            panelForm.Visible = false;
-            panelObject.Visible = false;
+            // Delete tuple on db 
+            String commandText = "DELETE FROM GestaoEscola.NaoDocente WHERE NMec = @ID";
+            SqlCommand command = new SqlCommand(commandText, cn);
+            // Add vars 
+            command.Parameters.Add("@ID", SqlDbType.Int);
+            command.Parameters["@ID"].Value = f.nmec;
+
+            // Execute query 
+            int rowsAffected = 0;
+            try
+            {
+                rowsAffected = command.ExecuteNonQuery();
+                Console.WriteLine(String.Format("rowsAffected {0}", rowsAffected));
+            }
+            catch (SqlException ex)
+            {
+                String errorMessage = "Ocorreu um erro, tente novamente!";
+                for (int i = 0; i < ex.Errors.Count; i++)
+                {
+                    if (ex.Errors[i].Message.IndexOf("O funcionário não pode ser eliminado enquanto for supervisor", StringComparison.OrdinalIgnoreCase) >= 0)
+                    {
+                        errorMessage = ex.Errors[i].Message;
+                        break;
+                    }
+
+                }
+                MessageBox.Show(
+                    errorMessage + "\r\n\r\n" + ex.ToString(),
+                    "Erro!",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+                return;
+            }
+            // If successful query 
+            if (rowsAffected == 3)
+            {
+                // Remove object from interface list 
+                listObjects.Items.RemoveAt(itemIndex);
+                // Show user feedback 
+                MessageBox.Show(
+                    "O tuplo foi eliminado com sucesso da base de dados!",
+                    "Sucesso!",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information
+                );
+                // Update stats
+                updateStats();
+                // Hide panels 
+                panelForm.Visible = false;
+                panelObject.Visible = false;
+            }
+            else
+            {
+                MessageBox.Show(
+                    "Ocorreu um erro, tente novamente!",
+                    "Erro!",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+            }
         }
 
         private void pesquisar()
@@ -334,8 +391,23 @@ namespace Funcionarios
             }
             catch (SqlException ex)
             {
+                String errorMessage = "Ocorreu um erro, verifique que preencheu todos os dados corretamente e tente novamente!";
+                for (int i = 0; i < ex.Errors.Count; i++)
+                {
+                    if (ex.Errors[i].Message.IndexOf("Já existe uma pessoa com o email", StringComparison.OrdinalIgnoreCase) >= 0)
+                    {
+                        errorMessage = ex.Errors[i].Message;
+                        break;
+                    }
+                    if (ex.Errors[i].Message.IndexOf("Já existe uma pessoa com o número de telemóvel fornecido", StringComparison.OrdinalIgnoreCase) >= 0)
+                    {
+                        errorMessage = ex.Errors[i].Message;
+                        break;
+                    }
+
+                }
                 MessageBox.Show(
-                    "Ocorreu um erro, verifique que preencheu todos os dados corretamente e tente novamente!\r\n" + ex.ToString(),
+                    errorMessage + "\r\n\r\n" + ex.ToString(),
                     "Erro!",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error
@@ -343,7 +415,7 @@ namespace Funcionarios
                 return;
             }
             // If query is successful 
-            if (rowsAffected == 3 && returnValue == 1)
+            if (returnValue == 1)
             {
                 // If add operation, construct object (was null)
                 if (!edit)
@@ -376,8 +448,13 @@ namespace Funcionarios
             }
             else
             {
+                String messageError = "Ocorreu um erro, verifique que preencheu todos os dados corretamente e tente novamente!";
+                if (returnValue == -2)
+                    messageError = "Já existe uma pessoa na base de dados com esse número mecanográfico!";
+                else if (returnValue == -3 || returnValue == -4)
+                    messageError = "Ocorreu um erro interno na base de dados! Tente novamente.";
                 MessageBox.Show(
-                    "Ocorreu um erro, verifique que preencheu todos os dados corretamente e tente novamente!",
+                    messageError,
                     "Erro!",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error

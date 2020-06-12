@@ -74,6 +74,22 @@ namespace Funcionarios
             return null;
         }
 
+        private void loadBibliotecas()
+        {
+            // Execute SQL query to get Docente rows
+            SqlCommand cmd = new SqlCommand("SELECT * FROM GestaoEscola.Biblioteca", cn);
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                Bloco t = new Bloco();
+                t.nome = "Biblioteca " + reader["nome"].ToString();
+                blocos.Add(t);
+            }
+
+            // Close reader
+            reader.Close();
+        }
+
         private void loadFuncoes()
         {
             // Execute SQL query to get Docente rows
@@ -130,7 +146,11 @@ namespace Funcionarios
         {
             // Get turnos
             loadBlocos();
+            loadBibliotecas();
             loadFuncoes();
+
+            // Paint main shft blocks white
+            colorMainShift(nd.turno);
 
             // Execute SQL query to get Docente rows
             SqlCommand cmd = new SqlCommand("SELECT * FROM GestaoEscola.ND_trabalha_Bloco WHERE NMec="+nd.nmec.ToString(), cn);
@@ -150,7 +170,25 @@ namespace Funcionarios
                 addToInterface(d);
                 counter++;
             }
+            // Close reader
+            reader.Close();
 
+            // Execute SQL query to get trabalha_Biblioteca rows
+            cmd = new SqlCommand("SELECT * FROM GestaoEscola.ND_trabalha_Biblioteca WHERE NMec=" + nd.nmec.ToString(), cn);
+            reader = cmd.ExecuteReader();
+            // Create list of Objects given the query results
+            while (reader.Read())
+            {
+                NDTrabalhaBloco d = new NDTrabalhaBloco();
+                d.nd = nd;
+                d.funcao = getFuncao(Int32.Parse(reader["codFuncao"].ToString()));
+                d.bloco = getBlocoByNome("Biblioteca " + reader["biblioteca"].ToString());
+                Turno t = new Turno();
+                t.horaInicio = TimeSpan.Parse(reader["horaInicio"].ToString());
+                t.horaFim = TimeSpan.Parse(reader["horaFim"].ToString());
+                d.turno = t;
+                addToInterface(d);
+            }
             // Close reader
             reader.Close();
 
@@ -207,6 +245,58 @@ namespace Funcionarios
             if (turnoInsideTimeSpan(d.turno, new TimeSpan(22, 00, 00), new TimeSpan(24, 00, 00)))
             {
                 horario2224.Text = horario2224.Text + d.turno.str + "\r\n" + d.bloco.nome + ", como " + d.funcao.nome + "\r\n\r\n";
+            }
+        }
+
+        void colorMainShift(Turno d)
+        {
+            if (turnoInsideTimeSpan(d, new TimeSpan(00, 00, 00), new TimeSpan(02, 00, 00)))
+            {
+                horario0002.BackColor = Color.White;
+            }
+            if (turnoInsideTimeSpan(d, new TimeSpan(02, 00, 00), new TimeSpan(04, 00, 00)))
+            {
+                horario0204.BackColor = Color.White;
+            }
+            if (turnoInsideTimeSpan(d, new TimeSpan(04, 00, 00), new TimeSpan(06, 00, 00)))
+            {
+                horario0406.BackColor = Color.White;
+            }
+            if (turnoInsideTimeSpan(d, new TimeSpan(06, 00, 00), new TimeSpan(08, 00, 00)))
+            {
+                horario0608.BackColor = Color.White;
+            }
+            if (turnoInsideTimeSpan(d, new TimeSpan(08, 00, 00), new TimeSpan(10, 00, 00)))
+            {
+                horario0810.BackColor = Color.White;
+            }
+            if (turnoInsideTimeSpan(d, new TimeSpan(10, 00, 00), new TimeSpan(12, 00, 00)))
+            {
+                horario1012.BackColor = Color.White;
+            }
+            if (turnoInsideTimeSpan(d, new TimeSpan(12, 00, 00), new TimeSpan(14, 00, 00)))
+            {
+                horario1214.BackColor = Color.White;
+            }
+            if (turnoInsideTimeSpan(d, new TimeSpan(14, 00, 00), new TimeSpan(16, 00, 00)))
+            {
+                horario1416.BackColor = Color.White;
+            }
+            if (turnoInsideTimeSpan(d, new TimeSpan(16, 00, 00), new TimeSpan(18, 00, 00)))
+            {
+                horario1618.BackColor = Color.White;
+            }
+            if (turnoInsideTimeSpan(d, new TimeSpan(18, 00, 00), new TimeSpan(20, 00, 00)))
+            {
+                horario1820.BackColor = Color.White;
+            }
+            if (turnoInsideTimeSpan(d, new TimeSpan(20, 00, 00), new TimeSpan(22, 00, 00)))
+            {
+                horario2022.BackColor = Color.White;
+            }
+            if (turnoInsideTimeSpan(d, new TimeSpan(22, 00, 00), new TimeSpan(24, 00, 00)))
+            {
+                horario2224.BackColor = Color.White;
             }
         }
 

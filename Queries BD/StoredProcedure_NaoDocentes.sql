@@ -19,13 +19,13 @@ BEGIN
     IF (@RowsAffected!=0 AND @Edit=0)
         BEGIN
             PRINT 'Error! There is already a tuple on GestaoEscola.Pessoa with that NMec! Aborting...'
-            SET @State = -1
+            SET @State = -2
             RETURN @State
         END
     IF (@RowsAffected!=1 AND @Edit=1)
         BEGIN
             PRINT 'Error! There is no tuple on GestaoEscola.Pessoa with that NMec! The edit operation can not be accomplished! Aborting...'
-            SET @State = -1
+            SET @State = -2
             RETURN @State
         END
     
@@ -43,7 +43,7 @@ BEGIN
         INSERT INTO GestaoEscola.EmailDominio VALUES (@EmailDominioID + 1, @EmailDominio)
         IF (@@ROWCOUNT=0)
             PRINT 'Error creating GestaoEscola.EmailDomio tuple! Aborting...'
-            SET @State = -1
+            SET @State = -3
             RETURN @State
         END
     ELSE
@@ -61,7 +61,7 @@ BEGIN
         IF (@@ROWCOUNT!=1)
             BEGIN
             PRINT 'Error! There was an error creating tuple on GestaoEscola.Pessoa! Aborting...'
-            SET @State = -1
+            SET @State = -4
             ROLLBACK TRAN SavepointTranBegin
             END
         IF @Edit=0
@@ -71,7 +71,7 @@ BEGIN
         IF (@@ROWCOUNT!=1)
             BEGIN
             PRINT 'Error! There was an error creating tuple on GestaoEscola.Funcionario! Aborting...'
-            SET @State = -1
+            SET @State = -4
             ROLLBACK TRAN SavepointTranBegin
             END
         IF @Edit=0
@@ -81,7 +81,7 @@ BEGIN
         IF (@@ROWCOUNT!=1)
             BEGIN
             PRINT 'Error! There was an error creating tuple on GestaoEscola.NaoDocente! Aborting...'
-            SET @State = -1
+            SET @State = -4
             ROLLBACK TRAN SavepointTranBegin
             END
         -- Give user some feedback
