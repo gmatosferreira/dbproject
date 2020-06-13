@@ -298,6 +298,8 @@ namespace Funcionarios
         {
             // Add object btn
             addObject();
+            panelObject.Visible = false;
+            listObjects.DeselectAll();
         }
 
         private void panelFormHide_Click(object sender, EventArgs e)
@@ -428,10 +430,10 @@ namespace Funcionarios
             command.Parameters.Add("@EmailDominioEE", SqlDbType.VarChar);
             command.Parameters["@EmailDominioEE"].Value = emailDominioEE;
             command.Parameters.Add("@Edit", SqlDbType.Bit);
-            command.Parameters["@Edit"].Value = 0;
 
             if (edit)
                 command.Parameters["@Edit"].Value = 1;
+            command.Parameters["@Edit"].Value = 0;
             // Return value stuff
             var returnParameter = command.Parameters.Add("@ReturnVal", SqlDbType.Int);
             returnParameter.Direction = ParameterDirection.ReturnValue;
@@ -455,7 +457,7 @@ namespace Funcionarios
                 return;
             }
             // If query is successful 
-            if (rowsAffected == 2 && returnValue == 1)
+            if (rowsAffected >= 2 && returnValue == 1)
             {
                 // If add operation, construct object (was null)
                 if (!edit)

@@ -41,9 +41,11 @@ BEGIN
         -- Add tuple to DB
         INSERT INTO GestaoEscola.EmailDominio VALUES (@EmailDominioID + 1, @EmailDominio)
         IF (@@ROWCOUNT=0)
+	    BEGIN
             PRINT 'Error creating GestaoEscola.EmailDomio tuple! Aborting...'
             SET @State = -1
             RETURN @State
+            END
         END
     ELSE
         BEGIN
@@ -62,9 +64,11 @@ BEGIN
         -- Add tuple to DB
         INSERT INTO GestaoEscola.EmailDominio VALUES (@EmailDominioID_EE + 1, @EmailDominioEE)
         IF (@@ROWCOUNT=0)
+	    BEGIN
             PRINT 'Error creating GestaoEscola.EmailDomio tuple! Aborting...'
             SET @State = -1
             RETURN @State
+            END
         END
     ELSE
         BEGIN
