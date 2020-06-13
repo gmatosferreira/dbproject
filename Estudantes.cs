@@ -162,7 +162,7 @@ namespace Funcionarios
                 return;
             }
             // If successful query 
-            if (rowsAffected == 3)
+            if (rowsAffected == 4)
             {
                 // Remove object from interface list 
                 listObjects.RemoveObject(e);
