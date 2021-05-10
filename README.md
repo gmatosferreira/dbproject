@@ -26,7 +26,7 @@ The interface was developed with Windows Forms and the language we used was **C#
 
 ### Report
 
-The report is available (in Portuguese) [here][Files/report.pdf].
+The report is available (in Portuguese) [here](Files/report.pdf).
 
 
 
