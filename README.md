@@ -1,6 +1,6 @@
 # System for high school administrative management
 
-This project was developed in the context of [Databases](https://www.ua.pt/en/uc/2238) curricular unit, part of the Computer Science Bachelor at [Aveiro University](https://www.ua.pt/). It was lectured by [Carlos Costa](https://www.ua.pt/en/p/10322010) ans assisted by [Joaquim Pinto](https://www.ua.pt/en/p/10312245) during the 2019/2020 school year.
+This project was developed in the context of [Databases](https://www.ua.pt/en/uc/2238) curricular unit, part of the Computer Science Bachelor at [Aveiro University](https://www.ua.pt/). It was lectured by [Carlos Costa](https://www.ua.pt/en/p/10322010) and assisted by [Joaquim Pinto](https://www.ua.pt/en/p/10312245) during the 2019/2020 school year.
 
 It was graded **17 out of 20**.
 
