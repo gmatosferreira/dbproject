@@ -1,6 +1,6 @@
 # System for high school administrative management
 
-This project was developed in the context of [Databases](https://www.ua.pt/en/uc/2238) curricular unit, part of the Computer Science Bachelor at [Aveiro University](https://www.ua.pt/).
+This project was developed in the context of [Databases](https://www.ua.pt/en/uc/2238) curricular unit, part of the Computer Science Bachelor at [Aveiro University](https://www.ua.pt/). It was lectured by [Carlos Costa](https://www.ua.pt/en/p/10322010) ans assisted by [Joaquim Pinto](https://www.ua.pt/en/p/10312245) during the 2019/2020 school year.
 
 It was graded **17 out of 20**.
 
@@ -24,9 +24,17 @@ The interface was developed with Windows Forms and the language we used was **C#
 
 
 
-### Report
+## Report
 
 The report is available (in Portuguese) [here](Files/report.pdf).
+
+
+
+## Authors
+
+[Gonçalo Matos](https://github.com/gmatosferreira)
+
+[Maria Rocha](https://github.com/Mariainesrocha)
 
 
 
